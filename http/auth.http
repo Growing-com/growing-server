@@ -1,0 +1,24 @@
+### 로그인-관리자
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "soonjong8",
+  "password": "leader",
+  "remember": 1
+}
+
+### 로그인-코디
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "test1",
+  "password": "leader"
+}
+
+### 로그아웃(Documneted)
+POST http://localhost:8080/api/auth/logout
+
+### 로그인 체크(Documneted)
+GET http://localhost:8080/api/auth/isLoggedIn

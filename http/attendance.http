@@ -1,0 +1,64 @@
+### 출석 체크(Documented)
+POST http://localhost:8080/api/attendance
+Content-Type: application/json
+
+{
+  "week": "2024-09-02",
+  "attendances": [
+    {
+      "teamMemberId": 2,
+      "teamId": 1,
+      "status": "ATTEND",
+      "etc": ""
+    }
+  ]
+}
+
+### 출석 조회 by 코디 + 주차(Documented)
+GET http://localhost:8080/api/attendance?codyId=429&week=2023-09-03
+
+### 출석 검색 by 학년(Documented)
+GET http://localhost:8080/api/attendance/search?startDate=2023-09-03&endDate=2023-09-03&page=0&size=10&grade=9
+
+### 출석 검색 by 이름(Documented)
+GET http://localhost:8080/api/attendance/search?startDate=2023-09-03&endDate=2023-09-03&page=0&size=10&name=김
+
+### 출석 검색 by 코디들(Documented)
+GET http://localhost:8080/api/attendance/search?startDate=2023-09-03&endDate=2023-09-03&page=4&size=10&codyId=7
+
+### 출석 검색 by 새가족(Documented)
+GET http://localhost:8080/api/attendance/search?startDate=2023-08-02&endDate=2023-09-03&isNewOnly=true&page=0&size=10
+
+----------------------------------------------------------------------------------------------------------------------
+
+### 출석 통계 결석 인원(Documented)
+GET http://localhost:8080/api/statistics/attendance?startDate=2023-09-03&endDate=2023-10-03&isAbsent=true
+
+### 출석 통계 새가족 인원(Documented)
+GET http://localhost:8080/api/statistics/attendance?startDate=2023-11-12&endDate=2023-11-25&isNewOnly=true
+
+### 출석 진행률(Documented)
+GET http://localhost:8080/api/statistics/term/1/attendanceProgress?week=2023-09-03
+
+### 출석 주차 개요(Documented)
+GET http://localhost:8080/api/statistics/attendanceSummary?startDate=2023-09-03&endDate=2023-09-03
+
+----------------------------------------------------------------------------------------------------------------------
+
+### 출석 엑셀 전체(Documented)
+GET http://localhost:8080/api/statistics/term/1/personalAttendance
+
+### 출석 엑셀 새가족, 등반 포함(Documented)
+GET http://localhost:8080/api/statistics/term/1/newFamilyAttendance
+
+### 출석 엑셀 순모임별(Documented)
+GET http://localhost:8080/api/statistics/term/1/leaderAttendance
+
+### 출석 엑셀 나무별(Documented)
+GET http://localhost:8080/api/statistics/term/1/managerAttendance
+
+### 출석 엑셀 학년별(Documented)
+GET http://localhost:8080/api/statistics/term/1/gradeAttendance
+
+### 출석 엑셀 텀 출석율(Documented)
+GET http://localhost:8080/api/statistics/term/1/attendanceRate

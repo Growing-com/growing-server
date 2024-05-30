@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  test-db:
+    image: mysql:8.0.33
+    restart: always
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: growing
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      TZ: Asia/Seoul
+    volumes:
+      - test-db-data:/var/lib/mysql
+
+volumes:
+  data:
+    driver: local
+  test-db-data:

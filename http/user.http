@@ -1,0 +1,27 @@
+### 계정 전체 조회(Documneted)
+GET http://localhost:8080/api/user
+
+### 계정 단건 조회(Documented)
+GET http://localhost:8080/api/user/1
+
+### 계정 정보 수정(Documented)
+PUT http://localhost:8080/api/user/1
+Content-Type: application/json
+
+{
+  "name": "이주은",
+  "sex": "FEMALE",
+  "phoneNumber": "010-2102-6202",
+  "grade": 3,
+  "isActive": true,
+  "etc": "야옹"
+}
+
+### 내 정보(Documented)
+GET http://localhost:8080/api/user/myInfo
+
+### 현재 부서에서 활동중인 사람들
+GET http://localhost:8080/api/activeUsers
+
+### 현재 부서에서 라인아웃된 사람들
+GET http://localhost:8080/api/inactiveAccounts

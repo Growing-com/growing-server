@@ -1,0 +1,5 @@
+### ENUM(Documented)
+GET http://localhost:8080/api/common/enums
+
+### ENUM by key(Documented)
+GET http://localhost:8080/api/common/enums?name=role

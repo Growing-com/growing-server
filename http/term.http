@@ -1,0 +1,89 @@
+### 새가족 등록(Documented)
+POST http://localhost:8080/api/user
+Content-Type: application/json
+
+{
+  "name":  "우상욱C",
+  "sex":  "MALE",
+  "grade": 9,
+  "teamId": 38,
+  "visitTermId": 1,
+  "visitDate": "2023-08-10",
+  "etc": "상욱이 친구"
+}
+
+### 새가족 라인업(Documented)
+POST http://localhost:8080/api/team/38/teamMember/474/lineup
+Content-Type: application/json
+
+{
+  "plantTeamId": 21,
+  "lineupDate": "2023-10-13",
+  "gradeAtFirstVisit": 9
+}
+
+### 새가족 라인아웃(Documented)
+POST http://localhost:8080/api/team/38/teamMember/473/lineout
+Content-Type: application/json
+
+{
+  "lineoutDate": "2023-09-13",
+  "gradeAtFirstVisit": 9
+}
+
+### 텀의 코디(Documented)
+GET http://localhost:8080/api/term/{{termId}}/cody
+
+### 텀의 새가족반 순장들(Documented)
+GET http://localhost:8080/api/term/{{termId}}/newTeamLeaders
+
+### 텀의 코디의 순장들(Documented)
+GET http://localhost:8080/api/term/1/cody/169/leaders
+
+### 텀(Documented)
+### 라인업
+GET http://localhost:8080/api/term
+
+### 재적인원, 새등록(Documented)
+GET http://localhost:8080/api/term/totalUser?week=2023-09-03
+
+### 텀의 새가족들(Documented)
+GET http://localhost:8080/api/term/1/newComers
+
+### 텀 생성
+### 라인업
+POST http://localhost:8080/api/term
+Content-Type: application/json
+
+{
+  "name": "test2",
+  "startDate": "2024-03-01",
+  "endDate": "2024-09-01",
+  "memo": "foo",
+  "groupings": "{\"foo\": [1, 2, 3]}"
+}
+
+### 텀 시작
+### 라인업
+POST http://localhost:8080/api/term/4/start
+
+### 텀 종료
+### 라인업
+POST http://localhost:8080/api/term/4/close
+
+### 텀 삭제
+### 라인업
+DELETE http://localhost:8080/api/term/3
+
+### 텀 수정
+### 라인업
+PUT http://localhost:8080/api/term/6
+Content-Type: application/json
+
+{
+  "name": "test223",
+  "startDate": "2024-03-01",
+  "endDate": "2024-09-01",
+  "memo": "foo",
+  "groupings": "{\"foo\": [1, 2, 3], \"bar\": [4, 5, 6]}"
+}

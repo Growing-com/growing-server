@@ -1,0 +1,35 @@
+### 로그인(관리자)
+POST https://wsangwook.com/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "soonjong8",
+  "password": "leader",
+  "remember": 1
+}
+
+### 주간 출석 통계 생성
+POST https://wsangwook.com/api/job
+Content-Type: application/json
+
+{
+  "name": "weeklyAttendanceJob",
+  "jobParameters": {
+    "requestDate": "2024-01-28"
+  }
+}
+
+###
+GET http://localhost:8080/api/attendance/search?startDate=2023-10-12&endDate=2023-11-12&page=3&size=10&codyId=6
+
+###
+GET https://wsangwook.com/api/term/1/newComers
+
+###
+GET https://wsangwook.com/api/statistics/attendance?startDate=2023-11-12&endDate=2023-11-25&isNewOnly=true
+
+### 현재 부서에서 활동중인 사람들
+GET https://wsangwook.com/api/activeUsers
+
+### 현재 부서에서 라인아웃된 사람들
+GET https://wsangwook.com/api/inactiveAccounts

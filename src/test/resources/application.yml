@@ -1,0 +1,32 @@
+spring:
+  session:
+    timeout: 86400
+  batch:
+    job:
+      names: ${job.name:NONE}
+  flyway:
+    enabled: false
+  mvc:
+    format:
+      date: "yyyy-MM-dd"
+      datetime: "yyyy-MM-dd HH:mm:ss"
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        show-sql: true
+        format_sql: true
+        default_batch_fetch_size: 1000
+        open-in-view: false
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:mysql://localhost:3308/growing
+    username: test
+    password: test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  tomcat:
+    mbeanregistry:
+      enabled: true

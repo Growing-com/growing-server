@@ -1,0 +1,1 @@
+alter table users add column visit_term_id bigint not null default 0;
