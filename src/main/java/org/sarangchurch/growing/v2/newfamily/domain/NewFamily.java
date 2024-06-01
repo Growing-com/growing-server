@@ -1,10 +1,12 @@
 package org.sarangchurch.growing.v2.newfamily.domain;
 
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import org.sarangchurch.growing.core.types.BaseEntity;
 
 import javax.persistence.*;
@@ -13,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Entity(name = "new_family")
+@TypeDef(name = "json", typeClass = JsonType.class)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NewFamily extends BaseEntity {
@@ -47,5 +50,9 @@ public class NewFamily extends BaseEntity {
         this.grade = grade;
         this.newFamilyLeaderId = newFamilyLeaderId;
         this.etc = etc;
+    }
+
+    public void setNewFamilyLeader(Long newFamilyLeaderId) {
+        this.newFamilyLeaderId = newFamilyLeaderId;
     }
 }
