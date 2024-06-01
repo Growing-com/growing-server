@@ -46,6 +46,7 @@ public class SecurityConfig {
                 .antMatchers("/api/auth/isLoggedIn").permitAll()
                 .antMatchers("/api/common/**").permitAll()
                 .antMatchers("/actuator/**").permitAll()
+                .antMatchers("/api/v2/**").permitAll() // 개발 편의를 위함
                 .anyRequest().authenticated()
 
                 .and()
