@@ -3,23 +3,24 @@ package org.sarangchurch.growing.v2.term.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.sarangchurch.growing.core.types.BaseEntity;
 
 import javax.persistence.*;
 
 @Entity(name = "small_group_member")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SmallGroupMember {
+public class SmallGroupMember extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "term_id")
+    @Column(name = "term_id", nullable = false)
     private Long termId;
 
-    @Column(name = "small_group_id")
+    @Column(name = "small_group_id", nullable = false)
     private Long smallGroupId;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 }

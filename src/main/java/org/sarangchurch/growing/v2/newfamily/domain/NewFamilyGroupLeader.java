@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v2.term.domain;
+package org.sarangchurch.growing.v2.newfamily.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -7,10 +7,10 @@ import org.sarangchurch.growing.core.types.BaseEntity;
 
 import javax.persistence.*;
 
-@Entity(name = "small_group_leader")
+@Entity(name = "new_family_group_leader")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SmallGroupLeader extends BaseEntity {
+public class NewFamilyGroupLeader extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

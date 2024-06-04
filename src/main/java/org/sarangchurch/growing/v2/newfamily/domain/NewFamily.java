@@ -23,7 +23,7 @@ public class NewFamily extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "phone_number")
@@ -32,20 +32,20 @@ public class NewFamily extends BaseEntity {
     @Column(name = "birth")
     private LocalDate birth;
 
-    @Column(name = "grade")
+    @Column(name = "grade", nullable = false)
     private Integer grade;
 
     @Column(name = "new_family_leader_id")
     private Long newFamilyLeaderId;
 
-    @Column(name = "visit_date")
+    @Column(name = "visit_date", nullable = false)
     private LocalDate visitDate;
 
     @Column(name = "promote_date")
     private LocalDate promoteDate = null;
 
     @Type(type = "json")
-    @Column(name = "etc", columnDefinition = "json")
+    @Column(name = "etc", columnDefinition = "json", nullable = false)
     private Map<String, Object> etc = new HashMap<>();
 
     @Builder
