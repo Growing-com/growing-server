@@ -38,21 +38,36 @@ public class NewFamily extends BaseEntity {
     @Column(name = "new_family_leader_id")
     private Long newFamilyLeaderId;
 
+    @Column(name = "visit_date")
+    private LocalDate visitDate;
+
+    @Column(name = "promote_date")
+    private LocalDate promoteDate = null;
+
     @Type(type = "json")
     @Column(name = "etc", columnDefinition = "json")
     private Map<String, Object> etc = new HashMap<>();
 
     @Builder
-    public NewFamily(String name, String phoneNumber, LocalDate birth, Integer grade, Long newFamilyLeaderId, Map<String, Object> etc) {
+    public NewFamily(String name, String phoneNumber, LocalDate birth, Integer grade, Long newFamilyLeaderId, LocalDate visitDate, Map<String, Object> etc) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.birth = birth;
         this.grade = grade;
         this.newFamilyLeaderId = newFamilyLeaderId;
+        this.visitDate = visitDate;
         this.etc = etc;
     }
 
     public void setNewFamilyLeader(Long newFamilyLeaderId) {
         this.newFamilyLeaderId = newFamilyLeaderId;
+    }
+
+    public void promote(LocalDate promoteDate) {
+        if (this.promoteDate != null) {
+            throw new IllegalStateException("이미 등반한 새가족입니다");
+        }
+
+        this.promoteDate = promoteDate;
     }
 }

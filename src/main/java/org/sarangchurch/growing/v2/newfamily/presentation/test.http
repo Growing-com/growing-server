@@ -1,3 +1,4 @@
+### 새가족 등록
 POST http://localhost:8080/api/v2/new-families/register
 Content-Type: application/json
 
@@ -6,6 +7,7 @@ Content-Type: application/json
   "phoneNumber":"010-1234-5678",
   "birth": "2000-10-16",
   "grade": 9,
+  "visitDate": "2024-06-01",
   "newFamilyLeaderId": 5,
   "etc": {
     "school": "서울대학교 감자학과 6학년",
@@ -19,10 +21,18 @@ Content-Type: application/json
   }
 }
 
-###
+### 새가족 순장 배정
 POST http://localhost:8080/api/v2/new-families/2/assignNewFamilyLeader
 Content-Type: application/json
 
 {
   "newFamilyLeaderId": 1
+}
+
+### 등반
+POST http://localhost:8080/api/v2/new-families/1/promote
+Content-Type: application/json
+
+{
+  "promoteDate": "2024-06-09"
 }
