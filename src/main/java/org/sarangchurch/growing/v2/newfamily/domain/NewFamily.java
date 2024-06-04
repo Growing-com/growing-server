@@ -35,8 +35,8 @@ public class NewFamily extends BaseEntity {
     @Column(name = "grade", nullable = false)
     private Integer grade;
 
-    @Column(name = "new_family_leader_id")
-    private Long newFamilyLeaderId;
+    @Column(name = "new_family_group_id")
+    private Long newFamilyGroupId;
 
     @Column(name = "visit_date", nullable = false)
     private LocalDate visitDate;
@@ -49,18 +49,18 @@ public class NewFamily extends BaseEntity {
     private Map<String, Object> etc = new HashMap<>();
 
     @Builder
-    public NewFamily(String name, String phoneNumber, LocalDate birth, Integer grade, Long newFamilyLeaderId, LocalDate visitDate, Map<String, Object> etc) {
+    public NewFamily(String name, String phoneNumber, LocalDate birth, Integer grade, Long newFamilyGroupId, LocalDate visitDate, Map<String, Object> etc) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.birth = birth;
         this.grade = grade;
-        this.newFamilyLeaderId = newFamilyLeaderId;
+        this.newFamilyGroupId = newFamilyGroupId;
         this.visitDate = visitDate;
         this.etc = etc;
     }
 
-    public void setNewFamilyLeader(Long newFamilyLeaderId) {
-        this.newFamilyLeaderId = newFamilyLeaderId;
+    public void assignNewFamilyGroup(Long newFamilyGroupId) {
+        this.newFamilyGroupId = newFamilyGroupId;
     }
 
     public void promote(LocalDate promoteDate) {

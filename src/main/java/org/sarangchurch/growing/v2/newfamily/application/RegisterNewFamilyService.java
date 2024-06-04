@@ -13,12 +13,14 @@ public class RegisterNewFamilyService {
     private final NewFamilyRepository newFamilyRepository;
 
     public void register(RegisterNewFamilyRequest request) {
-        validateNewFamilyLeader(request.getNewFamilyLeaderId());
+        validateNewFamilyGroup(request.getNewFamilyGroupId());
 
         newFamilyRepository.save(request.toEntity());
+
+        // TODO: 지체(User) 등록
     }
 
-    private void validateNewFamilyLeader(Long newFamilyLeaderId) {
-        // TODO: 새가족반 순장 id 검증
+    private void validateNewFamilyGroup(Long newFamilyGroupId) {
+        // TODO: 새가족반 검증
     }
 }

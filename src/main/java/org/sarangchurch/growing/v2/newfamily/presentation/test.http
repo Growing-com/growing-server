@@ -8,7 +8,7 @@ Content-Type: application/json
   "birth": "2000-10-16",
   "grade": 9,
   "visitDate": "2024-06-01",
-  "newFamilyLeaderId": 5,
+  "newFamilyGroupId": 5,
   "etc": {
     "school": "서울대학교 감자학과 6학년",
     "introducer": "박똘똘",
@@ -22,11 +22,11 @@ Content-Type: application/json
 }
 
 ### 새가족 순장 배정
-POST http://localhost:8080/api/v2/new-families/2/assignNewFamilyLeader
+POST http://localhost:8080/api/v2/new-families/1/assignNewFamilyGroup
 Content-Type: application/json
 
 {
-  "newFamilyLeaderId": 1
+  "newFamilyGroupId": 1
 }
 
 ### 등반
