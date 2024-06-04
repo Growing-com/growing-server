@@ -16,8 +16,8 @@ public class AssignLeaderController {
 
     private final AssignLeaderService assignLeaderService;
 
-    @PostMapping("/api/v2/new-families/{newFamilyId}/assignNewFamilyLeader")
+    @PostMapping("/api/v2/new-families/{newFamilyId}/assignNewFamilyGroup")
     public void assignLeader(@PathVariable Long newFamilyId, @RequestBody @Valid AssignLeaderRequest request) {
-        assignLeaderService.assign(newFamilyId, request.getNewFamilyLeaderId());
+        assignLeaderService.assign(newFamilyId, request.getNewFamilyGroupId());
     }
 }

@@ -25,7 +25,7 @@ public class RegisterNewFamilyRequest {
     @NotNull(message = "학년을 입력해주세요.")
     private Integer grade;
 
-    private Long newFamilyLeaderId;
+    private Long newFamilyGroupId;
 
     @NotNull(message = "방문 날짜를 입력해주세요.")
     private LocalDate visitDate;
@@ -38,7 +38,7 @@ public class RegisterNewFamilyRequest {
                 .phoneNumber(phoneNumber)
                 .birth(birth)
                 .grade(grade)
-                .newFamilyLeaderId(newFamilyLeaderId)
+                .newFamilyGroupId(newFamilyGroupId)
                 .visitDate(visitDate)
                 .etc(etc)
                 .build();
