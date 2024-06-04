@@ -27,6 +27,9 @@ public class RegisterNewFamilyRequest {
 
     private Long newFamilyLeaderId;
 
+    @NotNull(message = "방문 날짜를 입력해주세요.")
+    private LocalDate visitDate;
+
     private Map<String, Object> etc;
 
     public NewFamily toEntity() {
@@ -36,6 +39,7 @@ public class RegisterNewFamilyRequest {
                 .birth(birth)
                 .grade(grade)
                 .newFamilyLeaderId(newFamilyLeaderId)
+                .visitDate(visitDate)
                 .etc(etc)
                 .build();
     }
