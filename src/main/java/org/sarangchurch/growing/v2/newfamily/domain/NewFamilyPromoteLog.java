@@ -24,7 +24,7 @@ public class NewFamilyPromoteLog extends BaseEntity {
     private Long smallGroupId;
 
     @Builder
-    public NewFamilyPromoteLog(LocalDate promoteDate, Long smallGroupId) {
+    private NewFamilyPromoteLog(LocalDate promoteDate, Long smallGroupId) {
         this.promoteDate = promoteDate;
         this.smallGroupId = smallGroupId;
     }

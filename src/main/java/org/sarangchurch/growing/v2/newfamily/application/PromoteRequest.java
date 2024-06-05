@@ -2,6 +2,7 @@ package org.sarangchurch.growing.v2.newfamily.application;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v2.newfamily.domain.NewFamilyPromoteLog;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -13,4 +14,17 @@ public class PromoteRequest {
     private LocalDate promoteDate;
 
     private Long smallGroupId;
+
+    public NewFamilyPromoteLog createPromoteLog() {
+        if (smallGroupId != null) {
+            return NewFamilyPromoteLog.builder()
+                    .promoteDate(promoteDate)
+                    .smallGroupId(smallGroupId)
+                    .build();
+        }
+
+        return NewFamilyPromoteLog.builder()
+                .promoteDate(promoteDate)
+                .build();
+    }
 }

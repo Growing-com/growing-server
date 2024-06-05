@@ -81,7 +81,11 @@ public class NewFamily extends BaseEntity {
         this.newFamilyGroupId = newFamilyGroupId;
     }
 
-    public void promote(LocalDate promoteDate) {
-//        newFamilyPromoteLogId
+    public void promote(Long newFamilyPromoteLogId) {
+        if (this.newFamilyPromoteLogId != null) {
+            throw new IllegalStateException("이미 등반했습니다.");
+        }
+
+        this.newFamilyPromoteLogId = newFamilyPromoteLogId;
     }
 }
