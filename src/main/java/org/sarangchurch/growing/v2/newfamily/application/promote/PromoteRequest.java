@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v2.newfamily.application;
+package org.sarangchurch.growing.v2.newfamily.application.promote;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

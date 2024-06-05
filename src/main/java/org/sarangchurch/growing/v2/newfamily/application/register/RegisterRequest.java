@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v2.newfamily.application;
+package org.sarangchurch.growing.v2.newfamily.application.register;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Getter
 @RequiredArgsConstructor
-public class RegisterNewFamilyRequest {
+public class RegisterRequest {
     @NotNull(message = "이름을 입력해주세요.")
     private String name;
 

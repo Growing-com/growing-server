@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v2.newfamily.application;
+package org.sarangchurch.growing.v2.newfamily.application.lineup;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamily;
@@ -7,21 +7,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
-public class AssignLeaderService {
+@RequiredArgsConstructor
+public class LineupService {
     private final NewFamilyRepository newFamilyRepository;
 
-    public void assign(Long newFamilyId, Long newFamilyGroupId) {
+    public void lineup(Long newFamilyId, LineupRequest request) {
         NewFamily newFamily = newFamilyRepository.findById(newFamilyId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 새가족입니다"));
 
-        validateNewFamilyGroup(newFamilyGroupId);
+        Long smallGroupId = request.getSmallGroupId();
 
-        newFamily.assignNewFamilyGroup(newFamilyGroupId);
-    }
+        // TODO: 새가족을
+        if (request.getPromoteDate() != null) {
+            // 등반 + 라인업
 
-    private void validateNewFamilyGroup(Long newFamilyLeaderId) {
-        // TODO: 새가족반 검증
+        } else {
+            // 라인업
+        }
     }
 }
