@@ -34,7 +34,8 @@ POST http://localhost:8080/api/v2/new-families/1/promote
 Content-Type: application/json
 
 {
-  "promoteDate": "2024-06-09"
+  "promoteDate": "2024-06-09",
+  "smallGroupId": 2
 }
 
 ### 라인업
