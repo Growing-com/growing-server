@@ -21,6 +21,7 @@ public class LineupService {
         // TODO: 새가족을
         if (request.getPromoteDate() != null) {
             // 등반 + 라인업
+
         } else {
             // 라인업
         }
