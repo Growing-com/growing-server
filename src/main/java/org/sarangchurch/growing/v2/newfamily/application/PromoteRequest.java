@@ -12,5 +12,5 @@ public class PromoteRequest {
     @NotNull(message = "등반 날짜를 입력해주세요.")
     private LocalDate promoteDate;
 
-    private Long smallGroupLeaderId;
+    private Long smallGroupId;
 }
