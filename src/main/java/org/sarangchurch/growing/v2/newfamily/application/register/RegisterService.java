@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v2.newfamily.application;
+package org.sarangchurch.growing.v2.newfamily.application.register;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamily;
@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class RegisterNewFamilyService {
+public class RegisterService {
 
     private final NewFamilyRepository newFamilyRepository;
 
-    public void register(RegisterNewFamilyRequest request) {
+    public void register(RegisterRequest request) {
         validateNewFamilyGroup(request.getNewFamilyGroupId());
 
         // TODO: 지체(User) 등록

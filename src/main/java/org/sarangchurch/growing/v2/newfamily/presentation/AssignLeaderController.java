@@ -1,8 +1,8 @@
 package org.sarangchurch.growing.v2.newfamily.presentation;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v2.newfamily.application.AssignLeaderRequest;
-import org.sarangchurch.growing.v2.newfamily.application.AssignLeaderService;
+import org.sarangchurch.growing.v2.newfamily.application.assignleader.AssignLeaderRequest;
+import org.sarangchurch.growing.v2.newfamily.application.assignleader.AssignLeaderService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

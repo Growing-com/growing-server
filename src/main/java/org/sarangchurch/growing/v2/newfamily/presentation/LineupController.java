@@ -1,8 +1,8 @@
 package org.sarangchurch.growing.v2.newfamily.presentation;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v2.newfamily.application.LineupRequest;
-import org.sarangchurch.growing.v2.newfamily.application.LineupService;
+import org.sarangchurch.growing.v2.newfamily.application.lineup.LineupRequest;
+import org.sarangchurch.growing.v2.newfamily.application.lineup.LineupService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
