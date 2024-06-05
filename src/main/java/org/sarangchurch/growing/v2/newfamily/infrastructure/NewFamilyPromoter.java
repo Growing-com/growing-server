@@ -30,7 +30,7 @@ public class NewFamilyPromoter {
 
         newFamily.promote(log.getId());
 
-        // TODO: 일반 순원 생성
+        // TODO: 라인업(일반 순원 생성)
     }
 
     public void promote(Long newFamilyId, LocalDate promoteDate) {

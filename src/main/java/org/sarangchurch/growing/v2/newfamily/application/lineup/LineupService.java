@@ -19,13 +19,15 @@ public class LineupService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 새가족입니다"));
 
         if (request.getPromoteDate() != null) {
+            // 등반 + 라인업(일반 케이스)
             newFamilyPromoter.promote(newFamilyId, request.getPromoteDate(), request.getSmallGroupId());
-            // TODO: 라인업(일반 케이스, 일반 순원 생성)
-        } else {
-            // 라인업(특이 케이스)
-            validateSmallGroup(request.getSmallGroupId());
-            newFamily.assignSmallGroup(request.getSmallGroupId());
+
+            return;
         }
+
+        // 등반 없이 일반 순모임 라인업(특이 케이스)
+        validateSmallGroup(request.getSmallGroupId());
+        newFamily.assignSmallGroup(request.getSmallGroupId());
     }
 
     private void validateSmallGroup(Long smallGroupId) {
