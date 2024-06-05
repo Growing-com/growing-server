@@ -18,9 +18,9 @@ public class PromoteService {
 
         newFamily.promote(request.getPromoteDate());
 
-        Long smallGroupLeaderId = request.getSmallGroupLeaderId();
+        Long smallGroupId = request.getSmallGroupId();
 
-        if (smallGroupLeaderId != null) {
+        if (smallGroupId != null) {
             // TODO: 라인업 처리
         }
     }

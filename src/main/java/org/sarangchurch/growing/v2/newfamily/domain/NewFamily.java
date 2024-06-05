@@ -15,14 +15,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Entity(name = "new_family")
-@TypeDef(name = "json", typeClass = JsonType.class)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@TypeDef(name = "json", typeClass = JsonType.class)
 public class NewFamily extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // 인적 정보 START //
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -35,21 +36,37 @@ public class NewFamily extends BaseEntity {
     @Column(name = "grade", nullable = false)
     private Integer grade;
 
-    @Column(name = "new_family_group_id")
-    private Long newFamilyGroupId;
+    @Type(type = "json")
+    @Column(name = "etc", columnDefinition = "json", nullable = false)
+    private Map<String, Object> etc = new HashMap<>();
+    // 인적 정보 END //
 
     @Column(name = "visit_date", nullable = false)
     private LocalDate visitDate;
 
-    @Column(name = "promote_date")
-    private LocalDate promoteDate = null;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
-    @Type(type = "json")
-    @Column(name = "etc", columnDefinition = "json", nullable = false)
-    private Map<String, Object> etc = new HashMap<>();
+    @Column(name = "new_family_group_id")
+    private Long newFamilyGroupId;
+
+    @Column(name = "new_family_promote_log_id")
+    private Long newFamilyPromoteLogId;
+
+    @Column(name = "small_group_id")
+    private Long smallGroupId; // 새가족반이 아닌 일반 순모임에 배정된 특이 케이스
 
     @Builder
-    public NewFamily(String name, String phoneNumber, LocalDate birth, Integer grade, Long newFamilyGroupId, LocalDate visitDate, Map<String, Object> etc) {
+    public NewFamily(
+            String name,
+            String phoneNumber,
+            LocalDate birth,
+            Integer grade,
+            Long newFamilyGroupId,
+            LocalDate visitDate,
+            Map<String, Object> etc,
+            Long userId
+    ) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.birth = birth;
@@ -57,6 +74,7 @@ public class NewFamily extends BaseEntity {
         this.newFamilyGroupId = newFamilyGroupId;
         this.visitDate = visitDate;
         this.etc = etc;
+        this.userId = userId;
     }
 
     public void assignNewFamilyGroup(Long newFamilyGroupId) {
@@ -64,10 +82,6 @@ public class NewFamily extends BaseEntity {
     }
 
     public void promote(LocalDate promoteDate) {
-        if (this.promoteDate != null) {
-            throw new IllegalStateException("이미 등반한 새가족입니다");
-        }
-
-        this.promoteDate = promoteDate;
+//        newFamilyPromoteLogId
     }
 }
