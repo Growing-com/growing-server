@@ -35,7 +35,7 @@ Content-Type: application/json
 
 {
   "promoteDate": "2024-06-09",
-  "smallGroupId": 2
+  "smallGroupId": null
 }
 
 ### 라인업
