@@ -77,7 +77,31 @@ public class NewFamily extends BaseEntity {
         this.userId = userId;
     }
 
+    public void assignSmallGroup(Long smallGroupId) {
+        if (this.newFamilyPromoteLogId != null) {
+            throw new IllegalStateException("이미 등반했습니다.");
+        }
+
+        if (this.newFamilyGroupId != null) {
+            throw new IllegalStateException("이미 새가족반에 배정되었습니다.");
+        }
+
+        if (this.smallGroupId != null) {
+            throw new IllegalStateException("이미 순모임에 배정되었습니다.");
+        }
+
+        this.smallGroupId = smallGroupId;
+    }
+
     public void assignNewFamilyGroup(Long newFamilyGroupId) {
+        if (this.newFamilyPromoteLogId != null) {
+            throw new IllegalStateException("이미 등반했습니다.");
+        }
+
+        if (this.newFamilyGroupId != null) {
+            throw new IllegalStateException("이미 새가족반에 배정되었습니다.");
+        }
+
         this.newFamilyGroupId = newFamilyGroupId;
     }
 

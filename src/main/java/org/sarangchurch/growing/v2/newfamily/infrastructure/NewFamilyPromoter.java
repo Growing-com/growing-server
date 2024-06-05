@@ -29,6 +29,8 @@ public class NewFamilyPromoter {
         );
 
         newFamily.promote(log.getId());
+
+        // TODO: 일반 순원 생성
     }
 
     public void promote(Long newFamilyId, LocalDate promoteDate) {
@@ -45,6 +47,6 @@ public class NewFamilyPromoter {
     }
 
     private void validateSmallGroup(Long smallGroupId) {
-        // TODO
+        // TODO: 순모임 유효성 검사
     }
 }
