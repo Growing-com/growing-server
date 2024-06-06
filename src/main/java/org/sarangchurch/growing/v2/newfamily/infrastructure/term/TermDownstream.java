@@ -13,4 +13,8 @@ public class TermDownstream {
     public Term findTermBySmallGroupId(Long smallGroupId) {
         return termService.findTermBySmallGroupId(smallGroupId);
     }
+
+    public Term findTerm(Long id) {
+        return termService.findTerm(id);
+    }
 }

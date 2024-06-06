@@ -47,4 +47,10 @@ public class TermServiceImpl implements TermService {
         return termRepository.findById(smallGroup.getTermId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 텀입니다."));
     }
+
+    @Override
+    public Term findTerm(Long id) {
+        return termRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 텀입니다."));
+    }
 }

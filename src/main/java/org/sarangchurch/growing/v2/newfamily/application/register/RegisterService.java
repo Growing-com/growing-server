@@ -1,8 +1,8 @@
 package org.sarangchurch.growing.v2.newfamily.application.register;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v2.newfamily.domain.NewFamily;
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamilyRepository;
+import org.sarangchurch.growing.v2.newfamily.infrastructure.NewFamilyGroupValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,19 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class RegisterService {
-
+    private final NewFamilyGroupValidator newFamilyGroupValidator;
     private final NewFamilyRepository newFamilyRepository;
 
     public void register(RegisterRequest request) {
-        validateNewFamilyGroup(request.getNewFamilyGroupId());
+        if (request.getNewFamilyGroupId() != null) {
+            newFamilyGroupValidator.validateAvailable(request.getNewFamilyGroupId());
+        }
 
         // TODO: 지체(User) 등록
         Long userId = 1L;
 
-        NewFamily newFamily = newFamilyRepository.save(request.toEntity(userId));
+        newFamilyRepository.save(request.toEntity(userId));
     }
 
-    private void validateNewFamilyGroup(Long newFamilyGroupId) {
-        // TODO: 새가족반 검증
-    }
 }

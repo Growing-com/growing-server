@@ -8,7 +8,7 @@ Content-Type: application/json
   "birth": "2000-10-16",
   "grade": 9,
   "visitDate": "2024-06-01",
-  "newFamilyGroupId": 1,
+  "newFamilyGroupId": null,
   "etc": {
     "school": "서울대학교 감자학과 6학년",
     "introducer": "박똘똘",
