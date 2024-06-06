@@ -36,7 +36,7 @@ public class LineupService {
         Term term = termDownstream.findTermBySmallGroupId(smallGroupId);
 
         if (!term.isActive()) {
-            throw new IllegalStateException("종료됐거나 시작되지 않은 텀의 순모임에 새가족을 배정할 수 없습니다.");
+            throw new IllegalStateException("종료되거나 시작되지 않은 텀의 순모임에 새가족을 배정할 수 없습니다.");
         }
     }
 }

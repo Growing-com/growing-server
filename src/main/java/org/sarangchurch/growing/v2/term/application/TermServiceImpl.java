@@ -18,9 +18,8 @@ public class TermServiceImpl implements TermService {
 
     @Override
     public void lineupUser(Long userId, Long smallGroupId) {
-        // user 검증
+        // TODO: user 검증
 
-        // smallGroup 검증
         SmallGroup smallGroup = smallGroupRepository.findById(smallGroupId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 순모임입니다."));
 
@@ -46,6 +45,12 @@ public class TermServiceImpl implements TermService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 순모임입니다."));
 
         return termRepository.findById(smallGroup.getTermId())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 텀입니다."));
+    }
+
+    @Override
+    public Term findTerm(Long id) {
+        return termRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 텀입니다."));
     }
 }

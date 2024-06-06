@@ -6,4 +6,6 @@ public interface TermService {
     void lineupUser(Long userId, Long smallGroupId);
 
     Term findTermBySmallGroupId(Long smallGroupId);
+
+    Term findTerm(Long id);
 }
