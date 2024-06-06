@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "users")
+@Table(name = "v1_users")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserEntity extends BaseEntity {

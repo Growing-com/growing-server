@@ -15,7 +15,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-@Entity(name = "new_family")
+@Entity
+@Table(name = "new_family")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @TypeDef(name = "json", typeClass = JsonType.class)
