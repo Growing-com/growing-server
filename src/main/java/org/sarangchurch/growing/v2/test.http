@@ -43,5 +43,6 @@ POST http://localhost:8080/api/v2/new-families/1/line-up
 Content-Type: application/json
 
 {
-  "smallGroupId": 1
+  "smallGroupId": 1,
+  "promoteDate": "2024-06-09"
 }
