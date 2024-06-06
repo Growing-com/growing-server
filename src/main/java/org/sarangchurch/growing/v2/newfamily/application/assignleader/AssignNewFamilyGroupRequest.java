@@ -5,6 +5,6 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class AssignLeaderRequest {
+public class AssignNewFamilyGroupRequest {
     private Long newFamilyGroupId;
 }

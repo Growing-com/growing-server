@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class AssignLeaderService {
+public class AssignNewFamilyGroupService {
     private final NewFamilyRepository newFamilyRepository;
 
     public void assign(Long newFamilyId, Long newFamilyGroupId) {
