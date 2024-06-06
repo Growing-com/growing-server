@@ -9,7 +9,7 @@ import org.sarangchurch.growing.core.types.BaseEntity;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
+@Entity(name = "v1_term")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Term extends BaseEntity {
