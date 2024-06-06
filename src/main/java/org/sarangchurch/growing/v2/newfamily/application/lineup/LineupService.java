@@ -28,11 +28,11 @@ public class LineupService {
         }
 
         // 등반 없이 일반 순모임 라인업(특이 케이스)
-        validateSmallGroup(request.getSmallGroupId());
+        validateSmallGroupAvailable(request.getSmallGroupId());
         newFamily.assignSmallGroup(request.getSmallGroupId());
     }
 
-    private void validateSmallGroup(Long smallGroupId) {
+    private void validateSmallGroupAvailable(Long smallGroupId) {
         Term term = termDownstream.findTermBySmallGroupId(smallGroupId);
 
         if (!term.isActive()) {

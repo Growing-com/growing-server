@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v2.term.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.types.BaseEntity;
@@ -23,4 +24,11 @@ public class SmallGroupMember extends BaseEntity {
 
     @Column(name = "user_id", nullable = false)
     private Long userId;
+
+    @Builder
+    public SmallGroupMember(Long termId, Long smallGroupId, Long userId) {
+        this.termId = termId;
+        this.smallGroupId = smallGroupId;
+        this.userId = userId;
+    }
 }
