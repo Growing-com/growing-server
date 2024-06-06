@@ -13,8 +13,7 @@ public class PromoteService {
 
     public void promote(Long newFamilyId, PromoteRequest request) {
         if (request.getSmallGroupId() != null) {
-            // 등반 + 라인업(일반 케이스)
-            newFamilyPromoter.promote(newFamilyId, request.getPromoteDate(), request.getSmallGroupId());
+            newFamilyPromoter.promoteAndLineup(newFamilyId, request.getPromoteDate(), request.getSmallGroupId());
 
             return;
         }

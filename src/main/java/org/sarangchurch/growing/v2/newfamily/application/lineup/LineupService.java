@@ -19,8 +19,7 @@ public class LineupService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 새가족입니다"));
 
         if (request.getPromoteDate() != null) {
-            // 등반 + 라인업(일반 케이스)
-            newFamilyPromoter.promote(newFamilyId, request.getPromoteDate(), request.getSmallGroupId());
+            newFamilyPromoter.promoteAndLineup(newFamilyId, request.getPromoteDate(), request.getSmallGroupId());
 
             return;
         }

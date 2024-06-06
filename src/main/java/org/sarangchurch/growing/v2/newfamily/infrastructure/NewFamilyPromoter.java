@@ -14,10 +14,9 @@ import java.time.LocalDate;
 public class NewFamilyPromoter {
     private final NewFamilyRepository newFamilyRepository;
     private final NewFamilyPromoteLogRepository newFamilyPromoteLogRepository;
+    private final TermUpstream termUpstream;
 
-    public void promote(Long newFamilyId, LocalDate promoteDate, Long smallGroupId) {
-        validateSmallGroup(smallGroupId);
-
+    public void promoteAndLineup(Long newFamilyId, LocalDate promoteDate, Long smallGroupId) {
         NewFamily newFamily = newFamilyRepository.findById(newFamilyId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 새가족입니다"));
 
@@ -30,7 +29,7 @@ public class NewFamilyPromoter {
 
         newFamily.promote(log.getId());
 
-        // TODO: 라인업(일반 순원 생성)
+        termUpstream.lineupUser(newFamily.getUserId(), smallGroupId);
     }
 
     public void promote(Long newFamilyId, LocalDate promoteDate) {
@@ -44,9 +43,5 @@ public class NewFamilyPromoter {
         );
 
         newFamily.promote(log.getId());
-    }
-
-    private void validateSmallGroup(Long smallGroupId) {
-        // TODO: 순모임 유효성 검사
     }
 }
