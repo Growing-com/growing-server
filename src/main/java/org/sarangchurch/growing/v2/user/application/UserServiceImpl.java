@@ -18,4 +18,10 @@ public class UserServiceImpl implements UserService {
         // 이름 중복 검사 해야하나?
         return userRepository.save(user);
     }
+
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("지체를 찾을 수 없습니다."));
+    }
 }

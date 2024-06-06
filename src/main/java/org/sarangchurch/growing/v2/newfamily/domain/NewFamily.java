@@ -59,8 +59,9 @@ public class NewFamily extends BaseEntity {
     @Column(name = "new_family_promote_log_id")
     private Long newFamilyPromoteLogId;
 
+    // 새가족반이 아닌 일반 순모임에 배정된 특이 케이스
     @Column(name = "small_group_id")
-    private Long smallGroupId; // 새가족반이 아닌 일반 순모임에 배정된 특이 케이스
+    private Long smallGroupId;
 
     @Builder
     public NewFamily(
