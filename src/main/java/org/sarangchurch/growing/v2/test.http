@@ -6,6 +6,7 @@ Content-Type: application/json
   "name": "김똘똘",
   "phoneNumber":"010-1234-5678",
   "birth": "2000-10-16",
+  "gender": "MALE",
   "grade": 9,
   "visitDate": "2024-06-01",
   "newFamilyGroupId": null,

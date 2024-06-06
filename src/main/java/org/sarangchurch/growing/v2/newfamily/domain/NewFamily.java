@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.sarangchurch.growing.core.types.BaseEntity;
+import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -32,6 +33,10 @@ public class NewFamily extends BaseEntity {
 
     @Column(name = "birth")
     private LocalDate birth;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private Gender gender;
 
     @Column(name = "grade", nullable = false)
     private Integer grade;
@@ -61,6 +66,7 @@ public class NewFamily extends BaseEntity {
             String name,
             String phoneNumber,
             LocalDate birth,
+            Gender gender,
             Integer grade,
             Long newFamilyGroupId,
             LocalDate visitDate,
@@ -70,6 +76,7 @@ public class NewFamily extends BaseEntity {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.birth = birth;
+        this.gender = gender;
         this.grade = grade;
         this.newFamilyGroupId = newFamilyGroupId;
         this.visitDate = visitDate;
