@@ -7,7 +7,8 @@ import org.sarangchurch.growing.core.types.BaseEntity;
 
 import javax.persistence.*;
 
-@Entity(name = "new_family_group_member")
+@Entity
+@Table(name = "new_family_group_member")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NewFamilyGroupMember extends BaseEntity {

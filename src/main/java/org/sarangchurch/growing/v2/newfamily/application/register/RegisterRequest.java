@@ -2,6 +2,7 @@ package org.sarangchurch.growing.v2.newfamily.application.register;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamily;
 
 import javax.validation.constraints.Min;
@@ -21,6 +22,9 @@ public class RegisterRequest {
 
     private LocalDate birth;
 
+    @NotNull(message = "성별을 입력해주세요.")
+    private Gender gender;
+
     @Min(value = 0, message = "최소 학년은 0입니다.")
     @NotNull(message = "학년을 입력해주세요.")
     private Integer grade;
@@ -37,6 +41,7 @@ public class RegisterRequest {
                 .name(name)
                 .phoneNumber(phoneNumber)
                 .birth(birth)
+                .gender(gender)
                 .grade(grade)
                 .newFamilyGroupId(newFamilyGroupId)
                 .visitDate(visitDate)

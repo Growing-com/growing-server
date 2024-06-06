@@ -7,7 +7,8 @@ import org.sarangchurch.growing.core.types.BaseEntity;
 
 import javax.persistence.*;
 
-@Entity(name = "small_group")
+@Entity
+@Table(name = "small_group")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SmallGroup extends BaseEntity {

@@ -9,7 +9,8 @@ import org.sarangchurch.growing.core.types.BaseEntity;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity(name = "new_family_promote_log")
+@Entity
+@Table(name = "new_family_promote_log")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NewFamilyPromoteLog extends BaseEntity {

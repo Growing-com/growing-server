@@ -8,13 +8,15 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.sarangchurch.growing.core.types.BaseEntity;
+import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-@Entity(name = "new_family")
+@Entity
+@Table(name = "new_family")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @TypeDef(name = "json", typeClass = JsonType.class)
@@ -32,6 +34,10 @@ public class NewFamily extends BaseEntity {
 
     @Column(name = "birth")
     private LocalDate birth;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender", nullable = false)
+    private Gender gender;
 
     @Column(name = "grade", nullable = false)
     private Integer grade;
@@ -53,14 +59,16 @@ public class NewFamily extends BaseEntity {
     @Column(name = "new_family_promote_log_id")
     private Long newFamilyPromoteLogId;
 
+    // 새가족반이 아닌 일반 순모임에 배정된 특이 케이스
     @Column(name = "small_group_id")
-    private Long smallGroupId; // 새가족반이 아닌 일반 순모임에 배정된 특이 케이스
+    private Long smallGroupId;
 
     @Builder
     public NewFamily(
             String name,
             String phoneNumber,
             LocalDate birth,
+            Gender gender,
             Integer grade,
             Long newFamilyGroupId,
             LocalDate visitDate,
@@ -70,6 +78,7 @@ public class NewFamily extends BaseEntity {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.birth = birth;
+        this.gender = gender;
         this.grade = grade;
         this.newFamilyGroupId = newFamilyGroupId;
         this.visitDate = visitDate;

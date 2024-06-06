@@ -8,7 +8,9 @@ import org.sarangchurch.growing.core.types.BaseEntity;
 
 import javax.persistence.*;
 
-@Entity(name = "small_group_member")
+// TODO: UNIQUE(smallGroupId, userId)
+@Entity
+@Table(name = "small_group_member")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SmallGroupMember extends BaseEntity {

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sarangchurch.growing.v2.core.interfaces.term.TermService;
 import org.sarangchurch.growing.v2.term.domain.*;
+import org.sarangchurch.growing.v2.term.infrastructure.user.UserDownstream;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,10 +16,11 @@ public class TermServiceImpl implements TermService {
     private final SmallGroupRepository smallGroupRepository;
     private final SmallGroupMemberRepository smallGroupMemberRepository;
     private final TermRepository termRepository;
+    private final UserDownstream userDownstream;
 
     @Override
     public void lineupUser(Long userId, Long smallGroupId) {
-        // TODO: user 검증
+        userDownstream.userExistsById(userId);
 
         SmallGroup smallGroup = smallGroupRepository.findById(smallGroupId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 순모임입니다."));
