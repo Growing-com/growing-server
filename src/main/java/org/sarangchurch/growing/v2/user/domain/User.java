@@ -10,6 +10,8 @@ import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+
+// NOTE: V2에서는 User-Account 분리시킨다.
 @Entity
 @Table(name = "user")
 @Getter
@@ -29,7 +31,7 @@ public class User extends BaseEntity {
     private LocalDate birth;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
+    @Column(name = "gender", nullable = false)
     private Gender gender;
 
     @Column(name = "grade", nullable = false)

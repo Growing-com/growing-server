@@ -36,7 +36,7 @@ public class NewFamily extends BaseEntity {
     private LocalDate birth;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
+    @Column(name = "gender", nullable = false)
     private Gender gender;
 
     @Column(name = "grade", nullable = false)
