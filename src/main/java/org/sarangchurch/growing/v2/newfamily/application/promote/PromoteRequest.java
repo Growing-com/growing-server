@@ -1,13 +1,13 @@
 package org.sarangchurch.growing.v2.newfamily.application.promote;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class PromoteRequest {
     @NotNull(message = "등반 날짜를 입력해주세요.")
     private LocalDate promoteDate;
