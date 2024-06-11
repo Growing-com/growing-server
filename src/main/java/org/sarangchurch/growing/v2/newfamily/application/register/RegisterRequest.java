@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v2.newfamily.application.register;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamily;
 
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class RegisterRequest {
     @NotNull(message = "이름을 입력해주세요.")
     private String name;
