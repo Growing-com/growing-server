@@ -72,8 +72,7 @@ public class NewFamily extends BaseEntity {
             Integer grade,
             Long newFamilyGroupId,
             LocalDate visitDate,
-            Map<String, Object> etc,
-            Long userId
+            Map<String, Object> etc
     ) {
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -83,7 +82,6 @@ public class NewFamily extends BaseEntity {
         this.newFamilyGroupId = newFamilyGroupId;
         this.visitDate = visitDate;
         this.etc = etc;
-        this.userId = userId;
     }
 
     public void assignSmallGroup(Long smallGroupId) {
@@ -120,5 +118,9 @@ public class NewFamily extends BaseEntity {
         }
 
         this.newFamilyPromoteLogId = newFamilyPromoteLogId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

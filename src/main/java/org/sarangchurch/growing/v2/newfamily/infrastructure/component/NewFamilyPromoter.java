@@ -35,6 +35,7 @@ public class NewFamilyPromoter {
         termUpstream.lineupUser(newFamily.getUserId(), smallGroupId);
     }
 
+    @Transactional
     public void promote(Long newFamilyId, LocalDate promoteDate) {
         NewFamily newFamily = newFamilyRepository.findById(newFamilyId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 새가족입니다"));
