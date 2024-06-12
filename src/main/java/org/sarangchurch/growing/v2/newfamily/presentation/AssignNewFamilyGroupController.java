@@ -1,8 +1,8 @@
 package org.sarangchurch.growing.v2.newfamily.presentation;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v2.newfamily.application.assignleader.AssignNewFamilyGroupRequest;
-import org.sarangchurch.growing.v2.newfamily.application.assignleader.AssignNewFamilyGroupService;
+import org.sarangchurch.growing.v2.newfamily.application.assign.AssignNewFamilyGroupRequest;
+import org.sarangchurch.growing.v2.newfamily.application.assign.AssignNewFamilyGroupService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
