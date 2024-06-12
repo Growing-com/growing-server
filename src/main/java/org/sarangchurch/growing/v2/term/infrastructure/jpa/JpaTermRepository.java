@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v2.term.infrastructure;
+package org.sarangchurch.growing.v2.term.infrastructure.jpa;
 
 import org.sarangchurch.growing.v2.term.domain.Term;
 import org.sarangchurch.growing.v2.term.domain.TermRepository;
