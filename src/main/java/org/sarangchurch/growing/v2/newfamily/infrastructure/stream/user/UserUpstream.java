@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v2.newfamily.infrastructure.user;
+package org.sarangchurch.growing.v2.newfamily.infrastructure.stream.user;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v2.core.interfaces.user.UserService;

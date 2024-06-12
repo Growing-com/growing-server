@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v2.newfamily.infrastructure;
+package org.sarangchurch.growing.v2.newfamily.infrastructure.jpa;
 
 import org.sarangchurch.growing.v2.newfamily.domain.LineoutNewFamily;
 import org.sarangchurch.growing.v2.newfamily.domain.LineoutNewFamilyRepository;

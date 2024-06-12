@@ -1,9 +1,9 @@
-package org.sarangchurch.growing.v2.newfamily.infrastructure;
+package org.sarangchurch.growing.v2.newfamily.infrastructure.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamilyGroup;
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamilyGroupRepository;
-import org.sarangchurch.growing.v2.newfamily.infrastructure.term.TermDownstream;
+import org.sarangchurch.growing.v2.newfamily.infrastructure.stream.term.TermDownstream;
 import org.sarangchurch.growing.v2.term.domain.Term;
 import org.springframework.stereotype.Component;
 
