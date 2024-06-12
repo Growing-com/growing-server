@@ -9,7 +9,7 @@ Content-Type: application/json
   "gender": "MALE",
   "grade": 9,
   "visitDate": "2024-06-01",
-  "newFamilyGroupId": 1,
+  "newFamilyGroupId": null,
   "etc": {
     "school": "서울대학교 감자학과 6학년",
     "introducer": "박똘똘",
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 ### 새가족 순장 배정
-POST http://localhost:8080/api/v2/new-families/1/assign-new-family-group
+POST http://localhost:8080/api/v2/new-families/2/assign-new-family-group
 Content-Type: application/json
 
 {
