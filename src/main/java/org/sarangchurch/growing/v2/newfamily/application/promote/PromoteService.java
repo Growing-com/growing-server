@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v2.newfamily.application.promote;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v2.newfamily.infrastructure.NewFamilyPromoter;
+import org.sarangchurch.growing.v2.newfamily.infrastructure.component.NewFamilyPromoter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

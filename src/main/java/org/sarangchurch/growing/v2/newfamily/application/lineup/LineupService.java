@@ -1,8 +1,8 @@
 package org.sarangchurch.growing.v2.newfamily.application.lineup;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v2.newfamily.infrastructure.NewFamilyPromoter;
-import org.sarangchurch.growing.v2.newfamily.infrastructure.NewFamilySmallGroupAssigner;
+import org.sarangchurch.growing.v2.newfamily.infrastructure.component.NewFamilyPromoter;
+import org.sarangchurch.growing.v2.newfamily.infrastructure.component.NewFamilySmallGroupAssigner;
 import org.springframework.stereotype.Service;
 
 @Service

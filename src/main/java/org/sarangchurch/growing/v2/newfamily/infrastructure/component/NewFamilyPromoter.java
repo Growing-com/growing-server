@@ -1,11 +1,11 @@
-package org.sarangchurch.growing.v2.newfamily.infrastructure;
+package org.sarangchurch.growing.v2.newfamily.infrastructure.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamily;
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamilyPromoteLog;
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamilyPromoteLogRepository;
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamilyRepository;
-import org.sarangchurch.growing.v2.newfamily.infrastructure.term.TermUpstream;
+import org.sarangchurch.growing.v2.newfamily.infrastructure.stream.term.TermUpstream;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

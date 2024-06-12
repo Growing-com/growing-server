@@ -2,8 +2,8 @@ package org.sarangchurch.growing.v2.newfamily.application.register;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamilyRepository;
-import org.sarangchurch.growing.v2.newfamily.infrastructure.NewFamilyGroupValidator;
-import org.sarangchurch.growing.v2.newfamily.infrastructure.user.UserUpstream;
+import org.sarangchurch.growing.v2.newfamily.infrastructure.component.NewFamilyGroupValidator;
+import org.sarangchurch.growing.v2.newfamily.infrastructure.stream.user.UserUpstream;
 import org.sarangchurch.growing.v2.user.domain.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v2.newfamily.infrastructure.term;
+package org.sarangchurch.growing.v2.newfamily.infrastructure.stream.term;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v2.core.interfaces.term.TermService;
