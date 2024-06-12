@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
-public class NewFamilyGroupAssigner {
+public class NewFamilyNewFamilyGroupAssigner {
     private final NewFamilyRepository newFamilyRepository;
     private final NewFamilyGroupValidator newFamilyGroupValidator;
 
