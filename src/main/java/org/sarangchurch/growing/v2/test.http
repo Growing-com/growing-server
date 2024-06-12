@@ -9,7 +9,7 @@ Content-Type: application/json
   "gender": "MALE",
   "grade": 9,
   "visitDate": "2024-06-01",
-  "newFamilyGroupId": null,
+  "newFamilyGroupId": 1,
   "etc": {
     "school": "서울대학교 감자학과 6학년",
     "introducer": "박똘똘",

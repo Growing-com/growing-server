@@ -36,7 +36,7 @@ public class RegisterRequest {
 
     private Map<String, Object> etc;
 
-    public NewFamily toEntity(Long userId) {
+    public NewFamily toEntity() {
         return NewFamily.builder()
                 .name(name)
                 .phoneNumber(phoneNumber)
@@ -46,7 +46,6 @@ public class RegisterRequest {
                 .newFamilyGroupId(newFamilyGroupId)
                 .visitDate(visitDate)
                 .etc(etc)
-                .userId(userId)
                 .build();
     }
 }
