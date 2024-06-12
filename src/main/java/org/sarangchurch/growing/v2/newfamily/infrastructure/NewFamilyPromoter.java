@@ -7,6 +7,7 @@ import org.sarangchurch.growing.v2.newfamily.domain.NewFamilyPromoteLogRepositor
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamilyRepository;
 import org.sarangchurch.growing.v2.newfamily.infrastructure.term.TermUpstream;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
@@ -17,6 +18,7 @@ public class NewFamilyPromoter {
     private final NewFamilyPromoteLogRepository newFamilyPromoteLogRepository;
     private final TermUpstream termUpstream;
 
+    @Transactional
     public void promoteAndLineup(Long newFamilyId, LocalDate promoteDate, Long smallGroupId) {
         NewFamily newFamily = newFamilyRepository.findById(newFamilyId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 새가족입니다"));
