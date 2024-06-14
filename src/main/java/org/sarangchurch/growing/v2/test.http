@@ -80,3 +80,19 @@ Content-Type: application/json
     "comment": "이 친구는 짜장면을 좋아합니다"
   }
 }
+
+### 새가족 출석 등록
+POST http://localhost:8080/api/v2/new-family-attendance
+Content-Type: application/json
+
+{
+  "date": "2024-06-01",
+  "attendanceItems": [
+    {
+      "newFamilyId": 3,
+      "status": "ATTEND",
+      "reason": "크킄"
+    }
+  ]
+}
+
