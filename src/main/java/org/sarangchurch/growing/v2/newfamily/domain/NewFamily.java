@@ -96,4 +96,8 @@ public class NewFamily extends BaseEntity {
     public boolean isPromoted() {
         return newFamilyPromoteLogId != null;
     }
+
+    public void updateEtc(Map<String, Object> etc) {
+        this.etc = etc;
+    }
 }
