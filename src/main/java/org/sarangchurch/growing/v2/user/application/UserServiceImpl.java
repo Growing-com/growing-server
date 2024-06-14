@@ -1,17 +1,22 @@
 package org.sarangchurch.growing.v2.user.application;
 
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
 import org.sarangchurch.growing.v2.core.interfaces.user.UserService;
 import org.sarangchurch.growing.v2.user.domain.User;
 import org.sarangchurch.growing.v2.user.infrastructure.UserAppender;
 import org.sarangchurch.growing.v2.user.infrastructure.UserFinder;
+import org.sarangchurch.growing.v2.user.infrastructure.UserUpdater;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserAppender userAppender;
     private final UserFinder userFinder;
+    private final UserUpdater userUpdater;
 
     @Override
     public User register(User user) {
@@ -22,5 +27,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Long id) {
         return userFinder.findById(id);
+    }
+
+    @Override
+    public void update(Long userId, String name, String phoneNumber, LocalDate birth, Gender gender, Integer grade) {
+        userUpdater.update(userId, name, phoneNumber, birth, gender, grade);
     }
 }

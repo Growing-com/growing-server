@@ -45,4 +45,22 @@ public class User extends BaseEntity {
         this.gender = gender;
         this.grade = grade;
     }
+
+    public UserEditor toEditor() {
+        return UserEditor.builder()
+                .name(name)
+                .phoneNumber(phoneNumber)
+                .birth(birth)
+                .gender(gender)
+                .grade(grade)
+                .build();
+    }
+
+    public void edit(UserEditor editor) {
+        name = editor.getName();
+        phoneNumber = editor.getPhoneNumber();
+        birth = editor.getBirth();
+        gender = editor.getGender();
+        grade = editor.getGrade();
+    }
 }

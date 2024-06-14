@@ -58,3 +58,25 @@ Content-Type: application/json
 {
   "newFamilyGroupId": 1
 }
+
+### 새가족 정보 수정
+POST http://localhost:8080/api/v2/new-families/1/update-info
+Content-Type: application/json
+
+{
+  "name": "김똘똘2222",
+  "phoneNumber":"010-1234-5678",
+  "birth": "2000-10-16",
+  "gender": "MALE",
+  "grade": 9,
+  "etc": {
+    "school": "서울대학교 감자학과 6학년",
+    "introducer": "박똘똘",
+    "isFirstChurch": false,
+    "latestChurch": "온누리교회",
+    "visitReason": "아는 사람 소개로",
+    "relationshipWithJesus": "잘 모른다",
+    "hasCertaintityOfSalvation": false,
+    "comment": "이 친구는 짜장면을 좋아합니다"
+  }
+}
