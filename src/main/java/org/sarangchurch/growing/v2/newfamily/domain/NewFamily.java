@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.sarangchurch.growing.core.types.BaseEntity;
-import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -25,31 +24,6 @@ public class NewFamily extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 인적 정보 START //
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
-    @Column(name = "birth")
-    private LocalDate birth;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender", nullable = false)
-    private Gender gender;
-
-    @Column(name = "grade", nullable = false)
-    private Integer grade;
-
-    @Type(type = "json")
-    @Column(name = "etc", columnDefinition = "json", nullable = false)
-    private Map<String, Object> etc = new HashMap<>();
-    // 인적 정보 END //
-
-    @Column(name = "visit_date", nullable = false)
-    private LocalDate visitDate;
-
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
@@ -63,22 +37,15 @@ public class NewFamily extends BaseEntity {
     @Column(name = "small_group_id")
     private Long smallGroupId;
 
+    @Column(name = "visit_date", nullable = false)
+    private LocalDate visitDate;
+
+    @Type(type = "json")
+    @Column(name = "etc", columnDefinition = "json", nullable = false)
+    private Map<String, Object> etc = new HashMap<>();
+
     @Builder
-    public NewFamily(
-            String name,
-            String phoneNumber,
-            LocalDate birth,
-            Gender gender,
-            Integer grade,
-            Long newFamilyGroupId,
-            LocalDate visitDate,
-            Map<String, Object> etc
-    ) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.birth = birth;
-        this.gender = gender;
-        this.grade = grade;
+    public NewFamily(Long newFamilyGroupId, LocalDate visitDate, Map<String, Object> etc) {
         this.newFamilyGroupId = newFamilyGroupId;
         this.visitDate = visitDate;
         this.etc = etc;
@@ -120,7 +87,13 @@ public class NewFamily extends BaseEntity {
         this.newFamilyPromoteLogId = newFamilyPromoteLogId;
     }
 
-    public void setUserId(Long userId) {
+    public NewFamily setUserId(Long userId) {
         this.userId = userId;
+
+        return this;
+    }
+
+    public boolean isPromoted() {
+        return newFamilyPromoteLogId != null;
     }
 }

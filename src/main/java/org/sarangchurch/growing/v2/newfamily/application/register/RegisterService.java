@@ -16,6 +16,6 @@ public class RegisterService {
             newFamilyGroupValidator.validateAvailable(request.getNewFamilyGroupId());
         }
 
-        newFamilyAppender.append(request.toEntity());
+        newFamilyAppender.append(request);
     }
 }
