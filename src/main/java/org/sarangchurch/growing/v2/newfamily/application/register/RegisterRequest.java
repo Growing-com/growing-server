@@ -38,11 +38,6 @@ public class RegisterRequest {
 
     public NewFamily toEntity() {
         return NewFamily.builder()
-                .name(name)
-                .phoneNumber(phoneNumber)
-                .birth(birth)
-                .gender(gender)
-                .grade(grade)
                 .newFamilyGroupId(newFamilyGroupId)
                 .visitDate(visitDate)
                 .etc(etc)

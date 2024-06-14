@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v2.newfamily.infrastructure.component;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v2.newfamily.domain.NewFamily;
+import org.sarangchurch.growing.v2.newfamily.application.register.RegisterRequest;
 import org.sarangchurch.growing.v2.newfamily.domain.NewFamilyRepository;
 import org.sarangchurch.growing.v2.newfamily.infrastructure.stream.user.UserUpstream;
 import org.sarangchurch.growing.v2.user.domain.User;
@@ -15,19 +15,17 @@ public class NewFamilyAppender {
     private final UserUpstream userUpstream;
 
     @Transactional
-    public void append(NewFamily newFamily) {
+    public void append(RegisterRequest request) {
         User user = User.builder()
-                .name(newFamily.getName())
-                .phoneNumber(newFamily.getPhoneNumber())
-                .birth(newFamily.getBirth())
-                .gender(newFamily.getGender())
-                .grade(newFamily.getGrade())
+                .name(request.getName())
+                .phoneNumber(request.getPhoneNumber())
+                .birth(request.getBirth())
+                .gender(request.getGender())
+                .grade(request.getGrade())
                 .build();
 
         User savedUser = userUpstream.register(user);
 
-        newFamily.setUserId(savedUser.getId());
-
-        newFamilyRepository.save(newFamily);
+        newFamilyRepository.save(request.toEntity().setUserId(savedUser.getId()));
     }
 }
