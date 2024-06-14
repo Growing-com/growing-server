@@ -24,13 +24,6 @@ public class NewFamily extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Type(type = "json")
-    @Column(name = "etc", columnDefinition = "json", nullable = false)
-    private Map<String, Object> etc = new HashMap<>();
-
-    @Column(name = "visit_date", nullable = false)
-    private LocalDate visitDate;
-
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
@@ -43,6 +36,13 @@ public class NewFamily extends BaseEntity {
     // 새가족반이 아닌 일반 순모임에 배정된 특이 케이스
     @Column(name = "small_group_id")
     private Long smallGroupId;
+
+    @Column(name = "visit_date", nullable = false)
+    private LocalDate visitDate;
+
+    @Type(type = "json")
+    @Column(name = "etc", columnDefinition = "json", nullable = false)
+    private Map<String, Object> etc = new HashMap<>();
 
     @Builder
     public NewFamily(Long newFamilyGroupId, LocalDate visitDate, Map<String, Object> etc) {
@@ -91,5 +91,9 @@ public class NewFamily extends BaseEntity {
         this.userId = userId;
 
         return this;
+    }
+
+    public boolean isPromoted() {
+        return newFamilyPromoteLogId != null;
     }
 }

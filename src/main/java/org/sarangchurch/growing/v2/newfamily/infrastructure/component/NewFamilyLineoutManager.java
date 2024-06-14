@@ -16,6 +16,10 @@ public class NewFamilyLineoutManager {
 
     @Transactional
     public void lineout(NewFamily newFamily) {
+        if (newFamily.isPromoted()) {
+            throw new IllegalStateException("이미 등반한 새가족입니다");
+        }
+
         LineoutNewFamily lineoutNewFamily = LineoutNewFamily.from(newFamily);
 
         newFamilyRepository.deleteById(newFamily.getId());
