@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v2.attendance.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.attendance.domain.attendance.AttendanceStatus;
@@ -11,7 +12,9 @@ import java.time.LocalDate;
 
 // TODO: UNIQUE(newFamilyId, date)
 @Entity
-@Table(name = "new_family_attendance")
+@Table(name = "new_family_attendance", uniqueConstraints = {
+        @UniqueConstraint(name = "new_family_attendance_unique_new_family_id_date", columnNames = {"new_family_id", "date"})
+})
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NewFamilyAttendance extends BaseEntity {
@@ -31,4 +34,12 @@ public class NewFamilyAttendance extends BaseEntity {
 
     @Column(name = "reason")
     private String reason;
+
+    @Builder
+    public NewFamilyAttendance(Long newFamilyId, LocalDate date, AttendanceStatus status, String reason) {
+        this.newFamilyId = newFamilyId;
+        this.date = date;
+        this.status = status;
+        this.reason = reason;
+    }
 }

@@ -3,12 +3,14 @@ package org.sarangchurch.growing.v2.attendance.application;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.attendance.domain.attendance.AttendanceStatus;
+import org.sarangchurch.growing.v2.attendance.domain.NewFamilyAttendance;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
@@ -19,6 +21,17 @@ public class RegisterNewFamilyAttendanceRequest {
     @NotEmpty(message = "출석 리스트를 입력해주세요.")
     @Valid
     private List<NewFamilyAttendanceItems> attendanceItems;
+
+    public List<NewFamilyAttendance> toEntities() {
+        return attendanceItems.stream()
+                .map(it -> NewFamilyAttendance.builder()
+                        .newFamilyId(it.newFamilyId)
+                        .date(date)
+                        .status(it.status)
+                        .reason(it.reason)
+                        .build())
+                .collect(Collectors.toList());
+    }
 
     @Getter
     @NoArgsConstructor

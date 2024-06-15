@@ -89,7 +89,7 @@ Content-Type: application/json
   "date": "2024-06-01",
   "attendanceItems": [
     {
-      "newFamilyId": 3,
+      "newFamilyId": 1,
       "status": "ATTEND",
       "reason": "크킄"
     }
