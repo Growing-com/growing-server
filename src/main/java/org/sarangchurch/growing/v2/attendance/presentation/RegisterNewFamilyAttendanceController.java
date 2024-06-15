@@ -15,6 +15,7 @@ public class RegisterNewFamilyAttendanceController {
 
     private final RegisterNewFamilyAttendanceService registerNewFamilyAttendanceService;
 
+    // TODO: @AuthenticationPrincipal
     @PostMapping("/api/v2/new-family-attendance")
     public void registerNewFamilyAttendance(@RequestBody @Valid RegisterNewFamilyAttendanceRequest request) {
         registerNewFamilyAttendanceService.register(request);
