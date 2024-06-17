@@ -6,8 +6,10 @@ import org.sarangchurch.growing.auth.security.handler.Http401Handler;
 import org.sarangchurch.growing.auth.security.handler.Http403Handler;
 import org.sarangchurch.growing.auth.security.handler.LoginFailHandler;
 import org.sarangchurch.growing.auth.security.handler.LoginSuccessHandler;
-import org.sarangchurch.growing.user.domain.UserEntity;
 import org.sarangchurch.growing.user.domain.UserRepository;
+import org.sarangchurch.growing.v2.auth.domain.Account;
+import org.sarangchurch.growing.v2.auth.domain.AccountRepository;
+import org.sarangchurch.growing.v2.auth.domain.Principal;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
@@ -28,6 +30,7 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig {
+    private final AccountRepository accountRepository;
     private final UserRepository userRepository;
     private final ObjectMapper objectMapper;
 
@@ -46,6 +49,7 @@ public class SecurityConfig {
                 .antMatchers("/api/auth/isLoggedIn").permitAll()
                 .antMatchers("/api/common/**").permitAll()
                 .antMatchers("/actuator/**").permitAll()
+                .antMatchers("/api/v2/new-family-attendance").authenticated()
                 .antMatchers("/api/v2/**").permitAll() // 개발 편의를 위함
                 .anyRequest().authenticated()
 
@@ -90,10 +94,14 @@ public class SecurityConfig {
     @Bean
     UserDetailsService userDetailsService() {
         return username -> {
-            UserEntity user = userRepository.findByUsername(username)
+            Account account = accountRepository.findByUsername(username)
                     .orElseThrow(() -> new UsernameNotFoundException("No username: " + username));
 
-            return new UserDetailsImpl(user);
+            return Principal.from(account);
+//            UserEntity user = userRepository.findByUsername(username)
+//                    .orElseThrow(() -> new UsernameNotFoundException("No username: " + username));
+//
+//            return new UserDetailsImpl(user);
         };
     }
 

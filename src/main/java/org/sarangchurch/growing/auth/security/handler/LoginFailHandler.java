@@ -23,7 +23,7 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .status(400)
-                .message("아이디/비밀번호를 확인해주세요.")
+                .message("Wrong username/password")
                 .build();
 
         response.setStatus(SC_BAD_REQUEST);
