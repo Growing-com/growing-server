@@ -18,7 +18,6 @@ public class NewFamilyAttendanceAppender {
 
     @Transactional
     public void append(RegisterNewFamilyAttendanceRequest request) {
-        // TODO: 권한 검사(간사-> all, 리더-> 본인 소속)
         List<NewFamilyAttendance> attendances = request.toEntities();
 
         List<Long> newFamilyIds = attendances.stream()
