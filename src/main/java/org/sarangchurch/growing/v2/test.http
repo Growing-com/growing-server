@@ -3,13 +3,13 @@ POST http://localhost:8080/api/v2/new-families/register
 Content-Type: application/json
 
 {
-  "name": "김똘똘",
+  "name": "새가족",
   "phoneNumber":"010-1234-5678",
   "birth": "2000-10-16",
   "gender": "MALE",
   "grade": 9,
   "visitDate": "2024-06-01",
-  "newFamilyGroupId": null,
+  "newFamilyGroupId": 1,
   "etc": {
     "school": "서울대학교 감자학과 6학년",
     "introducer": "박똘똘",
@@ -90,6 +90,11 @@ Content-Type: application/json
   "attendanceItems": [
     {
       "newFamilyId": 1,
+      "status": "ATTEND",
+      "reason": "크킄"
+    },
+    {
+      "newFamilyId": 2,
       "status": "ATTEND",
       "reason": "크킄"
     }

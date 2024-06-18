@@ -22,4 +22,8 @@ public class NewFamilyFinder {
 
         return newFamilies.size() == ids.size();
     }
+
+    public List<NewFamily> findByIdIn(List<Long> ids) {
+        return newFamilyRepository.findByIdIn(ids);
+    }
 }
