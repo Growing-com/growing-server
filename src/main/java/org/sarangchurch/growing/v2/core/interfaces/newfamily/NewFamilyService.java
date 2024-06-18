@@ -1,6 +1,6 @@
 package org.sarangchurch.growing.v2.core.interfaces.newfamily;
 
-import org.sarangchurch.growing.v2.newfamily.domain.NewFamily;
+import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamily;
 
 import java.util.List;
 

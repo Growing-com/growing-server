@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v2.core.interfaces.user;
 
 import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
-import org.sarangchurch.growing.v2.user.domain.User;
+import org.sarangchurch.growing.v2.feat.user.domain.User;
 
 import java.time.LocalDate;
 
