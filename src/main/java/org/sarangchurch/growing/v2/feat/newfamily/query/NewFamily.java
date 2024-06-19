@@ -1,0 +1,23 @@
+package org.sarangchurch.growing.v2.feat.newfamily.query;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
+
+import java.time.LocalDate;
+import java.util.Map;
+
+@Getter
+@RequiredArgsConstructor
+public class NewFamily {
+    private final Long userId;
+    private final String name;
+    private final String phoneNumber;
+    private final LocalDate birth;
+    private final Gender gender;
+    private final Integer grade;
+    private final LocalDate visitDate;
+    private final Map<String, Object> etc;
+    private final String newFamilyGroupLeaderName;
+    private final String smallGroupLeaderName;
+}
