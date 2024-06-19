@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.core.config;
+package org.sarangchurch.growing.v2.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
