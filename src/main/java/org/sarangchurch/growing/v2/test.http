@@ -3,13 +3,13 @@ POST http://localhost:8080/api/v2/new-families/register
 Content-Type: application/json
 
 {
-  "name": "새가족",
+  "name": "새가족2",
   "phoneNumber":"010-1234-5678",
   "birth": "2000-10-16",
   "gender": "MALE",
   "grade": 9,
   "visitDate": "2024-06-01",
-  "newFamilyGroupId": 1,
+  "newFamilyGroupId": null,
   "etc": {
     "school": "서울대학교 감자학과 6학년",
     "introducer": "박똘똘",
@@ -40,12 +40,12 @@ Content-Type: application/json
 }
 
 ### 라인업
-POST http://localhost:8080/api/v2/new-families/1/line-up
+POST http://localhost:8080/api/v2/new-families/2/line-up
 Content-Type: application/json
 
 {
   "smallGroupId": 1,
-  "promoteDate": "2024-06-09"
+  "promoteDate": "2024-06-09",
 }
 
 ### 라인아웃
@@ -115,3 +115,6 @@ POST http://localhost:8080/api/auth/logout
 
 ### 새가족반 목록 조회
 GET http://localhost:8080/api/v2/term/1/new-family-groups
+
+### 새가족 목록 조회
+GET http://localhost:8080/api/v2/new-families
