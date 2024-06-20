@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Getter
 @RequiredArgsConstructor
-public class NewFamily {
+public class PromotedNewFamily {
     private final Long newFamilyId;
     private final String name;
     private final String phoneNumber;

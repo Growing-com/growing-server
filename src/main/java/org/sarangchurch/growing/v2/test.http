@@ -118,3 +118,6 @@ GET http://localhost:8080/api/v2/term/1/new-family-groups
 
 ### 새가족 목록 조회
 GET http://localhost:8080/api/v2/new-families
+
+### 등반자 목록 조회
+GET http://localhost:8080/api/v2/promoted-new-families
