@@ -20,5 +20,5 @@ public class LinedoutNewFamily {
     private final LocalDate visitDate;
     private final Map<String, Object> etc;
     private final String newFamilyGroupLeaderName;
-    private final LocalDateTime lineoutDate;
+    private final LocalDateTime lineoutAt;
 }
