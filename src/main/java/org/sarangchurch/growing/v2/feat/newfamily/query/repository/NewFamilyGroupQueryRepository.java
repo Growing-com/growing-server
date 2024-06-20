@@ -1,8 +1,9 @@
-package org.sarangchurch.growing.v2.feat.newfamily.query;
+package org.sarangchurch.growing.v2.feat.newfamily.query.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v2.feat.newfamily.query.model.NewFamilyGroup;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
