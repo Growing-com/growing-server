@@ -49,7 +49,7 @@ Content-Type: application/json
 }
 
 ### 라인아웃
-POST http://localhost:8080/api/v2/new-families/2/line-out
+POST http://localhost:8080/api/v2/new-families/4/line-out
 
 ### 새가족 복귀
 POST http://localhost:8080/api/v2/lined-out-new-families/1/rollback
@@ -121,3 +121,6 @@ GET http://localhost:8080/api/v2/new-families
 
 ### 등반자 목록 조회
 GET http://localhost:8080/api/v2/promoted-new-families
+
+### 새가족 이탈자 목록 조회
+GET http://localhost:8080/api/v2/lined-out-new-families
