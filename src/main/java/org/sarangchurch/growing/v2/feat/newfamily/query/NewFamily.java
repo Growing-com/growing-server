@@ -10,7 +10,7 @@ import java.util.Map;
 @Getter
 @RequiredArgsConstructor
 public class NewFamily {
-    private final Long userId;
+    private final Long newFamilyId;
     private final String name;
     private final String phoneNumber;
     private final LocalDate birth;
@@ -20,4 +20,5 @@ public class NewFamily {
     private final Map<String, Object> etc;
     private final String newFamilyGroupLeaderName;
     private final String smallGroupLeaderName;
+    private final String promotedSmallGroupLeaderName;
 }
