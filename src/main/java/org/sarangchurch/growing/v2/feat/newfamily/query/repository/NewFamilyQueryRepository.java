@@ -1,8 +1,10 @@
-package org.sarangchurch.growing.v2.feat.newfamily.query;
+package org.sarangchurch.growing.v2.feat.newfamily.query.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v2.feat.newfamily.query.model.NewFamily;
+import org.sarangchurch.growing.v2.feat.newfamily.query.model.PromotedNewFamily;
 import org.sarangchurch.growing.v2.feat.term.domain.smallgroup.QSmallGroup;
 import org.sarangchurch.growing.v2.feat.term.domain.smallgroupleader.QSmallGroupLeader;
 import org.sarangchurch.growing.v2.feat.user.domain.QUser;

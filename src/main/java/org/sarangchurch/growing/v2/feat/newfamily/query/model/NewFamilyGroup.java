@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v2.feat.newfamily.query;
+package org.sarangchurch.growing.v2.feat.newfamily.query.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
