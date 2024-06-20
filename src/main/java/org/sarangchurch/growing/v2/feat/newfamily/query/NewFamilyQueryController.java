@@ -16,4 +16,9 @@ public class NewFamilyQueryController {
     public ApiResponse<List<NewFamily>> findNewFamilies() {
         return ApiResponse.of(newFamilyQueryRepository.findAll());
     }
+
+    @GetMapping("/api/v2/promoted-new-families")
+    public ApiResponse<List<PromotedNewFamily>> findPromotedNewFamilies() {
+        return ApiResponse.of(newFamilyQueryRepository.findAllPromotedNewFamily());
+    }
 }

@@ -46,7 +46,8 @@ public class NewFamilyQueryRepository {
                         newFamily.etc,
                         newFamilyGroupLeaderUser.name,
                         smallGroupLeaderUser.name,
-                        promotedSmallGroupLeaderUser.name
+                        promotedSmallGroupLeaderUser.name,
+                        newFamilyPromoteLog.promoteDate
                 ))
                 .from(newFamily)
                 .join(user).on(user.id.eq(newFamily.userId))
@@ -63,6 +64,56 @@ public class NewFamilyQueryRepository {
                 .leftJoin(promotedSmallGroup).on(promotedSmallGroup.id.eq(newFamilyPromoteLog.smallGroupId))
                 .leftJoin(promotedSmallGroupLeader).on(promotedSmallGroupLeader.id.eq(promotedSmallGroup.smallGroupLeaderId))
                 .leftJoin(promotedSmallGroupLeaderUser).on(promotedSmallGroupLeaderUser.id.eq(promotedSmallGroupLeader.userId))
+                // 정렬
+                .orderBy(newFamily.visitDate.desc())
+                .fetch();
+    }
+
+    public List<PromotedNewFamily> findAllPromotedNewFamily() {
+        // 새가족반
+        QUser newFamilyGroupLeaderUser = new QUser("newFamilyGroupLeaderUser");
+
+        // 새가족일때 일반 순모임
+        QSmallGroup smallGroup = new QSmallGroup("smallGroup");
+        QSmallGroupLeader smallGroupLeader = new QSmallGroupLeader("smallGroupLeader");
+        QUser smallGroupLeaderUser = new QUser("smallGroupLeaderUser");
+
+        // 등반한 순모임
+        QSmallGroup promotedSmallGroup = new QSmallGroup("promotedSmallGroup");
+        QSmallGroupLeader promotedSmallGroupLeader = new QSmallGroupLeader("promotedSmallGroupLeader");
+        QUser promotedSmallGroupLeaderUser = new QUser("promotedSmallGroupLeaderUser");
+
+        return queryFactory.select(Projections.constructor(PromotedNewFamily.class,
+                        newFamily.id,
+                        user.name,
+                        user.phoneNumber,
+                        user.birth,
+                        user.gender,
+                        user.grade,
+                        newFamily.visitDate,
+                        newFamily.etc,
+                        newFamilyGroupLeaderUser.name,
+                        smallGroupLeaderUser.name,
+                        promotedSmallGroupLeaderUser.name,
+                        newFamilyPromoteLog.promoteDate
+                ))
+                .from(newFamily)
+                .join(user).on(user.id.eq(newFamily.userId))
+                // 새가족반
+                .leftJoin(newFamilyGroup).on(newFamilyGroup.id.eq(newFamily.newFamilyGroupId))
+                .leftJoin(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
+                .leftJoin(newFamilyGroupLeaderUser).on(newFamilyGroupLeaderUser.id.eq(newFamilyGroupLeader.userId))
+                // 새가족일때 일반 순모임
+                .leftJoin(smallGroup).on(smallGroup.id.eq(newFamily.smallGroupId))
+                .leftJoin(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
+                .leftJoin(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroupLeader.userId))
+                // 등반한 순모임
+                .innerJoin(newFamilyPromoteLog).on(newFamilyPromoteLog.id.eq(newFamily.newFamilyPromoteLogId))
+                .innerJoin(promotedSmallGroup).on(promotedSmallGroup.id.eq(newFamilyPromoteLog.smallGroupId))
+                .innerJoin(promotedSmallGroupLeader).on(promotedSmallGroupLeader.id.eq(promotedSmallGroup.smallGroupLeaderId))
+                .innerJoin(promotedSmallGroupLeaderUser).on(promotedSmallGroupLeaderUser.id.eq(promotedSmallGroupLeader.userId))
+                // 정렬
+                .orderBy(newFamilyPromoteLog.promoteDate.desc())
                 .fetch();
     }
 }
