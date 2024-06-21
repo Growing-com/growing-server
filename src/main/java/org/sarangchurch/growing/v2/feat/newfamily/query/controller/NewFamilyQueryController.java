@@ -6,6 +6,7 @@ import org.sarangchurch.growing.v2.feat.newfamily.query.model.NewFamily;
 import org.sarangchurch.growing.v2.feat.newfamily.query.repository.NewFamilyQueryRepository;
 import org.sarangchurch.growing.v2.feat.newfamily.query.model.PromotedNewFamily;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,7 +17,11 @@ public class NewFamilyQueryController {
     private final NewFamilyQueryRepository newFamilyQueryRepository;
 
     @GetMapping("/api/v2/new-families")
-    public ApiResponse<List<NewFamily>> findNewFamilies() {
+    public ApiResponse<List<NewFamily>> findNewFamilies(@RequestParam(required = false) Long newFamilyGroupId) {
+        if (newFamilyGroupId != null) {
+            return ApiResponse.of(newFamilyQueryRepository.findByNewFamilyGroup(newFamilyGroupId));
+        }
+
         return ApiResponse.of(newFamilyQueryRepository.findAll());
     }
 
