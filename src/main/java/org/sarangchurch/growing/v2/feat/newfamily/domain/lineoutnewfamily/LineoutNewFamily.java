@@ -4,15 +4,14 @@ import io.hypersistence.utils.hibernate.type.json.JsonType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.sarangchurch.growing.core.types.BaseEntity;
 import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamily;
+import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamilyEtc;
+import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamilyEtcConverter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 @Entity
 @Table(name = "line_out_new_family")
@@ -33,9 +32,9 @@ public class LineoutNewFamily extends BaseEntity {
     @Column(name = "new_family_group_id")
     private Long newFamilyGroupId;
 
-    @Type(type = "json")
+    @Convert(converter = NewFamilyEtcConverter.class)
     @Column(name = "etc", columnDefinition = "json", nullable = false)
-    private Map<String, Object> etc = new HashMap<>();
+    private NewFamilyEtc etc;
 
     public static LineoutNewFamily from(NewFamily newFamily) {
         return new LineoutNewFamily(
@@ -46,7 +45,7 @@ public class LineoutNewFamily extends BaseEntity {
         );
     }
 
-    private LineoutNewFamily(Long userId, LocalDate visitDate, Long newFamilyGroupId, Map<String, Object> etc) {
+    private LineoutNewFamily(Long userId, LocalDate visitDate, Long newFamilyGroupId, NewFamilyEtc etc) {
         this.userId = userId;
         this.visitDate = visitDate;
         this.newFamilyGroupId = newFamilyGroupId;
