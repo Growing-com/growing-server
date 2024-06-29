@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.types.BaseEntity;
-import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
+import org.sarangchurch.growing.v2.core.interfaces.common.Sex;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -31,18 +31,18 @@ public class User extends BaseEntity {
     private LocalDate birth;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender", nullable = false)
-    private Gender gender;
+    @Column(name = "sex", nullable = false)
+    private Sex sex;
 
     @Column(name = "grade", nullable = false)
     private Integer grade;
 
     @Builder
-    public User(String name, String phoneNumber, LocalDate birth, Gender gender, Integer grade) {
+    public User(String name, String phoneNumber, LocalDate birth, Sex sex, Integer grade) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.birth = birth;
-        this.gender = gender;
+        this.sex = sex;
         this.grade = grade;
     }
 
@@ -51,7 +51,7 @@ public class User extends BaseEntity {
                 .name(name)
                 .phoneNumber(phoneNumber)
                 .birth(birth)
-                .gender(gender)
+                .sex(sex)
                 .grade(grade)
                 .build();
     }
@@ -60,7 +60,7 @@ public class User extends BaseEntity {
         name = editor.getName();
         phoneNumber = editor.getPhoneNumber();
         birth = editor.getBirth();
-        gender = editor.getGender();
+        sex = editor.getSex();
         grade = editor.getGrade();
     }
 }

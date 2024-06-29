@@ -87,7 +87,7 @@ public class NewFamilyAttendanceQueryRepository {
                         user.name,
                         user.phoneNumber,
                         user.birth,
-                        user.gender,
+                        user.sex,
                         user.grade,
                         newFamily.visitDate,
                         newFamily.etc,

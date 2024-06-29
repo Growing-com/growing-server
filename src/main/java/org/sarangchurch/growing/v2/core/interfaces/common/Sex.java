@@ -1,6 +1,6 @@
 package org.sarangchurch.growing.v2.core.interfaces.common;
 
-public enum Gender {
+public enum Sex {
     MALE,
     FEMALE;
 }

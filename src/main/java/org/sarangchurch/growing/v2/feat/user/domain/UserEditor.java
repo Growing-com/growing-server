@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v2.feat.user.domain;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
+import org.sarangchurch.growing.v2.core.interfaces.common.Sex;
 
 import java.time.LocalDate;
 
@@ -11,15 +11,15 @@ public class UserEditor {
     private String name;
     private String phoneNumber;
     private LocalDate birth;
-    private Gender gender;
+    private Sex sex;
     private Integer grade;
 
     @Builder
-    public UserEditor(String name, String phoneNumber, LocalDate birth, Gender gender, Integer grade) {
+    public UserEditor(String name, String phoneNumber, LocalDate birth, Sex sex, Integer grade) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.birth = birth;
-        this.gender = gender;
+        this.sex = sex;
         this.grade = grade;
     }
 
@@ -35,8 +35,8 @@ public class UserEditor {
         this.birth = birth;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    public void setSex(Sex sex) {
+        this.sex = sex;
     }
 
     public void setGrade(Integer grade) {

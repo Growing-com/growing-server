@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v2.feat.newfamily.application.register;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
+import org.sarangchurch.growing.v2.core.interfaces.common.Sex;
 import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamily;
 
 import javax.validation.constraints.Min;
@@ -23,7 +23,7 @@ public class RegisterRequest {
     private LocalDate birth;
 
     @NotNull(message = "성별을 입력해주세요.")
-    private Gender gender;
+    private Sex sex;
 
     @Min(value = 0, message = "최소 학년은 0입니다.")
     @NotNull(message = "학년을 입력해주세요.")
