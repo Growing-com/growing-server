@@ -28,7 +28,7 @@ public class NewFamilyUpdater {
                 request.getName(),
                 request.getPhoneNumber(),
                 request.getBirth(),
-                request.getGender(),
+                request.getSex(),
                 request.getGrade()
         );
     }

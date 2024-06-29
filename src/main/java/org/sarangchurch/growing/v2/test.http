@@ -6,7 +6,7 @@ Content-Type: application/json
   "name": "새가족2",
   "phoneNumber":"010-1234-5678",
   "birth": "2000-10-16",
-  "gender": "MALE",
+  "sex": "MALE",
   "grade": 9,
   "visitDate": "2024-06-01",
   "newFamilyGroupId": null,
@@ -67,7 +67,7 @@ Content-Type: application/json
   "name": "김똘똘2222",
   "phoneNumber":"010-1234-5678",
   "birth": "2000-10-16",
-  "gender": "MALE",
+  "sex": "MALE",
   "grade": 9,
   "etc": {
     "school": "서울대학교 감자학과 6학년",

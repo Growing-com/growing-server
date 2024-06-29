@@ -27,7 +27,7 @@ public class LinedoutNewFamilyQueryRepository {
                         user.name,
                         user.phoneNumber,
                         user.birth,
-                        user.gender,
+                        user.sex,
                         user.grade,
                         lineoutNewFamily.visitDate,
                         lineoutNewFamily.etc,

@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v2.feat.newfamily.query.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
+import org.sarangchurch.growing.v2.core.interfaces.common.Sex;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ public class LinedoutNewFamily {
     private final String name;
     private final String phoneNumber;
     private final LocalDate birth;
-    private final Gender gender;
+    private final Sex sex;
     private final Integer grade;
     private final LocalDate visitDate;
     private final Map<String, Object> etc;

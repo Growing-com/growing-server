@@ -20,7 +20,7 @@ public class NewFamilyAppender {
                 .name(request.getName())
                 .phoneNumber(request.getPhoneNumber())
                 .birth(request.getBirth())
-                .gender(request.getGender())
+                .sex(request.getSex())
                 .grade(request.getGrade())
                 .build();
 

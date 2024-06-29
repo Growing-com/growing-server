@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v2.feat.user.application;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v2.core.interfaces.common.Gender;
+import org.sarangchurch.growing.v2.core.interfaces.common.Sex;
 import org.sarangchurch.growing.v2.core.interfaces.user.UserService;
 import org.sarangchurch.growing.v2.feat.user.domain.User;
 import org.sarangchurch.growing.v2.feat.user.infrastructure.component.UserAppender;
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(Long userId, String name, String phoneNumber, LocalDate birth, Gender gender, Integer grade) {
-        userUpdater.update(userId, name, phoneNumber, birth, gender, grade);
+    public void update(Long userId, String name, String phoneNumber, LocalDate birth, Sex sex, Integer grade) {
+        userUpdater.update(userId, name, phoneNumber, birth, sex, grade);
     }
 }
