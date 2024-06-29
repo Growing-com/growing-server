@@ -3,11 +3,11 @@ package org.sarangchurch.growing.v2.feat.newfamily.application.updateinfo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.v2.core.interfaces.common.Sex;
+import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamilyEtc;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.util.Map;
 
 @Getter
 @NoArgsConstructor
@@ -24,5 +24,5 @@ public class UpdateInfoRequest {
     @Min(value = 0, message = "최소 학년은 0입니다.")
     private Integer grade;
 
-    private Map<String, Object> etc;
+    private NewFamilyEtc etc;
 }

@@ -5,14 +5,11 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.sarangchurch.growing.core.types.BaseEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 @Entity
 @Table(name = "new_family")
@@ -40,12 +37,12 @@ public class NewFamily extends BaseEntity {
     @Column(name = "visit_date", nullable = false)
     private LocalDate visitDate;
 
-    @Type(type = "json")
+    @Convert(converter = NewFamilyEtcConverter.class)
     @Column(name = "etc", columnDefinition = "json", nullable = false)
-    private Map<String, Object> etc = new HashMap<>();
+    private NewFamilyEtc etc;
 
     @Builder
-    public NewFamily(Long newFamilyGroupId, LocalDate visitDate, Map<String, Object> etc) {
+    public NewFamily(Long newFamilyGroupId, LocalDate visitDate, NewFamilyEtc etc) {
         this.newFamilyGroupId = newFamilyGroupId;
         this.visitDate = visitDate;
         this.etc = etc;
@@ -97,7 +94,7 @@ public class NewFamily extends BaseEntity {
         return newFamilyPromoteLogId != null;
     }
 
-    public void updateEtc(Map<String, Object> etc) {
+    public void updateEtc(NewFamilyEtc etc) {
         this.etc = etc;
     }
 }

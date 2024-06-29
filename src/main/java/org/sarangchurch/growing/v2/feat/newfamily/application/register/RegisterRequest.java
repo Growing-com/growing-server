@@ -4,12 +4,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.v2.core.interfaces.common.Sex;
 import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamily;
+import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamilyEtc;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.util.Map;
 
 @Getter
 @NoArgsConstructor
@@ -34,7 +34,7 @@ public class RegisterRequest {
     @NotNull(message = "방문 날짜를 입력해주세요.")
     private LocalDate visitDate;
 
-    private Map<String, Object> etc;
+    private NewFamilyEtc etc;
 
     public NewFamily toEntity() {
         return NewFamily.builder()

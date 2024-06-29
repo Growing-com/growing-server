@@ -2,6 +2,7 @@ package org.sarangchurch.growing.v2.feat.newfamily.infrastructure.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v2.feat.newfamily.application.register.RegisterRequest;
+import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamilyRepository;
 import org.sarangchurch.growing.v2.feat.newfamily.infrastructure.stream.user.UserUpstream;
 import org.sarangchurch.growing.v2.feat.user.domain.User;
@@ -26,6 +27,10 @@ public class NewFamilyAppender {
 
         User savedUser = userUpstream.register(user);
 
-        newFamilyRepository.save(request.toEntity().setUserId(savedUser.getId()));
+        NewFamily newFamily = request.toEntity();
+
+        newFamily.setUserId(savedUser.getId());
+
+        newFamilyRepository.save(newFamily);
     }
 }
