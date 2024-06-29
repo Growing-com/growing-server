@@ -7,10 +7,10 @@ public class NewFamilyEtc {
     private String school;
     private String comment;
     private String introducer;
-    private String visitReason;
+    private NewFamilyVisitReason visitReason;
     private String latestChurch;
     private Boolean isFirstChurch;
     private String address;
-    private String relationshipWithJesus;
+    private NewFamilyRelationshipWithJesus relationshipWithJesus;
     private Boolean hasCertaintityOfSalvation;
 }
