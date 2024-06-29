@@ -16,8 +16,8 @@ Content-Type: application/json
     "isFirstChurch": false,
     "address": "감자밭",
     "latestChurch": "온누리교회",
-    "visitReason": "아는 사람 소개로",
-    "relationshipWithJesus": "잘 모른다",
+    "visitReason": "DISCIPLE_TRAINING",
+    "relationshipWithJesus": "LORD",
     "hasCertaintityOfSalvation": false,
     "comment": "이 친구는 짜장면을 좋아합니다"
   }
@@ -76,8 +76,8 @@ Content-Type: application/json
     "isFirstChurch": false,
     "address": "고구마밭",
     "latestChurch": "온누리교회",
-    "visitReason": "아는 사람 소개로",
-    "relationshipWithJesus": "잘 모른다",
+    "visitReason": "DISCIPLE_TRAINING",
+    "relationshipWithJesus": "LORD",
     "hasCertaintityOfSalvation": false,
     "comment": "이 친구는 짜장면을 좋아합니다"
   }
