@@ -134,3 +134,20 @@ GET http://localhost:8080/api/v2/term/1/small-groups
 GET http://localhost:8080/api/v2/new-family-attendances?
     cursor=2025-06-19T20:09:52Z
     &limit=4
+
+### 새가족 대량 라인업
+POST http://localhost:8080/api/v2/new-families/batch-line-up
+Content-Type: application/json
+
+{
+  "requests": [
+    {
+      "newFamilyId": 1,
+      "smallGroupId": 1,
+      "promoteDate": "2024-06-09"
+    }
+  ]
+}
+
+### 새가족 상세 조회
+GET http://localhost:8080/api/v2/new-families/1
