@@ -131,9 +131,7 @@ GET http://localhost:8080/api/v2/lined-out-new-families
 GET http://localhost:8080/api/v2/term/1/small-groups
 
 ### 새가족 출석 조회
-GET http://localhost:8080/api/v2/new-family-attendances?
-    cursor=2025-06-19T20:09:52Z
-    &limit=4
+GET http://localhost:8080/api/v2/new-family-attendances?page=0&size=10
 
 ### 새가족 대량 라인업
 POST http://localhost:8080/api/v2/new-families/batch-line-up

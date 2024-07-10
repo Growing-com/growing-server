@@ -1,15 +1,18 @@
 package org.sarangchurch.growing.v2.feat.attendance.query;
 
+import com.mysema.commons.lang.Pair;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v2.feat.term.domain.smallgroup.QSmallGroup;
 import org.sarangchurch.growing.v2.feat.term.domain.smallgroupleader.QSmallGroupLeader;
 import org.sarangchurch.growing.v2.feat.user.domain.QUser;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -28,13 +31,14 @@ import static org.sarangchurch.growing.v2.feat.user.domain.QUser.user;
 public class NewFamilyAttendanceQueryRepository {
     private final JPAQueryFactory queryFactory;
 
-    public List<NewFamilyAttendance> findPromotedIncludedByDateRange(
+    public Page<NewFamilyAttendance> findPromotedIncludedByDateRange(
             LocalDate startDate,
             LocalDate endDate,
-            LocalDateTime cursor,
-            int limit
+            Pageable pageable
     ) {
-        List<NewFamilyAttendance> newFamilyAttendances =  this.findNewFamiliesByCursorAndLimit(cursor, limit);
+        Pair<List<NewFamilyAttendance>, Long> p = this.findNewFamilies(pageable.getOffset(), pageable.getPageSize());
+        List<NewFamilyAttendance> newFamilyAttendances = p.getFirst();
+        Long totalCount = p.getSecond();
 
         List<Long> newFamilyIds = newFamilyAttendances.stream()
                 .map(NewFamilyAttendance::getNewFamilyId)
@@ -54,20 +58,10 @@ public class NewFamilyAttendanceQueryRepository {
             it.setAttendanceItems(attendanceItems);
         });
 
-        return newFamilyAttendances;
+        return new PageImpl<>(newFamilyAttendances, pageable, totalCount);
     }
 
-    private List<NewFamilyAttendance> findNewFamiliesByCursorAndLimit(LocalDateTime cursor, int limit) {
-        LocalDateTime baseCreatedAt = queryFactory.select(newFamily.createdAt)
-                .from(newFamily)
-                .where(newFamily.createdAt.loe(cursor))
-                .orderBy(newFamily.createdAt.desc())
-                .fetchFirst();
-
-        if (baseCreatedAt == null) {
-            return Collections.emptyList();
-        }
-
+    private Pair<List<NewFamilyAttendance>, Long> findNewFamilies(long offset, long limit) {
         // 새가족반
         QUser newFamilyGroupLeaderUser = new QUser("newFamilyGroupLeaderUser");
 
@@ -81,7 +75,7 @@ public class NewFamilyAttendanceQueryRepository {
         QSmallGroupLeader promotedSmallGroupLeader = new QSmallGroupLeader("promotedSmallGroupLeader");
         QUser promotedSmallGroupLeaderUser = new QUser("promotedSmallGroupLeaderUser");
 
-        return queryFactory.select(Projections.constructor(NewFamilyAttendance.class,
+        List<NewFamilyAttendance> content = queryFactory.select(Projections.constructor(NewFamilyAttendance.class,
                         newFamily.id,
                         newFamily.createdAt,
                         user.name,
@@ -111,11 +105,18 @@ public class NewFamilyAttendanceQueryRepository {
                 .leftJoin(promotedSmallGroup).on(promotedSmallGroup.id.eq(newFamilyPromoteLog.smallGroupId))
                 .leftJoin(promotedSmallGroupLeader).on(promotedSmallGroupLeader.id.eq(promotedSmallGroup.smallGroupLeaderId))
                 .leftJoin(promotedSmallGroupLeaderUser).on(promotedSmallGroupLeaderUser.id.eq(promotedSmallGroupLeader.userId))
-                // filter, sort, limit
-                .where(newFamily.createdAt.loe(baseCreatedAt)) // ms까지 짤리기 때문에 loe 해도 괜찮음
+                // order, offset, limit
                 .orderBy(newFamily.createdAt.desc())
+                .offset(offset)
                 .limit(limit)
                 .fetch();
+
+        Long totalCount = queryFactory
+                .select(newFamily.id.count())
+                .from(newFamily)
+                .fetchOne();
+
+        return Pair.of(content, totalCount);
     }
 
     private Map<Long, List<NewFamilyAttendanceItem>> findAttendancesByIdInAndDateRange(List<Long> newFamilyIds, LocalDate startDate, LocalDate endDate) {
