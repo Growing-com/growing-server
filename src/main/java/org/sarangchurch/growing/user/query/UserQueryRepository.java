@@ -5,8 +5,13 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.term.domain.team.Duty;
+import org.sarangchurch.growing.user.domain.Role;
+import org.sarangchurch.growing.v2.feat.auth.domain.QAccount;
+import org.sarangchurch.growing.v2.feat.user.domain.QUser;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,6 +24,8 @@ import static org.sarangchurch.growing.training.domain.discipleship.QDiscipleshi
 import static org.sarangchurch.growing.training.domain.training.QTraining.training;
 import static org.sarangchurch.growing.training.domain.training.QTrainingMember.trainingMember;
 import static org.sarangchurch.growing.user.domain.QUserEntity.userEntity;
+import static org.sarangchurch.growing.v2.feat.auth.domain.QAccount.*;
+import static org.sarangchurch.growing.v2.feat.user.domain.QUser.*;
 
 @Repository
 @RequiredArgsConstructor
@@ -145,24 +152,22 @@ public class UserQueryRepository {
     public Account findAccountById(Long id) {
         return queryFactory
                 .select(Projections.constructor(Account.class,
-                        userEntity.id.as("id"),
-                        userEntity.name.as("name"),
-                        userEntity.grade.as("grade"),
-                        userEntity.sex.as("sex"),
-                        teamMember.duty.as("duty"),
-                        userEntity.role.as("role"),
-                        userEntity.phoneNumber.as("phoneNumber"),
-                        userEntity.birth.as("birth"),
-                        userEntity.isActive.as("isActive"),
-                        userEntity.visitDate.as("visitDate"),
-                        userEntity.etc.as("etc"),
-                        userEntity.updatedAt.as("updatedAt"),
-                        userEntity.updatedBy.as("updatedBy")
+                        account.id.as("id"),
+                        user.name.as("name"),
+                        Expressions.asNumber(1).as("grade"),
+                        user.sex.as("sex"),
+                        Expressions.asEnum(Duty.GANSA).as("duty"),
+                        Expressions.asEnum(Role.ADMIN).as("role"),
+                        user.phoneNumber.as("phoneNumber"),
+                        user.birth.as("birth"),
+                        Expressions.asBoolean(true).as("isActive"),
+                        Expressions.asDate(LocalDate.of(1970, 1, 1)).as("visitDate"),
+                        Expressions.asString("").as("etc"),
+                        user.updatedAt.as("updatedAt"),
+                        user.updatedBy.as("updatedBy")
                 ))
-                .from(userEntity)
-                .leftJoin(teamMember).on((teamMember.memberId.eq(userEntity.id)), userEntity.id.eq(id))
-                .join(team).on(team.id.eq(teamMember.teamId))
-                .join(term).on(term.id.eq(team.termId), term.isActive.isTrue())
+                .from(account)
+                .join(user).on(user.id.eq(account.userId), account.id.eq(id))
                 .fetchOne();
     }
 
