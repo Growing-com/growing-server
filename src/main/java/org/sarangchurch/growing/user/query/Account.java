@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.term.domain.team.Duty;
 import org.sarangchurch.growing.user.domain.Role;
-import org.sarangchurch.growing.user.domain.Sex;
+import org.sarangchurch.growing.v2.core.interfaces.common.Sex;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

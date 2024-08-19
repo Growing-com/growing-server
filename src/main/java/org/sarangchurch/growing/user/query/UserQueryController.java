@@ -3,6 +3,7 @@ package org.sarangchurch.growing.user.query;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.auth.security.UserDetailsImpl;
 import org.sarangchurch.growing.core.types.ApiResponse;
+import org.sarangchurch.growing.v2.feat.auth.domain.Principal;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +45,7 @@ public class UserQueryController {
     }
 
     @GetMapping("/api/user/myInfo")
-    public ApiResponse<Account> findMyInfo(@AuthenticationPrincipal UserDetailsImpl user) {
-        return ApiResponse.of(userQueryRepository.findAccountById(user.getId()));
+    public ApiResponse<Account> findMyInfo(@AuthenticationPrincipal Principal principal) {
+        return ApiResponse.of(userQueryRepository.findAccountById(principal.getUserId()));
     }
 }
