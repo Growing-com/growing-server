@@ -18,6 +18,9 @@ public class NewFamilyPromoteLog extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "new_family_id")
+    private Long newFamilyId;
+
     @Column(name = "promote_data", nullable = false)
     private LocalDate promoteDate;
 
@@ -25,8 +28,13 @@ public class NewFamilyPromoteLog extends BaseEntity {
     private Long smallGroupId;
 
     @Builder
-    private NewFamilyPromoteLog(LocalDate promoteDate, Long smallGroupId) {
+    private NewFamilyPromoteLog(Long newFamilyId, LocalDate promoteDate, Long smallGroupId) {
+        this.newFamilyId = newFamilyId;
         this.promoteDate = promoteDate;
+        this.smallGroupId = smallGroupId;
+    }
+
+    public void updateSmallGroupId(Long smallGroupId) {
         this.smallGroupId = smallGroupId;
     }
 }

@@ -84,6 +84,10 @@ public class NewFamily extends BaseEntity {
         this.newFamilyPromoteLogId = newFamilyPromoteLogId;
     }
 
+    public void setSmallGroup(Long smallGroupId) {
+        this.smallGroupId = smallGroupId;
+    }
+
     public NewFamily setUserId(Long userId) {
         this.userId = userId;
 
