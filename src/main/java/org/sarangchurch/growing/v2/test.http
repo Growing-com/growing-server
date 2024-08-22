@@ -32,16 +32,15 @@ Content-Type: application/json
 }
 
 ### 등반
-POST http://localhost:8080/api/v2/new-families/2/promote
+POST http://localhost:8080/api/v2/new-families/3/promote
 Content-Type: application/json
 
 {
-  "promoteDate": "2024-06-09",
-  "smallGroupId": 1
+  "promoteDate": "2024-06-09"
 }
 
 ### 라인업
-POST http://localhost:8080/api/v2/new-families/1/line-up
+POST http://localhost:8080/api/v2/new-families/3/line-up
 Content-Type: application/json
 
 {
