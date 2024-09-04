@@ -3,7 +3,7 @@ package org.sarangchurch.growing.v2.feat.newfamily.infrastructure.component;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamilyRepository;
-import org.sarangchurch.growing.v2.feat.newfamily.infrastructure.stream.term.TermDownstream;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.term.V1TermDownstream;
 import org.sarangchurch.growing.v2.feat.term.domain.term.Term;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class NewFamilySmallGroupAssigner {
     private final NewFamilyRepository newFamilyRepository;
-    private final TermDownstream termDownstream;
+    private final V1TermDownstream termDownstream;
 
     @Transactional
     public void assign(Long newFamilyId, Long smallGroupId) {

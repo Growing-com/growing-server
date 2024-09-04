@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v2.feat.newfamily.domain.newfamilygroup;
+package org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup;
 
 import java.util.Optional;
 

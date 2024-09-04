@@ -7,7 +7,7 @@ import org.sarangchurch.growing.v2.core.interfaces.newfamily.NewFamilyGroupLeade
 import org.sarangchurch.growing.v2.core.interfaces.newfamily.NewFamilyGroupService;
 import org.sarangchurch.growing.v2.core.interfaces.newfamily.NewFamilyService;
 import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamily;
-import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
 import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamilygroupleader.NewFamilyGroupLeader;
 import org.springframework.stereotype.Component;
 

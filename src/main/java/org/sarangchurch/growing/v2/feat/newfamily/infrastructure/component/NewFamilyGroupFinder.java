@@ -1,8 +1,8 @@
 package org.sarangchurch.growing.v2.feat.newfamily.infrastructure.component;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
-import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamilygroup.NewFamilyGroupRepository;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroupRepository;
 import org.springframework.stereotype.Component;
 
 @Component

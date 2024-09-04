@@ -3,7 +3,7 @@ package org.sarangchurch.growing.v2.feat.attendance.query;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v2.core.interfaces.common.Sex;
-import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamilyEtc;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyEtc;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
