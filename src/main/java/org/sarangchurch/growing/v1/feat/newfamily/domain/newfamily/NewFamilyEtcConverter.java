@@ -1,8 +1,7 @@
-package org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily;
+package org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyEtc;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

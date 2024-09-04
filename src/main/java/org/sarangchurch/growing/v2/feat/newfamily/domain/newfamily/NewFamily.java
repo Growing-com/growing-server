@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.TypeDef;
 import org.sarangchurch.growing.core.types.BaseEntity;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyEtc;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -30,7 +31,7 @@ public class NewFamily extends BaseEntity {
     @Column(name = "new_family_promote_log_id")
     private Long newFamilyPromoteLogId;
 
-    // 새가족반이 아닌 일반 순모임에 배정된 특이 케이스
+    // 새가족반이 아닌 일반 순모임에 배정된 특이 케이스(삭제 예정)
     @Column(name = "small_group_id")
     private Long smallGroupId;
 
