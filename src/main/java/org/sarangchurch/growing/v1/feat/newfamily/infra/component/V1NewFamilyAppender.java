@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
-public class NewFamilyAppender {
+public class V1NewFamilyAppender {
     private final NewFamilyRepository newFamilyRepository;
     private final UserUpstream userUpstream;
 

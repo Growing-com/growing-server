@@ -102,4 +102,8 @@ public class NewFamily extends BaseEntity {
     public void updateEtc(NewFamilyEtc etc) {
         this.etc = etc;
     }
+
+    public void updateNewFamilyGroup(Long newFamilyGroupId) {
+        this.newFamilyGroupId = newFamilyGroupId;
+    }
 }
