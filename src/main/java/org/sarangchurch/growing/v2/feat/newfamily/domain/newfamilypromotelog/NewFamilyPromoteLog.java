@@ -25,7 +25,7 @@ public class NewFamilyPromoteLog extends BaseEntity {
     @Column(name = "new_family_id", nullable = false)
     private Long newFamilyId;
 
-    @Column(name = "promote_data")
+    @Column(name = "promote_data") // 오타 있음
     private LocalDate promoteDate;
 
     @Column(name = "small_group_id")
@@ -46,5 +46,9 @@ public class NewFamilyPromoteLog extends BaseEntity {
 
     public void updateSmallGroupId(Long smallGroupId) {
         this.smallGroupId = smallGroupId;
+    }
+
+    public boolean isPromoted() {
+        return promoteDate != null;
     }
 }

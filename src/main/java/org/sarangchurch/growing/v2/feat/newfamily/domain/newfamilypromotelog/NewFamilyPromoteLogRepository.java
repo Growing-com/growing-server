@@ -7,4 +7,5 @@ public interface NewFamilyPromoteLogRepository {
     NewFamilyPromoteLog save(NewFamilyPromoteLog log);
     Optional<NewFamilyPromoteLog> findByNewFamilyId(Long newFamilyId);
     <S extends NewFamilyPromoteLog> List<S> saveAll(Iterable<S> entities);
+    List<NewFamilyPromoteLog> findByIdIn(List<Long> ids);
 }
