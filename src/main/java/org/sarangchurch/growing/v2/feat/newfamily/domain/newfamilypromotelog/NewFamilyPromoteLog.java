@@ -18,13 +18,13 @@ public class NewFamilyPromoteLog extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "new_family_id")
+    @Column(name = "new_family_id", nullable = false)
     private Long newFamilyId;
 
-    @Column(name = "promote_data", nullable = false)
+    @Column(name = "promote_data")
     private LocalDate promoteDate;
 
-    @Column(name = "small_group_id")
+    @Column(name = "small_group_id", nullable = false)
     private Long smallGroupId;
 
     @Builder
