@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.newfamily.query;
+package org.sarangchurch.growing.v1.feat.newfamily.query.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +18,5 @@ public class V1NewFamily {
     private final LocalDate visitDate;
     private final Integer grade;
     private final NewFamilyEtc etc;
-    private final String newFamilyGroupLeaderName;
-    // smallGroupLeaderName: O, promoteDate: X -> (가)라인업 상태, 등반전
-    // smallGroupLeaderName: O, promoteDate: O -> 라인업 + 등반 완료
-    private final String smallGroupLeaderName;
-    private final LocalDate promoteDate;
+    private final Long newFamilyGroupId;
 }
