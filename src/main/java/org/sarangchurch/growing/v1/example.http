@@ -64,3 +64,11 @@ GET http://localhost:8080/api/v1/new-families/1
 
 ### 텀 2. 새가족 순장 목록 조회
 GET http://localhost:8080/api/v1/active-new-family-groups
+
+### 등반/라인업 1. 새가족 라인업 요청(대량)
+POST http://localhost:8080/api/v1/new-families/request-line-up
+Content-Type: application/json
+
+{
+  "newFamilyIds": [2]
+}

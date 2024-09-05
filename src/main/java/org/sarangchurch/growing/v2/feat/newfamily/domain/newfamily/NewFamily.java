@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.TypeDef;
 import org.sarangchurch.growing.core.types.BaseEntity;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyEtc;
+import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLog;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -105,5 +106,13 @@ public class NewFamily extends BaseEntity {
 
     public void updateNewFamilyGroup(Long newFamilyGroupId) {
         this.newFamilyGroupId = newFamilyGroupId;
+    }
+    
+    public void setPromoteLog(NewFamilyPromoteLog log) {
+        if (newFamilyPromoteLogId != null) {
+            throw new IllegalStateException("이미 새가족 라인업/등반 기록이 존재합니다.");
+        }
+
+        newFamilyPromoteLogId = log.getId();
     }
 }
