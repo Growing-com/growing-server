@@ -23,7 +23,7 @@ public class V1NewFamilyQueryController {
     }
 
     @GetMapping("/api/v1/new-families/{newFamilyId}")
-    public ApiResponse<V1NewFamily> findById(@PathVariable("newFamilyId") Long newFamilyId) {
-        return ApiResponse.of(repository.findById(newFamilyId));
+    public V1NewFamily findById(@PathVariable("newFamilyId") Long newFamilyId) {
+        return repository.findById(newFamilyId);
     }
 }

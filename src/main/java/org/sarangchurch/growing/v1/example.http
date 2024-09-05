@@ -7,7 +7,7 @@ Content-Type: application/json
   "password": "foo"
 }
 
-### 1. 새가족 등록
+### 인적정보 1. 새가족 등록
 POST http://localhost:8080/api/v1/new-families/register
 Content-Type: application/json
 
@@ -31,7 +31,7 @@ Content-Type: application/json
   }
 }
 
-### 2. 새가족 수정
+### 인적정보 2. 새가족 수정
 POST http://localhost:8080/api/v1/new-families/1/update
 Content-Type: application/json
 
@@ -56,8 +56,11 @@ Content-Type: application/json
   }
 }
 
-### 3. 새가족 목록 조회
+### 인적정보 3. 새가족 목록 조회
 GET http://localhost:8080//api/v1/new-families
 
-### 4. 새가족 정보 조회
+### 인적정보 4. 새가족 정보 조회
 GET http://localhost:8080/api/v1/new-families/1
+
+### 텀 2. 새가족 순장 목록 조회
+GET http://localhost:8080/api/v1/active-new-family-groups
