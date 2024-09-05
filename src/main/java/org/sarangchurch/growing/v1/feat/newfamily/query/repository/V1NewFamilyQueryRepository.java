@@ -3,6 +3,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.query.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1LineUpReadyNewFamilyListItem;
 import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1NewFamilyListItem;
 import org.sarangchurch.growing.v2.feat.user.domain.QUser;
@@ -74,5 +75,43 @@ public class V1NewFamilyQueryRepository {
                 .join(user).on(user.id.eq(newFamily.userId), newFamily.id.eq(newFamilyId))
                 .leftJoin(newFamilyGroup).on(newFamilyGroup.id.eq(newFamily.newFamilyGroupId))
                 .fetchOne();
+    }
+
+    public List<V1LineUpReadyNewFamilyListItem> findAllLineUpReady() {
+        List<Long> lineUpReadyPromoteLogIds = queryFactory
+                .select(newFamilyPromoteLog.id)
+                .from(newFamilyPromoteLog)
+                .where(
+                        newFamilyPromoteLog.smallGroupId.isNull(),
+                        newFamilyPromoteLog.promoteDate.isNull()
+                )
+                .fetch();
+
+
+        QUser newFamilyGroupLeaderUser = new QUser("newFamilyGroupLeaderUser");
+
+        return queryFactory.select(Projections.constructor(V1LineUpReadyNewFamilyListItem.class,
+                        newFamily.id.as("newFamilyId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.phoneNumber.as("phoneNumber"),
+                        user.birth.as("birth"),
+                        newFamily.visitDate.as("visitDate"),
+                        user.grade.as("grade"),
+                        newFamily.etc.as("etc"),
+                        newFamilyGroupLeaderUser.name.as("newFamilyGroupLeaderName")
+                ))
+                .from(newFamily)
+                .join(user).on(
+                        user.id.eq(newFamily.userId),
+                        newFamily.newFamilyPromoteLogId.in(lineUpReadyPromoteLogIds)
+                )
+                // 새가족반
+                .leftJoin(newFamilyGroup).on(newFamilyGroup.id.eq(newFamily.newFamilyGroupId))
+                .leftJoin(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
+                .leftJoin(newFamilyGroupLeaderUser).on(newFamilyGroupLeaderUser.id.eq(newFamilyGroupLeader.userId))
+                // 정렬
+                .orderBy(newFamily.visitDate.desc())
+                .fetch();
     }
 }
