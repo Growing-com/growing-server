@@ -63,7 +63,7 @@ GET http://localhost:8080//api/v1/new-families
 GET http://localhost:8080/api/v1/new-families/1
 
 ### 인적정보 5. 라인업 요청 목록
-GET http://localhost:8080/api/v1/line-up-ready-new-families
+GET http://localhost:8080/api/v1/promote-candidate-new-families
 
 ### 텀 2. 새가족 순장 목록 조회
 GET http://localhost:8080/api/v1/active-new-family-groups
@@ -73,5 +73,5 @@ POST http://localhost:8080/api/v1/new-families/request-line-up
 Content-Type: application/json
 
 {
-  "newFamilyIds": [2]
+  "newFamilyIds": [4]
 }

@@ -19,4 +19,5 @@ public class V1LineUpReadyNewFamilyListItem {
     private final Integer grade;
     private final NewFamilyEtc etc;
     private final String newFamilyGroupLeaderName;
+    private final String smallGroupLeaderName;
 }
