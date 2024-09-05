@@ -9,7 +9,9 @@ import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1NewFamilyListIte
 import org.sarangchurch.growing.v2.feat.user.domain.QUser;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
 import static org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.QNewFamily.newFamily;
@@ -77,18 +79,26 @@ public class V1NewFamilyQueryRepository {
                 .fetchOne();
     }
 
-    public List<V1LineUpReadyNewFamilyListItem> findAllLineUpReady() {
+    public List<V1LineUpReadyNewFamilyListItem> findAllPromoteCandidates() {
         List<Long> lineUpReadyPromoteLogIds = queryFactory
                 .select(newFamilyPromoteLog.id)
                 .from(newFamilyPromoteLog)
-                .where(
-                        newFamilyPromoteLog.smallGroupId.isNull(),
-                        newFamilyPromoteLog.promoteDate.isNull()
-                )
+                .where(newFamilyPromoteLog.smallGroupId.isNull(),
+                        newFamilyPromoteLog.promoteDate.isNull())
                 .fetch();
 
+        List<Long> promoteReadyLogIds = queryFactory
+                .select(newFamilyPromoteLog.id)
+                .from(newFamilyPromoteLog)
+                .where(newFamilyPromoteLog.smallGroupId.isNotNull(),
+                        newFamilyPromoteLog.promoteDate.isNull())
+                .fetch();
+
+        Set<Long> logIds = new HashSet<>(lineUpReadyPromoteLogIds);
+        logIds.addAll(promoteReadyLogIds);
 
         QUser newFamilyGroupLeaderUser = new QUser("newFamilyGroupLeaderUser");
+        QUser smallGroupLeaderUser = new QUser("smallGroupLeaderUser");
 
         return queryFactory.select(Projections.constructor(V1LineUpReadyNewFamilyListItem.class,
                         newFamily.id.as("newFamilyId"),
@@ -99,17 +109,23 @@ public class V1NewFamilyQueryRepository {
                         newFamily.visitDate.as("visitDate"),
                         user.grade.as("grade"),
                         newFamily.etc.as("etc"),
-                        newFamilyGroupLeaderUser.name.as("newFamilyGroupLeaderName")
+                        newFamilyGroupLeaderUser.name.as("newFamilyGroupLeaderName"),
+                        smallGroupLeaderUser.name.as("smallGroupLeaderName")
                 ))
                 .from(newFamily)
                 .join(user).on(
                         user.id.eq(newFamily.userId),
-                        newFamily.newFamilyPromoteLogId.in(lineUpReadyPromoteLogIds)
+                        newFamily.newFamilyPromoteLogId.in(logIds)
                 )
                 // 새가족반
                 .leftJoin(newFamilyGroup).on(newFamilyGroup.id.eq(newFamily.newFamilyGroupId))
                 .leftJoin(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
                 .leftJoin(newFamilyGroupLeaderUser).on(newFamilyGroupLeaderUser.id.eq(newFamilyGroupLeader.userId))
+                // 일반 순모임
+                .leftJoin(newFamilyPromoteLog).on(newFamilyPromoteLog.id.eq(newFamily.newFamilyPromoteLogId))
+                .leftJoin(smallGroup).on(smallGroup.id.eq(newFamilyPromoteLog.smallGroupId))
+                .leftJoin(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
+                .leftJoin(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroupLeader.userId))
                 // 정렬
                 .orderBy(newFamily.visitDate.desc())
                 .fetch();

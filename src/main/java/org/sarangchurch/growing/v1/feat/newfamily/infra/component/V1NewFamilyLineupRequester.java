@@ -25,7 +25,7 @@ public class V1NewFamilyLineupRequester {
         }
 
         boolean alreadyRequested = newFamilies.stream()
-                .anyMatch(el -> el.getNewFamilyGroupId() != null);
+                .anyMatch(el -> el.getNewFamilyPromoteLogId() != null);
 
         if (alreadyRequested) {
             throw new IllegalStateException("이미 라인업 요청이 완료된 새가족이 포함되어 있습니다.");

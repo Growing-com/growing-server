@@ -28,8 +28,8 @@ public class V1NewFamilyQueryController {
         return repository.findById(newFamilyId);
     }
 
-    @GetMapping("/api/v1/line-up-ready-new-families")
-    public ApiResponse<List<V1LineUpReadyNewFamilyListItem>> findLineUpReadyNewFamilies() {
-        return ApiResponse.of(repository.findAllLineUpReady());
+    @GetMapping("/api/v1/promote-candidate-new-families")
+    public ApiResponse<List<V1LineUpReadyNewFamilyListItem>> promoteCandidateNewFamilies() {
+        return ApiResponse.of(repository.findAllPromoteCandidates());
     }
 }
