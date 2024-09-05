@@ -13,12 +13,10 @@ Content-Type: application/json
   "etc": {
     "school": "서울대학교 감자학과 6학년",
     "introducer": "박똘똘",
-    "isFirstChurch": false,
     "address": "감자밭",
     "latestChurch": "온누리교회",
     "visitReason": "DISCIPLE_TRAINING",
     "relationshipWithJesus": "LORD",
-    "hasCertaintityOfSalvation": false,
     "comment": "이 친구는 짜장면을 좋아합니다"
   }
 }

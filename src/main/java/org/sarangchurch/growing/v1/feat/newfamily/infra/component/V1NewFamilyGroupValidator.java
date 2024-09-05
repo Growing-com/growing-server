@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class NewFamilyGroupValidator {
+public class V1NewFamilyGroupValidator {
     private final NewFamilyGroupRepository newFamilyGroupRepository;
     private final V1TermDownstream termDownstream;
 

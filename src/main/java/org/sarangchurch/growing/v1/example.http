@@ -30,3 +30,28 @@ Content-Type: application/json
     "comment": "이 친구는 짜장면을 좋아합니다"
   }
 }
+
+### 2. 새가족 수정
+POST http://localhost:8080/api/v1/new-families/15/update
+Content-Type: application/json
+
+{
+  "name": "고길동",
+  "sex": "MALE",
+  "phoneNumber":"010-1234-5678",
+  "birth": "2003-03-03",
+  "visitDate": "2024-09-01",
+  "grade": 3,
+  "newFamilyGroupId": 1,
+  "etc": {
+    "school": "감자대학교 감자학과 1학년",
+    "introducer": "홍길동",
+    "isFirstChurch": "NO",
+    "latestChurch": "온누리교회",
+    "visitReason": "DISCIPLE_TRAINING",
+    "relationshipWithJesus": "LORD",
+    "hasCertaintityOfSalvation": "YES",
+    "comment": "이 친구는 짜장면을 좋아합니다",
+    "lineUpMemo": "낯을 많이 가림"
+  }
+}

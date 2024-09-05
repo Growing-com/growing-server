@@ -13,4 +13,5 @@ public class NewFamilyEtc {
     private NewFamilyRelationshipWithJesus relationshipWithJesus;
     private BooleanOption hasCertaintityOfSalvation;
     private String comment;
+    private String lineUpMemo;
 }
