@@ -2,6 +2,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.query.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.types.ApiResponse;
+import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1LineUpReadyNewFamilyListItem;
 import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1NewFamilyListItem;
 import org.sarangchurch.growing.v1.feat.newfamily.query.repository.V1NewFamilyQueryRepository;
@@ -25,5 +26,10 @@ public class V1NewFamilyQueryController {
     @GetMapping("/api/v1/new-families/{newFamilyId}")
     public V1NewFamily findById(@PathVariable("newFamilyId") Long newFamilyId) {
         return repository.findById(newFamilyId);
+    }
+
+    @GetMapping("/api/v1/line-up-ready-new-families")
+    public ApiResponse<List<V1LineUpReadyNewFamilyListItem>> findLineUpReadyNewFamilies() {
+        return ApiResponse.of(repository.findAllLineUpReady());
     }
 }
