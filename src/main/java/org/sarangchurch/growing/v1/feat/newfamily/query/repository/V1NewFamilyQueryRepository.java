@@ -7,9 +7,7 @@ import org.sarangchurch.growing.v1.feat.newfamily.query.model.*;
 import org.sarangchurch.growing.v2.feat.user.domain.QUser;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
 import static org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.QNewFamily.newFamily;
@@ -78,22 +76,11 @@ public class V1NewFamilyQueryRepository {
     }
 
     public List<V1LineUpReadyNewFamilyListItem> findAllPromoteCandidates() {
-        List<Long> lineUpReadyPromoteLogIds = queryFactory
+        List<Long> promoteCandidateLogIds = queryFactory
                 .select(newFamilyPromoteLog.id)
                 .from(newFamilyPromoteLog)
-                .where(newFamilyPromoteLog.smallGroupId.isNull(),
-                        newFamilyPromoteLog.promoteDate.isNull())
+                .where(newFamilyPromoteLog.promoteDate.isNull())
                 .fetch();
-
-        List<Long> promoteReadyLogIds = queryFactory
-                .select(newFamilyPromoteLog.id)
-                .from(newFamilyPromoteLog)
-                .where(newFamilyPromoteLog.smallGroupId.isNotNull(),
-                        newFamilyPromoteLog.promoteDate.isNull())
-                .fetch();
-
-        Set<Long> logIds = new HashSet<>(lineUpReadyPromoteLogIds);
-        logIds.addAll(promoteReadyLogIds);
 
         QUser newFamilyGroupLeaderUser = new QUser("newFamilyGroupLeaderUser");
         QUser smallGroupLeaderUser = new QUser("smallGroupLeaderUser");
@@ -113,7 +100,7 @@ public class V1NewFamilyQueryRepository {
                 .from(newFamily)
                 .join(user).on(
                         user.id.eq(newFamily.userId),
-                        newFamily.newFamilyPromoteLogId.in(logIds)
+                        newFamily.newFamilyPromoteLogId.in(promoteCandidateLogIds)
                 )
                 // 새가족반
                 .leftJoin(newFamilyGroup).on(newFamilyGroup.id.eq(newFamily.newFamilyGroupId))
