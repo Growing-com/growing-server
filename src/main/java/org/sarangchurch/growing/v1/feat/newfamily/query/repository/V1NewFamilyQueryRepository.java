@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1LineUpReadyNewFamilyListItem;
 import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1NewFamilyListItem;
+import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1PromotedNewFamilyListItem;
 import org.sarangchurch.growing.v2.feat.user.domain.QUser;
 import org.springframework.stereotype.Repository;
 
@@ -126,6 +127,39 @@ public class V1NewFamilyQueryRepository {
                 .leftJoin(smallGroup).on(smallGroup.id.eq(newFamilyPromoteLog.smallGroupId))
                 .leftJoin(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
                 .leftJoin(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroupLeader.userId))
+                // 정렬
+                .orderBy(newFamily.visitDate.desc())
+                .fetch();
+    }
+
+    public List<V1PromotedNewFamilyListItem> findAllPromoted() {
+        QUser newFamilyGroupLeaderUser = new QUser("newFamilyGroupLeaderUser");
+        QUser smallGroupLeaderUser = new QUser("smallGroupLeaderUser");
+
+        return queryFactory.select(Projections.constructor(V1PromotedNewFamilyListItem.class,
+                        newFamily.id.as("newFamilyId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.phoneNumber.as("phoneNumber"),
+                        user.grade.as("grade"),
+                        newFamilyGroupLeaderUser.name.as("newFamilyGroupLeaderName"),
+                        smallGroupLeaderUser.name.as("smallGroupLeaderName"),
+                        newFamilyPromoteLog.promoteDate.as("promoteDate")
+                ))
+                .from(newFamily)
+                .join(newFamilyPromoteLog).on(
+                        newFamily.newFamilyPromoteLogId.eq(newFamilyPromoteLog.id),
+                        newFamilyPromoteLog.promoteDate.isNotNull()
+                )
+                .join(user).on(user.id.eq(newFamily.userId))
+                // 일반 순모임
+                .join(smallGroup).on(smallGroup.id.eq(newFamilyPromoteLog.smallGroupId))
+                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
+                .join(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroupLeader.userId))
+                // 새가족반
+                .join(newFamilyGroup).on(newFamilyGroup.id.eq(newFamily.newFamilyGroupId))
+                .join(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
+                .join(newFamilyGroupLeaderUser).on(newFamilyGroupLeaderUser.id.eq(newFamilyGroupLeader.userId))
                 // 정렬
                 .orderBy(newFamily.visitDate.desc())
                 .fetch();
