@@ -76,7 +76,7 @@ POST http://localhost:8080/api/v1/new-families/request-line-up
 Content-Type: application/json
 
 {
-  "newFamilyIds": [2]
+  "newFamilyIds": [3]
 }
 
 ### 등반/라인업 2. 새가족 대량 라인업 ONLY
@@ -92,6 +92,23 @@ Content-Type: application/json
     {
       "newFamilyId": 2,
       "smallGroupId": 1
+    }
+  ]
+}
+
+### 등반/라인업 4. 새가족 대량 등반 ONLY
+POST http://localhost:8080/api/v1/new-families/promote
+Content-Type: application/json
+
+{
+  "content": [
+    {
+      "newFamilyId": 1,
+      "promoteDate": "2024-09-13"
+    },
+    {
+      "newFamilyId": 2,
+      "promoteDate": "2024-09-13"
     }
   ]
 }
