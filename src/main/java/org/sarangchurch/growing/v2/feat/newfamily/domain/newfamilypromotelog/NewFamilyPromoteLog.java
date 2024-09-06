@@ -51,4 +51,12 @@ public class NewFamilyPromoteLog extends BaseEntity {
     public boolean isPromoted() {
         return promoteDate != null;
     }
+
+    public boolean isPromoteCandidate() {
+        return smallGroupId != null && promoteDate == null;
+    }
+
+    public void updatePromoteDate(LocalDate promoteDate) {
+        this.promoteDate = promoteDate;
+    }
 }
