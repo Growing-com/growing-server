@@ -81,7 +81,7 @@ public class V1NewFamilyTemporaryLineUpManager {
                     .findAny()
                     .orElseThrow();
 
-            log.updateCandidateSmallGroups(temporarySmallGroupIds);
+            log.updateTemporarySmallGroups(temporarySmallGroupIds);
         }
     }
 }

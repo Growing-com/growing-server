@@ -37,8 +37,8 @@ public class NewFamilyPromoteLog extends BaseEntity {
     private Long smallGroupId;
 
     @Convert(converter = LongArrayListConverter.class)
-    @Column(name = "candidate_small_group_ids", columnDefinition = "json", nullable = false)
-    private List<Long> candidateSmallGroupIds = new ArrayList<>();
+    @Column(name = "temporary_small_group_ids", columnDefinition = "json", nullable = false)
+    private List<Long> temporarySmallGroupIds = new ArrayList<>();
 
     public static List<NewFamilyPromoteLog> ofSize(int size) {
         return IntStream.range(0, size)
@@ -69,7 +69,7 @@ public class NewFamilyPromoteLog extends BaseEntity {
         this.promoteDate = promoteDate;
     }
 
-    public void updateCandidateSmallGroups(List<Long> candidateSmallGroupIds) {
-        this.candidateSmallGroupIds = candidateSmallGroupIds;
+    public void updateTemporarySmallGroups(List<Long> candidateSmallGroupIds) {
+        this.temporarySmallGroupIds = candidateSmallGroupIds;
     }
 }

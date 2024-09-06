@@ -3,10 +3,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.query.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1LineUpReadyNewFamilyListItem;
-import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1NewFamily;
-import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1NewFamilyListItem;
-import org.sarangchurch.growing.v1.feat.newfamily.query.model.V1PromotedNewFamilyListItem;
+import org.sarangchurch.growing.v1.feat.newfamily.query.model.*;
 import org.sarangchurch.growing.v2.feat.user.domain.QUser;
 import org.springframework.stereotype.Repository;
 
@@ -161,6 +158,20 @@ public class V1NewFamilyQueryRepository {
                 .join(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
                 .join(newFamilyGroupLeaderUser).on(newFamilyGroupLeaderUser.id.eq(newFamilyGroupLeader.userId))
                 // 정렬
+                .orderBy(newFamily.visitDate.desc())
+                .fetch();
+    }
+
+    public List<V1TemporaryLinedUpNewFamilyListItem> findAllTemporaryLinedUp() {
+        return queryFactory.select(Projections.constructor(V1TemporaryLinedUpNewFamilyListItem.class,
+                        newFamily.id.as("newFamilyId"),
+                        newFamilyPromoteLog.temporarySmallGroupIds.as("temporarySmallGroupIds")
+                ))
+                .from(newFamilyPromoteLog)
+                .join(newFamily).on(
+                        newFamily.newFamilyPromoteLogId.eq(newFamilyPromoteLog.id),
+                        newFamilyPromoteLog.promoteDate.isNull()
+                )
                 .orderBy(newFamily.visitDate.desc())
                 .fetch();
     }
