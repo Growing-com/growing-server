@@ -71,26 +71,6 @@ GET http://localhost:8080/api/v1/temporary-lined-up-new-families
 ### 인적정보 7. 등반자 목록
 GET http://localhost:8080/api/v1/promoted-new-families
 
-### 유출 1. 새가족 라인아웃
-POST http://localhost:8080/api/v1/new-families/line-out
-Content-Type: application/json
-
-{
-  "newFamilyIds": [8]
-}
-
-### 유출 2. 새가족 라인인
-POST http://localhost:8080/api/v1/line-out-new-families/1/line-in
-
-### 유출 3. 라인아웃 목록 조회
-GET http://localhost:8080/api/v1/line-out-new-families
-
-### 텀 1. 일반 순장 및 나무 목록 조회
-GET http://localhost:8080/api/v1/active-small-groups
-
-### 텀 2. 새가족 순장 목록 조회
-GET http://localhost:8080/api/v1/active-new-family-groups
-
 ### 등반/라인업 1. 새가족 대량 라인업 요청
 POST http://localhost:8080/api/v1/new-families/request-line-up
 Content-Type: application/json
@@ -137,3 +117,38 @@ Content-Type: application/json
     }
   ]
 }
+
+### 출석 2. 새가족 출석 체크
+POST http://localhost:8080/api/v1/new-families/attendance-check
+Content-Type: application/json
+
+{
+  "date": "2024-09-01",
+  "attendanceItems": [
+    {
+      "newFamilyId": 1,
+      "status": "ABSENT",
+      "reason": "감기"
+    }
+  ]
+}
+
+### 유출 1. 새가족 라인아웃
+POST http://localhost:8080/api/v1/new-families/line-out
+Content-Type: application/json
+
+{
+  "newFamilyIds": [8]
+}
+
+### 유출 2. 새가족 라인인
+POST http://localhost:8080/api/v1/line-out-new-families/1/line-in
+
+### 유출 3. 라인아웃 목록 조회
+GET http://localhost:8080/api/v1/line-out-new-families
+
+### 텀 1. 일반 순장 및 나무 목록 조회
+GET http://localhost:8080/api/v1/active-small-groups
+
+### 텀 2. 새가족 순장 목록 조회
+GET http://localhost:8080/api/v1/active-new-family-groups
