@@ -29,6 +29,9 @@ public class LineoutNewFamily extends BaseEntity {
     @Column(name = "visit_date", nullable = false)
     private LocalDate visitDate;
 
+    @Column(name = "line_out_date", nullable = false)
+    private LocalDate lineOutDate;
+
     @Column(name = "new_family_group_id")
     private Long newFamilyGroupId;
 
@@ -40,14 +43,16 @@ public class LineoutNewFamily extends BaseEntity {
         return new LineoutNewFamily(
                 newFamily.getUserId(),
                 newFamily.getVisitDate(),
+                LocalDate.now(),
                 newFamily.getNewFamilyGroupId(),
                 newFamily.getEtc()
         );
     }
 
-    private LineoutNewFamily(Long userId, LocalDate visitDate, Long newFamilyGroupId, NewFamilyEtc etc) {
+    private LineoutNewFamily(Long userId, LocalDate visitDate, LocalDate lineOutDate, Long newFamilyGroupId, NewFamilyEtc etc) {
         this.userId = userId;
         this.visitDate = visitDate;
+        this.lineOutDate = lineOutDate;
         this.newFamilyGroupId = newFamilyGroupId;
         this.etc = etc;
     }

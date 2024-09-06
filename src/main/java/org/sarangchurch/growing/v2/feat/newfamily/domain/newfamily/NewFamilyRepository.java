@@ -8,4 +8,5 @@ public interface NewFamilyRepository {
     Optional<NewFamily> findById(Long id);
     void deleteById(Long id);
     List<NewFamily> findByIdIn(List<Long> ids);
+    void deleteByIdIn(List<Long> ids);
 }

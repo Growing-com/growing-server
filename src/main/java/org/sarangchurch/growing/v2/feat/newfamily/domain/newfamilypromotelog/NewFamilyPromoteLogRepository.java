@@ -8,4 +8,5 @@ public interface NewFamilyPromoteLogRepository {
     Optional<NewFamilyPromoteLog> findByNewFamilyId(Long newFamilyId);
     <S extends NewFamilyPromoteLog> List<S> saveAll(Iterable<S> entities);
     List<NewFamilyPromoteLog> findByIdIn(List<Long> ids);
+    void deleteByIdIn(List<Long> ids);
 }
