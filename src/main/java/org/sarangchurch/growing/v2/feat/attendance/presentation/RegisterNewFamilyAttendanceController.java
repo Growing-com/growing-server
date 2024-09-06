@@ -17,7 +17,8 @@ public class RegisterNewFamilyAttendanceController {
 
     private final RegisterNewFamilyAttendanceService registerNewFamilyAttendanceService;
 
-    @PostMapping("/api/v2/new-family-attendance")
+    // TODO: v1으로 옮기기
+    @PostMapping("/api/v1/new-families/attendance-check")
     public void registerNewFamilyAttendance(
             @AuthenticationPrincipal Principal principal,
             @RequestBody @Valid RegisterNewFamilyAttendanceRequest request
