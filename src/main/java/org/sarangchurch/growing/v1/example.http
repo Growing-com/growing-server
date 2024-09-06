@@ -65,7 +65,7 @@ GET http://localhost:8080/api/v1/new-families/1
 ### 인적정보 5. 라인업 요청 목록
 GET http://localhost:8080/api/v1/promote-candidate-new-families
 
-### 인적정보 6. 등반자 목록
+### 인적정보 7. 등반자 목록
 GET http://localhost:8080/api/v1/promoted-new-families
 
 ### 텀 1. 일반 순장 및 나무 목록 조회
@@ -82,7 +82,20 @@ Content-Type: application/json
   "newFamilyIds": [3]
 }
 
-### 등반/라인업 2. 새가족 대량 라인업 ONLY
+### 등반/라인업 2. 새가족 대량 후보순장 임시 라인업
+POST http://localhost:8080/api/v1/new-families/temporary-line-up
+Content-Type: application/json
+
+{
+  "content": [
+    {
+      "newFamilyId": 3,
+      "temporarySmallGroupIds": [1]
+    }
+  ]
+}
+
+### 등반/라인업 3. 새가족 대량 라인업 ONLY
 POST http://localhost:8080/api/v1/new-families/line-up
 Content-Type: application/json
 

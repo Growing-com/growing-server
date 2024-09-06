@@ -1,20 +1,20 @@
-package org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily;
+package org.sarangchurch.growing.v1.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyEtc;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Converter(autoApply = true)
-public class NewFamilyEtcConverter implements AttributeConverter<NewFamilyEtc, String> {
+public class LongArrayListConverter implements AttributeConverter<ArrayList<Long>, String> {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public String convertToDatabaseColumn(NewFamilyEtc attribute) {
+    public String convertToDatabaseColumn(ArrayList<Long> attribute) {
         try {
             return objectMapper.writeValueAsString(attribute);
         } catch (JsonProcessingException e) {
@@ -23,9 +23,9 @@ public class NewFamilyEtcConverter implements AttributeConverter<NewFamilyEtc, S
     }
 
     @Override
-    public NewFamilyEtc convertToEntityAttribute(String dbData) {
+    public ArrayList<Long> convertToEntityAttribute(String dbData) {
         try {
-            return objectMapper.readValue(dbData, NewFamilyEtc.class);
+            return objectMapper.readValue(dbData, objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, Long.class));
         } catch (IOException e) {
             throw new IllegalArgumentException("Error reading JSON", e);
         }
