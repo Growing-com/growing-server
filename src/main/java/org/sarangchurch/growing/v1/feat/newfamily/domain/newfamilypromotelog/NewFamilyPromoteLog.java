@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.TypeDef;
 import org.sarangchurch.growing.core.types.BaseEntity;
-import org.sarangchurch.growing.v1.core.LongArrayListConverter;
+import org.sarangchurch.growing.v1.config.LongArrayListConverter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -26,7 +26,7 @@ public class NewFamilyPromoteLog extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "promote_data") // 오타 있음
+    @Column(name = "promote_date")
     private LocalDate promoteDate;
 
     @Column(name = "small_group_id")

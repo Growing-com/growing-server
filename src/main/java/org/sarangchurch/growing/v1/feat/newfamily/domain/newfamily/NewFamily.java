@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.TypeDef;
 import org.sarangchurch.growing.core.types.BaseEntity;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.lineoutnewfamily.LineoutNewFamily;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.lineoutnewfamily.LineOutNewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLog;
 
 import javax.persistence.*;
@@ -43,7 +43,7 @@ public class NewFamily extends BaseEntity {
     @Column(name = "etc", columnDefinition = "json", nullable = false)
     private NewFamilyEtc etc;
 
-    public static NewFamily from(LineoutNewFamily lineoutNewFamily) {
+    public static NewFamily from(LineOutNewFamily lineoutNewFamily) {
         return NewFamily.builder()
                 .userId(lineoutNewFamily.getUserId())
                 .visitDate(lineoutNewFamily.getVisitDate())

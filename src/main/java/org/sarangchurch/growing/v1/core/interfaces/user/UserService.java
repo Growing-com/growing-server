@@ -8,7 +8,5 @@ import java.time.LocalDate;
 public interface UserService {
     User register(User user);
 
-    User findById(Long id);
-
     void update(Long userId, String name, String phoneNumber, LocalDate birth, Sex sex, Integer grade);
 }

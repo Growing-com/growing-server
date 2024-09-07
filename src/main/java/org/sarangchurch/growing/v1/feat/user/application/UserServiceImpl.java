@@ -5,7 +5,6 @@ import org.sarangchurch.growing.v1.core.interfaces.common.Sex;
 import org.sarangchurch.growing.v1.core.interfaces.user.UserService;
 import org.sarangchurch.growing.v1.feat.user.domain.User;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserAppender;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserFinder;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserUpdater;
 import org.springframework.stereotype.Service;
 
@@ -15,18 +14,12 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserAppender userAppender;
-    private final UserFinder userFinder;
     private final UserUpdater userUpdater;
 
     @Override
     public User register(User user) {
         // 이름 중복 검사 해야하나?
         return userAppender.append(user);
-    }
-
-    @Override
-    public User findById(Long id) {
-        return userFinder.findById(id);
     }
 
     @Override

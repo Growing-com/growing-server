@@ -12,11 +12,6 @@ import java.util.List;
 public class NewFamilyFinder {
     private final NewFamilyRepository newFamilyRepository;
 
-    public NewFamily findById(Long id) {
-        return newFamilyRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 새가족입니다"));
-    }
-
     public boolean existsByIds(List<Long> ids) {
         List<NewFamily> newFamilies = newFamilyRepository.findByIdIn(ids);
 
@@ -24,6 +19,12 @@ public class NewFamilyFinder {
     }
 
     public List<NewFamily> findByIdIn(List<Long> ids) {
-        return newFamilyRepository.findByIdIn(ids);
+        List<NewFamily> newFamilies = newFamilyRepository.findByIdIn(ids);
+
+        if (ids.size() != newFamilies.size()) {
+            throw new IllegalArgumentException("존재하지 않는 새가족이 포함되어 있습니다.");
+        }
+
+        return newFamilies;
     }
 }
