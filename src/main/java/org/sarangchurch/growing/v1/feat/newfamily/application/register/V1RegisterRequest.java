@@ -3,8 +3,8 @@ package org.sarangchurch.growing.v1.feat.newfamily.application.register;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyEtc;
-import org.sarangchurch.growing.v2.core.interfaces.common.Sex;
-import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamily;
+import org.sarangchurch.growing.v1.core.interfaces.common.Sex;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

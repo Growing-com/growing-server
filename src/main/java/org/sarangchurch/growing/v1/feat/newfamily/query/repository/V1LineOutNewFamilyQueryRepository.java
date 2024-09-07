@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static org.sarangchurch.growing.v2.feat.newfamily.domain.lineoutnewfamily.QLineoutNewFamily.lineoutNewFamily;
-import static org.sarangchurch.growing.v2.feat.user.domain.QUser.user;
+import static org.sarangchurch.growing.v1.feat.newfamily.domain.lineoutnewfamily.QLineoutNewFamily.lineoutNewFamily;
+import static org.sarangchurch.growing.v1.feat.user.domain.QUser.user;
 
 @Repository
 @RequiredArgsConstructor

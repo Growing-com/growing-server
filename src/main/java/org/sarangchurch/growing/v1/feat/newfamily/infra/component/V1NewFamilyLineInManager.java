@@ -1,10 +1,10 @@
 package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v2.feat.newfamily.domain.lineoutnewfamily.LineoutNewFamily;
-import org.sarangchurch.growing.v2.feat.newfamily.domain.lineoutnewfamily.LineoutNewFamilyRepository;
-import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamily;
-import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamilyRepository;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.lineoutnewfamily.LineoutNewFamily;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.lineoutnewfamily.LineoutNewFamilyRepository;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyRepository;
 import org.springframework.stereotype.Component;
 
 @Component

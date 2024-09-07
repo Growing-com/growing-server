@@ -1,10 +1,10 @@
 package org.sarangchurch.growing.v1.feat.term.infra.component;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v2.feat.term.domain.smallgroup.SmallGroup;
-import org.sarangchurch.growing.v2.feat.term.domain.smallgroup.SmallGroupRepository;
-import org.sarangchurch.growing.v2.feat.term.domain.term.Term;
-import org.sarangchurch.growing.v2.feat.term.domain.term.TermRepository;
+import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
+import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroupRepository;
+import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
+import org.sarangchurch.growing.v1.feat.term.domain.term.TermRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

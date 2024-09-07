@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroupRepository;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.term.V1TermDownstream;
-import org.sarangchurch.growing.v2.feat.term.domain.term.Term;
+import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.springframework.stereotype.Component;
 
 @Component

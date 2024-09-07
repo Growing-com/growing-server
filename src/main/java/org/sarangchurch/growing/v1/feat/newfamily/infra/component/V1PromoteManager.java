@@ -2,10 +2,10 @@ package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.application.promote.V1PromoteRequest;
-import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamily;
-import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamily.NewFamilyRepository;
-import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLog;
-import org.sarangchurch.growing.v2.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLogRepository;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyRepository;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLog;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLogRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
