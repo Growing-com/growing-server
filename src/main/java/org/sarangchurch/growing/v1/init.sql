@@ -2,7 +2,7 @@
 INSERT IGNORE INTO growing.account (id, is_super_user, password, user_id, username) VALUES (1, true, '$2a$10$r0v2AxWht/yfX6XcTtgneOPE3uVI7cjHr51k1GyvG747n0uDCcIMa', 1, 'foo');
 
 -- term
-INSERT IGNORE INTO growing.term (id, is_active) VALUES (1, true);
+INSERT IGNORE INTO growing.term (id, name, start_date, end_date, is_active) VALUES (1, '2024년 2학기', '2024-09-01', '2025-03-01', true);
 
 -- user
 insert ignore into growing.user (id, created_at, created_by, updated_at, updated_by, birth, grade, name, phone_number, sex)

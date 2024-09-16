@@ -9,22 +9,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
-import static org.sarangchurch.growing.v1.feat.user.domain.QUser.user;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
-import static org.sarangchurch.growing.v1.feat.term.domain.term.QTerm.term;
+import static org.sarangchurch.growing.v1.feat.user.domain.QUser.user;
 
 @Repository
 @RequiredArgsConstructor
-public class NewFamilyGroupRepository {
+public class NewFamilyGroupQueryRepository {
     private final JPAQueryFactory queryFactory;
 
-    public List<NewFamilyGroupListItem> findActive() {
-        Long activeTermId = queryFactory
-                .select(term.id)
-                .from(term)
-                .where(term.isActive.isTrue())
-                .fetchOne();
-
+    public List<NewFamilyGroupListItem> findByTermId(Long termId) {
         return queryFactory
                 .select(Projections.constructor(NewFamilyGroupListItem.class,
                         newFamilyGroup.id.as("newFamilyGroupId"),
@@ -33,7 +26,7 @@ public class NewFamilyGroupRepository {
                 .from(newFamilyGroup)
                 .join(newFamilyGroupLeader).on(
                         newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId),
-                        newFamilyGroupLeader.termId.eq(activeTermId)
+                        newFamilyGroupLeader.termId.eq(termId)
                 )
                 .join(user).on(user.id.eq(newFamilyGroupLeader.userId))
                 .fetch();

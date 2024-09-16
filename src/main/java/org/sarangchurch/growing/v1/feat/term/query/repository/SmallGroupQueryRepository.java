@@ -10,7 +10,6 @@ import java.util.List;
 
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
-import static org.sarangchurch.growing.v1.feat.term.domain.term.QTerm.term;
 import static org.sarangchurch.growing.v1.feat.user.domain.QUser.user;
 
 @Repository
@@ -18,13 +17,7 @@ import static org.sarangchurch.growing.v1.feat.user.domain.QUser.user;
 public class SmallGroupQueryRepository {
     private final JPAQueryFactory queryFactory;
 
-    public List<SmallGroupListItem> findAll() {
-        Long activeTermId = queryFactory
-                .select(term.id)
-                .from(term)
-                .where(term.isActive.isTrue())
-                .fetchOne();
-
+    public List<SmallGroupListItem> findByTermId(Long termId) {
         return queryFactory
                 .select(Projections.constructor(SmallGroupListItem.class,
                         smallGroup.id.as("smallGroupId"),
@@ -33,7 +26,7 @@ public class SmallGroupQueryRepository {
                 .from(smallGroup)
                 .join(smallGroupLeader).on(
                         smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId),
-                        smallGroup.termId.eq(activeTermId)
+                        smallGroup.termId.eq(termId)
                 )
                 .join(user).on(user.id.eq(smallGroupLeader.userId))
                 .fetch();
