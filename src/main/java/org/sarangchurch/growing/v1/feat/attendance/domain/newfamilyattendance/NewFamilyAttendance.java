@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sarangchurch.growing.attendance.domain.attendance.AttendanceStatus;
 import org.sarangchurch.growing.core.types.BaseEntity;
 
 import javax.persistence.*;

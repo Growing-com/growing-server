@@ -1,6 +1,6 @@
 package org.sarangchurch.growing.core.config;
 
-import org.sarangchurch.growing.auth.security.UserDetailsImpl;
+import org.sarangchurch.growing.v1.feat.auth.domain.Principal;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -19,9 +19,9 @@ public class SecurityAuditorConfig {
         return () -> {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-            if (authentication != null && authentication.getPrincipal() instanceof UserDetailsImpl) {
-                UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
-                return Optional.of(user.getName());
+            if (authentication != null && authentication.getPrincipal() instanceof Principal) {
+                Principal principal = (Principal) authentication.getPrincipal();
+                return Optional.of(String.valueOf(principal.getId()));
             }
 
             return Optional.empty();
