@@ -6,12 +6,9 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.term.domain.team.Duty;
 import org.sarangchurch.growing.user.domain.Role;
-import org.sarangchurch.growing.v2.feat.auth.domain.QAccount;
-import org.sarangchurch.growing.v2.feat.user.domain.QUser;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,8 +21,8 @@ import static org.sarangchurch.growing.training.domain.discipleship.QDiscipleshi
 import static org.sarangchurch.growing.training.domain.training.QTraining.training;
 import static org.sarangchurch.growing.training.domain.training.QTrainingMember.trainingMember;
 import static org.sarangchurch.growing.user.domain.QUserEntity.userEntity;
-import static org.sarangchurch.growing.v2.feat.auth.domain.QAccount.*;
-import static org.sarangchurch.growing.v2.feat.user.domain.QUser.*;
+import static org.sarangchurch.growing.v1.feat.auth.domain.QAccount.account;
+import static org.sarangchurch.growing.v1.feat.user.domain.QUser.user;
 
 @Repository
 @RequiredArgsConstructor
