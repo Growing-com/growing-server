@@ -1,11 +1,14 @@
-### 0. 로그인
-POST http://localhost:8080/api/auth/login
+### 권한 1. 로그인
+POST http://localhost:8080/api/v1/auth/login
 Content-Type: application/json
 
 {
   "username": "foo",
   "password": "foo"
 }
+
+### 권한 2. 로그아웃
+POST http://localhost:8080/api/v1/auth/logout
 
 ### 인적정보 1. 새가족 등록
 POST http://localhost:8080/api/v1/new-families/register
@@ -70,6 +73,9 @@ GET http://localhost:8080/api/v1/temporary-lined-up-new-families
 
 ### 인적정보 7. 등반자 목록
 GET http://localhost:8080/api/v1/promoted-new-families
+
+### 인적정보 8. 내 정보
+GET http://localhost:8080/api/v1/my-info
 
 ### 등반/라인업 1. 새가족 대량 라인업 요청
 POST http://localhost:8080/api/v1/new-families/request-line-up

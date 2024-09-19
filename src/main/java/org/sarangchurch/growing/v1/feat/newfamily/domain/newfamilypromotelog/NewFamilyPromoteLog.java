@@ -6,8 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.TypeDef;
-import org.sarangchurch.growing.core.types.BaseEntity;
-import org.sarangchurch.growing.v1.config.LongArrayListConverter;
+import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
+import org.sarangchurch.growing.config.LongArrayListConverter;
 
 import javax.persistence.*;
 import java.time.LocalDate;

@@ -1,5 +1,5 @@
 -- account
-INSERT IGNORE INTO growing.account (id, is_super_user, password, user_id, username) VALUES (1, true, '$2a$10$r0v2AxWht/yfX6XcTtgneOPE3uVI7cjHr51k1GyvG747n0uDCcIMa', 1, 'foo');
+INSERT IGNORE INTO growing.account (id, is_super_user, password, user_id, username, role) VALUES (1, true, '$2a$10$r0v2AxWht/yfX6XcTtgneOPE3uVI7cjHr51k1GyvG747n0uDCcIMa', 1, 'foo', 'SUPER_ADMIN');
 
 -- term
 INSERT IGNORE INTO growing.term (id, name, start_date, end_date, is_active) VALUES (1, '2024년 2학기', '2024-09-01', '2025-03-01', true);

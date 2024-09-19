@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.term.query.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.types.ApiResponse;
+import org.sarangchurch.growing.core.interfaces.common.ApiResponse;
 import org.sarangchurch.growing.v1.feat.term.query.model.SmallGroupListItem;
 import org.sarangchurch.growing.v1.feat.term.query.repository.SmallGroupQueryRepository;
 import org.springframework.web.bind.annotation.GetMapping;

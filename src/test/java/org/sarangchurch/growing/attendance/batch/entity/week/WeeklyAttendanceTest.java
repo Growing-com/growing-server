@@ -2,7 +2,6 @@ package org.sarangchurch.growing.attendance.batch.entity.week;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.sarangchurch.growing.core.types.Week;
 
 import java.time.LocalDate;
 import java.util.List;
