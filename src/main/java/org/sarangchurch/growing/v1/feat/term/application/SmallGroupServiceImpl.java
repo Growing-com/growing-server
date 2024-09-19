@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.term.application;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.core.interfaces.term.SmallGroupService;
+import org.sarangchurch.growing.core.interfaces.v1.term.SmallGroupService;
 import org.sarangchurch.growing.v1.feat.term.infra.component.SmallGroupValidator;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.newfamily.query.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.types.ApiResponse;
+import org.sarangchurch.growing.core.interfaces.common.ApiResponse;
 import org.sarangchurch.growing.v1.feat.newfamily.query.model.NewFamilyGroupListItem;
 import org.sarangchurch.growing.v1.feat.newfamily.query.repository.NewFamilyGroupQueryRepository;
 import org.springframework.web.bind.annotation.GetMapping;

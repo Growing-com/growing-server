@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sarangchurch.growing.core.types.BaseEntity;
+import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
 
 import javax.persistence.*;
 

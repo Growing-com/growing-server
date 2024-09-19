@@ -1,8 +1,8 @@
 package org.sarangchurch.growing.v1.feat.user.application;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.core.interfaces.common.Sex;
-import org.sarangchurch.growing.v1.core.interfaces.user.UserService;
+import org.sarangchurch.growing.core.interfaces.common.Sex;
+import org.sarangchurch.growing.core.interfaces.v1.user.UserService;
 import org.sarangchurch.growing.v1.feat.user.domain.User;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserAppender;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserUpdater;

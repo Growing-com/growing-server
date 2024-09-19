@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily;
 
 import lombok.Getter;
-import org.sarangchurch.growing.v1.core.interfaces.common.BooleanOption;
+import org.sarangchurch.growing.core.interfaces.common.BooleanOption;
 
 @Getter
 public class NewFamilyEtc {

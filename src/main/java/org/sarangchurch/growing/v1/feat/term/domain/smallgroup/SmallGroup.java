@@ -3,7 +3,7 @@ package org.sarangchurch.growing.v1.feat.term.domain.smallgroup;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sarangchurch.growing.core.types.BaseEntity;
+import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
 
 import javax.persistence.*;
 
