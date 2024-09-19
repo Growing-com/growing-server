@@ -74,6 +74,9 @@ GET http://localhost:8080/api/v1/temporary-lined-up-new-families
 ### 인적정보 7. 등반자 목록
 GET http://localhost:8080/api/v1/promoted-new-families
 
+### 인적정보 8. 내 정보
+GET http://localhost:8080/api/v1/my-info
+
 ### 등반/라인업 1. 새가족 대량 라인업 요청
 POST http://localhost:8080/api/v1/new-families/request-line-up
 Content-Type: application/json

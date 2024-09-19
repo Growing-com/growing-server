@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.auth.domain;
+package org.sarangchurch.growing.v1.feat.user.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -20,6 +20,10 @@ public class Account {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private AccountRole role;
 
     @Column(name = "user_id")
     private Long userId;

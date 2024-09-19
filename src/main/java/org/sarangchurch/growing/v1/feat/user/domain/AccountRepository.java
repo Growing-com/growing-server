@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.auth.domain;
+package org.sarangchurch.growing.v1.feat.user.domain;
 
 import java.util.Optional;
 
