@@ -1,11 +1,11 @@
-package org.sarangchurch.growing.auth.security;
+package org.sarangchurch.growing.v1.feat.auth.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.auth.security.handler.Http401Handler;
-import org.sarangchurch.growing.auth.security.handler.Http403Handler;
-import org.sarangchurch.growing.auth.security.handler.LoginFailHandler;
-import org.sarangchurch.growing.auth.security.handler.LoginSuccessHandler;
+import org.sarangchurch.growing.v1.feat.auth.security.handler.Http401Handler;
+import org.sarangchurch.growing.v1.feat.auth.security.handler.Http403Handler;
+import org.sarangchurch.growing.v1.feat.auth.security.handler.LoginFailHandler;
+import org.sarangchurch.growing.v1.feat.auth.security.handler.LoginSuccessHandler;
 import org.sarangchurch.growing.v1.feat.auth.domain.Account;
 import org.sarangchurch.growing.v1.feat.auth.domain.AccountRepository;
 import org.sarangchurch.growing.v1.feat.auth.domain.Principal;
@@ -42,13 +42,9 @@ public class SecurityConfig {
                 .and()
 
                 .authorizeRequests()
-                .antMatchers("/api/auth/login").permitAll()
-                .antMatchers("/api/auth/logout").permitAll()
-                .antMatchers("/api/auth/isLoggedIn").permitAll()
-                .antMatchers("/api/common/**").permitAll()
+                .antMatchers("/api/v1/auth/login").permitAll()
+                .antMatchers("/api/v1/auth/logout").permitAll()
                 .antMatchers("/actuator/**").permitAll()
-                .antMatchers("/api/v2/new-family-attendance").authenticated()
-                .antMatchers("/api/v2/**").permitAll() // 개발 편의를 위함
                 .anyRequest().authenticated()
 
                 .and()
@@ -62,7 +58,7 @@ public class SecurityConfig {
 
     @Bean
     AuthFilter authFilter() {
-        AuthFilter filter = new AuthFilter("/api/auth/login", objectMapper);
+        AuthFilter filter = new AuthFilter("/api/v1/auth/login", objectMapper);
         filter.setAuthenticationManager(authenticationManager());
         filter.setAuthenticationSuccessHandler(new LoginSuccessHandler());
         filter.setAuthenticationFailureHandler(new LoginFailHandler(objectMapper));

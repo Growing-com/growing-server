@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.auth.security.handler;
+package org.sarangchurch.growing.v1.feat.auth.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.auth.security.handler;
+package org.sarangchurch.growing.v1.feat.auth.security.handler;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

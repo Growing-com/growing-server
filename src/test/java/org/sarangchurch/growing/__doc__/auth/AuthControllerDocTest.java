@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.sarangchurch.growing.__doc__.DocTest;
-import org.sarangchurch.growing.auth.presentation.AuthController;
+import org.sarangchurch.growing.v1.feat.auth.presentation.AuthController;
 import org.sarangchurch.growing.core.types.ApiResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;

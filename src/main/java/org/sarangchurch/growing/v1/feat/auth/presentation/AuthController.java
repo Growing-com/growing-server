@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.auth.presentation;
+package org.sarangchurch.growing.v1.feat.auth.presentation;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 @RestController
 public class AuthController {
 
-    @PostMapping("/api/auth/logout")
+    @PostMapping("/api/v1/auth/logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
 
