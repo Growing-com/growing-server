@@ -22,8 +22,8 @@ public class NewFamilyQueryController {
     }
 
     @GetMapping("/api/v1/new-families/{newFamilyId}")
-    public NewFamily findById(@PathVariable("newFamilyId") Long newFamilyId) {
-        return repository.findById(newFamilyId);
+    public ApiResponse<List<NewFamily>> findById(@PathVariable("newFamilyId") Long newFamilyId) {
+        return ApiResponse.of(List.of(repository.findById(newFamilyId)));
     }
 
     @GetMapping("/api/v1/promote-candidate-new-families")
