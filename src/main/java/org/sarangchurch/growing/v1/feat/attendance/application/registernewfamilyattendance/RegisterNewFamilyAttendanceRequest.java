@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.attendance.application.registernewfamil
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sarangchurch.growing.attendance.domain.attendance.AttendanceStatus;
+import org.sarangchurch.growing.v1.feat.attendance.domain.newfamilyattendance.AttendanceStatus;
 import org.sarangchurch.growing.v1.feat.attendance.domain.newfamilyattendance.NewFamilyAttendance;
 
 import javax.validation.Valid;

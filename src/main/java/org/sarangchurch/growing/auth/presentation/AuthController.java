@@ -1,10 +1,6 @@
 package org.sarangchurch.growing.auth.presentation;
 
 import lombok.extern.slf4j.Slf4j;
-import org.sarangchurch.growing.auth.security.UserDetailsImpl;
-import org.sarangchurch.growing.core.types.ApiResponse;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,10 +33,5 @@ public class AuthController {
 
         response.addCookie(sessionCookie);
         response.addCookie(rememberCookie);
-    }
-
-    @GetMapping("/api/auth/isLoggedIn")
-    public ApiResponse<Boolean> isLoggedIn(@AuthenticationPrincipal UserDetailsImpl user) {
-        return ApiResponse.of(user != null);
     }
 }

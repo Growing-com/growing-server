@@ -6,7 +6,6 @@ import org.sarangchurch.growing.auth.security.handler.Http401Handler;
 import org.sarangchurch.growing.auth.security.handler.Http403Handler;
 import org.sarangchurch.growing.auth.security.handler.LoginFailHandler;
 import org.sarangchurch.growing.auth.security.handler.LoginSuccessHandler;
-import org.sarangchurch.growing.user.domain.UserRepository;
 import org.sarangchurch.growing.v1.feat.auth.domain.Account;
 import org.sarangchurch.growing.v1.feat.auth.domain.AccountRepository;
 import org.sarangchurch.growing.v1.feat.auth.domain.Principal;
@@ -31,7 +30,6 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final AccountRepository accountRepository;
-    private final UserRepository userRepository;
     private final ObjectMapper objectMapper;
 
     @Bean
@@ -98,10 +96,6 @@ public class SecurityConfig {
                     .orElseThrow(() -> new UsernameNotFoundException("No username: " + username));
 
             return Principal.from(account);
-//            UserEntity user = userRepository.findByUsername(username)
-//                    .orElseThrow(() -> new UsernameNotFoundException("No username: " + username));
-//
-//            return new UserDetailsImpl(user);
         };
     }
 
