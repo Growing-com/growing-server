@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.term.domain.smallgroup;
+package org.sarangchurch.growing.v1.feat.term.domain.cody;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,10 +8,10 @@ import org.sarangchurch.growing.core.types.BaseEntity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "small_group")
+@Table(name = "cody")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SmallGroup extends BaseEntity {
+public class Cody extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,9 +19,6 @@ public class SmallGroup extends BaseEntity {
     @Column(name = "term_id", nullable = false)
     private Long termId;
 
-    @Column(name = "cody_id", nullable = false)
-    private Long codyId;
-
-    @Column(name = "small_group_leader_id", nullable = false)
-    private Long smallGroupLeaderId;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 }

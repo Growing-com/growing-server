@@ -32,7 +32,7 @@ Content-Type: application/json
 }
 
 ### 인적정보 2. 새가족 수정
-POST http://localhost:8080/api/v1/new-families/11/update
+POST http://localhost:8080/api/v1/new-families/1/update
 Content-Type: application/json
 
 {
@@ -76,7 +76,7 @@ POST http://localhost:8080/api/v1/new-families/request-line-up
 Content-Type: application/json
 
 {
-  "newFamilyIds": [8]
+  "newFamilyIds": [1]
 }
 
 ### 등반/라인업 2. 새가족 대량 후보순장 임시 라인업
@@ -99,7 +99,7 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 8,
+      "newFamilyId": 1,
       "smallGroupId": 1
     }
   ]
@@ -112,23 +112,29 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 5,
+      "newFamilyId": 1,
       "promoteDate": "2024-09-13"
     }
   ]
 }
+
+### 출석 1. 새가족 목록 출석 조회
+GET http://localhost:8080/api/v1/new-families/attendances
 
 ### 출석 2. 새가족 출석 체크
 POST http://localhost:8080/api/v1/new-families/attendance-check
 Content-Type: application/json
 
 {
-  "date": "2024-09-01",
+  "date": "2024-09-15",
   "attendanceItems": [
     {
-      "newFamilyId": 1,
-      "status": "ABSENT",
-      "reason": "감기"
+      "newFamilyId": 2,
+      "status": "ATTEND"
+    },
+    {
+      "newFamilyId": 3,
+      "status": "ATTEND"
     }
   ]
 }
