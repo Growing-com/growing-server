@@ -9,17 +9,15 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 public class UserAccountQueryController {
     private final UserAccountQueryRepository userAccountQueryRepository;
 
     @GetMapping("/api/v1/my-info")
-    public ApiResponse<List<UserAccount>> findMyAccount(
+    public ApiResponse<UserAccount> findMyAccount(
             @AuthenticationPrincipal Principal principal
     ) {
-        return ApiResponse.of(List.of(userAccountQueryRepository.findByUserId(principal.getUserId())));
+        return ApiResponse.of(userAccountQueryRepository.findByUserId(principal.getUserId()));
     }
 }
