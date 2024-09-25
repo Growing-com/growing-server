@@ -16,9 +16,7 @@ public class PromotedNewFamilyListItem {
     private final String newFamilyGroupLeaderName;
     private final String smallGroupLeaderName;
     private final LocalDate promoteDate;
-
     private final long weeksAfterPromotion;
-    private final long attendanceAfterPromotion;
 
     public PromotedNewFamilyListItem(Long newFamilyId, String name, Sex sex, String phoneNumber, Integer grade, String newFamilyGroupLeaderName, String smallGroupLeaderName, LocalDate promoteDate) {
         this.newFamilyId = newFamilyId;
@@ -30,7 +28,6 @@ public class PromotedNewFamilyListItem {
         this.smallGroupLeaderName = smallGroupLeaderName;
         this.promoteDate = promoteDate;
         // 계산
-        this.weeksAfterPromotion = ChronoUnit.WEEKS.between(LocalDate.now(), promoteDate);
-        this.attendanceAfterPromotion = -1;
+        this.weeksAfterPromotion = ChronoUnit.WEEKS.between(promoteDate, LocalDate.now());
     }
 }

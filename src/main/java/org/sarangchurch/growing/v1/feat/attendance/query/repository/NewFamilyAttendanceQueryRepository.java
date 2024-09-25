@@ -5,6 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.attendance.domain.newfamilyattendance.AttendanceStatus;
 import org.sarangchurch.growing.v1.feat.attendance.query.model.NewFamilyAttendanceListItem;
+import org.sarangchurch.growing.v1.feat.user.domain.QUser;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -16,6 +17,8 @@ import java.util.stream.Collectors;
 
 import static org.sarangchurch.growing.v1.feat.attendance.domain.newfamilyattendance.QNewFamilyAttendance.newFamilyAttendance;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.QNewFamily.newFamily;
+import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
+import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.QNewFamilyPromoteLog.newFamilyPromoteLog;
 import static org.sarangchurch.growing.v1.feat.user.domain.QUser.user;
 
@@ -26,6 +29,8 @@ public class NewFamilyAttendanceQueryRepository {
 
     public List<NewFamilyAttendanceListItem> findNewFamilyAttendances() {
         List<LocalDate> lastTwelveSundays = getLastTwelveSundays();
+
+        QUser newFamilyGroupLeaderUser = new QUser("newFamilyGroupLeaderUser");
 
         List<Long> currentNewFamilyIds = queryFactory.select(newFamily.id)
                 .from(newFamily)
@@ -43,6 +48,7 @@ public class NewFamilyAttendanceQueryRepository {
                         user.name.as("name"),
                         user.sex.as("sex"),
                         user.grade.as("grade"),
+                        newFamilyGroupLeaderUser.name.as("newFamilyGroupLeaderName"),
                         newFamilyAttendance.status.as("status"),
                         newFamilyAttendance.date.as("date"),
                         newFamilyAttendance.reason.as("reason")
@@ -51,6 +57,11 @@ public class NewFamilyAttendanceQueryRepository {
                 .join(user).on(user.id.eq(newFamily.userId),
                         newFamily.id.in(currentNewFamilyIds)
                 )
+                // 새가족반 리더
+                .leftJoin(newFamilyGroup).on(newFamily.newFamilyGroupId.eq(newFamilyGroup.id))
+                .leftJoin(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
+                .leftJoin(newFamilyGroupLeaderUser).on(newFamilyGroupLeaderUser.id.eq(newFamilyGroupLeader.userId))
+                // 출석
                 .leftJoin(newFamilyAttendance).on(newFamily.id.eq(newFamilyAttendance.newFamilyId))
                 .fetch();
 
@@ -60,17 +71,26 @@ public class NewFamilyAttendanceQueryRepository {
         return groupedById.values()
                 .stream()
                 .map(attendItems -> {
-                    long attendCount = attendItems.stream().filter(it2 -> it2.getStatus() == AttendanceStatus.ATTEND).count();
-                    long absentCount = attendItems.stream().filter(it2 -> it2.getStatus() == AttendanceStatus.ABSENT).count();
+                    long attendCount = attendItems.stream().filter(it -> it.getStatus() == AttendanceStatus.ATTEND).count();
+                    long absentCount = attendItems.stream().filter(it -> it.getStatus() == AttendanceStatus.ABSENT).count();
 
                     NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem firstItem = attendItems.get(0);
 
-                    List<NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem> sortedByDateDesc = attendItems.stream()
-                            .filter(it ->
-                                    lastTwelveSundays.stream()
-                                            .anyMatch(it2 -> it2.equals(it.getDate()))
+                    List<NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem> sortedByDateDesc = lastTwelveSundays.stream()
+                            .map(it -> attendItems.stream()
+                                    .filter(it2 -> it.equals(it2.getDate()))
+                                    .findAny()
+                                    .orElse(new NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem(
+                                            firstItem.getNewFamilyId(),
+                                            firstItem.getName(),
+                                            firstItem.getSex(),
+                                            firstItem.getGrade(),
+                                            firstItem.getNewFamilyGroupLeaderName(),
+                                            AttendanceStatus.NONE,
+                                            it,
+                                            ""
+                                    ))
                             )
-                            .sorted(Comparator.comparing(NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem::getDate).reversed())
                             .collect(Collectors.toList());
 
                     return new NewFamilyAttendanceListItem(
@@ -78,13 +98,12 @@ public class NewFamilyAttendanceQueryRepository {
                             firstItem.getName(),
                             firstItem.getSex(),
                             firstItem.getGrade(),
+                            firstItem.getNewFamilyGroupLeaderName(),
                             attendCount,
                             absentCount,
                             sortedByDateDesc
                     );
                 })
-                .collect(Collectors.toList())
-                .stream()
                 .sorted(Comparator.comparing(NewFamilyAttendanceListItem::getTotalAttendCount).reversed())
                 .collect(Collectors.toList());
     }

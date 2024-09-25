@@ -16,6 +16,7 @@ public class NewFamilyAttendanceListItem {
     private final String name;
     private final Sex sex;
     private final Integer grade;
+    private final String newFamilyGroupLeaderName;
     private final long totalAttendCount;
     private final long totalAbsentCount;
     private final List<NewFamilyAttendanceListItemAttendItem> attendanceItems;
@@ -31,6 +32,8 @@ public class NewFamilyAttendanceListItem {
         private final Sex sex;
         @JsonIgnore
         private final Integer grade;
+        @JsonIgnore
+        private final String newFamilyGroupLeaderName;
 
         private final AttendanceStatus status;
         private final LocalDate date;

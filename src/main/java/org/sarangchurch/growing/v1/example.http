@@ -10,6 +10,7 @@ Content-Type: application/json
 ### 권한 2. 로그아웃
 POST http://localhost:8080/api/v1/auth/logout
 
+
 ### 인적정보 1. 새가족 등록
 POST http://localhost:8080/api/v1/new-families/register
 Content-Type: application/json
@@ -35,7 +36,7 @@ Content-Type: application/json
 }
 
 ### 인적정보 2. 새가족 수정
-POST http://localhost:8080/api/v1/new-families/1/update
+POST http://localhost:8080/api/v1/new-families/2/update
 Content-Type: application/json
 
 {
@@ -82,7 +83,7 @@ POST http://localhost:8080/api/v1/new-families/request-line-up
 Content-Type: application/json
 
 {
-  "newFamilyIds": [1]
+  "newFamilyIds": [2]
 }
 
 ### 등반/라인업 2. 새가족 대량 후보순장 임시 라인업
@@ -105,7 +106,7 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 1,
+      "newFamilyId": 2,
       "smallGroupId": 1
     }
   ]

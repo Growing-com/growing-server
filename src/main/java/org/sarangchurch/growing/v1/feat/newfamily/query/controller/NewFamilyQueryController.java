@@ -6,6 +6,7 @@ import org.sarangchurch.growing.v1.feat.newfamily.query.model.*;
 import org.sarangchurch.growing.v1.feat.newfamily.query.repository.NewFamilyQueryRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,13 +18,17 @@ public class NewFamilyQueryController {
     private final NewFamilyQueryRepository repository;
 
     @GetMapping("/api/v1/new-families")
-    public ApiResponse<List<NewFamilyListItem>> findAll() {
-        return ApiResponse.of(repository.findAll());
+    public ApiResponse<List<NewFamilyListItem>> findAll(@RequestParam(required = false) Long newFamilyGroupId) {
+        if (newFamilyGroupId == null) {
+            return ApiResponse.of(repository.findAll());
+        }
+
+        return ApiResponse.of(repository.findByNewFamilyGroup(newFamilyGroupId));
     }
 
     @GetMapping("/api/v1/new-families/{newFamilyId}")
-    public ApiResponse<List<NewFamily>> findById(@PathVariable("newFamilyId") Long newFamilyId) {
-        return ApiResponse.of(List.of(repository.findById(newFamilyId)));
+    public ApiResponse<NewFamily> findById(@PathVariable("newFamilyId") Long newFamilyId) {
+        return ApiResponse.of(repository.findById(newFamilyId));
     }
 
     @GetMapping("/api/v1/promote-candidate-new-families")
