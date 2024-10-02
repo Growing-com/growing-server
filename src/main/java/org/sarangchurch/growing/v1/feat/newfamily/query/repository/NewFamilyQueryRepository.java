@@ -75,7 +75,7 @@ public class NewFamilyQueryRepository {
         // 일반 순모임 리더 지체
         QUser smallGroupLeaderUser = new QUser("smallGroupLeaderUser");
 
-        return queryFactory.select(Projections.constructor(NewFamilyListItem.class,
+        List<NewFamilyListItem> fetch = queryFactory.select(Projections.constructor(NewFamilyListItem.class,
                         newFamily.id.as("newFamilyId"),
                         user.name.as("name"),
                         user.sex.as("sex"),
@@ -91,12 +91,12 @@ public class NewFamilyQueryRepository {
                 .from(newFamily)
                 .join(user).on(user.id.eq(newFamily.userId), newFamily.id.in(currentNewFamilyIds))
                 // 새가족반
-                .leftJoin(newFamilyGroup).on(
+                .join(newFamilyGroup).on(
                         newFamilyGroup.id.eq(newFamily.newFamilyGroupId),
                         newFamilyGroup.id.eq(newFamilyGroupId)
                 )
-                .leftJoin(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
-                .leftJoin(newFamilyGroupLeaderUser).on(newFamilyGroupLeaderUser.id.eq(newFamilyGroupLeader.userId))
+                .join(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
+                .join(newFamilyGroupLeaderUser).on(newFamilyGroupLeaderUser.id.eq(newFamilyGroupLeader.userId))
                 // 등반한 순모임
                 .leftJoin(newFamilyPromoteLog).on(newFamilyPromoteLog.id.eq(newFamily.newFamilyPromoteLogId))
                 .leftJoin(smallGroup).on(smallGroup.id.eq(newFamilyPromoteLog.smallGroupId))
@@ -105,6 +105,8 @@ public class NewFamilyQueryRepository {
                 // 정렬
                 .orderBy(newFamily.visitDate.desc())
                 .fetch();
+
+        return fetch;
     }
 
     public NewFamily findById(Long newFamilyId) {
