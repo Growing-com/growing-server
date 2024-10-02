@@ -27,6 +27,87 @@ import static org.sarangchurch.growing.v1.feat.user.domain.QUser.user;
 public class NewFamilyAttendanceQueryRepository {
     private final JPAQueryFactory queryFactory;
 
+    public List<NewFamilyAttendanceListItem> findNewFamilyAttendancesByNewFamilyGroup(Long newFamilyGroupId) {
+        List<LocalDate> lastTwelveSundays = getLastTwelveSundays();
+
+        QUser newFamilyGroupLeaderUser = new QUser("newFamilyGroupLeaderUser");
+
+        List<Long> currentNewFamilyIds = queryFactory.select(newFamily.id)
+                .from(newFamily)
+                .leftJoin(newFamilyPromoteLog)
+                    .on(newFamily.newFamilyPromoteLogId.eq(newFamilyPromoteLog.id))
+                .where(
+                        newFamily.newFamilyPromoteLogId.isNull().or(newFamilyPromoteLog.promoteDate.isNull()),
+                        newFamily.newFamilyGroupId.eq(newFamilyGroupId)
+                )
+                .fetch();
+
+        List<NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem> items = queryFactory
+                .select(Projections.constructor(NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem.class,
+                        newFamily.id.as("newFamilyId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade"),
+                        newFamilyGroupLeaderUser.name.as("newFamilyGroupLeaderName"),
+                        newFamilyAttendance.status.as("status"),
+                        newFamilyAttendance.date.as("date"),
+                        newFamilyAttendance.reason.as("reason")
+                ))
+                .from(newFamily)
+                .join(user).on(user.id.eq(newFamily.userId),
+                        newFamily.id.in(currentNewFamilyIds)
+                )
+                // 새가족반 리더
+                .leftJoin(newFamilyGroup).on(newFamily.newFamilyGroupId.eq(newFamilyGroup.id))
+                .leftJoin(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
+                .leftJoin(newFamilyGroupLeaderUser).on(newFamilyGroupLeaderUser.id.eq(newFamilyGroupLeader.userId))
+                // 출석
+                .leftJoin(newFamilyAttendance).on(newFamily.id.eq(newFamilyAttendance.newFamilyId))
+                .fetch();
+
+        Map<Long, List<NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem>> groupedById = items.stream()
+                .collect(Collectors.groupingBy(NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem::getNewFamilyId));
+
+        return groupedById.values()
+                .stream()
+                .map(attendItems -> {
+                    long attendCount = attendItems.stream().filter(it -> it.getStatus() == AttendanceStatus.ATTEND).count();
+                    long absentCount = attendItems.stream().filter(it -> it.getStatus() == AttendanceStatus.ABSENT).count();
+
+                    NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem firstItem = attendItems.get(0);
+
+                    List<NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem> sortedByDateDesc = lastTwelveSundays.stream()
+                            .map(it -> attendItems.stream()
+                                    .filter(it2 -> it.equals(it2.getDate()))
+                                    .findAny()
+                                    .orElse(new NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem(
+                                            firstItem.getNewFamilyId(),
+                                            firstItem.getName(),
+                                            firstItem.getSex(),
+                                            firstItem.getGrade(),
+                                            firstItem.getNewFamilyGroupLeaderName(),
+                                            AttendanceStatus.NONE,
+                                            it,
+                                            ""
+                                    ))
+                            )
+                            .collect(Collectors.toList());
+
+                    return new NewFamilyAttendanceListItem(
+                            firstItem.getNewFamilyId(),
+                            firstItem.getName(),
+                            firstItem.getSex(),
+                            firstItem.getGrade(),
+                            firstItem.getNewFamilyGroupLeaderName(),
+                            attendCount,
+                            absentCount,
+                            sortedByDateDesc
+                    );
+                })
+                .sorted(Comparator.comparing(NewFamilyAttendanceListItem::getTotalAttendCount).reversed())
+                .collect(Collectors.toList());
+    }
+
     public List<NewFamilyAttendanceListItem> findNewFamilyAttendances() {
         List<LocalDate> lastTwelveSundays = getLastTwelveSundays();
 

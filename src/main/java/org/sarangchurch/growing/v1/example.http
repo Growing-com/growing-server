@@ -36,7 +36,7 @@ Content-Type: application/json
 }
 
 ### 인적정보 2. 새가족 수정
-POST http://localhost:8080/api/v1/new-families/3/update
+POST http://localhost:8080/api/v1/new-families/4/update
 Content-Type: application/json
 
 {
@@ -126,7 +126,7 @@ Content-Type: application/json
 }
 
 ### 출석 1. 새가족 목록 출석 조회
-GET http://localhost:8080/api/v1/new-families/attendances
+GET http://localhost:8080/api/v1/new-families/attendances?newFamilyGroupId=1
 
 ### 출석 2. 새가족 출석 체크
 POST http://localhost:8080/api/v1/new-families/attendance-check
@@ -136,7 +136,7 @@ Content-Type: application/json
   "date": "2024-09-15",
   "attendanceItems": [
     {
-      "newFamilyId": 2,
+      "newFamilyId": 4,
       "status": "ATTEND"
     },
     {
