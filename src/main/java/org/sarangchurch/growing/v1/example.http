@@ -36,7 +36,7 @@ Content-Type: application/json
 }
 
 ### 인적정보 2. 새가족 수정
-POST http://localhost:8080/api/v1/new-families/2/update
+POST http://localhost:8080/api/v1/new-families/3/update
 Content-Type: application/json
 
 {
@@ -61,7 +61,7 @@ Content-Type: application/json
 }
 
 ### 인적정보 3. 새가족 목록 조회
-GET http://localhost:8080//api/v1/new-families
+GET http://localhost:8080//api/v1/new-families?newFamilyGroupId=1
 
 ### 인적정보 4. 새가족 정보 조회
 GET http://localhost:8080/api/v1/new-families/1
@@ -83,7 +83,7 @@ POST http://localhost:8080/api/v1/new-families/request-line-up
 Content-Type: application/json
 
 {
-  "newFamilyIds": [2]
+  "newFamilyIds": [3]
 }
 
 ### 등반/라인업 2. 새가족 대량 후보순장 임시 라인업
@@ -106,7 +106,7 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 2,
+      "newFamilyId": 3,
       "smallGroupId": 1
     }
   ]
@@ -119,7 +119,7 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 1,
+      "newFamilyId": 3,
       "promoteDate": "2024-09-13"
     }
   ]
