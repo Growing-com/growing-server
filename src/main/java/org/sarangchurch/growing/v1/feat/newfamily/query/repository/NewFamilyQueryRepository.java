@@ -42,10 +42,8 @@ public class NewFamilyQueryRepository {
                         user.birth.as("birth"),
                         newFamily.visitDate.as("visitDate"),
                         user.grade.as("grade"),
-                        newFamily.etc.as("etc"),
                         newFamilyGroupLeaderUser.name.as("newFamilyGroupLeaderName"),
-                        smallGroupLeaderUser.name.as("smallGroupLeaderName"),
-                        newFamilyPromoteLog.promoteDate.as("promoteDate")
+                        smallGroupLeaderUser.name.as("smallGroupLeaderName")
                 ))
                 .from(newFamily)
                 .join(user).on(user.id.eq(newFamily.userId), newFamily.id.in(currentNewFamilyIds))
@@ -75,7 +73,7 @@ public class NewFamilyQueryRepository {
         // 일반 순모임 리더 지체
         QUser smallGroupLeaderUser = new QUser("smallGroupLeaderUser");
 
-        List<NewFamilyListItem> fetch = queryFactory.select(Projections.constructor(NewFamilyListItem.class,
+        return queryFactory.select(Projections.constructor(NewFamilyListItem.class,
                         newFamily.id.as("newFamilyId"),
                         user.name.as("name"),
                         user.sex.as("sex"),
@@ -83,10 +81,8 @@ public class NewFamilyQueryRepository {
                         user.birth.as("birth"),
                         newFamily.visitDate.as("visitDate"),
                         user.grade.as("grade"),
-                        newFamily.etc.as("etc"),
                         newFamilyGroupLeaderUser.name.as("newFamilyGroupLeaderName"),
-                        smallGroupLeaderUser.name.as("smallGroupLeaderName"),
-                        newFamilyPromoteLog.promoteDate.as("promoteDate")
+                        smallGroupLeaderUser.name.as("smallGroupLeaderName")
                 ))
                 .from(newFamily)
                 .join(user).on(user.id.eq(newFamily.userId), newFamily.id.in(currentNewFamilyIds))
@@ -105,8 +101,6 @@ public class NewFamilyQueryRepository {
                 // 정렬
                 .orderBy(newFamily.visitDate.desc())
                 .fetch();
-
-        return fetch;
     }
 
     public NewFamily findById(Long newFamilyId) {
