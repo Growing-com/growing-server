@@ -94,7 +94,7 @@ Content-Type: application/json
   "content": [
     {
       "newFamilyId": 4,
-      "temporarySmallGroupIds": [1]
+      "temporarySmallGroupIds": [1, 2]
     }
   ]
 }
