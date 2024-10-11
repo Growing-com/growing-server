@@ -159,7 +159,7 @@ public class NewFamilyQueryRepository {
                 .leftJoin(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
                 .leftJoin(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroupLeader.userId))
                 // 정렬
-                .orderBy(newFamily.visitDate.desc())
+                .orderBy(newFamilyPromoteLog.createdAt.desc())
                 .fetch();
     }
 
@@ -192,7 +192,7 @@ public class NewFamilyQueryRepository {
                 .leftJoin(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
                 .leftJoin(newFamilyGroupLeaderUser).on(newFamilyGroupLeaderUser.id.eq(newFamilyGroupLeader.userId))
                 // 정렬
-                .orderBy(newFamily.visitDate.desc())
+                .orderBy(newFamilyPromoteLog.promoteDate.desc())
                 .fetch();
     }
 
