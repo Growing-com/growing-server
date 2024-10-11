@@ -126,7 +126,7 @@ Content-Type: application/json
 }
 
 ### 출석 1. 새가족 목록 출석 조회
-GET http://localhost:8080/api/v1/new-families/attendances?newFamilyGroupId=1
+GET http://localhost:8080/api/v1/new-families/attendances
 
 ### 출석 2. 새가족 출석 체크
 POST http://localhost:8080/api/v1/new-families/attendance-check
