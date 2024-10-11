@@ -83,7 +83,7 @@ POST http://localhost:8080/api/v1/new-families/request-line-up
 Content-Type: application/json
 
 {
-  "newFamilyIds": [3]
+  "newFamilyIds": [4]
 }
 
 ### 등반/라인업 2. 새가족 대량 후보순장 임시 라인업
@@ -93,7 +93,7 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 8,
+      "newFamilyId": 4,
       "temporarySmallGroupIds": [1]
     }
   ]

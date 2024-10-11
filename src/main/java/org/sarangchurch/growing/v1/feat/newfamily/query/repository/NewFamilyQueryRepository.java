@@ -147,7 +147,8 @@ public class NewFamilyQueryRepository {
                         user.grade.as("grade"),
                         newFamily.etc.as("etc"),
                         newFamilyGroupLeaderUser.name.as("newFamilyGroupLeaderName"),
-                        smallGroupLeaderUser.name.as("smallGroupLeaderName")
+                        smallGroupLeaderUser.name.as("smallGroupLeaderName"),
+                        newFamilyPromoteLog.temporarySmallGroupIds.as("temporarySmallGroupIds")
                 ))
                 .from(newFamily)
                 .join(user).on(
