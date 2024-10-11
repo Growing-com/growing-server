@@ -8,7 +8,9 @@ import org.sarangchurch.growing.v1.feat.attendance.query.model.NewFamilyAttendan
 import org.sarangchurch.growing.v1.feat.user.domain.QUser;
 import org.springframework.stereotype.Repository;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -104,7 +106,7 @@ public class NewFamilyAttendanceQueryRepository {
                             sortedByDateDesc
                     );
                 })
-                .sorted(Comparator.comparing(NewFamilyAttendanceListItem::getTotalAttendCount).reversed())
+                .sorted(Comparator.comparing(NewFamilyAttendanceListItem::getNewFamilyGroupLeaderName, Comparator.nullsLast(Comparator.naturalOrder())))
                 .collect(Collectors.toList());
     }
 
@@ -185,7 +187,7 @@ public class NewFamilyAttendanceQueryRepository {
                             sortedByDateDesc
                     );
                 })
-                .sorted(Comparator.comparing(NewFamilyAttendanceListItem::getTotalAttendCount).reversed())
+                .sorted(Comparator.comparing(NewFamilyAttendanceListItem::getNewFamilyGroupLeaderName, Comparator.nullsLast(Comparator.naturalOrder())))
                 .collect(Collectors.toList());
     }
 
@@ -194,11 +196,11 @@ public class NewFamilyAttendanceQueryRepository {
         LocalDate today = LocalDate.now();
 
         // 최근 일요일부터 시작
-        LocalDate lastSunday = today.with(java.time.DayOfWeek.SUNDAY);
+        LocalDate sunday = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
 
         for (int i = 0; i < 12; i++) {
-            sundays.add(lastSunday);
-            lastSunday = lastSunday.minusWeeks(1); // 이전 주 일요일로 이동
+            sundays.add(sunday);
+            sunday = sunday.minusWeeks(1); // 이전 주 일요일로 이동
         }
 
         return sundays;

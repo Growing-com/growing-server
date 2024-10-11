@@ -42,10 +42,8 @@ public class NewFamilyQueryRepository {
                         user.birth.as("birth"),
                         newFamily.visitDate.as("visitDate"),
                         user.grade.as("grade"),
-                        newFamily.etc.as("etc"),
                         newFamilyGroupLeaderUser.name.as("newFamilyGroupLeaderName"),
-                        smallGroupLeaderUser.name.as("smallGroupLeaderName"),
-                        newFamilyPromoteLog.promoteDate.as("promoteDate")
+                        smallGroupLeaderUser.name.as("smallGroupLeaderName")
                 ))
                 .from(newFamily)
                 .join(user).on(user.id.eq(newFamily.userId), newFamily.id.in(currentNewFamilyIds))
@@ -75,7 +73,7 @@ public class NewFamilyQueryRepository {
         // 일반 순모임 리더 지체
         QUser smallGroupLeaderUser = new QUser("smallGroupLeaderUser");
 
-        List<NewFamilyListItem> fetch = queryFactory.select(Projections.constructor(NewFamilyListItem.class,
+        return queryFactory.select(Projections.constructor(NewFamilyListItem.class,
                         newFamily.id.as("newFamilyId"),
                         user.name.as("name"),
                         user.sex.as("sex"),
@@ -83,10 +81,8 @@ public class NewFamilyQueryRepository {
                         user.birth.as("birth"),
                         newFamily.visitDate.as("visitDate"),
                         user.grade.as("grade"),
-                        newFamily.etc.as("etc"),
                         newFamilyGroupLeaderUser.name.as("newFamilyGroupLeaderName"),
-                        smallGroupLeaderUser.name.as("smallGroupLeaderName"),
-                        newFamilyPromoteLog.promoteDate.as("promoteDate")
+                        smallGroupLeaderUser.name.as("smallGroupLeaderName")
                 ))
                 .from(newFamily)
                 .join(user).on(user.id.eq(newFamily.userId), newFamily.id.in(currentNewFamilyIds))
@@ -105,8 +101,6 @@ public class NewFamilyQueryRepository {
                 // 정렬
                 .orderBy(newFamily.visitDate.desc())
                 .fetch();
-
-        return fetch;
     }
 
     public NewFamily findById(Long newFamilyId) {
@@ -147,7 +141,8 @@ public class NewFamilyQueryRepository {
                         user.grade.as("grade"),
                         newFamily.etc.as("etc"),
                         newFamilyGroupLeaderUser.name.as("newFamilyGroupLeaderName"),
-                        smallGroupLeaderUser.name.as("smallGroupLeaderName")
+                        smallGroupLeaderUser.name.as("smallGroupLeaderName"),
+                        newFamilyPromoteLog.temporarySmallGroupIds.as("temporarySmallGroupIds")
                 ))
                 .from(newFamily)
                 .join(user).on(
@@ -164,7 +159,7 @@ public class NewFamilyQueryRepository {
                 .leftJoin(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
                 .leftJoin(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroupLeader.userId))
                 // 정렬
-                .orderBy(newFamily.visitDate.desc())
+                .orderBy(newFamilyPromoteLog.createdAt.desc())
                 .fetch();
     }
 
@@ -197,7 +192,7 @@ public class NewFamilyQueryRepository {
                 .leftJoin(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
                 .leftJoin(newFamilyGroupLeaderUser).on(newFamilyGroupLeaderUser.id.eq(newFamilyGroupLeader.userId))
                 // 정렬
-                .orderBy(newFamily.visitDate.desc())
+                .orderBy(newFamilyPromoteLog.promoteDate.desc())
                 .fetch();
     }
 

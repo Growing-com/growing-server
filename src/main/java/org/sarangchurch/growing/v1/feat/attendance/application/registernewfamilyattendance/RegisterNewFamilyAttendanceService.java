@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 
 @Service
 @RequiredArgsConstructor
@@ -13,16 +14,16 @@ public class RegisterNewFamilyAttendanceService {
     private final NewFamilyAttendanceAppender newFamilyAttendanceAppender;
 
     public void register(RegisterNewFamilyAttendanceRequest request) {
-        LocalDate date = request.getDate();
+        request.toLatestSunday();
 
-        if (date.getDayOfWeek() != DayOfWeek.SUNDAY) {
-            throw new IllegalArgumentException("일요일 날짜로만 출석체크할 수 있습니다.");
-        }
+        LocalDate requestDate = request.getDate();
+        LocalDate latestSunday = LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
 
-        if (date.isAfter(LocalDate.now())) {
+        if (requestDate.isAfter(latestSunday)) {
             throw new IllegalArgumentException("과거 날짜로만 출석체크할 수 있습니다.");
         }
 
         newFamilyAttendanceAppender.append(request);
     }
+
 }

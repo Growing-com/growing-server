@@ -8,7 +8,9 @@ import org.sarangchurch.growing.v1.feat.attendance.domain.newfamilyattendance.Ne
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +23,10 @@ public class RegisterNewFamilyAttendanceRequest {
     @NotEmpty(message = "출석 리스트를 입력해주세요.")
     @Valid
     private List<NewFamilyAttendanceItems> attendanceItems;
+
+    public void toLatestSunday() {
+        date = date.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
+    }
 
     public List<NewFamilyAttendance> toEntities() {
         return attendanceItems.stream()

@@ -8,6 +8,7 @@ import org.sarangchurch.growing.v1.feat.term.domain.term.TermRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -31,15 +32,15 @@ public class SmallGroupValidator {
             throw new IllegalArgumentException("존재하지 않는 일반 순모임이 포함되어 있습니다.");
         }
 
-        List<Long> termIds = smallGroups.stream()
+        Set<Long> termIds = smallGroups.stream()
                 .map(SmallGroup::getTermId)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
         if (termIds.size() != 1) {
             throw new IllegalStateException("모든 가용한 순모임은 하나의 텀에만 속해있어야합니다.");
         }
 
-        Term term = termRepository.findById(termIds.get(0))
+        Term term = termRepository.findById(termIds.iterator().next())
                 .orElseThrow();
 
         if (!term.isActive()) {

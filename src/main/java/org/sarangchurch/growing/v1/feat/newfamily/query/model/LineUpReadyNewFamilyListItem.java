@@ -6,6 +6,7 @@ import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyEtc;
 import org.sarangchurch.growing.core.interfaces.common.Sex;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @RequiredArgsConstructor
@@ -20,4 +21,5 @@ public class LineUpReadyNewFamilyListItem {
     private final NewFamilyEtc etc;
     private final String newFamilyGroupLeaderName;
     private final String smallGroupLeaderName;
+    private final List<Long> temporarySmallGroupIds;
 }
