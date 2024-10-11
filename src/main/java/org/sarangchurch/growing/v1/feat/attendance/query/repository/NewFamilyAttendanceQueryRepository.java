@@ -106,7 +106,7 @@ public class NewFamilyAttendanceQueryRepository {
                             sortedByDateDesc
                     );
                 })
-                .sorted(Comparator.comparing(NewFamilyAttendanceListItem::getTotalAttendCount).reversed())
+                .sorted(Comparator.comparing(NewFamilyAttendanceListItem::getNewFamilyGroupLeaderName, Comparator.nullsLast(Comparator.naturalOrder())))
                 .collect(Collectors.toList());
     }
 
@@ -187,7 +187,7 @@ public class NewFamilyAttendanceQueryRepository {
                             sortedByDateDesc
                     );
                 })
-                .sorted(Comparator.comparing(NewFamilyAttendanceListItem::getTotalAttendCount).reversed())
+                .sorted(Comparator.comparing(NewFamilyAttendanceListItem::getNewFamilyGroupLeaderName, Comparator.nullsLast(Comparator.naturalOrder())))
                 .collect(Collectors.toList());
     }
 
