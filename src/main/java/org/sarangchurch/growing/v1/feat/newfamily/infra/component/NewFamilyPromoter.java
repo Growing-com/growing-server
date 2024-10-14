@@ -5,6 +5,7 @@ import org.sarangchurch.growing.v1.feat.newfamily.application.promote.PromoteReq
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLog;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLogRepository;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.term.SmallGroupMemberUpstream;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class NewFamilyPromoter {
     private final NewFamilyFinder newFamilyFinder;
     private final NewFamilyPromoteLogRepository promoteLogRepository;
+    private final SmallGroupMemberUpstream smallGroupMemberUpstream;
 
     @Transactional
     public void promote(PromoteRequest request) {
@@ -58,6 +60,8 @@ public class NewFamilyPromoter {
                     .orElseThrow();
 
             log.updatePromoteDate(promoteDate);
+
+            smallGroupMemberUpstream.create(newFamily.getUserId(), log.getSmallGroupId());
         }
     }
 }
