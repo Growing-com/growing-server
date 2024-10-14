@@ -171,3 +171,6 @@ GET http://localhost:8080/api/v1/terms
 
 ### 텀 4. 활성화된 텀
 GET http://localhost:8080/api/v1/terms/active-term
+
+### FOOBAR
+GET http://localhost:8080/api/v1/foobar?termId=1&codyId=1&leaderUserId=2

@@ -28,6 +28,8 @@ public class SmallGroupMember extends BaseEntity {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
+    // TODO: ADD isTransferred
+
     @Builder
     public SmallGroupMember(Long termId, Long smallGroupId, Long userId) {
         this.termId = termId;

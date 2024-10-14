@@ -9,4 +9,6 @@ public interface UserService {
     User register(User user);
 
     void update(Long userId, String name, String phoneNumber, LocalDate birth, Sex sex, Integer grade);
+
+    User findById(Long userId);
 }

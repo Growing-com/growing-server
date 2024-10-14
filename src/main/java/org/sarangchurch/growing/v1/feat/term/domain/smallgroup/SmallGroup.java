@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.term.domain.smallgroup;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "small_group")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+// TODO: UNIQUE(codyId, smallGroupLeaderId)
 public class SmallGroup extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,4 +26,11 @@ public class SmallGroup extends BaseEntity {
 
     @Column(name = "small_group_leader_id", nullable = false)
     private Long smallGroupLeaderId;
+
+    @Builder
+    public SmallGroup(Long termId, Long codyId, Long smallGroupLeaderId) {
+        this.termId = termId;
+        this.codyId = codyId;
+        this.smallGroupLeaderId = smallGroupLeaderId;
+    }
 }
