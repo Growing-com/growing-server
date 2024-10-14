@@ -83,7 +83,7 @@ POST http://localhost:8080/api/v1/new-families/request-line-up
 Content-Type: application/json
 
 {
-  "newFamilyIds": [5]
+  "newFamilyIds": [7]
 }
 
 ### 등반/라인업 2. 새가족 대량 후보순장 임시 라인업
@@ -106,7 +106,7 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 5,
+      "newFamilyId": 7,
       "smallGroupId": 5
     }
   ]
@@ -119,7 +119,7 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 3,
+      "newFamilyId": 7,
       "promoteDate": "2024-09-13"
     }
   ]
@@ -171,3 +171,6 @@ GET http://localhost:8080/api/v1/terms
 
 ### 텀 4. 활성화된 텀
 GET http://localhost:8080/api/v1/terms/active-term
+
+### FOOBAR
+GET http://localhost:8080/api/v1/foobar?termId=1&codyId=1&leaderUserId=2

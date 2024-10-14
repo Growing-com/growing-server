@@ -18,6 +18,7 @@ public class SmallGroupMember extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // TODO: DELETE
     @Column(name = "term_id", nullable = false)
     private Long termId;
 
@@ -26,6 +27,8 @@ public class SmallGroupMember extends BaseEntity {
 
     @Column(name = "user_id", nullable = false)
     private Long userId;
+
+    // TODO: ADD isTransferred
 
     @Builder
     public SmallGroupMember(Long termId, Long smallGroupId, Long userId) {

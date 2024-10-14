@@ -37,6 +37,8 @@ public class User extends BaseEntity {
     @Column(name = "grade", nullable = false)
     private Integer grade;
 
+    // TODO: add isActive
+
     @Builder
     public User(String name, String phoneNumber, LocalDate birth, Sex sex, Integer grade) {
         this.name = name;
