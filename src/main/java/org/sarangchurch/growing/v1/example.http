@@ -193,3 +193,6 @@ Content-Type: application/json
   "smallGroupMemberId": 8,
   "targetSmallGroupId": 15
 }
+
+### 인적 정보. 코디
+GET http://localhost:8080/api/v1/terms/1/codies
