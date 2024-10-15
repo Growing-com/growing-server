@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
+import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
 
 import javax.persistence.*;
 
@@ -35,5 +36,9 @@ public class SmallGroupMember extends BaseEntity {
         this.termId = termId;
         this.smallGroupId = smallGroupId;
         this.userId = userId;
+    }
+
+    public void updateSmallGroup(SmallGroup targetSmallGroup) {
+        this.smallGroupId = targetSmallGroup.getId();
     }
 }

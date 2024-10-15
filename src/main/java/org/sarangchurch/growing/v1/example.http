@@ -173,4 +173,4 @@ GET http://localhost:8080/api/v1/terms
 GET http://localhost:8080/api/v1/terms/active-term
 
 ### FOOBAR
-GET http://localhost:8080/api/v1/foobar?smallGroupId=8
+GET http://localhost:8080/api/v1/foobar?smallGroupMemberId=1&targetSmallGroupId=3
