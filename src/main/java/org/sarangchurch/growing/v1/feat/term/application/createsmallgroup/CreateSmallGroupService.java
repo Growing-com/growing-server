@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.term.application;
+package org.sarangchurch.growing.v1.feat.term.application.createsmallgroup;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.infra.component.CodyValidator;
@@ -13,9 +13,9 @@ public class CreateSmallGroupService {
     private final CodyValidator codyValidator;
     private final SmallGroupAppender smallGroupAppender;
 
-    public void create(Long termId, Long codyId, Long userId) {
+    public void create(Long termId, CreateSmallGroupRequest request) {
         termValidator.validateActive(termId);
-        codyValidator.validateAvailableByIdAndTerm(codyId, termId);
-        smallGroupAppender.append(termId, codyId, userId);
+        codyValidator.validateAvailableByIdAndTerm(request.getCodyId(), termId);
+        smallGroupAppender.append(termId, request.getCodyId(), request.getLeaderUserId(), request.getMemberUserIds());
     }
 }

@@ -172,5 +172,27 @@ GET http://localhost:8080/api/v1/terms
 ### 텀 4. 활성화된 텀
 GET http://localhost:8080/api/v1/terms/active-term
 
-### FOOBAR
-GET http://localhost:8080/api/v1/foobar?termId=1&codyId=1&leaderUserId=2
+### 라인업 1. 순모임 생성
+POST http://localhost:8080/api/v1/terms/1/create-small-group
+Content-Type: application/json
+
+{
+  "codyId": 1,
+  "leaderUserId": 3,
+  "memberUserIds": [2, 4]
+}
+
+### 라인업 2. 순모임 삭제
+POST http://localhost:8080/api/v1/small-groups/14/delete
+
+### 라인업 3. 라인업 변경
+POST http://localhost:8080/api/v1/line-up-edit
+Content-Type: application/json
+
+{
+  "smallGroupMemberId": 8,
+  "targetSmallGroupId": 15
+}
+
+### 인적 정보. 코디
+GET http://localhost:8080/api/v1/terms/1/codies

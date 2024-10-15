@@ -16,6 +16,8 @@ public class NewFamilyGroupMember extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // TODO: 텀 id
+
     @Column(name = "new_family_group_id", nullable = false)
     private Long newFamilyGroupId;
 

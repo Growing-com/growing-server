@@ -4,6 +4,7 @@ import org.sarangchurch.growing.core.interfaces.common.Sex;
 import org.sarangchurch.growing.v1.feat.user.domain.User;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface UserService {
     User register(User user);
@@ -11,4 +12,6 @@ public interface UserService {
     void update(Long userId, String name, String phoneNumber, LocalDate birth, Sex sex, Integer grade);
 
     User findById(Long userId);
+
+    List<User> findByIdIn(List<Long> ids);
 }
