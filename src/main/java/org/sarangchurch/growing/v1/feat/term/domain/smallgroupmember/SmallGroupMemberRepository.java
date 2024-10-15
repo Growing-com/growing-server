@@ -10,4 +10,5 @@ public interface SmallGroupMemberRepository {
     Optional<SmallGroupMember> findById(Long id);
     void deleteByTermIdAndUserIdIn(Long termId, List<Long> userIds);
     <S extends SmallGroupMember> List<S> saveAll(Iterable<S> entities);
+    void deleteBySmallGroupId(Long smallGroupId);
 }

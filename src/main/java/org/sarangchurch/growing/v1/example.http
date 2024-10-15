@@ -172,20 +172,28 @@ GET http://localhost:8080/api/v1/terms
 ### 텀 4. 활성화된 텀
 GET http://localhost:8080/api/v1/terms/active-term
 
-### 라인업 1. 순모임 생성
+### 라인업. 순모임 생성
 POST http://localhost:8080/api/v1/terms/1/create-small-group
 Content-Type: application/json
 
 {
   "codyId": 1,
-  "leaderUserId": 3,
+  "leaderUserId": 301,
   "memberUserIds": [2, 4]
 }
 
-### 라인업 2. 순모임 삭제
+### 라인업. 순모임 수정
+POST http://localhost:8080/api/v1/small-groups/14/update
+Content-Type: application/json
+
+{
+  "memberUserIds": []
+}
+
+### 라인업. 순모임 삭제
 POST http://localhost:8080/api/v1/small-groups/14/delete
 
-### 라인업 3. 라인업 변경
+### 라인업. 순원 라인업 변경
 POST http://localhost:8080/api/v1/line-up-edit
 Content-Type: application/json
 
