@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.term.application;
+package org.sarangchurch.growing.v1.feat.term.application.deletesmallgroup;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.infra.component.SmallGroupRemover;

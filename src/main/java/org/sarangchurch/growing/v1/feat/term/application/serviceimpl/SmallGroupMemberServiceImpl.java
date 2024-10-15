@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.term.application;
+package org.sarangchurch.growing.v1.feat.term.application.serviceimpl;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.v1.term.SmallGroupMemberService;

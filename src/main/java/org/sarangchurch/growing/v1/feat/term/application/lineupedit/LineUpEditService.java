@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.term.application;
+package org.sarangchurch.growing.v1.feat.term.application.lineupedit;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.infra.component.LineUpEditor;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class LineUpEditService {
     private final LineUpEditor lineUpEditor;
 
-    public void edit(Long smallGroupMemberId, Long targetSmallGroupId) {
-        lineUpEditor.edit(smallGroupMemberId, targetSmallGroupId);
+    public void edit(LineUpEditRequest request) {
+        lineUpEditor.edit(request.getSmallGroupMemberId(), request.getTargetSmallGroupId());
     }
 }

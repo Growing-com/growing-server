@@ -20,7 +20,6 @@ public class LineUpEditor {
         SmallGroupMember smallGroupMember = smallGroupMemberRepository.findById(smallGroupMemberId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 순원입니다."));
 
-
         SmallGroup targetSmallGroup = smallGroupRepository.findById(targetSmallGroupId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 순모임입니다."));
 
