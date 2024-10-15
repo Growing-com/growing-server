@@ -19,7 +19,6 @@ public class SmallGroupMember extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // TODO: DELETE
     @Column(name = "term_id", nullable = false)
     private Long termId;
 

@@ -5,6 +5,8 @@ import org.sarangchurch.growing.v1.feat.user.domain.User;
 import org.sarangchurch.growing.v1.feat.user.domain.UserRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class UserFinder {
@@ -13,5 +15,9 @@ public class UserFinder {
     public User findById(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
+    }
+
+    public List<User> findByIdIn(List<Long> ids) {
+        return userRepository.findByIdIn(ids);
     }
 }

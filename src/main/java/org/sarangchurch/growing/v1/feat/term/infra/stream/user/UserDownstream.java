@@ -5,6 +5,8 @@ import org.sarangchurch.growing.core.interfaces.v1.user.UserService;
 import org.sarangchurch.growing.v1.feat.user.domain.User;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class UserDownstream {
@@ -12,5 +14,9 @@ public class UserDownstream {
 
     public User findById(Long id) {
         return userService.findById(id);
+    }
+
+    public List<User> findByIdIn(List<Long> ids) {
+        return userService.findByIdIn(ids);
     }
 }

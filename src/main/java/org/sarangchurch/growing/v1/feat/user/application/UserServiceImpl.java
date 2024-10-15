@@ -10,6 +10,7 @@ import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserUpdate
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,5 +33,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Long userId) {
         return userFinder.findById(userId);
+    }
+
+    @Override
+    public List<User> findByIdIn(List<Long> ids) {
+        return userFinder.findByIdIn(ids);
     }
 }
