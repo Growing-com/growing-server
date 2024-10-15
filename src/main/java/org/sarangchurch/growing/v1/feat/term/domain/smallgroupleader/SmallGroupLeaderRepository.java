@@ -4,4 +4,6 @@ public interface SmallGroupLeaderRepository {
     SmallGroupLeader save(SmallGroupLeader leader);
 
     boolean existsByTermIdAndUserId(Long termId, Long userId);
+
+    void deleteById(Long smallGroupLeaderId);
 }

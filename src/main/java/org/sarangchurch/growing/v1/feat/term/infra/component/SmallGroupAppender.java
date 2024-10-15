@@ -8,6 +8,7 @@ import org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.SmallGroupL
 import org.sarangchurch.growing.v1.feat.term.infra.stream.user.UserDownstream;
 import org.sarangchurch.growing.v1.feat.user.domain.User;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
@@ -16,6 +17,7 @@ public class SmallGroupAppender {
     private final SmallGroupLeaderRepository smallGroupLeaderRepository;
     private final SmallGroupRepository smallGroupRepository;
 
+    @Transactional
     public void append(Long termId, Long codyId, Long userId) {
         User user = userDownstream.findById(userId);
 
