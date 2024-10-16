@@ -7,8 +7,13 @@ import org.sarangchurch.growing.v1.feat.term.query.model.TreeMemberListItem;
 import org.sarangchurch.growing.v1.feat.user.domain.QUser;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
+import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
+import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
+import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.QNewFamilyGroupMember.newFamilyGroupMember;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.QSmallGroupMember.smallGroupMember;
@@ -22,7 +27,7 @@ public class TreeMemberQueryRepository {
     public List<TreeMemberListItem> findBySmallGroup(Long smallGroupId) {
         QUser leaderUser = new QUser("leaderUser");
 
-        // 순장
+        // 일반 순장
         Long smallGroupLeaderId = queryFactory.select(smallGroup.smallGroupLeaderId)
                 .from(smallGroup)
                 .where(smallGroup.id.eq(smallGroupId))
@@ -41,7 +46,7 @@ public class TreeMemberQueryRepository {
                 .join(user).on(user.id.eq(smallGroupLeader.userId), smallGroupLeader.id.eq(smallGroupLeaderId))
                 .fetchOne();
 
-        // 순원
+        // 일반 순원
         List<TreeMemberListItem> smallGroupMemberList = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
                         user.id.as("userId"),
                         user.name.as("name"),
@@ -65,6 +70,83 @@ public class TreeMemberQueryRepository {
     }
 
     public List<TreeMemberListItem> findByCody(Long codyId) {
-        return null;
+        QUser leaderUser = new QUser("leaderUser");
+
+        // 일반 순장
+        List<TreeMemberListItem> result1 = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
+                        user.id.as("userId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade"),
+                        user.phoneNumber.as("phoneNumber"),
+                        user.birth.as("birth"),
+                        user.name.as("smallGroupLeaderName")
+                ))
+                .from(smallGroup)
+                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId), smallGroup.codyId.eq(codyId))
+                .join(user).on(user.id.eq(smallGroupLeader.userId))
+                .fetch();
+
+        // 일반 순원
+        List<TreeMemberListItem> result2 = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
+                        user.id.as("userId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade"),
+                        user.phoneNumber.as("phoneNumber"),
+                        user.birth.as("birth"),
+                        leaderUser.name.as("smallGroupLeaderName")
+                ))
+                .from(smallGroup)
+                .join(smallGroupMember).on(smallGroupMember.smallGroupId.eq(smallGroup.id), smallGroup.codyId.eq(smallGroup.codyId))
+                .join(user).on(user.id.eq(smallGroupMember.userId))
+                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
+                .join(leaderUser).on(leaderUser.id.eq(smallGroupLeader.userId))
+                .fetch();
+
+        // 새가족 순장
+        List<TreeMemberListItem> result3 = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
+                        user.id.as("userId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade"),
+                        user.phoneNumber.as("phoneNumber"),
+                        user.birth.as("birth"),
+                        user.name.as("smallGroupLeaderName")
+                ))
+                .from(newFamilyGroup)
+                .join(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId),
+                        newFamilyGroup.codyId.eq(codyId))
+                .join(user).on(user.id.eq(newFamilyGroupLeader.userId))
+                .fetch();
+
+        // 새가족 순원
+        List<TreeMemberListItem> result4 = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
+                        user.id.as("userId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade"),
+                        user.phoneNumber.as("phoneNumber"),
+                        user.birth.as("birth"),
+                        leaderUser.name.as("smallGroupLeaderName")
+                ))
+                .from(newFamilyGroup)
+                .join(newFamilyGroupMember).on(newFamilyGroupMember.newFamilyGroupId.eq(newFamilyGroup.id),
+                        newFamilyGroup.codyId.eq(codyId))
+                .join(user).on(user.id.eq(newFamilyGroupMember.userId))
+                .join(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
+                .join(leaderUser).on(leaderUser.id.eq(newFamilyGroupLeader.userId))
+                .fetch();
+
+        List<TreeMemberListItem> result = new ArrayList<>();
+
+        result.addAll(result1);
+        result.addAll(result2);
+        result.addAll(result3);
+        result.addAll(result4);
+
+        result.sort(Comparator.comparing(TreeMemberListItem::getSmallGroupLeaderName));
+
+        return result;
     }
 }

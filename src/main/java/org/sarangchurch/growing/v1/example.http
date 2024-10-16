@@ -177,13 +177,13 @@ POST http://localhost:8080/api/v1/terms/1/create-small-group
 Content-Type: application/json
 
 {
-  "codyId": 1,
-  "leaderUserId": 301,
+  "codyId": 3,
+  "leaderUserId": 302,
   "memberUserIds": [2, 4]
 }
 
 ### 라인업. 순모임 수정
-POST http://localhost:8080/api/v1/small-groups/14/update
+POST http://localhost:8080/api/v1/small-groups/18/update
 Content-Type: application/json
 
 {
@@ -191,7 +191,7 @@ Content-Type: application/json
 }
 
 ### 라인업. 순모임 삭제
-POST http://localhost:8080/api/v1/small-groups/14/delete
+POST http://localhost:8080/api/v1/small-groups/18/delete
 
 ### 라인업. 순원 라인업 변경
 POST http://localhost:8080/api/v1/line-up-edit
@@ -201,6 +201,17 @@ Content-Type: application/json
   "smallGroupMemberId": 8,
   "targetSmallGroupId": 15
 }
+
+### 라인업. 코디 추가
+POST http://localhost:8080/api/v1/terms/1/create-cody
+Content-Type: application/json
+
+{
+  "codyUserId": 1
+}
+
+### 라인업. 코디 삭제
+POST http://localhost:8080/api/v1/codies/4/delete
 
 ### 인적 정보. 모든 리더쉽
 GET http://localhost:8080/api/v1/terms/1/all-leaders
@@ -215,4 +226,4 @@ GET http://localhost:8080/api/v1/terms/1/small-group-leaders
 GET http://localhost:8080/api/v1/terms/1/new-family-group-leaders
 
 ### 인적 정보. 순모임 소속 인원
-GET http://localhost:8080/api/v1/terms/1/codies/1/members?smallGroupId=17
+GET http://localhost:8080/api/v1/codies/1/members

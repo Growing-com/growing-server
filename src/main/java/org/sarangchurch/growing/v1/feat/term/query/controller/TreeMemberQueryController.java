@@ -16,20 +16,19 @@ import java.util.List;
 public class TreeMemberQueryController {
     private final TreeMemberQueryRepository treeMemberQueryRepository;
 
-    @GetMapping("/api/v1/terms/{termId}/codies/{codyId}/members")
+    @GetMapping("/api/v1/codies/{codyId}/members")
     public ApiResponse<List<TreeMemberListItem>> findTreeMembers(
-            @PathVariable Long termId,
             @PathVariable Long codyId,
             @RequestParam(required = false) Long smallGroupId
     ) {
-        // 순모임 소속
+        // 순모임별 조회
         if (smallGroupId != null) {
             return ApiResponse.of(treeMemberQueryRepository.findBySmallGroup(smallGroupId));
         }
 
-        // 새가족반 소속?
+        // 새가족반별 조회??
 
-        // 전체
+        // 코디별 조회
         return ApiResponse.of(treeMemberQueryRepository.findByCody(codyId));
     }
 }

@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.term.domain.cody;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
@@ -21,4 +22,10 @@ public class Cody extends BaseEntity {
 
     @Column(name = "user_id", nullable = false)
     private Long userId;
+
+    @Builder
+    public Cody(Long termId, Long userId) {
+        this.termId = termId;
+        this.userId = userId;
+    }
 }

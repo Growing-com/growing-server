@@ -27,7 +27,7 @@ public class SmallGroupAppender {
     public void append(Long termId, Long codyId, Long leaderUserId, List<Long> memberUserIds) {
         User user = userDownstream.findById(leaderUserId);
 
-        // user is active
+        // TODO: user is active
 
         // 순장
         boolean existsSmallGroupLeader = smallGroupLeaderRepository.existsByTermIdAndUserId(termId, leaderUserId);
