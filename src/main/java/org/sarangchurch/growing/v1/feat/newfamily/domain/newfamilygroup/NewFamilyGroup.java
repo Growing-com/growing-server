@@ -19,6 +19,9 @@ public class NewFamilyGroup extends BaseEntity {
     @Column(name = "term_id", nullable = false)
     private Long termId;
 
+    @Column(name = "cody_id", nullable = false)
+    private Long codyId;
+
     @Column(name = "new_family_group_leader_id", nullable = false)
     private Long newFamilyGroupLeaderId;
 }
