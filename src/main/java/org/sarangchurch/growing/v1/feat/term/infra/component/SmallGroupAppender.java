@@ -27,7 +27,9 @@ public class SmallGroupAppender {
     public void append(Long termId, Long codyId, Long leaderUserId, List<Long> memberUserIds) {
         User user = userDownstream.findById(leaderUserId);
 
-        // TODO: user is active
+        if (!user.isActive()) {
+            throw new IllegalStateException("순장이 활성 유저가 아닙니다.");
+        }
 
         // 순장
         boolean existsSmallGroupLeader = smallGroupLeaderRepository.existsByTermIdAndUserId(termId, leaderUserId);
@@ -58,10 +60,15 @@ public class SmallGroupAppender {
         List<User> memberUsers = userDownstream.findByIdIn(memberUserIds);
 
         if (memberUsers.size() != memberUserIds.size()) {
-            throw new IllegalArgumentException("존재하지 않는 유저가 포함되어 있습니다");
+            throw new IllegalArgumentException("존재하지 않는 유저가 포함되어 있습니다.");
         }
 
-        // memberUsers are active
+        boolean isEveryUserActive = memberUsers.stream()
+                .allMatch(User::isActive);
+
+        if (!isEveryUserActive) {
+            throw new IllegalStateException("순원중에 비활성 유저가 포함되어 있습니다.");
+        }
 
         List<SmallGroupMember> smallGroupMembers = memberUserIds.stream()
                 .map(it -> SmallGroupMember.builder()

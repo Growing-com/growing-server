@@ -23,6 +23,7 @@ public class NewFamilyAppender {
                 .birth(request.getBirth())
                 .sex(request.getSex())
                 .grade(request.getGrade())
+                .isActive(true)
                 .build();
 
         User savedUser = userUpstream.register(user);
