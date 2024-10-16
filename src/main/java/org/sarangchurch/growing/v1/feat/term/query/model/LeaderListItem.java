@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 @RequiredArgsConstructor
-public class CodyListItem {
+public class LeaderListItem {
     private final Long userId;
     private final String name;
     private final Sex sex;
