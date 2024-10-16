@@ -15,6 +15,11 @@ import java.util.List;
 public class LeaderQueryController {
     private final LeaderQueryRepository leaderQueryRepository;
 
+    @GetMapping("/api/v1/terms/{termId}/all-leaders")
+    public ApiResponse<List<LeaderListItem>> findAll(@PathVariable Long termId) {
+        return ApiResponse.of(leaderQueryRepository.findAllByTerm(termId));
+    }
+
     @GetMapping("/api/v1/terms/{termId}/codies")
     public ApiResponse<List<LeaderListItem>> findCodiesByTerm(@PathVariable Long termId) {
         return ApiResponse.of(leaderQueryRepository.findCodiesByTerm(termId));

@@ -7,6 +7,8 @@ import org.sarangchurch.growing.v1.feat.term.query.model.LeaderListItem;
 import org.sarangchurch.growing.v1.feat.user.domain.QUser;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
@@ -79,5 +81,20 @@ public class LeaderQueryRepository {
                 .join(codyUser).on(codyUser.id.eq(cody.userId))
                 .orderBy(codyUser.name.asc())
                 .fetch();
+    }
+
+    public List<LeaderListItem> findAllByTerm(Long termId) {
+        List<LeaderListItem> codies = findCodiesByTerm(termId);
+        List<LeaderListItem> smallGroupLeaders = findSmallGroupLeadersByTerm(termId);
+        List<LeaderListItem> newFamilyLeaders = findNewFamilyLeadersByTerm(termId);
+
+        List<LeaderListItem> result = new ArrayList<>();
+
+        result.addAll(codies);
+        result.addAll(smallGroupLeaders);
+        result.addAll(newFamilyLeaders);
+        result.sort(Comparator.comparing(LeaderListItem::getCodyName));
+
+        return result;
     }
 }

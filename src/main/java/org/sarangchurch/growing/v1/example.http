@@ -202,6 +202,9 @@ Content-Type: application/json
   "targetSmallGroupId": 15
 }
 
+### 인적 정보. 모든 리더쉽
+GET http://localhost:8080/api/v1/terms/1/all-leaders
+
 ### 인적 정보. 코디
 GET http://localhost:8080/api/v1/terms/1/codies
 
