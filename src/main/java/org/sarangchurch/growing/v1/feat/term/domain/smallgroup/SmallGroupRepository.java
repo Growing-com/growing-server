@@ -13,4 +13,6 @@ public interface SmallGroupRepository {
     Optional<SmallGroup> findById(Long id);
 
     void deleteById(Long id);
+
+    long countByCodyId(Long codyId);
 }

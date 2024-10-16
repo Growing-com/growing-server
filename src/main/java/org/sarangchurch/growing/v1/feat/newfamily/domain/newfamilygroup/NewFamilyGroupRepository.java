@@ -4,4 +4,6 @@ import java.util.Optional;
 
 public interface NewFamilyGroupRepository {
     Optional<NewFamilyGroup> findById(Long id);
+
+    long countByCodyId(Long codyId);
 }
