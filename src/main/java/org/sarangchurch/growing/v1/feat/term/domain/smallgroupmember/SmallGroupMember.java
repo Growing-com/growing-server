@@ -9,7 +9,7 @@ import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
 
 import javax.persistence.*;
 
-// TODO: UNIQUE(smallGroupId, userId)
+// TODO: DB UNIQUE(smallGroupId, userId)
 @Entity
 @Table(name = "small_group_member")
 @Getter
@@ -28,7 +28,7 @@ public class SmallGroupMember extends BaseEntity {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    // TODO: ADD isTransferred
+    // TODO: ADD isTransferred??
 
     @Builder
     public SmallGroupMember(Long termId, Long smallGroupId, Long userId) {

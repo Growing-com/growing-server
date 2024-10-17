@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "small_group")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-// TODO: UNIQUE(codyId, smallGroupLeaderId)
+// TODO: DB UNIQUE(codyId, smallGroupLeaderId)
 public class SmallGroup extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

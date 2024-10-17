@@ -194,11 +194,10 @@ Content-Type: application/json
 POST http://localhost:8080/api/v1/small-groups/18/delete
 
 ### 라인업. 순원 라인업 변경
-POST http://localhost:8080/api/v1/line-up-edit
+POST http://localhost:8080/api/v1/small-group-members/8/line-up-edit
 Content-Type: application/json
 
 {
-  "smallGroupMemberId": 8,
   "targetSmallGroupId": 15
 }
 

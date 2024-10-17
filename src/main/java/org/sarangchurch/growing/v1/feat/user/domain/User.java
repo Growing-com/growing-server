@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 
-// TODO: V2에서는 User-Account 분리시킨다.
 @Entity
 @Table(name = "user")
 @Getter
