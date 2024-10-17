@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.user.application;
+package org.sarangchurch.growing.v1.feat.user.application.serviceimpl;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.Sex;

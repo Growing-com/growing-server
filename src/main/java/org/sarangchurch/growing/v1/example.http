@@ -226,3 +226,20 @@ GET http://localhost:8080/api/v1/terms/1/new-family-group-leaders
 
 ### 인적 정보. 순모임 소속 인원
 GET http://localhost:8080/api/v1/codies/1/members
+
+### 유출. 파송
+POST http://localhost:8080/api/v1/users/dispatch
+Content-Type: application/json
+
+{
+  "content": [
+    {
+      "userId": 1,
+      "type": "ABROAD",
+      "sendDate": "2024-09-01"
+    }
+  ]
+}
+
+### 유출. 파송 복귀
+POST http://localhost:8080/api/v1/dispatched-users/2/return

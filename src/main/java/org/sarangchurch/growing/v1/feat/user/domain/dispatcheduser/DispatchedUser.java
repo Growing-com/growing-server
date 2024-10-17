@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.user.domain.dispatcheduser;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
@@ -29,4 +30,12 @@ public class DispatchedUser extends BaseEntity {
 
     @Column(name = "returnDate")
     private LocalDate returnDate;
+
+    @Builder
+    public DispatchedUser(Long userId, DispatchType type, LocalDate sendDate, LocalDate returnDate) {
+        this.userId = userId;
+        this.type = type;
+        this.sendDate = sendDate;
+        this.returnDate = returnDate;
+    }
 }
