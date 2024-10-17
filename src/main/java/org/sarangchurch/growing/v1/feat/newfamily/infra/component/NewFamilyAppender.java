@@ -5,7 +5,7 @@ import org.sarangchurch.growing.v1.feat.newfamily.application.register.RegisterR
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyRepository;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.user.UserUpstream;
-import org.sarangchurch.growing.v1.feat.user.domain.User;
+import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

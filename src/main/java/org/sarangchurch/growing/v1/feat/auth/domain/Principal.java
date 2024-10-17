@@ -1,6 +1,6 @@
 package org.sarangchurch.growing.v1.feat.auth.domain;
 
-import org.sarangchurch.growing.v1.feat.user.domain.Account;
+import org.sarangchurch.growing.v1.feat.user.domain.account.Account;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.List;

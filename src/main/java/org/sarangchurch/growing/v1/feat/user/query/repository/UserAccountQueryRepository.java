@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.user.query.model.UserAccount;
 import org.springframework.stereotype.Repository;
 
-import static org.sarangchurch.growing.v1.feat.user.domain.QAccount.account;
-import static org.sarangchurch.growing.v1.feat.user.domain.QUser.user;
+import static org.sarangchurch.growing.v1.feat.user.domain.account.QAccount.account;
+import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
 @Repository
 @RequiredArgsConstructor

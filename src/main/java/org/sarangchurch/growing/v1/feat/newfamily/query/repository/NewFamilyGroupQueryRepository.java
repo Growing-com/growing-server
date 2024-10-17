@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
-import static org.sarangchurch.growing.v1.feat.user.domain.QUser.user;
+import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
 @Repository
 @RequiredArgsConstructor

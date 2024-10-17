@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.user.domain;
+package org.sarangchurch.growing.v1.feat.user.domain.user;
 
 import lombok.AccessLevel;
 import lombok.Builder;

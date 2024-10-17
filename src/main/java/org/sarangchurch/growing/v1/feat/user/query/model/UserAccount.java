@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.user.query.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.user.domain.AccountRole;
+import org.sarangchurch.growing.v1.feat.user.domain.account.AccountRole;
 
 @Getter
 @RequiredArgsConstructor

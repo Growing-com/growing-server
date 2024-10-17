@@ -1,8 +1,8 @@
 package org.sarangchurch.growing.v1.feat.user.infrastructure.component;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.user.domain.User;
-import org.sarangchurch.growing.v1.feat.user.domain.UserRepository;
+import org.sarangchurch.growing.v1.feat.user.domain.user.User;
+import org.sarangchurch.growing.v1.feat.user.domain.user.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
