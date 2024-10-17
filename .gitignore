@@ -38,6 +38,5 @@ out/
 
 ## ADDED
 src/main/resources/application.yml
-deploy.sh
 src/main/resources/logback.xml
 *.dump.sql
