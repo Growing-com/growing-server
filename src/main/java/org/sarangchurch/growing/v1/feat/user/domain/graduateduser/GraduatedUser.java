@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.user.domain.graduateduser;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
@@ -22,4 +23,10 @@ public class GraduatedUser extends BaseEntity {
 
     @Column(name = "graduate_date", nullable = false)
     private LocalDate graduateDate;
+
+    @Builder
+    public GraduatedUser(Long userId, LocalDate graduateDate) {
+        this.userId = userId;
+        this.graduateDate = graduateDate;
+    }
 }

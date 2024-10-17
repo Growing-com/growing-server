@@ -66,4 +66,8 @@ public class User extends BaseEntity {
         sex = editor.getSex();
         grade = editor.getGrade();
     }
+
+    public void toInActive() {
+        isActive = false;
+    }
 }
