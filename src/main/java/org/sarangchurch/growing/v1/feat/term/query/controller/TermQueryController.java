@@ -20,7 +20,7 @@ public class TermQueryController {
     }
 
     @GetMapping("/api/v1/terms/active-term")
-    public ApiResponse<TermListItem> findActive() {
-        return ApiResponse.of(termQueryRepository.findActive());
+    public ApiResponse<List<TermListItem>> findActive() {
+        return ApiResponse.of(List.of(termQueryRepository.findActive()));
     }
 }

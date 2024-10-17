@@ -37,15 +37,17 @@ public class User extends BaseEntity {
     @Column(name = "grade", nullable = false)
     private Integer grade;
 
-    // TODO: add isActive
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive;
 
     @Builder
-    public User(String name, String phoneNumber, LocalDate birth, Sex sex, Integer grade) {
+    public User(String name, String phoneNumber, LocalDate birth, Sex sex, Integer grade, boolean isActive) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.birth = birth;
         this.sex = sex;
         this.grade = grade;
+        this.isActive = isActive;
     }
 
     public UserEditor toEditor() {

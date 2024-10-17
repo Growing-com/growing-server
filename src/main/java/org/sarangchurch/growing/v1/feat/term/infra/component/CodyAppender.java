@@ -33,7 +33,9 @@ public class CodyAppender {
 
         User user = userDownstream.findById(codyUserId);
 
-        // TODO: user is active
+        if (!user.isActive()) {
+            throw new IllegalStateException("활성 유저가 아닙니다.");
+        }
 
         codyRepository.save(Cody.builder()
                 .termId(termId)
