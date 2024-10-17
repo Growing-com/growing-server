@@ -6,7 +6,7 @@ import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroupReposit
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.SmallGroupMember;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.SmallGroupMemberRepository;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.user.UserDownstream;
-import org.sarangchurch.growing.v1.feat.user.domain.User;
+import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

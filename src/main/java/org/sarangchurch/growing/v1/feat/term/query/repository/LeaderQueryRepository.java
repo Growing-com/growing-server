@@ -4,7 +4,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.query.model.LeaderListItem;
-import org.sarangchurch.growing.v1.feat.user.domain.QUser;
+import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygrouple
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
-import static org.sarangchurch.growing.v1.feat.user.domain.QUser.user;
+import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
 @Repository
 @RequiredArgsConstructor

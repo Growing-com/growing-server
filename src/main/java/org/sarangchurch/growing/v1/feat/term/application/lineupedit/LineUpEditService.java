@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class LineUpEditService {
     private final LineUpEditor lineUpEditor;
 
-    public void edit(LineUpEditRequest request) {
-        lineUpEditor.edit(request.getSmallGroupMemberId(), request.getTargetSmallGroupId());
+    public void edit(Long smallGroupMemberId, LineUpEditRequest request) {
+        lineUpEditor.edit(smallGroupMemberId, request.getTargetSmallGroupId());
     }
 }
