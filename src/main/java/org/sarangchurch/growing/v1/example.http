@@ -168,13 +168,13 @@ POST http://localhost:8080/api/v1/terms/1/create-small-group
 Content-Type: application/json
 
 {
-  "codyId": 3,
-  "leaderUserId": 302,
-  "memberUserIds": [2, 4]
+  "codyId": 1,
+  "leaderUserId": 301,
+  "memberUserIds": [301]
 }
 
 ### 라인업. 순모임 수정
-POST http://localhost:8080/api/v1/small-groups/18/update
+POST http://localhost:8080/api/v1/small-groups/44/update
 Content-Type: application/json
 
 {
@@ -182,14 +182,14 @@ Content-Type: application/json
 }
 
 ### 라인업. 순모임 삭제
-POST http://localhost:8080/api/v1/small-groups/18/delete
+POST http://localhost:8080/api/v1/small-groups/44/delete
 
 ### 라인업. 순원 라인업 변경
-POST http://localhost:8080/api/v1/small-group-members/8/line-up-edit
+POST http://localhost:8080/api/v1/small-group-members/2/line-up-edit
 Content-Type: application/json
 
 {
-  "targetSmallGroupId": 15
+  "targetSmallGroupId": 58
 }
 
 ### 라인업. 코디 추가
@@ -197,11 +197,11 @@ POST http://localhost:8080/api/v1/terms/1/create-cody
 Content-Type: application/json
 
 {
-  "codyUserId": 1
+  "codyUserId": 365
 }
 
 ### 라인업. 코디 삭제
-POST http://localhost:8080/api/v1/codies/4/delete
+POST http://localhost:8080/api/v1/codies/11/delete
 
 ### 인적 정보. 모든 리더쉽
 GET http://localhost:8080/api/v1/terms/1/all-leaders

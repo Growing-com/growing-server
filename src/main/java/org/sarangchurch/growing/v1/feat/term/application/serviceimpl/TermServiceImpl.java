@@ -3,7 +3,7 @@ package org.sarangchurch.growing.v1.feat.term.application.serviceimpl;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.v1.term.TermService;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
-import org.sarangchurch.growing.v1.feat.term.infra.component.TermFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.TermFinder;
 import org.springframework.stereotype.Service;
 
 @Service
