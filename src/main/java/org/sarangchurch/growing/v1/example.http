@@ -215,15 +215,6 @@ POST http://localhost:8080/api/v1/codies/4/delete
 ### 인적 정보. 모든 리더쉽
 GET http://localhost:8080/api/v1/terms/1/all-leaders
 
-### 인적 정보. 코디
-GET http://localhost:8080/api/v1/terms/1/codies
-
-### 인적 정보. 일반 순모임 순장
-GET http://localhost:8080/api/v1/terms/1/small-group-leaders
-
-### 인적 정보. 새가족 순장
-GET http://localhost:8080/api/v1/terms/1/new-family-group-leaders
-
 ### 인적 정보. 순모임 소속 인원
 GET http://localhost:8080/api/v1/codies/1/members
 
