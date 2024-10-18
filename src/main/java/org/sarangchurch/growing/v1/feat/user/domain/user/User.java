@@ -70,4 +70,8 @@ public class User extends BaseEntity {
     public void toInActive() {
         isActive = false;
     }
+
+    public void toActive() {
+        isActive = true;
+    }
 }
