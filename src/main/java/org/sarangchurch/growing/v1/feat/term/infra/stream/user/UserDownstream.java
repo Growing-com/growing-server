@@ -19,4 +19,14 @@ public class UserDownstream {
     public List<User> findByIdIn(List<Long> ids) {
         return userService.findByIdIn(ids);
     }
+
+    public User findActiveByIdOrThrow(Long id) {
+        User user = userService.findById(id);
+
+        if (!user.isActive()) {
+            throw new IllegalStateException("순장이 활성 유저가 아닙니다.");
+        }
+
+        return user;
+    }
 }
