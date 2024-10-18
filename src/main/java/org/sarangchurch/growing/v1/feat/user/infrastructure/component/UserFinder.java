@@ -20,4 +20,8 @@ public class UserFinder {
     public List<User> findByIdIn(List<Long> ids) {
         return userRepository.findByIdIn(ids);
     }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 }

@@ -9,4 +9,6 @@ public interface UserRepository {
     Optional<User> findById(Long id);
 
     List<User> findByIdIn(List<Long> ids);
+
+    List<User> findAll();
 }
