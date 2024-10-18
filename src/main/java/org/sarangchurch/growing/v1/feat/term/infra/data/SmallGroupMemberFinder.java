@@ -18,4 +18,8 @@ public class SmallGroupMemberFinder {
         return smallGroupMemberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 순원입니다."));
     }
+
+    public boolean existsByUserIdAndTermId(Long userId, Long termId) {
+        return smallGroupMemberRepository.existsByUserIdAndTermId(userId, termId);
+    }
 }

@@ -168,9 +168,9 @@ POST http://localhost:8080/api/v1/terms/1/create-small-group
 Content-Type: application/json
 
 {
-  "codyId": 1,
+  "codyId": 14,
   "leaderUserId": 301,
-  "memberUserIds": [301]
+  "memberUserIds": [302]
 }
 
 ### 라인업. 순모임 수정
@@ -197,7 +197,7 @@ POST http://localhost:8080/api/v1/terms/1/create-cody
 Content-Type: application/json
 
 {
-  "codyUserId": 365
+  "codyUserId": 374
 }
 
 ### 라인업. 코디 삭제

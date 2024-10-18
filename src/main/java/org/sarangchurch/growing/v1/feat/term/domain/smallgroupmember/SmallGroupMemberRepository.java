@@ -8,6 +8,8 @@ public interface SmallGroupMemberRepository {
 
     long countBySmallGroupId(Long smallGroupId);
 
+    boolean existsByUserIdAndTermId(Long userId, Long termId);
+
     Optional<SmallGroupMember> findById(Long id);
 
     SmallGroupMember save(SmallGroupMember smallGroupMember);

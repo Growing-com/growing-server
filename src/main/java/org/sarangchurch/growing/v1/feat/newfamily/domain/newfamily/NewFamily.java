@@ -32,10 +32,6 @@ public class NewFamily extends BaseEntity {
     @Column(name = "new_family_promote_log_id")
     private Long newFamilyPromoteLogId;
 
-    // 새가족반이 아닌 일반 순모임에 배정된 특이 케이스(삭제 예정)
-    @Column(name = "small_group_id")
-    private Long smallGroupId;
-
     @Column(name = "visit_date", nullable = false)
     private LocalDate visitDate;
 
@@ -59,22 +55,6 @@ public class NewFamily extends BaseEntity {
         this.etc = etc;
     }
 
-    public void assignSmallGroup(Long smallGroupId) {
-        if (this.newFamilyPromoteLogId != null) {
-            throw new IllegalStateException("이미 등반했습니다.");
-        }
-
-        if (this.newFamilyGroupId != null) {
-            throw new IllegalStateException("이미 새가족반에 배정되었습니다.");
-        }
-
-        if (this.smallGroupId != null) {
-            throw new IllegalStateException("이미 순모임에 배정되었습니다.");
-        }
-
-        this.smallGroupId = smallGroupId;
-    }
-
     public NewFamily setUserId(Long userId) {
         this.userId = userId;
 
@@ -95,5 +75,9 @@ public class NewFamily extends BaseEntity {
         }
 
         newFamilyPromoteLogId = log.getId();
+    }
+
+    public boolean hasPromoteLog() {
+        return newFamilyPromoteLogId != null;
     }
 }
