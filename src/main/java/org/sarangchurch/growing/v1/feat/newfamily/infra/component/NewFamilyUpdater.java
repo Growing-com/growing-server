@@ -23,9 +23,9 @@ public class NewFamilyUpdater {
                 .orElseThrow(() -> new IllegalArgumentException("새가족을 찾을 수 없습니다"));
 
         Long requestNewFamilyGroupId = request.getNewFamilyGroupId();
-        boolean isChanged = !Objects.equals(newFamily.getNewFamilyGroupId(), requestNewFamilyGroupId);
+        boolean isNewFamilyGroupIdChanged = !Objects.equals(newFamily.getNewFamilyGroupId(), requestNewFamilyGroupId);
 
-        if (isChanged) {
+        if (isNewFamilyGroupIdChanged) {
             if (requestNewFamilyGroupId != null) {
                 newFamilyGroupValidator.validateAvailable(requestNewFamilyGroupId);
             }

@@ -3,6 +3,7 @@ package org.sarangchurch.growing.v1.feat.term.query.model;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.Sex;
+import org.sarangchurch.growing.v1.feat.term.domain.Duty;
 
 import java.time.LocalDate;
 
@@ -16,4 +17,10 @@ public class LeaderListItem {
     private final String phoneNumber;
     private final LocalDate birth;
     private final String codyName;
+
+    private Duty duty;
+
+    public void setDuty(Duty duty) {
+        this.duty = duty;
+    }
 }

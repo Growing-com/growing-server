@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.user.application;
+package org.sarangchurch.growing.v1.feat.user.application.serviceimpl;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.Sex;
@@ -38,5 +38,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findByIdIn(List<Long> ids) {
         return userFinder.findByIdIn(ids);
+    }
+
+    @Override
+    public void activateByIdIn(List<Long> ids) {
+        List<User> users = userFinder.findByIdIn(ids);
+
+        userUpdater.activate(users);
+    }
+
+    @Override
+    public void deActivateByIdIn(List<Long> ids) {
+        List<User> users = userFinder.findByIdIn(ids);
+
+        userUpdater.deactivate(users);
     }
 }

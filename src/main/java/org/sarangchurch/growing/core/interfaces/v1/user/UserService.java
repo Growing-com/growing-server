@@ -14,4 +14,8 @@ public interface UserService {
     User findById(Long userId);
 
     List<User> findByIdIn(List<Long> ids);
+
+    void activateByIdIn(List<Long> ids);
+
+    void deActivateByIdIn(List<Long> ids);
 }

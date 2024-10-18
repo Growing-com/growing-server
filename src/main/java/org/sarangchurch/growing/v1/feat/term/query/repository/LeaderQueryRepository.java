@@ -3,6 +3,7 @@ package org.sarangchurch.growing.v1.feat.term.query.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v1.feat.term.domain.Duty;
 import org.sarangchurch.growing.v1.feat.term.query.model.LeaderListItem;
 import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
 import org.springframework.stereotype.Repository;
@@ -84,10 +85,22 @@ public class LeaderQueryRepository {
     }
 
     public List<LeaderListItem> findAllByTerm(Long termId) {
+        // 코디
         List<LeaderListItem> codies = findCodiesByTerm(termId);
+
+        codies.forEach(it -> it.setDuty(Duty.CODY));
+
+        // 일반 순장
         List<LeaderListItem> smallGroupLeaders = findSmallGroupLeadersByTerm(termId);
+
+        smallGroupLeaders.forEach(it -> it.setDuty(Duty.SMALL_GROUP_LEADER));
+
+        // 새가족 순장
         List<LeaderListItem> newFamilyLeaders = findNewFamilyLeadersByTerm(termId);
 
+        newFamilyLeaders.forEach(it -> it.setDuty(Duty.NEW_FAMILY_GROUP_LEADER));
+
+        // 취합 및 정렬
         List<LeaderListItem> result = new ArrayList<>();
 
         result.addAll(codies);

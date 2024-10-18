@@ -19,19 +19,4 @@ public class LeaderQueryController {
     public ApiResponse<List<LeaderListItem>> findAll(@PathVariable Long termId) {
         return ApiResponse.of(leaderQueryRepository.findAllByTerm(termId));
     }
-
-    @GetMapping("/api/v1/terms/{termId}/codies")
-    public ApiResponse<List<LeaderListItem>> findCodiesByTerm(@PathVariable Long termId) {
-        return ApiResponse.of(leaderQueryRepository.findCodiesByTerm(termId));
-    }
-
-    @GetMapping("/api/v1/terms/{termId}/new-family-group-leaders")
-    public ApiResponse<List<LeaderListItem>> findNewFamilyGroupLeaderByTerm(@PathVariable Long termId) {
-        return ApiResponse.of(leaderQueryRepository.findNewFamilyLeadersByTerm(termId));
-    }
-
-    @GetMapping("/api/v1/terms/{termId}/small-group-leaders")
-    public ApiResponse<List<LeaderListItem>> findSmallGroupLeadersByTerm(@PathVariable Long termId) {
-        return ApiResponse.of(leaderQueryRepository.findNewFamilyLeadersByTerm(termId));
-    }
 }

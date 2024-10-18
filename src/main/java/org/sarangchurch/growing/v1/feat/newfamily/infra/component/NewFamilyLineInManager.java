@@ -15,11 +15,15 @@ public class NewFamilyLineInManager {
     private final LineOutNewFamilyRepository lineoutNewFamilyRepository;
 
     @Transactional
-    public void lineIn(Long lineOutNewFamilyId) {
+    public NewFamily lineIn(Long lineOutNewFamilyId) {
         LineOutNewFamily lineoutNewFamily = lineoutNewFamilyRepository.findById(lineOutNewFamilyId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 이탈자입니다."));
 
-        newFamilyRepository.save(NewFamily.from(lineoutNewFamily));
+        NewFamily newFamily = NewFamily.from(lineoutNewFamily);
+
+        newFamilyRepository.save(newFamily);
         lineoutNewFamilyRepository.deleteById(lineOutNewFamilyId);
+
+        return newFamily;
     }
 }

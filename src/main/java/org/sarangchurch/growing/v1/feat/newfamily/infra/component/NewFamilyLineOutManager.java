@@ -23,7 +23,7 @@ public class NewFamilyLineOutManager {
     private final LineOutNewFamilyRepository lineoutNewFamilyRepository;
 
     @Transactional
-    public void lineOut(LineOutRequest request) {
+    public List<LineOutNewFamily> lineOut(LineOutRequest request) {
         // 새가족 검증
         List<Long> newFamilyIds = request.getNewFamilyIds();
 
@@ -53,5 +53,7 @@ public class NewFamilyLineOutManager {
 
         // 등반 기록 삭제
          promoteLogRepository.deleteByIdIn(promoteLogIds);
+
+         return lineOutNewFamilies;
     }
 }

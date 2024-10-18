@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -29,5 +30,15 @@ public class UserUpdater {
         userEditor.setGrade(grade);
 
         user.edit(userEditor);
+    }
+
+    @Transactional
+    public void activate(List<User> users) {
+        users.forEach(User::toActive);
+    }
+
+    @Transactional
+    public void deactivate(List<User> users) {
+        users.forEach(User::toInActive);
     }
 }
