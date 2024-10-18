@@ -261,6 +261,14 @@ POST http://localhost:8080/api/v1/line-out-users/2/line-in
 ### 유출. 라인아웃 유저 조회
 GET http://localhost:8080/api/v1/line-out-users
 
+### 기타. 학년 전체 변경
+POST http://localhost:8080/api/v1/user-grade-update
+Content-Type: application/json
+
+{
+  "option": "DOWN"
+}
+
 ### 권한 1. 로그인
 POST http://localhost:8080/api/v1/auth/login
 Content-Type: application/json
