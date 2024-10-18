@@ -14,11 +14,15 @@ public class CodyRemover {
     private final CodyRepository codyRepository;
     private final SmallGroupRepository smallGroupRepository;
     private final NewFamilyGroupDownstream newFamilyGroupDownstream;
+    private final TermFinder termFinder;
 
     @Transactional
     public void remove(Long codyId) {
         Cody cody = codyRepository.findById(codyId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 코디입니다."));
+
+        // 활성 텀 검증
+        termFinder.findActiveByIdOrThrow(cody.getTermId());
 
         long smallGroupCount = smallGroupRepository.countByCodyId(cody.getId());
 

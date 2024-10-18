@@ -18,14 +18,9 @@ public class CodyAppender {
 
     @Transactional
     public void append(Long termId, Long codyUserId) {
-        Term term = termFinder.findById(termId);
+        Term term = termFinder.findActiveByIdOrThrow(termId);
 
-        // TODO: add active term validation elsewhere
-        if (!term.isActive()) {
-            throw new IllegalStateException("텀이 활성화되어야 코디를 추가할 수 있습니다.");
-        }
-
-        boolean alreadyExists = codyRepository.existsByUserIdAndTermId(codyUserId, termId);
+        boolean alreadyExists = codyRepository.existsByUserIdAndTermId(codyUserId, term.getId());
 
         if (alreadyExists) {
             throw new IllegalArgumentException("이미 존재하는 코디입니다.");
@@ -38,7 +33,7 @@ public class CodyAppender {
         }
 
         codyRepository.save(Cody.builder()
-                .termId(termId)
+                .termId(term.getId())
                 .userId(codyUserId)
                 .build());
     }
