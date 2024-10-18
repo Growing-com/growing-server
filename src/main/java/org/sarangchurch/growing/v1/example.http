@@ -226,6 +226,9 @@ Content-Type: application/json
 ### 유출. 파송 복귀
 POST http://localhost:8080/api/v1/dispatched-users/3/return
 
+### 유출. 파송자 조회
+GET http://localhost:8080/api/v1/dispatched-users
+
 ### 유출. 졸업
 POST http://localhost:8080/api/v1/users/graduate
 Content-Type: application/json
@@ -234,6 +237,9 @@ Content-Type: application/json
   "userIds": [1, 2, 3],
   "graduateDate": "2024-03-01"
 }
+
+### 유출. 졸업자 목록 조회
+GET http://localhost:8080/api/v1/graduated-users
 
 ### 유출. 라인아웃
 POST http://localhost:8080/api/v1/users/line-out
@@ -251,6 +257,9 @@ Content-Type: application/json
 
 ### 유출. 라인인
 POST http://localhost:8080/api/v1/line-out-users/2/line-in
+
+### 유출. 라인아웃 유저 조회
+GET http://localhost:8080/api/v1/line-out-users
 
 ### 권한 1. 로그인
 POST http://localhost:8080/api/v1/auth/login

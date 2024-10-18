@@ -26,8 +26,6 @@ public class TreeMemberQueryController {
             return ApiResponse.of(treeMemberQueryRepository.findBySmallGroup(smallGroupId));
         }
 
-        // 새가족반별 조회??
-
         // 코디별 조회
         return ApiResponse.of(treeMemberQueryRepository.findByCody(codyId));
     }
