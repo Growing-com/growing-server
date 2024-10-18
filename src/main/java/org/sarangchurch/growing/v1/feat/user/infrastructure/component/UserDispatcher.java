@@ -29,13 +29,6 @@ public class UserDispatcher {
             throw new IllegalArgumentException("존재하지 않는 유저가 포함되어 있습니다.");
         }
 
-        boolean includesInActive = users.stream()
-                .anyMatch(it -> !it.isActive());
-
-        if (includesInActive) {
-            throw new IllegalStateException("비활성 유저가 포함되어 있습니다.");
-        }
-
         boolean includesDispatched = dispatchedUserRepository.existsByUserIdIn(userIds);
 
         if (includesDispatched) {

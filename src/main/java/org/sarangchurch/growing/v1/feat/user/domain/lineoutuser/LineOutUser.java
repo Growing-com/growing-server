@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.user.domain.lineoutuser;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
@@ -25,4 +26,11 @@ public class LineOutUser extends BaseEntity {
 
     @Column(name = "reason")
     private String reason;
+
+    @Builder
+    public LineOutUser(Long userId, LocalDate lineOutDate, String reason) {
+        this.userId = userId;
+        this.lineOutDate = lineOutDate;
+        this.reason = reason;
+    }
 }

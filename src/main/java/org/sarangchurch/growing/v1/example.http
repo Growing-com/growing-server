@@ -1,12 +1,3 @@
-### 권한 1. 로그인
-POST http://localhost:8080/api/v1/auth/login
-Content-Type: application/json
-
-{
-  "username": "foo",
-  "password": "foo"
-}
-
 ### 권한 2. 로그아웃
 POST http://localhost:8080/api/v1/auth/logout
 
@@ -233,7 +224,7 @@ Content-Type: application/json
 }
 
 ### 유출. 파송 복귀
-POST http://localhost:8080/api/v1/dispatched-users/2/return
+POST http://localhost:8080/api/v1/dispatched-users/3/return
 
 ### 유출. 졸업
 POST http://localhost:8080/api/v1/users/graduate
@@ -243,3 +234,30 @@ Content-Type: application/json
   "userIds": [1, 2, 3],
   "graduateDate": "2024-03-01"
 }
+
+### 유출. 라인아웃
+POST http://localhost:8080/api/v1/users/line-out
+Content-Type: application/json
+
+{
+  "content": [
+    {
+      "userId": 4,
+      "lineOutDate": "2024-09-01",
+      "reason": "잠수"
+    }
+  ]
+}
+
+### 유출. 라인인
+POST http://localhost:8080/api/v1/line-out-users/2/line-in
+
+### 권한 1. 로그인
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "foo",
+  "password": "foo"
+}
+
