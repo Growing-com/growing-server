@@ -40,7 +40,7 @@ public class TreeMemberQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
-                        user.name.as("smallGroupLeaderName")
+                        user.name.as("leaderName")
                 ))
                 .from(smallGroupLeader)
                 .join(user).on(user.id.eq(smallGroupLeader.userId), smallGroupLeader.id.eq(smallGroupLeaderId))
@@ -54,7 +54,7 @@ public class TreeMemberQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
-                        leaderUser.name.as("smallGroupLeaderName")
+                        leaderUser.name.as("leaderName")
                 ))
                 .from(smallGroup)
                 .join(smallGroupMember).on(smallGroupMember.smallGroupId.eq(smallGroup.id), smallGroup.id.eq(smallGroupId))
@@ -80,7 +80,7 @@ public class TreeMemberQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
-                        user.name.as("smallGroupLeaderName")
+                        user.name.as("leaderName")
                 ))
                 .from(smallGroup)
                 .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId), smallGroup.codyId.eq(codyId))
@@ -95,7 +95,7 @@ public class TreeMemberQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
-                        leaderUser.name.as("smallGroupLeaderName")
+                        leaderUser.name.as("leaderName")
                 ))
                 .from(smallGroup)
                 .join(smallGroupMember).on(smallGroupMember.smallGroupId.eq(smallGroup.id), smallGroup.codyId.eq(smallGroup.codyId))
@@ -112,7 +112,7 @@ public class TreeMemberQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
-                        user.name.as("smallGroupLeaderName")
+                        user.name.as("leaderName")
                 ))
                 .from(newFamilyGroup)
                 .join(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId),
@@ -128,7 +128,7 @@ public class TreeMemberQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
-                        leaderUser.name.as("smallGroupLeaderName")
+                        leaderUser.name.as("leaderName")
                 ))
                 .from(newFamilyGroup)
                 .join(newFamilyGroupMember).on(newFamilyGroupMember.newFamilyGroupId.eq(newFamilyGroup.id),
@@ -145,7 +145,7 @@ public class TreeMemberQueryRepository {
         result.addAll(result3);
         result.addAll(result4);
 
-        result.sort(Comparator.comparing(TreeMemberListItem::getSmallGroupLeaderName));
+        result.sort(Comparator.comparing(TreeMemberListItem::getLeaderName));
 
         return result;
     }

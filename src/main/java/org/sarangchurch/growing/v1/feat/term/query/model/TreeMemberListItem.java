@@ -15,5 +15,5 @@ public class TreeMemberListItem {
     private final Integer grade;
     private final String phoneNumber;
     private final LocalDate birth;
-    private final String smallGroupLeaderName;
+    private final String leaderName;
 }
