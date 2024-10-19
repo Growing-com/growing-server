@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.application.temporarylineup.TemporaryLineUpRequest;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLog;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyPromoteLogFinder;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.term.SmallGroupDownstream;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

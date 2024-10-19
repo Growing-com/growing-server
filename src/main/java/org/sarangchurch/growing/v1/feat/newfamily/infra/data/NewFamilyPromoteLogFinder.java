@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
+package org.sarangchurch.growing.v1.feat.newfamily.infra.data;
 
 import com.mysema.commons.lang.Pair;
 import lombok.RequiredArgsConstructor;
