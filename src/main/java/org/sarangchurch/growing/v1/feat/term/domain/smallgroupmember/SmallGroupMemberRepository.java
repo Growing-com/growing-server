@@ -8,6 +8,8 @@ public interface SmallGroupMemberRepository {
 
     long countBySmallGroupId(Long smallGroupId);
 
+    boolean existsByUserIdAndTermId(Long userId, Long termId);
+
     Optional<SmallGroupMember> findById(Long id);
 
     SmallGroupMember save(SmallGroupMember smallGroupMember);
@@ -15,4 +17,6 @@ public interface SmallGroupMemberRepository {
     <S extends SmallGroupMember> List<S> saveAll(Iterable<S> entities);
 
     void deleteBySmallGroupId(Long smallGroupId);
+
+    boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId);
 }

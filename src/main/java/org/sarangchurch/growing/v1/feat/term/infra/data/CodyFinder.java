@@ -5,6 +5,8 @@ import org.sarangchurch.growing.v1.feat.term.domain.cody.Cody;
 import org.sarangchurch.growing.v1.feat.term.domain.cody.CodyRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class CodyFinder {
@@ -17,5 +19,9 @@ public class CodyFinder {
     public Cody findByIdOrThrow(Long id) {
         return codyRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 코디입니다"));
+    }
+
+    public boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId) {
+        return codyRepository.existsByUserIdInAndTermId(userIds, termId);
     }
 }

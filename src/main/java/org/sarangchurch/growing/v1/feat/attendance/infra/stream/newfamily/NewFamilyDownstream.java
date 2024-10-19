@@ -14,4 +14,12 @@ public class NewFamilyDownstream {
     public boolean existsByIds(List<Long> ids) {
         return newFamilyService.existsByIds(ids);
     }
+
+    public boolean containsNewFamilyByUserIds(List<Long> userIds) {
+        return newFamilyService.containsNewFamilyByUserIds(userIds);
+    }
+
+    public boolean isNewFamilyByUserId(Long userId) {
+        return newFamilyService.isNewFamilyByUserId(userId);
+    }
 }

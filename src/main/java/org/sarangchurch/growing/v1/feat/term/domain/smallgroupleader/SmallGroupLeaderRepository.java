@@ -1,9 +1,13 @@
 package org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader;
 
-public interface SmallGroupLeaderRepository {
-    SmallGroupLeader save(SmallGroupLeader leader);
+import java.util.List;
 
+public interface SmallGroupLeaderRepository {
     boolean existsByUserIdAndTermId(Long userId, Long termId);
+
+    boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId);
+
+    SmallGroupLeader save(SmallGroupLeader leader);
 
     void deleteById(Long smallGroupLeaderId);
 }
