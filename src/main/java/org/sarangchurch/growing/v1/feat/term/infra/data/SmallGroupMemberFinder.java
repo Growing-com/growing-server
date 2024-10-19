@@ -5,6 +5,8 @@ import org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.SmallGroupM
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.SmallGroupMemberRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class SmallGroupMemberFinder {
@@ -21,5 +23,9 @@ public class SmallGroupMemberFinder {
 
     public boolean existsByUserIdAndTermId(Long userId, Long termId) {
         return smallGroupMemberRepository.existsByUserIdAndTermId(userId, termId);
+    }
+
+    public boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId) {
+        return smallGroupMemberRepository.existsByUserIdInAndTermId(userIds, termId);
     }
 }

@@ -54,4 +54,9 @@ public class NewFamilyFinder {
         // 등반 기록이 없으면 새가족
         return true;
     }
+
+    public boolean containsNewFamilyByUserIds(List<Long> userIds) {
+        return userIds.stream()
+                .anyMatch(this::isNewFamilyByUserId);
+    }
 }

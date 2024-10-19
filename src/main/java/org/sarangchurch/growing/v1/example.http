@@ -169,8 +169,8 @@ Content-Type: application/json
 
 {
   "codyId": 14,
-  "leaderUserId": 301,
-  "memberUserIds": [302]
+  "leaderUserId": 308,
+  "memberUserIds": [374]
 }
 
 ### 라인업. 순모임 수정

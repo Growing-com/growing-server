@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.v1.newfamily.NewFamilyGroupMemberService;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class NewFamilyGroupMemberDownstream {
@@ -11,5 +13,9 @@ public class NewFamilyGroupMemberDownstream {
 
     public boolean existsByUserIdAndTermId(Long userId, Long termId) {
         return newFamilyGroupMemberService.existsByUserIdAndTermId(userId, termId);
+    }
+
+    public boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId) {
+        return newFamilyGroupMemberService.existsByUserIdInAndTermId(userIds, termId);
     }
 }

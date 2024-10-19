@@ -17,4 +17,6 @@ public interface SmallGroupMemberRepository {
     <S extends SmallGroupMember> List<S> saveAll(Iterable<S> entities);
 
     void deleteBySmallGroupId(Long smallGroupId);
+
+    boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId);
 }

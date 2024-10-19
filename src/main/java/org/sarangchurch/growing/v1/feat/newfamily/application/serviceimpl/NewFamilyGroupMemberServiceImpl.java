@@ -5,6 +5,8 @@ import org.sarangchurch.growing.core.interfaces.v1.newfamily.NewFamilyGroupMembe
 import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyGroupMemberFinder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class NewFamilyGroupMemberServiceImpl implements NewFamilyGroupMemberService {
@@ -13,5 +15,10 @@ public class NewFamilyGroupMemberServiceImpl implements NewFamilyGroupMemberServ
     @Override
     public boolean existsByUserIdAndTermId(Long userId, Long termId) {
         return newFamilyGroupMemberFinder.existsByUserIdAndTermId(userId, termId);
+    }
+
+    @Override
+    public boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId) {
+        return newFamilyGroupMemberFinder.existsByUserIdInAndTermId(userIds, termId);
     }
 }
