@@ -1,9 +1,11 @@
 package org.sarangchurch.growing.v1.feat.user.infrastructure.component;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.user.domain.graduateduser.GraduateUserRepository;
 import org.sarangchurch.growing.v1.feat.user.domain.graduateduser.GraduatedUser;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
+import org.sarangchurch.growing.v1.feat.user.infrastructure.data.GraduateUserReader;
+import org.sarangchurch.growing.v1.feat.user.infrastructure.data.GraduateUserWriter;
+import org.sarangchurch.growing.v1.feat.user.infrastructure.data.UserFinder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,17 +17,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserGraduateManager {
     private final UserFinder userFinder;
-    private final GraduateUserRepository graduateUserRepository;
+    private final GraduateUserReader graduateUserReader;
+    private final GraduateUserWriter graduateUserWriter;
 
     @Transactional
     public void graduate(List<Long> userIds, LocalDate graduateDate) {
-        List<User> users = userFinder.findByIdIn(userIds);
+        List<User> users = userFinder.findByIdInOrThrow(userIds);
 
-        if (users.size() != userIds.size()) {
-            throw new IllegalArgumentException("존재하지 않는 유저가 포함되어 있습니다.");
-        }
-
-        boolean includesGraduated = graduateUserRepository.existsByUserIdIn(userIds);
+        boolean includesGraduated = graduateUserReader.existsByUserIdIn(userIds);
 
         if (includesGraduated) {
             throw new IllegalStateException("이미 졸업한 유저가 포함되어 있습니다.");
@@ -40,6 +39,6 @@ public class UserGraduateManager {
                         .build())
                 .collect(Collectors.toList());
 
-        graduateUserRepository.saveAll(graduatedUsers);
+        graduateUserWriter.saveAll(graduatedUsers);
     }
 }

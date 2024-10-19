@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroupRepository;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyGroupFinder;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.term.TermDownstream;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.springframework.stereotype.Component;
@@ -10,12 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class NewFamilyGroupValidator {
-    private final NewFamilyGroupRepository newFamilyGroupRepository;
+    private final NewFamilyGroupFinder newFamilyGroupFinder;
     private final TermDownstream termDownstream;
 
     public void validateAvailable(Long newFamilyGroupId) {
-        NewFamilyGroup newFamilyGroup = newFamilyGroupRepository.findById(newFamilyGroupId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 새가족반입니다."));
+        NewFamilyGroup newFamilyGroup = newFamilyGroupFinder.findByIdOrThrow(newFamilyGroupId);
 
         Term term = termDownstream.findTerm(newFamilyGroup.getTermId());
 

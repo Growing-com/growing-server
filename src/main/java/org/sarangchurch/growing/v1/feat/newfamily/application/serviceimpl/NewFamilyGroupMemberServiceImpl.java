@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.application.serviceimpl;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.v1.newfamily.NewFamilyGroupMemberService;
-import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyGroupMemberFinder;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyGroupMemberFinder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

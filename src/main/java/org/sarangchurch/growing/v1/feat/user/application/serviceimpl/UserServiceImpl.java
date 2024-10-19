@@ -5,7 +5,7 @@ import org.sarangchurch.growing.core.interfaces.common.Sex;
 import org.sarangchurch.growing.core.interfaces.v1.user.UserService;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserAppender;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserFinder;
+import org.sarangchurch.growing.v1.feat.user.infrastructure.data.UserFinder;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserUpdater;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long userId) {
-        return userFinder.findById(userId);
+        return userFinder.findByIdOrThrow(userId);
     }
 
     @Override

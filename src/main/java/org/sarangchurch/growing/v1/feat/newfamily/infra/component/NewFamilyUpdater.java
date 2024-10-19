@@ -3,7 +3,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.application.update.UpdateRequest;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyRepository;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyFinder;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.user.UserUpstream;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,14 +13,13 @@ import java.util.Objects;
 @Component
 @RequiredArgsConstructor
 public class NewFamilyUpdater {
-    private final NewFamilyRepository newFamilyRepository;
+    private final NewFamilyFinder newFamilyFinder;
     private final NewFamilyGroupValidator newFamilyGroupValidator;
     private final UserUpstream userUpstream;
 
     @Transactional
     public void update(Long newFamilyId, UpdateRequest request) {
-        NewFamily newFamily = newFamilyRepository.findById(newFamilyId)
-                .orElseThrow(() -> new IllegalArgumentException("새가족을 찾을 수 없습니다"));
+        NewFamily newFamily = newFamilyFinder.findByIdOrThrow(newFamilyId);
 
         Long requestNewFamilyGroupId = request.getNewFamilyGroupId();
         boolean isNewFamilyGroupIdChanged = !Objects.equals(newFamily.getNewFamilyGroupId(), requestNewFamilyGroupId);

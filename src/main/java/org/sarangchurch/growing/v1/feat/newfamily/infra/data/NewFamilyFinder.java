@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
+package org.sarangchurch.growing.v1.feat.newfamily.infra.data;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
@@ -16,13 +16,18 @@ public class NewFamilyFinder {
     private final NewFamilyRepository newFamilyRepository;
     private final NewFamilyPromoteLogRepository newFamilyPromoteLogRepository;
 
+    public NewFamily findByIdOrThrow(Long id) {
+        return newFamilyRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("새가족을 찾을 수 없습니다"));
+    }
+
     public boolean existsByIds(List<Long> ids) {
         List<NewFamily> newFamilies = newFamilyRepository.findByIdIn(ids);
 
         return newFamilies.size() == ids.size();
     }
 
-    public List<NewFamily> findByIdIn(List<Long> ids) {
+    public List<NewFamily> findByIdInOrThrow(List<Long> ids) {
         List<NewFamily> newFamilies = newFamilyRepository.findByIdIn(ids);
 
         if (ids.size() != newFamilies.size()) {

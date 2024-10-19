@@ -2,17 +2,15 @@ package org.sarangchurch.growing.v1.feat.user.infrastructure.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
-import org.sarangchurch.growing.v1.feat.user.domain.user.UserRepository;
+import org.sarangchurch.growing.v1.feat.user.infrastructure.data.UserWriter;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
 public class UserAppender {
-    private final UserRepository userRepository;
+    private final UserWriter userWriter;
 
-    @Transactional
     public User append(User user) {
-        return userRepository.save(user);
+        return userWriter.save(user);
     }
 }

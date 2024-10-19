@@ -5,6 +5,7 @@ import org.sarangchurch.growing.core.interfaces.common.Sex;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.sarangchurch.growing.v1.feat.user.domain.user.UserEditor;
 import org.sarangchurch.growing.v1.feat.user.domain.user.UserRepository;
+import org.sarangchurch.growing.v1.feat.user.infrastructure.data.UserFinder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,12 +15,11 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class UserUpdater {
-    private final UserRepository userRepository;
+    private final UserFinder userFinder;
 
     @Transactional
     public void update(Long userId, String name, String phoneNumber, LocalDate birth, Sex sex, Integer grade) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 지체입니다."));
+        User user = userFinder.findByIdOrThrow(userId);
 
         UserEditor userEditor = user.toEditor();
 

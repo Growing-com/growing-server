@@ -6,7 +6,6 @@ import java.util.Optional;
 public interface NewFamilyRepository {
     Optional<NewFamily> findById(Long id);
     List<NewFamily> findByIdIn(List<Long> ids);
-    List<NewFamily> findByUserIdIn(List<Long> userIds);
     Optional<NewFamily> findByUserId(Long userId);
     NewFamily save(NewFamily newFamily);
     void deleteByIdIn(List<Long> ids);

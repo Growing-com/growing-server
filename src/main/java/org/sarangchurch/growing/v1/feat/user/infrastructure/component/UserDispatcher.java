@@ -3,8 +3,9 @@ package org.sarangchurch.growing.v1.feat.user.infrastructure.component;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.user.application.dispatch.DispatchRequest;
 import org.sarangchurch.growing.v1.feat.user.domain.dispatcheduser.DispatchedUser;
-import org.sarangchurch.growing.v1.feat.user.domain.dispatcheduser.DispatchedUserRepository;
-import org.sarangchurch.growing.v1.feat.user.domain.user.User;
+import org.sarangchurch.growing.v1.feat.user.infrastructure.data.DispatchedUserFinder;
+import org.sarangchurch.growing.v1.feat.user.infrastructure.data.DispatchedUserWriter;
+import org.sarangchurch.growing.v1.feat.user.infrastructure.data.UserFinder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +16,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserDispatcher {
     private final UserFinder userFinder;
-    private final DispatchedUserRepository dispatchedUserRepository;
+    private final DispatchedUserFinder dispatchedUserFinder;
+    private final DispatchedUserWriter dispatchedUserWriter;
 
     @Transactional
     public void dispatch(DispatchRequest request) {
@@ -23,13 +25,9 @@ public class UserDispatcher {
                 .map(DispatchRequest.DispatchRequestItem::getUserId)
                 .collect(Collectors.toList());
 
-        List<User> users = userFinder.findByIdIn(userIds);
+        userFinder.findByIdInOrThrow(userIds);
 
-        if (users.size() != userIds.size()) {
-            throw new IllegalArgumentException("존재하지 않는 유저가 포함되어 있습니다.");
-        }
-
-        boolean includesDispatched = dispatchedUserRepository.existsByUserIdIn(userIds);
+        boolean includesDispatched = dispatchedUserFinder.existsByUserIdIn(userIds);
 
         if (includesDispatched) {
             throw new IllegalStateException("이미 파송된 유저가 포함되어 있습니다.");
@@ -45,6 +43,6 @@ public class UserDispatcher {
                         .build())
                 .collect(Collectors.toList());
 
-        dispatchedUserRepository.saveAll(dispatchedUsers);
+        dispatchedUserWriter.saveAll(dispatchedUsers);
     }
 }

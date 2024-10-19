@@ -2,20 +2,19 @@ package org.sarangchurch.growing.v1.feat.user.infrastructure.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.user.domain.dispatcheduser.DispatchedUser;
-import org.sarangchurch.growing.v1.feat.user.domain.dispatcheduser.DispatchedUserRepository;
+import org.sarangchurch.growing.v1.feat.user.infrastructure.data.DispatchedUserFinder;
+import org.sarangchurch.growing.v1.feat.user.infrastructure.data.DispatchedUserWriter;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
 public class DispatchedReturner {
-    private final DispatchedUserRepository dispatchedUserRepository;
+    private final DispatchedUserFinder dispatchedUserFinder;
+    private final DispatchedUserWriter dispatchedUserWriter;
 
-    @Transactional
     public void returnDispatched(Long dispatchUserId) {
-        DispatchedUser dispatchedUser = dispatchedUserRepository.findById(dispatchUserId)
-                .orElseThrow(() -> new IllegalArgumentException("파송자가 아닙니다."));
+        DispatchedUser dispatchedUser = dispatchedUserFinder.findByIdOrThrow(dispatchUserId);
 
-        dispatchedUserRepository.deleteById(dispatchedUser.getId());
+        dispatchedUserWriter.deleteById(dispatchedUser.getId());
     }
 }
