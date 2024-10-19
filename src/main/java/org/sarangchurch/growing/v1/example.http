@@ -7,7 +7,7 @@ POST http://localhost:8080/api/v1/new-families/register
 Content-Type: application/json
 
 {
-  "name": "고길동",
+  "name": "고길동24",
   "sex": "MALE",
   "phoneNumber":"010-1234-5678",
   "birth": "2003-03-03",
@@ -127,11 +127,7 @@ Content-Type: application/json
   "date": "2024-10-07",
   "attendanceItems": [
     {
-      "newFamilyId": 4,
-      "status": "ATTEND"
-    },
-    {
-      "newFamilyId": 3,
+      "newFamilyId": 5,
       "status": "ATTEND"
     }
   ]
@@ -142,7 +138,7 @@ POST http://localhost:8080/api/v1/new-families/line-out
 Content-Type: application/json
 
 {
-  "newFamilyIds": [37]
+  "newFamilyIds": [5]
 }
 
 ### 유출 2. 새가족 라인인
@@ -174,11 +170,11 @@ Content-Type: application/json
 }
 
 ### 라인업. 순모임 수정
-POST http://localhost:8080/api/v1/small-groups/44/update
+POST http://localhost:8080/api/v1/small-groups/60/update
 Content-Type: application/json
 
 {
-  "memberUserIds": []
+  "memberUserIds": [373]
 }
 
 ### 라인업. 순모임 삭제
@@ -224,7 +220,7 @@ Content-Type: application/json
 }
 
 ### 유출. 파송 복귀
-POST http://localhost:8080/api/v1/dispatched-users/3/return
+POST http://localhost:8080/api/v1/dispatched-users/4/return
 
 ### 유출. 파송자 조회
 GET http://localhost:8080/api/v1/dispatched-users

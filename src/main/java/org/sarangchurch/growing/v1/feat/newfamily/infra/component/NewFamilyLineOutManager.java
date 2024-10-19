@@ -3,12 +3,9 @@ package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.application.lineout.LineOutRequest;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.lineoutnewfamily.LineOutNewFamily;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.lineoutnewfamily.LineOutNewFamilyRepository;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyRepository;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLog;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLogRepository;
-import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyFinder;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.data.*;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,25 +16,27 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NewFamilyLineOutManager {
     private final NewFamilyFinder newFamilyFinder;
-    private final NewFamilyRepository newFamilyRepository;
-    private final NewFamilyPromoteLogRepository promoteLogRepository;
-    private final LineOutNewFamilyRepository lineoutNewFamilyRepository;
+    private final NewFamilyPromoteLogFinder newFamilyPromoteLogFinder;
+
+    private final NewFamilyWriter newFamilyWriter;
+    private final LineOutNewFamilyWriter lineOutNewFamilyWriter;
+    private final NewFamilyPromoteLogWriter newFamilyPromoteLogWriter;
 
     @Transactional
     public List<LineOutNewFamily> lineOut(LineOutRequest request) {
-        // 새가족 검증
         List<Long> newFamilyIds = request.getNewFamilyIds();
 
-        List<NewFamily> newFamilies = newFamilyFinder.findByIdIn(newFamilyIds);
+        List<NewFamily> newFamilies = newFamilyFinder.findByIdInOrThrow(newFamilyIds);
 
-        // 라인아웃 가능 여부 검증(등반전)
+        // 등반전 확인
         List<Long> promoteLogIds = newFamilies.stream()
                 .map(NewFamily::getNewFamilyPromoteLogId)
                 .collect(Collectors.toList());
 
-        List<NewFamilyPromoteLog> promoteLogs = promoteLogRepository.findByIdIn(promoteLogIds);
-
-        boolean containsPromoted = promoteLogs.stream()
+        boolean containsPromoted = newFamilyPromoteLogFinder
+                .findPromoteCandidatesByNewFamilyIds(newFamilyIds)
+                .getSecond()
+                .stream()
                 .anyMatch(NewFamilyPromoteLog::isPromoted);
 
         if (containsPromoted) {
@@ -49,12 +48,12 @@ public class NewFamilyLineOutManager {
                 .map(LineOutNewFamily::from)
                 .collect(Collectors.toList());
 
-        newFamilyRepository.deleteByIdIn(newFamilyIds);
-        lineoutNewFamilyRepository.saveAll(lineOutNewFamilies);
+        newFamilyWriter.deleteByIdIn(newFamilyIds);
+        lineOutNewFamilyWriter.saveAll(lineOutNewFamilies);
 
         // 등반 기록 삭제
-         promoteLogRepository.deleteByIdIn(promoteLogIds);
+        newFamilyPromoteLogWriter.deleteByIdIn(promoteLogIds);
 
-         return lineOutNewFamilies;
+        return lineOutNewFamilies;
     }
 }

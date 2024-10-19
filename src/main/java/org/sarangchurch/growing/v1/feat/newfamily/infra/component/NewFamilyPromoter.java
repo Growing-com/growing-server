@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.application.promote.PromoteRequest;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLog;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLogRepository;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyFinder;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyPromoteLogFinder;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.term.SmallGroupMemberUpstream;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NewFamilyPromoter {
     private final NewFamilyFinder newFamilyFinder;
-    private final NewFamilyPromoteLogRepository promoteLogRepository;
+    private final NewFamilyPromoteLogFinder newFamilyPromoteLogFinder;
     private final SmallGroupMemberUpstream smallGroupMemberUpstream;
 
     @Transactional
@@ -28,14 +28,14 @@ public class NewFamilyPromoter {
                 .map(PromoteRequest.V1PromoteRequestItem::getNewFamilyId)
                 .collect(Collectors.toList());
 
-        List<NewFamily> newFamilies = newFamilyFinder.findByIdIn(newFamilyIds);
+        List<NewFamily> newFamilies = newFamilyFinder.findByIdInOrThrow(newFamilyIds);
 
         // 등반 가능 여부 검증
         List<Long> promoteLogIds = newFamilies.stream()
                 .map(NewFamily::getNewFamilyPromoteLogId)
                 .collect(Collectors.toList());
 
-        List<NewFamilyPromoteLog> promoteLogs = promoteLogRepository.findByIdIn(promoteLogIds);
+        List<NewFamilyPromoteLog> promoteLogs = newFamilyPromoteLogFinder.findByIdIn(promoteLogIds);
 
         long promoteCandidateCount = promoteLogs.stream()
                 .filter(NewFamilyPromoteLog::isPromoteCandidate)

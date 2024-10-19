@@ -17,7 +17,7 @@ public class NewFamilyPromoteLogFinder {
     private final NewFamilyPromoteLogRepository promoteLogRepository;
 
     public Pair<List<NewFamily>, List<NewFamilyPromoteLog>> findPromoteCandidatesByNewFamilyIds(List<Long> newFamilyIds) {
-        List<NewFamily> newFamilies = newFamilyFinder.findByIdIn(newFamilyIds);
+        List<NewFamily> newFamilies = newFamilyFinder.findByIdInOrThrow(newFamilyIds);
 
         // 라인업 가능 검증
         boolean containsBeforeRequest = newFamilies.stream()
@@ -42,5 +42,9 @@ public class NewFamilyPromoteLogFinder {
         }
 
         return Pair.of(newFamilies, promoteLogs);
+    }
+
+    public List<NewFamilyPromoteLog> findByIdIn(List<Long> promoteLogIds) {
+        return promoteLogRepository.findByIdIn(promoteLogIds);
     }
 }

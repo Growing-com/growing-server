@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class NewFamilyTemporaryLineUpManager {
-    private final NewFamilyPromoteLogFinder newFamilyPromoteLogFinder;
     private final SmallGroupDownstream smallGroupDownstream;
+    private final NewFamilyPromoteLogFinder newFamilyPromoteLogFinder;
 
     @Transactional
     public void temporaryLineUp(TemporaryLineUpRequest request) {
