@@ -26,4 +26,9 @@ public class NewFamilyServiceImpl implements NewFamilyService {
     public boolean containsNewFamilyByUserIds(List<Long> userIds) {
         return newFamilyFinder.containsNewFamilyByUserIds(userIds);
     }
+
+    @Override
+    public boolean existsByNewFamilyGroupId(Long newFamilyGroupId) {
+        return newFamilyFinder.existsCurrentByNewFamilyGroupId(newFamilyGroupId);
+    }
 }

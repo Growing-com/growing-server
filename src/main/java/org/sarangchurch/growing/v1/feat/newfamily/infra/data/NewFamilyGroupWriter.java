@@ -13,4 +13,8 @@ public class NewFamilyGroupWriter {
     public NewFamilyGroup save(NewFamilyGroup newFamilyGroup) {
         return newFamilyGroupRepository.save(newFamilyGroup);
     }
+
+    public void deleteById(Long newFamilyGroupId) {
+        newFamilyGroupRepository.deleteById(newFamilyGroupId);
+    }
 }

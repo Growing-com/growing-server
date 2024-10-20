@@ -13,4 +13,8 @@ public class NewFamilyGroupLeaderUpstream {
     public NewFamilyGroupLeader save(NewFamilyGroupLeader leader) {
         return newFamilyGroupLeaderService.save(leader);
     }
+
+    public void deleteById(Long newFamilyGroupLeaderId) {
+        newFamilyGroupLeaderService.deleteById(newFamilyGroupLeaderId);
+    }
 }

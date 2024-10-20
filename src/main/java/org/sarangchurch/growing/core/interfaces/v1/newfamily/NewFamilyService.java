@@ -8,4 +8,6 @@ public interface NewFamilyService {
     boolean isNewFamilyByUserId(Long userId);
 
     boolean containsNewFamilyByUserIds(List<Long> userIds);
+
+    boolean existsByNewFamilyGroupId(Long newFamilyGroupId);
 }

@@ -18,4 +18,8 @@ public class NewFamilyGroupMemberFinder {
     public boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId) {
         return newFamilyGroupMemberRepository.existsByUserIdInAndTermId(userIds, termId);
     }
+
+    public long countByNewFamilyGroupId(Long newFamilyGroupId) {
+        return newFamilyGroupMemberRepository.countByNewFamilyGroupId(newFamilyGroupId);
+    }
 }

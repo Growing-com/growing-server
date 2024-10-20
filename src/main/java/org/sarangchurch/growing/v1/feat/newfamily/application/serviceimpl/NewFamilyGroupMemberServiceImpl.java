@@ -26,6 +26,11 @@ public class NewFamilyGroupMemberServiceImpl implements NewFamilyGroupMemberServ
     }
 
     @Override
+    public long countByNewFamilyGroupId(Long newFamilyGroupId) {
+        return newFamilyGroupMemberFinder.countByNewFamilyGroupId(newFamilyGroupId);
+    }
+
+    @Override
     public List<NewFamilyGroupMember> saveAll(List<NewFamilyGroupMember> newFamilyGroupMembers) {
         return newFamilyGroupMemberWriter.saveAll(newFamilyGroupMembers);
     }

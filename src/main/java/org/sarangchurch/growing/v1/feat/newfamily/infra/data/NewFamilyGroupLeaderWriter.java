@@ -13,4 +13,8 @@ public class NewFamilyGroupLeaderWriter {
     public NewFamilyGroupLeader save(NewFamilyGroupLeader newFamilyGroupLeader) {
         return newFamilyGroupLeaderRepository.save(newFamilyGroupLeader);
     }
+
+    public void deleteById(Long newFamilyGroupLeaderId) {
+        newFamilyGroupLeaderRepository.deleteById(newFamilyGroupLeaderId);
+    }
 }
