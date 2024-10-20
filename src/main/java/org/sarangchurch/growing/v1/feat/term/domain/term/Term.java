@@ -27,4 +27,7 @@ public class Term {
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
+
+    @Column(name = "pastor_user_id", nullable = false)
+    private Long pastorUserId;
 }

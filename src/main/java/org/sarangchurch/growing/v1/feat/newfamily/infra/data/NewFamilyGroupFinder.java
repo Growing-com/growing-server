@@ -18,4 +18,8 @@ public class NewFamilyGroupFinder {
         return newFamilyGroupRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 새가족반입니다."));
     }
+
+    public boolean existsByCodyIdAndNewFamilyGroupLeaderId(Long codyId, Long newFamilyGroupLeaderId) {
+        return newFamilyGroupRepository.existsByCodyIdAndNewFamilyGroupLeaderId(codyId, newFamilyGroupLeaderId);
+    }
 }

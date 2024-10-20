@@ -6,4 +6,8 @@ public interface NewFamilyGroupRepository {
     Optional<NewFamilyGroup> findById(Long id);
 
     long countByCodyId(Long codyId);
+
+    boolean existsByCodyIdAndNewFamilyGroupLeaderId(Long codyId, Long newFamilyGroupLeaderId);
+
+    NewFamilyGroup save(NewFamilyGroup newFamilyGroup);
 }
