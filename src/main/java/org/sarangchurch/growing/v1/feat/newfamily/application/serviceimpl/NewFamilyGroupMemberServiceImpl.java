@@ -2,7 +2,9 @@ package org.sarangchurch.growing.v1.feat.newfamily.application.serviceimpl;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.v1.newfamily.NewFamilyGroupMemberService;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.NewFamilyGroupMember;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyGroupMemberFinder;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyGroupMemberWriter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NewFamilyGroupMemberServiceImpl implements NewFamilyGroupMemberService {
     private final NewFamilyGroupMemberFinder newFamilyGroupMemberFinder;
+    private final NewFamilyGroupMemberWriter newFamilyGroupMemberWriter;
 
     @Override
     public boolean existsByUserIdAndTermId(Long userId, Long termId) {
@@ -20,5 +23,10 @@ public class NewFamilyGroupMemberServiceImpl implements NewFamilyGroupMemberServ
     @Override
     public boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId) {
         return newFamilyGroupMemberFinder.existsByUserIdInAndTermId(userIds, termId);
+    }
+
+    @Override
+    public List<NewFamilyGroupMember> saveAll(List<NewFamilyGroupMember> newFamilyGroupMembers) {
+        return newFamilyGroupMemberWriter.saveAll(newFamilyGroupMembers);
     }
 }

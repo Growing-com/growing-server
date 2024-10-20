@@ -9,4 +9,6 @@ public interface NewFamilyGroupLeaderRepository {
     boolean existsByUserIdAndTermId(Long userId, Long termId);
 
     boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId);
+
+    NewFamilyGroupLeader save(NewFamilyGroupLeader newFamilyGroupLeader);
 }

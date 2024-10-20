@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
@@ -24,4 +25,11 @@ public class NewFamilyGroupMember extends BaseEntity {
 
     @Column(name = "user_id", nullable = false)
     private Long userId;
+
+    @Builder
+    public NewFamilyGroupMember(Long termId, Long newFamilyGroupId, Long userId) {
+        this.termId = termId;
+        this.newFamilyGroupId = newFamilyGroupId;
+        this.userId = userId;
+    }
 }

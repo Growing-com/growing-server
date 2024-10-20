@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.term.application.createsmallgroup;
+package org.sarangchurch.growing.v1.feat.term.application.createnewfamilygroup;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor
-public class CreateSmallGroupRequest {
+public class CreateNewFamilyGroupRequest {
     @NotNull(message = "코디 id를 입력해주세요.")
     private Long codyId;
 
