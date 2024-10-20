@@ -10,4 +10,6 @@ public interface NewFamilyGroupMemberRepository {
     long countByNewFamilyGroupId(Long newFamilyGroupId);
 
     <S extends NewFamilyGroupMember> List<S> saveAll(Iterable<S> newFamilyGroupMembers);
+
+    void deleteByNewFamilyGroupId(Long newFamilyGroupId);
 }
