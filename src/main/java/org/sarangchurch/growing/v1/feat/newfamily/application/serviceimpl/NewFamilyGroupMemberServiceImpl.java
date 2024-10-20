@@ -34,4 +34,9 @@ public class NewFamilyGroupMemberServiceImpl implements NewFamilyGroupMemberServ
     public List<NewFamilyGroupMember> saveAll(List<NewFamilyGroupMember> newFamilyGroupMembers) {
         return newFamilyGroupMemberWriter.saveAll(newFamilyGroupMembers);
     }
+
+    @Override
+    public void deleteByNewFamilyGroupId(Long newFamilyGroupId) {
+        newFamilyGroupMemberWriter.deleteByNewFamilyGroupId(newFamilyGroupId);
+    }
 }

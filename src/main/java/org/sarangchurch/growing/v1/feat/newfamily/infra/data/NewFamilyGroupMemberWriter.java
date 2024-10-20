@@ -15,4 +15,8 @@ public class NewFamilyGroupMemberWriter {
     public List<NewFamilyGroupMember> saveAll(List<NewFamilyGroupMember> newFamilyGroupMembers) {
         return newFamilyGroupMemberRepository.saveAll(newFamilyGroupMembers);
     }
+
+    public void deleteByNewFamilyGroupId(Long newFamilyGroupId) {
+        newFamilyGroupMemberRepository.deleteByNewFamilyGroupId(newFamilyGroupId);
+    }
 }

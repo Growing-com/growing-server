@@ -212,6 +212,14 @@ Content-Type: application/json
 ### 라인업. 새가족반 제거
 POST http://localhost:8080/api/v1/new-family-groups/3/delete
 
+### 라인업. 새가족반 수정
+POST http://localhost:8080/api/v1/new-family-groups/1/update
+Content-Type: application/json
+
+{
+  "memberUserIds": []
+}
+
 ### 인적 정보. 모든 리더쉽
 GET http://localhost:8080/api/v1/terms/1/all-leaders
 

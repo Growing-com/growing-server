@@ -15,4 +15,8 @@ public class NewFamilyGroupMemberUpstream {
     public void saveAll(List<NewFamilyGroupMember> newFamilyGroupMembers) {
         newFamilyGroupMemberService.saveAll(newFamilyGroupMembers);
     }
+
+    public void deleteByNewFamilyGroupId(Long newFamilyGroupId) {
+        newFamilyGroupMemberService.deleteByNewFamilyGroupId(newFamilyGroupId);
+    }
 }
