@@ -64,4 +64,8 @@ public class NewFamilyFinder {
         return userIds.stream()
                 .anyMatch(this::isNewFamilyByUserId);
     }
+
+    public boolean existsCurrentByNewFamilyGroupId(Long newFamilyGroupId) {
+        return newFamilyRepository.existsCurrentByNewFamilyGroupId(newFamilyGroupId);
+    }
 }

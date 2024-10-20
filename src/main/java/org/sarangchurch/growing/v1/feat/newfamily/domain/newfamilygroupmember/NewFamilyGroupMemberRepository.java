@@ -7,5 +7,7 @@ public interface NewFamilyGroupMemberRepository {
 
     boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId);
 
+    long countByNewFamilyGroupId(Long newFamilyGroupId);
+
     <S extends NewFamilyGroupMember> List<S> saveAll(Iterable<S> newFamilyGroupMembers);
 }

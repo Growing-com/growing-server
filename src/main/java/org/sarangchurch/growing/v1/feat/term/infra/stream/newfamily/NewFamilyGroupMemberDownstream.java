@@ -18,4 +18,8 @@ public class NewFamilyGroupMemberDownstream {
     public boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId) {
         return newFamilyGroupMemberService.existsByUserIdInAndTermId(userIds, termId);
     }
+
+    public long countByNewFamilyGroupId(Long newFamilyGroupId) {
+        return newFamilyGroupMemberService.countByNewFamilyGroupId(newFamilyGroupId);
+    }
 }

@@ -29,4 +29,9 @@ public class NewFamilyGroupLeaderServiceImpl implements NewFamilyGroupLeaderServ
     public NewFamilyGroupLeader save(NewFamilyGroupLeader newFamilyGroupLeader) {
         return newFamilyGroupLeaderWriter.save(newFamilyGroupLeader);
     }
+
+    @Override
+    public void deleteById(Long newFamilyGroupLeaderId) {
+        newFamilyGroupLeaderWriter.deleteById(newFamilyGroupLeaderId);
+    }
 }

@@ -10,4 +10,6 @@ public interface NewFamilyGroupLeaderService {
     boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId);
 
     NewFamilyGroupLeader save(NewFamilyGroupLeader newFamilyGroupLeader);
+
+    void deleteById(Long newFamilyGroupLeaderId);
 }

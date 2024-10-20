@@ -9,5 +9,8 @@ public interface NewFamilyGroupMemberService {
 
     boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId);
 
+    long countByNewFamilyGroupId(Long newFamilyGroupId);
+
     List<NewFamilyGroupMember> saveAll(List<NewFamilyGroupMember> newFamilyGroupMembers);
+
 }

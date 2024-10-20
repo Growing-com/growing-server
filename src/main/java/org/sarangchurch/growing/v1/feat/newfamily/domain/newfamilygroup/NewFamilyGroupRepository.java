@@ -10,4 +10,6 @@ public interface NewFamilyGroupRepository {
     boolean existsByCodyIdAndNewFamilyGroupLeaderId(Long codyId, Long newFamilyGroupLeaderId);
 
     NewFamilyGroup save(NewFamilyGroup newFamilyGroup);
+
+    void deleteById(Long newFamilyGroupId);
 }
