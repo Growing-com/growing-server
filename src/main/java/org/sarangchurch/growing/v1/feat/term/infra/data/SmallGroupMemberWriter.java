@@ -19,4 +19,8 @@ public class SmallGroupMemberWriter {
     public List<SmallGroupMember> saveAll(List<SmallGroupMember> smallGroupMembers) {
         return smallGroupMemberRepository.saveAll(smallGroupMembers);
     }
+
+    public SmallGroupMember save(SmallGroupMember smallGroupMember) {
+        return smallGroupMemberRepository.save(smallGroupMember);
+    }
 }

@@ -74,7 +74,7 @@ POST http://localhost:8080/api/v1/new-families/request-line-up
 Content-Type: application/json
 
 {
-  "newFamilyIds": [7]
+  "newFamilyIds": [41]
 }
 
 ### 등반/라인업 2. 새가족 대량 후보순장 임시 라인업
@@ -97,8 +97,8 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 7,
-      "smallGroupId": 5
+      "newFamilyId": 41,
+      "smallGroupId": 60
     }
   ]
 }
@@ -110,7 +110,7 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 7,
+      "newFamilyId": 41,
       "promoteDate": "2024-09-13"
     }
   ]
@@ -284,6 +284,33 @@ Content-Type: application/json
 
 {
   "option": "DOWN"
+}
+
+### 인적 정보. 유저 등록
+POST http://localhost:8080/api/v1/users/register
+Content-Type: application/json
+
+{
+  "name":  "김불닭볶음면",
+  "sex": "MALE",
+  "phoneNumber":  "010-5555-6666",
+  "birth": "1996-10-16",
+  "grade":  10,
+  "smallGroupId": 60
+}
+
+### 인적 정보. 유저 수정
+POST http://localhost:8080/api/v1/users/380/update
+Content-Type: application/json
+
+{
+  "name":  "김불닭볶음면22",
+  "sex": "MALE",
+  "phoneNumber":  "010-5555-7777",
+  "phoneNumber":  "010-5555-7777",
+  "birth": "1996-10-16",
+  "grade":  10,
+  "smallGroupId": 66
 }
 
 ### 권한 1. 로그인
