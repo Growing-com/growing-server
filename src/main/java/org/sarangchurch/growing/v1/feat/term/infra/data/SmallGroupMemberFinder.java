@@ -28,4 +28,8 @@ public class SmallGroupMemberFinder {
     public boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId) {
         return smallGroupMemberRepository.existsByUserIdInAndTermId(userIds, termId);
     }
+
+    public boolean existsByUserIdAndSmallGroupId(Long userId, Long smallGroupId) {
+        return smallGroupMemberRepository.existsByUserIdAndSmallGroupId(userId, smallGroupId);
+    }
 }
