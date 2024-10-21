@@ -12,4 +12,8 @@ public class SmallGroupMemberUpstream {
     public void create(Long userId, Long smallGroupId) {
         smallGroupMemberService.create(userId, smallGroupId);
     }
+
+    public void update(Long userId, Long smallGroupId) {
+        smallGroupMemberService.update(userId, smallGroupId);
+    }
 }

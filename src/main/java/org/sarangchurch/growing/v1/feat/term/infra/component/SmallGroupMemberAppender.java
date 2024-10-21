@@ -26,10 +26,10 @@ public class SmallGroupMemberAppender {
 
         smallGroupMemberWriter.save(
                 SmallGroupMember.builder()
-                .termId(smallGroup.getTermId())
-                .userId(userId)
-                .smallGroupId(smallGroupId)
-                .build()
+                        .termId(smallGroup.getTermId())
+                        .userId(userId)
+                        .smallGroupId(smallGroupId)
+                        .build()
         );
     }
 }
