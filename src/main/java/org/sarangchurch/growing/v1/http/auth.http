@@ -1,0 +1,11 @@
+### 로그인
+POST https://wsangwook.com/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "foo",
+  "password": "foo"
+}
+
+### 로그아웃
+POST https://wsangwook.com/api/v1/auth/logout
