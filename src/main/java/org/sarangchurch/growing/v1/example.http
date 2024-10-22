@@ -217,7 +217,7 @@ POST http://localhost:8080/api/v1/new-family-groups/1/update
 Content-Type: application/json
 
 {
-  "memberUserIds": []
+  "memberUserIds": [360]
 }
 
 ### 인적 정보. 모든 리더쉽
@@ -307,11 +307,16 @@ Content-Type: application/json
   "name":  "김불닭볶음면22",
   "sex": "MALE",
   "phoneNumber":  "010-5555-7777",
-  "phoneNumber":  "010-5555-7777",
   "birth": "1996-10-16",
   "grade":  10,
   "smallGroupId": 66
 }
+
+### 인적 정보. 텀 별 인원 배정수
+GET http://localhost:8080/api/v1/terms/1/duty-distribution-count
+
+### 인적 정보. 전체 인원
+GET http://localhost:8080/api/v1/users
 
 ### 권한 1. 로그인
 POST http://localhost:8080/api/v1/auth/login
