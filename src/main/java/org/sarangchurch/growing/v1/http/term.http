@@ -1,27 +1,27 @@
 ### 텀 목록
-GET https://wsangwook.com/api/v1/terms
+GET http://localhost:8080/api/v1/terms
 
 ### 활성 텀
-GET https://wsangwook.com/api/v1/terms/active-term
+GET http://localhost:8080/api/v1/terms/active-term
 
 ### 일반 순장 및 나무 목록 조회
-GET https://wsangwook.com/api/v1/terms/1/small-groups
+GET http://localhost:8080/api/v1/terms/1/small-groups
 
 ### 새가족 순장 목록 조회
-GET https://wsangwook.com/api/v1/terms/1/new-family-groups
+GET http://localhost:8080/api/v1/terms/1/new-family-groups
 
 ### 순모임 생성
-POST https://wsangwook.com/api/v1/terms/1/create-small-group
+POST http://localhost:8080/api/v1/terms/1/create-small-group
 Content-Type: application/json
 
 {
-  "codyId": 14,
-  "leaderUserId": 100,
-  "memberUserIds": [374]
+  "codyId": 17,
+  "leaderUserId": 383,
+  "memberUserIds": []
 }
 
 ### 순모임 수정
-POST https://wsangwook.com/api/v1/small-groups/60/update
+POST http://localhost:8080/api/v1/small-groups/60/update
 Content-Type: application/json
 
 {
@@ -29,10 +29,10 @@ Content-Type: application/json
 }
 
 ### 순모임 삭제
-POST https://wsangwook.com/api/v1/small-groups/44/delete
+POST http://localhost:8080/api/v1/small-groups/44/delete
 
 ### 순원 라인업 변경
-POST https://wsangwook.com/api/v1/small-group-members/2/line-up-edit
+POST http://localhost:8080/api/v1/small-group-members/2/line-up-edit
 Content-Type: application/json
 
 {
@@ -40,31 +40,31 @@ Content-Type: application/json
 }
 
 ### 코디 추가
-POST https://wsangwook.com/api/v1/terms/1/create-cody
+POST http://localhost:8080/api/v1/terms/1/create-cody
 Content-Type: application/json
 
 {
-  "codyUserId": 374
+  "codyUserId": 381
 }
 
 ### 코디 삭제
-POST https://wsangwook.com/api/v1/codies/11/delete
+POST http://localhost:8080/api/v1/codies/11/delete
 
 ### 새가족반 추가
-POST https://wsangwook.com/api/v1/terms/1/create-new-family-group
+POST http://localhost:8080/api/v1/terms/1/create-new-family-group
 Content-Type: application/json
 
 {
-  "codyId": 14,
-  "leaderUserId": 345,
-  "memberUserIds": [346]
+  "codyId": 17,
+  "leaderUserId": 384,
+  "memberUserIds": []
 }
 
 ### 새가족반 제거
-POST https://wsangwook.com/api/v1/new-family-groups/3/delete
+POST http://localhost:8080/api/v1/new-family-groups/3/delete
 
 ### 새가족반 수정
-POST https://wsangwook.com/api/v1/new-family-groups/1/update
+POST http://localhost:8080/api/v1/new-family-groups/1/update
 Content-Type: application/json
 
 {
@@ -72,10 +72,16 @@ Content-Type: application/json
 }
 
 ### 모든 리더쉽
-GET https://wsangwook.com/api/v1/terms/1/all-leaders
+GET http://localhost:8080/api/v1/terms/1/all-leaders
 
 ### 코디 소속 인원
-GET https://wsangwook.com/api/v1/codies/1/members
+GET http://localhost:8080/api/v1/codies/1/members
 
 ### 텀 별 인원 배정수
-GET https://wsangwook.com/api/v1/terms/1/duty-distribution-count
+GET http://localhost:8080/api/v1/terms/1/duty-distribution-count
+
+### 텀 별 코디 인원
+GET http://localhost:8080/api/v1/terms/1/codies
+
+### 코디 소속 순장(일반, 새가족 모두)
+GET http://localhost:8080/api/v1/codies/17/groups
