@@ -1,8 +1,8 @@
 ### 새가족 출석 조회
-GET https://wsangwook.com/api/v1/new-families/attendances
+GET http://localhost:8080/api/v1/new-families/attendances
 
 ### 새가족 출석 체크
-POST https://wsangwook.com/api/v1/new-families/attendance-check
+POST http://localhost:8080/api/v1/new-families/attendance-check
 Content-Type: application/json
 
 {

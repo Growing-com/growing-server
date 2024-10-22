@@ -30,6 +30,11 @@ public class AssignValidator {
             throw new IllegalStateException("비활성 유저입니다.");
         }
 
+        // 교역자
+        if (term.getPastorUserId().equals(user.getId())) {
+            throw new IllegalStateException("해당 텀에 이미 교역자로 배정된 유저입니다.");
+        }
+
         // 코디
         boolean codyExists = codyFinder.existsByUserIdAndTermId(user.getId(), term.getId());
 
@@ -84,6 +89,14 @@ public class AssignValidator {
 
         if (containsInActiveUser) {
             throw new IllegalStateException("비활성 유저가 포함되어 있습니다.");
+        }
+
+        // 교역자
+        boolean containsPastor = users.stream()
+                .anyMatch(it -> it.getId().equals(term.getPastorUserId()));
+
+        if (containsPastor) {
+            throw new IllegalStateException("해당 텀에 이미 교역자로 배정된 유저가 포함되어 있습니다.");
         }
 
         // 코디
