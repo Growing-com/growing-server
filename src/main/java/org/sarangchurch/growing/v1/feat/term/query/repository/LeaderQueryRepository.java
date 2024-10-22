@@ -17,6 +17,7 @@ import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygrouple
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
+import static org.sarangchurch.growing.v1.feat.term.domain.term.QTerm.term;
 import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
 @Repository
@@ -85,6 +86,11 @@ public class LeaderQueryRepository {
     }
 
     public List<LeaderListItem> findAllByTerm(Long termId) {
+        // 교역자
+        LeaderListItem pastor = findPastorByTerm(termId);
+
+        pastor.setDuty(Duty.PASTOR);
+
         // 코디
         List<LeaderListItem> codies = findCodiesByTerm(termId);
 
@@ -103,11 +109,27 @@ public class LeaderQueryRepository {
         // 취합 및 정렬
         List<LeaderListItem> result = new ArrayList<>();
 
+        result.add(pastor);
         result.addAll(codies);
         result.addAll(smallGroupLeaders);
         result.addAll(newFamilyLeaders);
         result.sort(Comparator.comparing(LeaderListItem::getCodyName));
 
         return result;
+    }
+
+    private LeaderListItem findPastorByTerm(Long termId) {
+        return queryFactory.select(Projections.constructor(LeaderListItem.class,
+                        user.id.as("userId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade"),
+                        user.phoneNumber.as("phoneNumber"),
+                        user.birth.as("birth"),
+                        user.name.as("codyName")
+                ))
+                .from(term)
+                .join(user).on(user.id.eq(term.pastorUserId), term.id.eq(termId))
+                .fetchOne();
     }
 }

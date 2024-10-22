@@ -1,8 +1,15 @@
 package org.sarangchurch.growing.v1.feat.term.domain;
 
 public enum Duty {
+    PASTOR,
     CODY,
+
     SMALL_GROUP_LEADER,
     NEW_FAMILY_GROUP_LEADER,
-    // 교역자, 순원, 새가족순원
+
+    SMALL_GROUP_MEMBER,
+    NEW_FAMILY_GROUP_MEMBER,
+
+    NEW_FAMILY,
+    NOT_PLACED;
 }
