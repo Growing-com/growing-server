@@ -1,5 +1,5 @@
 ### 새가족 등록
-POST http://localhost:8080/api/v1/new-families/register
+POST https://wsangwook.com/api/v1/new-families/register
 Content-Type: application/json
 
 {
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 ### 새가족 수정
-POST http://localhost:8080/api/v1/new-families/4/update
+POST https://wsangwook.com/api/v1/new-families/4/update
 Content-Type: application/json
 
 {
@@ -48,22 +48,22 @@ Content-Type: application/json
 }
 
 ### 새가족 목록 조회
-GET http://localhost:8080//api/v1/new-families?newFamilyGroupId=1
+GET https://wsangwook.com//api/v1/new-families?newFamilyGroupId=1
 
 ### 새가족 정보 조회
-GET http://localhost:8080/api/v1/new-families/1
+GET https://wsangwook.com/api/v1/new-families/1
 
 ### 라인업 요청 목록
-GET http://localhost:8080/api/v1/promote-candidate-new-families
+GET https://wsangwook.com/api/v1/promote-candidate-new-families
 
 ### 임시 라인업 목록
-GET http://localhost:8080/api/v1/temporary-lined-up-new-families
+GET https://wsangwook.com/api/v1/temporary-lined-up-new-families
 
 ### 등반자 목록
-GET http://localhost:8080/api/v1/promoted-new-families
+GET https://wsangwook.com/api/v1/promoted-new-families
 
 ### 새가족 라인업 요청
-POST http://localhost:8080/api/v1/new-families/request-line-up
+POST https://wsangwook.com/api/v1/new-families/request-line-up
 Content-Type: application/json
 
 {
@@ -71,7 +71,7 @@ Content-Type: application/json
 }
 
 ### 새가족 후보순장 임시 라인업
-POST http://localhost:8080/api/v1/new-families/temporary-line-up
+POST https://wsangwook.com/api/v1/new-families/temporary-line-up
 Content-Type: application/json
 
 {
@@ -84,7 +84,7 @@ Content-Type: application/json
 }
 
 ### 새가족 라인업
-POST http://localhost:8080/api/v1/new-families/line-up
+POST https://wsangwook.com/api/v1/new-families/line-up
 Content-Type: application/json
 
 {
@@ -97,7 +97,7 @@ Content-Type: application/json
 }
 
 ### 새가족 등반
-POST http://localhost:8080/api/v1/new-families/promote
+POST https://wsangwook.com/api/v1/new-families/promote
 Content-Type: application/json
 
 {
@@ -110,7 +110,7 @@ Content-Type: application/json
 }
 
 ### 새가족 라인아웃
-POST http://localhost:8080/api/v1/new-families/line-out
+POST https://wsangwook.com/api/v1/new-families/line-out
 Content-Type: application/json
 
 {
@@ -118,7 +118,7 @@ Content-Type: application/json
 }
 
 ### 새가족 라인인
-POST http://localhost:8080/api/v1/line-out-new-families/3/line-in
+POST https://wsangwook.com/api/v1/line-out-new-families/3/line-in
 
 ### 라인아웃 목록 조회
-GET http://localhost:8080/api/v1/line-out-new-families
+GET https://wsangwook.com/api/v1/line-out-new-families
