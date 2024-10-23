@@ -2,7 +2,11 @@ package org.sarangchurch.growing.v1.feat.term.infra.component.smallgroup;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
-import org.sarangchurch.growing.v1.feat.term.infra.data.*;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupWriter;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupleader.SmallGroupLeaderWriter;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -5,7 +5,7 @@ import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamil
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.NewFamilyGroupMember;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.infra.component.AssignValidator;
-import org.sarangchurch.growing.v1.feat.term.infra.data.TermFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupDownstream;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupMemberUpstream;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.user.UserDownstream;

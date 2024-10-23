@@ -3,7 +3,7 @@ POST http://localhost:8080/api/v1/new-families/register
 Content-Type: application/json
 
 {
-  "name": "김비둘기",
+  "name": "김참새",
   "sex": "MALE",
   "phoneNumber":"010-1234-5678",
   "birth": "2003-03-03",
@@ -114,7 +114,7 @@ POST http://localhost:8080/api/v1/new-families/line-out
 Content-Type: application/json
 
 {
-  "newFamilyIds": [5]
+  "newFamilyIds": [43]
 }
 
 ### 새가족 라인인

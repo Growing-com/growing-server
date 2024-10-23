@@ -2,7 +2,8 @@ package org.sarangchurch.growing.v1.feat.newfamily.application.lineout;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.lineoutnewfamily.LineOutNewFamily;
-import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyLineOutManager;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.component.lineinout.NewFamilyLineOutManager;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.attendance.NewFamilyAttendanceUpstream;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.user.UserUpstream;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 public class LineOutService {
     private final NewFamilyLineOutManager lineOutManager;
     private final UserUpstream userUpstream;
+    private final NewFamilyAttendanceUpstream newFamilyAttendanceUpstream;
 
     @Transactional
     public void lineOut(LineOutRequest request) {
@@ -27,5 +29,6 @@ public class LineOutService {
                 .collect(Collectors.toList());
 
         userUpstream.deactivateByIdIn(userIds);
+        newFamilyAttendanceUpstream.deleteByNewFamilyIdIn(newFamilyIds);
     }
 }

@@ -22,12 +22,6 @@ public class RegisterNewFamilyAttendanceController {
             @AuthenticationPrincipal Principal principal,
             @RequestBody @Valid RegisterNewFamilyAttendanceRequest request
     ) {
-//        if (principal.isSuperUser()) {
             registerNewFamilyAttendanceService.register(request);
-//
-//            return;
-//        }
-//
-//        registerNewFamilyAttendanceService.register(principal.getUserId(), request);
     }
 }

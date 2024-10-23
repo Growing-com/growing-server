@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
-import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyGroupFinder;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroup.NewFamilyGroupFinder;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.term.TermDownstream;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.springframework.stereotype.Component;

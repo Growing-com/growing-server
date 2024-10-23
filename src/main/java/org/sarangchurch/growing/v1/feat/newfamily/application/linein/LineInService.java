@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.application.linein;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
-import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyLineInManager;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.component.lineinout.NewFamilyLineInManager;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.user.UserUpstream;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

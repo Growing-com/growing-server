@@ -3,8 +3,8 @@ package org.sarangchurch.growing.v1.feat.term.infra.component.pastor;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.pastor.Pastor;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
-import org.sarangchurch.growing.v1.feat.term.infra.data.PastorFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.TermFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.pastor.PastorFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

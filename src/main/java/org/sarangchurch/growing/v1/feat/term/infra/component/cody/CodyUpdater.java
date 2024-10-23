@@ -3,9 +3,9 @@ package org.sarangchurch.growing.v1.feat.term.infra.component.cody;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.cody.Cody;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
-import org.sarangchurch.growing.v1.feat.term.infra.data.CodyFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.SmallGroupFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.TermFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.cody.CodyFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

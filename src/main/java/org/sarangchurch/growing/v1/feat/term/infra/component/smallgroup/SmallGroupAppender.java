@@ -6,7 +6,11 @@ import org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.SmallGroupL
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.SmallGroupMember;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.infra.component.AssignValidator;
-import org.sarangchurch.growing.v1.feat.term.infra.data.*;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupWriter;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupleader.SmallGroupLeaderWriter;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberWriter;
+import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.user.UserDownstream;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Component;

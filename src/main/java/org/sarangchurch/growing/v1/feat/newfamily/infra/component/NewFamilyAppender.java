@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
-import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyWriter;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamily.NewFamilyWriter;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.user.UserUpstream;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Component;
