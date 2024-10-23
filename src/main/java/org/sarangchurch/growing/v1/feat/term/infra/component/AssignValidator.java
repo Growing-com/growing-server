@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.attendance.infra.stream.newfamily.NewFamilyDownstream;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.infra.data.CodyFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.PastorFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.SmallGroupLeaderFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.SmallGroupMemberFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupLeaderDownstream;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class AssignValidator {
+    private final PastorFinder pastorFinder;
     private final CodyFinder codyFinder;
     private final SmallGroupLeaderFinder smallGroupLeaderFinder;
     private final SmallGroupMemberFinder smallGroupMemberFinder;
@@ -31,7 +33,9 @@ public class AssignValidator {
         }
 
         // 교역자
-        if (term.getPastorUserId().equals(user.getId())) {
+        boolean pastorExists = pastorFinder.existsByUserIdAndTermId(user.getId(), term.getId());
+
+        if (pastorExists) {
             throw new IllegalStateException("해당 텀에 이미 교역자로 배정된 유저입니다.");
         }
 
@@ -92,10 +96,9 @@ public class AssignValidator {
         }
 
         // 교역자
-        boolean containsPastor = users.stream()
-                .anyMatch(it -> it.getId().equals(term.getPastorUserId()));
+        boolean pastorExists = pastorFinder.existsByUserIdInAndTermId(userIds, term.getId());
 
-        if (containsPastor) {
+        if (pastorExists) {
             throw new IllegalStateException("해당 텀에 이미 교역자로 배정된 유저가 포함되어 있습니다.");
         }
 
