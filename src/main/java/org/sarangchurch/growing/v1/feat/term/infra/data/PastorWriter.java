@@ -13,4 +13,8 @@ public class PastorWriter {
     public Pastor save(Pastor pastor) {
         return pastorRepository.save(pastor);
     }
+
+    public void deleteById(Long id) {
+        pastorRepository.deleteById(id);
+    }
 }

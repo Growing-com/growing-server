@@ -18,6 +18,9 @@ Content-Type: application/json
   "pastorUserId": 390
 }
 
+### 교역자 삭제
+POST http://localhost:8080/api/v1/pastors/2/delete
+
 ### 코디 추가
 POST http://localhost:8080/api/v1/terms/1/create-cody
 Content-Type: application/json
