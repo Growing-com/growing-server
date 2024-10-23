@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.user.application.emit.linein;
+package org.sarangchurch.growing.v1.feat.user.application.linein;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserLineInManager;

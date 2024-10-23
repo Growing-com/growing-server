@@ -25,4 +25,16 @@ public class PastorRemover {
 
         pastorWriter.deleteById(pastorId);
     }
+
+    public void removeByUserIdAndTermId(Long userId, Long termId) {
+        Pastor pastor = pastorFinder.findByUserIdAndTermId(userId, termId);
+
+        termFinder.findActiveByIdOrThrow(pastor.getTermId());
+
+        if (pastor.isSenior()) {
+            throw new IllegalStateException("담당 교역자는 삭제할 수 없습니다. 먼저 담당 교역자를 변경해주세요.");
+        }
+
+        pastorWriter.deleteById(pastor.getId());
+    }
 }

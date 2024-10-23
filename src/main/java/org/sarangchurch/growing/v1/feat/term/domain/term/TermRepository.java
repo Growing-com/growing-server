@@ -4,4 +4,6 @@ import java.util.Optional;
 
 public interface TermRepository {
     Optional<Term> findById(Long id);
+
+    Optional<Term> findActive();
 }

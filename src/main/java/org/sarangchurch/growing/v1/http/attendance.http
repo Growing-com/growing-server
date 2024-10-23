@@ -9,7 +9,7 @@ Content-Type: application/json
   "date": "2024-10-07",
   "attendanceItems": [
     {
-      "newFamilyId": 43,
+      "newFamilyId": 44,
       "status": "ATTEND"
     }
   ]

@@ -24,4 +24,9 @@ public class CodyFinder {
     public boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId) {
         return codyRepository.existsByUserIdInAndTermId(userIds, termId);
     }
+
+    public Cody findByUserIdAndTermId(Long userId, Long termId) {
+        return codyRepository.findByUserIdAndTermId(userId, termId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 코디입니다"));
+    }
 }

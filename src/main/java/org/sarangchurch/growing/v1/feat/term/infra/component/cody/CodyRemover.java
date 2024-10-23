@@ -40,4 +40,27 @@ public class CodyRemover {
 
         codyWriter.delete(cody);
     }
+
+    public void removeByUserIdAndTermId(Long userId, Long termId) {
+        Cody cody = codyFinder.findByUserIdAndTermId(userId, termId);
+
+        // 활성 텀 검증
+        termFinder.findActiveByIdOrThrow(cody.getTermId());
+
+        // 담당 일반 순모임 검증
+        long smallGroupCount = smallGroupFinder.countByCodyId(cody.getId());
+
+        if (smallGroupCount > 0) {
+            throw new IllegalStateException("담당하는 순모임이 있는 코디는 삭제할 수 없습니다.");
+        }
+
+        // 담당 새가족반 검증
+        long newFamilyGroupCount = newFamilyGroupDownstream.countByCodyId(cody.getId());
+
+        if (newFamilyGroupCount > 0) {
+            throw new IllegalStateException("담당하는 새가족반이 있는 코디는 삭제할 수 없습니다.");
+        }
+
+        codyWriter.delete(cody);
+    }
 }

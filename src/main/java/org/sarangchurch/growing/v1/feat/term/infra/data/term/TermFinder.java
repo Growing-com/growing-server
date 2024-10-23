@@ -25,4 +25,9 @@ public class TermFinder {
 
         return term;
     }
+
+    public Term findActiveOrThrow() {
+        return termRepository.findActive()
+                .orElseThrow(() -> new IllegalArgumentException("활성 텀이 존재하지 않습니다."));
+    }
 }

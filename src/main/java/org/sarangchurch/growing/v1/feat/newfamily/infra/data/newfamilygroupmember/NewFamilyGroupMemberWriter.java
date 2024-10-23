@@ -19,4 +19,8 @@ public class NewFamilyGroupMemberWriter {
     public void deleteByNewFamilyGroupId(Long newFamilyGroupId) {
         newFamilyGroupMemberRepository.deleteByNewFamilyGroupId(newFamilyGroupId);
     }
+
+    public void deleteByUserIdAndTermId(Long userId, Long termId) {
+        newFamilyGroupMemberRepository.deleteByUserIdAndTermId(userId, termId);
+    }
 }

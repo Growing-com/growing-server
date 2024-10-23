@@ -1,7 +1,7 @@
-package org.sarangchurch.growing.v1.feat.user.presentation.emit;
+package org.sarangchurch.growing.v1.feat.user.presentation;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.user.application.emit.linein.UserLineInService;
+import org.sarangchurch.growing.v1.feat.user.application.linein.UserLineInService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -23,4 +23,8 @@ public class SmallGroupMemberWriter {
     public SmallGroupMember save(SmallGroupMember smallGroupMember) {
         return smallGroupMemberRepository.save(smallGroupMember);
     }
+
+    public void deleteByUserIdAndTermId(Long userId, Long termId) {
+        smallGroupMemberRepository.deleteByUserIdAndTermId(userId, termId);
+    }
 }

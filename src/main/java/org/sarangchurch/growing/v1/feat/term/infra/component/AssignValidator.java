@@ -144,4 +144,6 @@ public class AssignValidator {
             throw new IllegalStateException("새가족을 내부 인원으로 배정할 수 없습니다.");
         }
     }
+
+
 }

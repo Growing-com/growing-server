@@ -33,18 +33,18 @@ POST http://localhost:8080/api/v1/terms/1/create-pastor
 Content-Type: application/json
 
 {
-  "pastorUserId": 376
+  "pastorUserId": 395
 }
 
 ### 교역자 삭제
-POST http://localhost:8080/api/v1/pastors/2/delete
+POST http://localhost:8080/api/v1/pastors/4/delete
 
 ### 담임 교역자 변경
 POST http://localhost:8080/api/v1/terms/1/switch-senior-pastor
 Content-Type: application/json
 
 {
-  "targetSeniorPastorId": 3
+  "targetSeniorPastorId": 1
 }
 
 ### 코디 추가
