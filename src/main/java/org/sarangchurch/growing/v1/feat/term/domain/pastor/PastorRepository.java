@@ -13,4 +13,6 @@ public interface PastorRepository {
     Optional<Pastor> findById(Long id);
 
     void deleteById(Long id);
+
+    Optional<Pastor> findSeniorByTermId(Long termId);
 }

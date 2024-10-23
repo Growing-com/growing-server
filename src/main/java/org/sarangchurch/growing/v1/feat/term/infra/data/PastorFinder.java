@@ -24,4 +24,9 @@ public class PastorFinder {
         return pastorRepository.findById(pastorId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 교역자입니다."));
     }
+
+    public Pastor findSeniorByTermIdOrThrow(Long termId) {
+        return pastorRepository.findSeniorByTermId(termId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 교역자입니다."));
+    }
 }

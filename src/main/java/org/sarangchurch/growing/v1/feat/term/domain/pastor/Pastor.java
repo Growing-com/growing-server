@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
+import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 
 import javax.persistence.*;
 
@@ -31,5 +32,21 @@ public class Pastor extends BaseEntity {
         this.termId = termId;
         this.userId = userId;
         this.isSenior = isSenior;
+    }
+
+    public void toJunior() {
+        isSenior = false;
+    }
+
+    public void toSenior() {
+        isSenior = true;
+    }
+
+    public boolean isSameTerm(Pastor anotherPastor) {
+        return this.getTermId().equals(anotherPastor.getTermId());
+    }
+
+    public boolean isSameTerm(Term term) {
+        return this.getTermId().equals(term.getId());
     }
 }

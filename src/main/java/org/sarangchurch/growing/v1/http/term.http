@@ -21,6 +21,14 @@ Content-Type: application/json
 ### 교역자 삭제
 POST http://localhost:8080/api/v1/pastors/2/delete
 
+### 담임 교역자 변경
+POST http://localhost:8080/api/v1/terms/1/switch-senior-pastor
+Content-Type: application/json
+
+{
+  "targetSeniorPastorId": 3
+}
+
 ### 코디 추가
 POST http://localhost:8080/api/v1/terms/1/create-cody
 Content-Type: application/json
