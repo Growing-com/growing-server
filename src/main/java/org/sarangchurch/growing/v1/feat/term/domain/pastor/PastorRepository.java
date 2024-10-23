@@ -6,4 +6,6 @@ public interface PastorRepository {
     boolean existsByUserIdAndTermId(Long userId, Long termId);
 
     boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId);
+
+    Pastor save(Pastor pastor);
 }
