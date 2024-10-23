@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
+import org.sarangchurch.growing.v1.feat.term.domain.cody.Cody;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 
 import javax.persistence.*;
@@ -37,5 +38,13 @@ public class SmallGroup extends BaseEntity {
 
     public boolean isSameTerm(Term term) {
         return termId.equals(term.getId());
+    }
+
+    public void updateCody(Cody cody) {
+        if (!cody.getTermId().equals(termId)) {
+            throw new IllegalStateException("코디와 순모임이 속한 텀이 일치하지 않습니다.");
+        }
+
+        codyId = cody.getId();
     }
 }

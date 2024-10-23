@@ -15,8 +15,8 @@ POST http://localhost:8080/api/v1/terms/1/create-small-group
 Content-Type: application/json
 
 {
-  "codyId": 17,
-  "leaderUserId": 383,
+  "codyId": 18,
+  "leaderUserId": 388,
   "memberUserIds": []
 }
 
@@ -44,7 +44,15 @@ POST http://localhost:8080/api/v1/terms/1/create-cody
 Content-Type: application/json
 
 {
-  "codyUserId": 381
+  "codyUserId": 389
+}
+
+### 코디 수정
+POST http://localhost:8080/api/v1/codies/17/update
+Content-Type: application/json
+
+{
+  "smallGroupIds": [73, 74]
 }
 
 ### 코디 삭제
