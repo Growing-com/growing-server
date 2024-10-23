@@ -9,15 +9,14 @@ import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
+import static org.sarangchurch.growing.v1.feat.term.domain.pastor.QPastor.pastor;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
-import static org.sarangchurch.growing.v1.feat.term.domain.term.QTerm.term;
 import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
 @Repository
@@ -87,9 +86,9 @@ public class LeaderQueryRepository {
 
     public List<LeaderListItem> findAllByTerm(Long termId) {
         // 교역자
-        LeaderListItem pastor = findPastorByTerm(termId);
+        List<LeaderListItem> pastors = findPastorsByTerm(termId);
 
-        pastor.setDuty(Duty.PASTOR);
+        pastors.forEach(it -> it.setDuty(Duty.PASTOR));
 
         // 코디
         List<LeaderListItem> codies = findCodiesByTerm(termId);
@@ -109,16 +108,15 @@ public class LeaderQueryRepository {
         // 취합 및 정렬
         List<LeaderListItem> result = new ArrayList<>();
 
-        result.add(pastor);
+        result.addAll(pastors);
         result.addAll(codies);
         result.addAll(smallGroupLeaders);
         result.addAll(newFamilyLeaders);
-        result.sort(Comparator.comparing(LeaderListItem::getCodyName));
 
         return result;
     }
 
-    private LeaderListItem findPastorByTerm(Long termId) {
+    private List<LeaderListItem> findPastorsByTerm(Long termId) {
         return queryFactory.select(Projections.constructor(LeaderListItem.class,
                         user.id.as("userId"),
                         user.name.as("name"),
@@ -128,8 +126,8 @@ public class LeaderQueryRepository {
                         user.birth.as("birth"),
                         user.name.as("codyName")
                 ))
-                .from(term)
-                .join(user).on(user.id.eq(term.pastorUserId), term.id.eq(termId))
-                .fetchOne();
+                .from(pastor)
+                .join(user).on(user.id.eq(pastor.userId), pastor.termId.eq(termId))
+                .fetch();
     }
 }

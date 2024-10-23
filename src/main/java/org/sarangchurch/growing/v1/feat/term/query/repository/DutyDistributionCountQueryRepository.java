@@ -10,9 +10,9 @@ import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygrouple
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.QNewFamilyGroupMember.newFamilyGroupMember;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.QNewFamilyPromoteLog.newFamilyPromoteLog;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
+import static org.sarangchurch.growing.v1.feat.term.domain.pastor.QPastor.pastor;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.QSmallGroupMember.smallGroupMember;
-import static org.sarangchurch.growing.v1.feat.term.domain.term.QTerm.term;
 import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
 @Repository
@@ -28,9 +28,9 @@ public class DutyDistributionCountQueryRepository {
                 .fetchOne();
 
         Long pastorCount = queryFactory
-                .select(term.count())
-                .from(term)
-                .join(user).on(user.id.eq(term.pastorUserId))
+                .select(pastor.count())
+                .from(pastor)
+                .where(pastor.termId.eq(termId))
                 .fetchOne();
 
         Long codyCount = queryFactory
