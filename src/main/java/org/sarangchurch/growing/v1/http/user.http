@@ -3,7 +3,7 @@ POST http://localhost:8080/api/v1/users/register
 Content-Type: application/json
 
 {
-  "name":  "김불닭볶음면",
+  "name":  "김치즈김밥",
   "sex": "MALE",
   "phoneNumber":  "010-5555-6666",
   "birth": "1996-10-16",
@@ -12,7 +12,7 @@ Content-Type: application/json
 }
 
 ### 유저 수정
-POST http://localhost:8080/api/v1/users/380/update
+POST http://localhost:8080/api/v1/users/382/update
 Content-Type: application/json
 
 {
@@ -21,7 +21,7 @@ Content-Type: application/json
   "phoneNumber":  "010-5555-7777",
   "birth": "1996-10-16",
   "grade":  10,
-  "smallGroupId": 66
+  "smallGroupId": 73
 }
 
 ### 전체 인원
@@ -37,8 +37,8 @@ Content-Type: application/json
 {
   "content": [
     {
-      "userId": 1,
-      "type": "ABROAD",
+      "userId": 388,
+      "type": "MISSIONARY",
       "sendDate": "2024-09-01"
     }
   ]
@@ -47,7 +47,7 @@ Content-Type: application/json
 ### 파송 복귀
 POST http://localhost:8080/api/v1/dispatched-users/4/return
 
-### 파송자 조회
+### 파송자 목록 조회
 GET http://localhost:8080/api/v1/dispatched-users
 
 ### 졸업

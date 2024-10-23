@@ -4,6 +4,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v1.feat.term.domain.Duty;
 import org.sarangchurch.growing.v1.feat.term.query.model.CodyListItem;
 import org.sarangchurch.growing.v1.feat.term.query.model.GroupListItem;
 import org.sarangchurch.growing.v1.feat.term.query.model.GroupType;
@@ -55,7 +56,8 @@ public class TreeMemberQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
-                        user.name.as("leaderName")
+                        user.name.as("leaderName"),
+                        Expressions.asEnum(Duty.SMALL_GROUP_LEADER).as("duty")
                 ))
                 .from(smallGroupLeader)
                 .join(user).on(user.id.eq(smallGroupLeader.userId), smallGroupLeader.id.eq(smallGroupLeaderId))
@@ -69,7 +71,8 @@ public class TreeMemberQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
-                        leaderUser.name.as("leaderName")
+                        leaderUser.name.as("leaderName"),
+                        Expressions.asEnum(Duty.SMALL_GROUP_MEMBER).as("duty")
                 ))
                 .from(smallGroup)
                 .join(smallGroupMember).on(smallGroupMember.smallGroupId.eq(smallGroup.id), smallGroup.id.eq(smallGroupId))
@@ -88,14 +91,15 @@ public class TreeMemberQueryRepository {
         QUser leaderUser = new QUser("leaderUser");
 
         // 일반 순장
-        List<TreeMemberListItem> result1 = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
+        List<TreeMemberListItem> smallGroupLeaders = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
                         user.id.as("userId"),
                         user.name.as("name"),
                         user.sex.as("sex"),
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
-                        user.name.as("leaderName")
+                        user.name.as("leaderName"),
+                        Expressions.asEnum(Duty.SMALL_GROUP_LEADER).as("duty")
                 ))
                 .from(smallGroup)
                 .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId), smallGroup.codyId.eq(codyId))
@@ -103,14 +107,15 @@ public class TreeMemberQueryRepository {
                 .fetch();
 
         // 일반 순원
-        List<TreeMemberListItem> result2 = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
+        List<TreeMemberListItem> smallGroupMembers = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
                         user.id.as("userId"),
                         user.name.as("name"),
                         user.sex.as("sex"),
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
-                        leaderUser.name.as("leaderName")
+                        leaderUser.name.as("leaderName"),
+                        Expressions.asEnum(Duty.SMALL_GROUP_MEMBER).as("duty")
                 ))
                 .from(smallGroup)
                 .join(smallGroupMember).on(smallGroupMember.smallGroupId.eq(smallGroup.id), smallGroup.codyId.eq(smallGroup.codyId))
@@ -120,14 +125,15 @@ public class TreeMemberQueryRepository {
                 .fetch();
 
         // 새가족 순장
-        List<TreeMemberListItem> result3 = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
+        List<TreeMemberListItem> newFamilyGroupLeaders = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
                         user.id.as("userId"),
                         user.name.as("name"),
                         user.sex.as("sex"),
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
-                        user.name.as("leaderName")
+                        user.name.as("leaderName"),
+                        Expressions.asEnum(Duty.NEW_FAMILY_GROUP_LEADER).as("duty")
                 ))
                 .from(newFamilyGroup)
                 .join(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId),
@@ -136,14 +142,15 @@ public class TreeMemberQueryRepository {
                 .fetch();
 
         // 새가족 순원
-        List<TreeMemberListItem> result4 = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
+        List<TreeMemberListItem> newFamilyGroupMembers = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
                         user.id.as("userId"),
                         user.name.as("name"),
                         user.sex.as("sex"),
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
-                        leaderUser.name.as("leaderName")
+                        leaderUser.name.as("leaderName"),
+                        Expressions.asEnum(Duty.NEW_FAMILY_GROUP_MEMBER).as("duty")
                 ))
                 .from(newFamilyGroup)
                 .join(newFamilyGroupMember).on(newFamilyGroupMember.newFamilyGroupId.eq(newFamilyGroup.id),
@@ -155,10 +162,10 @@ public class TreeMemberQueryRepository {
 
         List<TreeMemberListItem> result = new ArrayList<>();
 
-        result.addAll(result1);
-        result.addAll(result2);
-        result.addAll(result3);
-        result.addAll(result4);
+        result.addAll(smallGroupLeaders);
+        result.addAll(smallGroupMembers);
+        result.addAll(newFamilyGroupLeaders);
+        result.addAll(newFamilyGroupMembers);
 
         result.sort(Comparator.comparing(TreeMemberListItem::getLeaderName));
 
