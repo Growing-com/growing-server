@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.term.application.updatesmallgroup;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.term.infra.component.SmallGroupUpdater;
+import org.sarangchurch.growing.v1.feat.term.infra.component.smallgroup.SmallGroupUpdater;
 import org.springframework.stereotype.Service;
 
 @Service

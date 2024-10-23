@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.term.infra.component;
+package org.sarangchurch.growing.v1.feat.term.infra.component.newfamilygroup;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;

@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.term.application.deletenewfamilygroup;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.term.infra.component.NewFamilyGroupRemover;
+import org.sarangchurch.growing.v1.feat.term.infra.component.newfamilygroup.NewFamilyGroupRemover;
 import org.springframework.stereotype.Service;
 
 @Service

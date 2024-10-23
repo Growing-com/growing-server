@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.term.infra.component;
+package org.sarangchurch.growing.v1.feat.term.infra.component.cody;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.cody.Cody;

@@ -1,8 +1,9 @@
-package org.sarangchurch.growing.v1.feat.term.infra.component;
+package org.sarangchurch.growing.v1.feat.term.infra.component.cody;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.cody.Cody;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
+import org.sarangchurch.growing.v1.feat.term.infra.component.AssignValidator;
 import org.sarangchurch.growing.v1.feat.term.infra.data.CodyWriter;
 import org.sarangchurch.growing.v1.feat.term.infra.data.TermFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.user.UserDownstream;

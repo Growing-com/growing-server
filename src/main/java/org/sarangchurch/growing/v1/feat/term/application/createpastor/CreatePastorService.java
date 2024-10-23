@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.term.application.createpastor;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.term.infra.component.PastorAppender;
+import org.sarangchurch.growing.v1.feat.term.infra.component.pastor.PastorAppender;
 import org.springframework.stereotype.Service;
 
 @Service

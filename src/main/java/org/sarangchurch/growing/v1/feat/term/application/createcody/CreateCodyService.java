@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.term.application.createcody;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.term.infra.component.CodyAppender;
+import org.sarangchurch.growing.v1.feat.term.infra.component.cody.CodyAppender;
 import org.springframework.stereotype.Service;
 
 @Service

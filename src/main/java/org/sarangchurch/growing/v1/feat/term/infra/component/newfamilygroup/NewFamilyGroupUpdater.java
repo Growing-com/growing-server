@@ -1,9 +1,10 @@
-package org.sarangchurch.growing.v1.feat.term.infra.component;
+package org.sarangchurch.growing.v1.feat.term.infra.component.newfamilygroup;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.NewFamilyGroupMember;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
+import org.sarangchurch.growing.v1.feat.term.infra.component.AssignValidator;
 import org.sarangchurch.growing.v1.feat.term.infra.data.TermFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupDownstream;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupMemberUpstream;

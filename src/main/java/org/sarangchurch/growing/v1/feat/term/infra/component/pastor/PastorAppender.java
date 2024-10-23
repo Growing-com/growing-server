@@ -1,8 +1,9 @@
-package org.sarangchurch.growing.v1.feat.term.infra.component;
+package org.sarangchurch.growing.v1.feat.term.infra.component.pastor;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.pastor.Pastor;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
+import org.sarangchurch.growing.v1.feat.term.infra.component.AssignValidator;
 import org.sarangchurch.growing.v1.feat.term.infra.data.PastorWriter;
 import org.sarangchurch.growing.v1.feat.term.infra.data.TermFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.user.UserDownstream;

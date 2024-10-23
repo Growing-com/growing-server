@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.term.application.updatenewfamilygroup;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.term.infra.component.NewFamilyGroupUpdater;
+import org.sarangchurch.growing.v1.feat.term.infra.component.newfamilygroup.NewFamilyGroupUpdater;
 import org.springframework.stereotype.Service;
 
 @Service

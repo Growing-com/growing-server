@@ -1,10 +1,11 @@
-package org.sarangchurch.growing.v1.feat.term.infra.component;
+package org.sarangchurch.growing.v1.feat.term.infra.component.smallgroup;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.SmallGroupLeader;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.SmallGroupMember;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
+import org.sarangchurch.growing.v1.feat.term.infra.component.AssignValidator;
 import org.sarangchurch.growing.v1.feat.term.infra.data.*;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.user.UserDownstream;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;

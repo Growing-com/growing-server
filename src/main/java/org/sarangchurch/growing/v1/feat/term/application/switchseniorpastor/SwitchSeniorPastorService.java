@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.term.application.switchseniorpastor;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.term.infra.component.SeniorPastorSwitcher;
+import org.sarangchurch.growing.v1.feat.term.infra.component.pastor.SeniorPastorSwitcher;
 import org.springframework.stereotype.Service;
 
 @Service

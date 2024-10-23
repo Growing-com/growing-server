@@ -1,8 +1,8 @@
 package org.sarangchurch.growing.v1.feat.term.application.createsmallgroup;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.term.infra.component.CodyValidator;
-import org.sarangchurch.growing.v1.feat.term.infra.component.SmallGroupAppender;
+import org.sarangchurch.growing.v1.feat.term.infra.component.cody.CodyValidator;
+import org.sarangchurch.growing.v1.feat.term.infra.component.smallgroup.SmallGroupAppender;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.term.application.deletepastor;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.term.infra.component.PastorRemover;
+import org.sarangchurch.growing.v1.feat.term.infra.component.pastor.PastorRemover;
 import org.springframework.stereotype.Service;
 
 @Service
