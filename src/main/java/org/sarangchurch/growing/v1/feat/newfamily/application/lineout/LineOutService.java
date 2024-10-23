@@ -18,7 +18,9 @@ public class LineOutService {
 
     @Transactional
     public void lineOut(LineOutRequest request) {
-        List<LineOutNewFamily> lineOutNewFamilies = lineOutManager.lineOut(request);
+        List<Long> newFamilyIds = request.getNewFamilyIds();
+
+        List<LineOutNewFamily> lineOutNewFamilies = lineOutManager.lineOut(newFamilyIds);
 
         List<Long> userIds = lineOutNewFamilies.stream()
                 .map(LineOutNewFamily::getUserId)

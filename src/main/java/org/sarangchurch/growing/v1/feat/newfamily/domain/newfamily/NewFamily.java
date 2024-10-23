@@ -80,4 +80,8 @@ public class NewFamily extends BaseEntity {
     public boolean hasPromoteLog() {
         return newFamilyPromoteLogId != null;
     }
+
+    public void updateVisitDate(LocalDate visitDate) {
+        this.visitDate = visitDate;
+    }
 }

@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.user.infrastructure.component;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.user.application.usergradeupdate.UserGradeUpdateOption;
+import org.sarangchurch.growing.v1.feat.user.domain.UserGradeUpdateOption;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.data.UserFinder;
 import org.springframework.stereotype.Component;

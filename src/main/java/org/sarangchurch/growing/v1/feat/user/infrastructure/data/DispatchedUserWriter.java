@@ -19,4 +19,8 @@ public class DispatchedUserWriter {
     public void saveAll(List<DispatchedUser> dispatchedUsers) {
         dispatchedUserRepository.saveAll(dispatchedUsers);
     }
+
+    public void deleteByUserIdIn(List<Long> userIds) {
+        dispatchedUserRepository.deleteByUserIdIn(userIds);
+    }
 }

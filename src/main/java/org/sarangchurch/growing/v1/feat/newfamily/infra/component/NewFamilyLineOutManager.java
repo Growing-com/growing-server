@@ -1,7 +1,6 @@
 package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.newfamily.application.lineout.LineOutRequest;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.lineoutnewfamily.LineOutNewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLog;
@@ -23,9 +22,7 @@ public class NewFamilyLineOutManager {
     private final NewFamilyPromoteLogWriter newFamilyPromoteLogWriter;
 
     @Transactional
-    public List<LineOutNewFamily> lineOut(LineOutRequest request) {
-        List<Long> newFamilyIds = request.getNewFamilyIds();
-
+    public List<LineOutNewFamily> lineOut(List<Long> newFamilyIds) {
         List<NewFamily> newFamilies = newFamilyFinder.findByIdInOrThrow(newFamilyIds);
 
         // 등반전 확인

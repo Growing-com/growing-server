@@ -2,7 +2,6 @@ package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
 
 import com.mysema.commons.lang.Pair;
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.newfamily.application.temporarylineup.TemporaryLineUpRequest;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLog;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyPromoteLogFinder;
@@ -20,26 +19,21 @@ public class NewFamilyTemporaryLineUpManager {
     private final NewFamilyPromoteLogFinder newFamilyPromoteLogFinder;
 
     @Transactional
-    public void temporaryLineUp(TemporaryLineUpRequest request) {
-        List<Long> newFamilyIds = request.getContent()
-                .stream()
-                .map(TemporaryLineUpRequest.V1TemporaryLineUpRequestItem::getNewFamilyId)
-                .collect(Collectors.toList());
-
-        List<Long> smallGroupIds = request.getContent()
-                .stream()
-                .flatMap(el -> el.getTemporarySmallGroupIds().stream())
-                .collect(Collectors.toList());
-
-        smallGroupDownstream.validateAvailable(smallGroupIds);
+    public void temporaryLineUp(List<Long> newFamilyIds, List<List<Long>> temporarySmallGroupIds) {
+        smallGroupDownstream.validateAvailable(
+                temporarySmallGroupIds
+                        .stream()
+                        .flatMap(List::stream)
+                        .collect(Collectors.toList())
+        );
 
         Pair<List<NewFamily>, List<NewFamilyPromoteLog>> pair = newFamilyPromoteLogFinder.findPromoteCandidatesByNewFamilyIds(newFamilyIds);
         List<NewFamily> newFamilies = pair.getFirst();
         List<NewFamilyPromoteLog> promoteLogs = pair.getSecond();
 
-        for (TemporaryLineUpRequest.V1TemporaryLineUpRequestItem requestItem : request.getContent()) {
-            Long newFamilyId = requestItem.getNewFamilyId();
-            List<Long> temporarySmallGroupIds = requestItem.getTemporarySmallGroupIds();
+        for (int i = 0; i < newFamilyIds.size(); i++) {
+            Long newFamilyId = newFamilyIds.get(i);
+            List<Long> temporarySmallGroupIdList = temporarySmallGroupIds.get(i);
 
             NewFamily newFamily = newFamilies.stream()
                     .filter(el -> el.getId().equals(newFamilyId))
@@ -51,7 +45,7 @@ public class NewFamilyTemporaryLineUpManager {
                     .findAny()
                     .orElseThrow();
 
-            log.updateTemporarySmallGroups(temporarySmallGroupIds);
+            log.updateTemporarySmallGroups(temporarySmallGroupIdList);
         }
     }
 }

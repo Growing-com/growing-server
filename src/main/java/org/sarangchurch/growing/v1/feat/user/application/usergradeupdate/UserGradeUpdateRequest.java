@@ -2,6 +2,7 @@ package org.sarangchurch.growing.v1.feat.user.application.usergradeupdate;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.sarangchurch.growing.v1.feat.user.domain.UserGradeUpdateOption;
 
 import javax.validation.constraints.NotNull;
 

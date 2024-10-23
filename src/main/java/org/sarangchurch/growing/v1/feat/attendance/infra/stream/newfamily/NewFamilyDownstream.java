@@ -11,8 +11,8 @@ import java.util.List;
 public class NewFamilyDownstream {
     private final NewFamilyService newFamilyService;
 
-    public boolean existsByIds(List<Long> ids) {
-        return newFamilyService.existsByIds(ids);
+    public boolean existsAllByIds(List<Long> ids) {
+        return newFamilyService.existsAllByIds(ids);
     }
 
     public boolean containsNewFamilyByUserIds(List<Long> userIds) {

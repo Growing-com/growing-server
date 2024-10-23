@@ -21,7 +21,7 @@ public class NewFamilyFinder {
                 .orElseThrow(() -> new IllegalArgumentException("새가족을 찾을 수 없습니다"));
     }
 
-    public boolean existsByIds(List<Long> ids) {
+    public boolean existsAllByIds(List<Long> ids) {
         List<NewFamily> newFamilies = newFamilyRepository.findByIdIn(ids);
 
         return newFamilies.size() == ids.size();

@@ -11,4 +11,6 @@ public interface DispatchedUserRepository {
     void deleteById(Long dispatchUserId);
 
     Optional<DispatchedUser> findById(Long dispatchUserId);
+
+    void deleteByUserIdIn(List<Long> userIds);
 }

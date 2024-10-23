@@ -1,7 +1,6 @@
 package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.newfamily.application.promote.PromoteRequest;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLog;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyFinder;
@@ -22,12 +21,7 @@ public class NewFamilyPromoter {
     private final SmallGroupMemberUpstream smallGroupMemberUpstream;
 
     @Transactional
-    public void promote(PromoteRequest request) {
-        List<Long> newFamilyIds = request.getContent()
-                .stream()
-                .map(PromoteRequest.V1PromoteRequestItem::getNewFamilyId)
-                .collect(Collectors.toList());
-
+    public void promote(List<Long> newFamilyIds, List<LocalDate> promoteDates) {
         List<NewFamily> newFamilies = newFamilyFinder.findByIdInOrThrow(newFamilyIds);
 
         // 등반 가능 여부 검증
@@ -46,9 +40,9 @@ public class NewFamilyPromoter {
         }
 
         // 등반 처리
-        for (PromoteRequest.V1PromoteRequestItem requestItem : request.getContent()) {
-            Long newFamilyId = requestItem.getNewFamilyId();
-            LocalDate promoteDate = requestItem.getPromoteDate();
+        for (int i = 0; i < newFamilies.size(); i++) {
+            Long newFamilyId = newFamilyIds.get(i);
+            LocalDate promoteDate = promoteDates.get(i);
 
             NewFamily newFamily = newFamilies.stream()
                     .filter(el -> el.getId().equals(newFamilyId))

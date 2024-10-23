@@ -13,8 +13,8 @@ public class NewFamilyServiceImpl implements NewFamilyService {
     private final NewFamilyFinder newFamilyFinder;
 
     @Override
-    public boolean existsByIds(List<Long> ids) {
-        return newFamilyFinder.existsByIds(ids);
+    public boolean existsAllByIds(List<Long> ids) {
+        return newFamilyFinder.existsAllByIds(ids);
     }
 
     @Override

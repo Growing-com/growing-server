@@ -1,13 +1,15 @@
 package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.newfamily.application.update.UpdateRequest;
+import org.sarangchurch.growing.core.interfaces.common.Sex;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyEtc;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.NewFamilyFinder;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.user.UserUpstream;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Component
@@ -18,31 +20,44 @@ public class NewFamilyUpdater {
     private final UserUpstream userUpstream;
 
     @Transactional
-    public void update(Long newFamilyId, UpdateRequest request) {
+    public void update(
+            Long newFamilyId,
+            Long newFamilyGroupId,
+            String name,
+            Sex sex,
+            String phoneNumber,
+            LocalDate birth,
+            LocalDate visitDate,
+            Integer grade,
+            NewFamilyEtc etc
+    ) {
         NewFamily newFamily = newFamilyFinder.findByIdOrThrow(newFamilyId);
 
-        Long requestNewFamilyGroupId = request.getNewFamilyGroupId();
-        boolean isNewFamilyGroupIdChanged = !Objects.equals(newFamily.getNewFamilyGroupId(), requestNewFamilyGroupId);
+        boolean isNewFamilyGroupIdChanged = !Objects.equals(newFamily.getNewFamilyGroupId(), newFamilyGroupId);
 
         if (isNewFamilyGroupIdChanged) {
-            if (requestNewFamilyGroupId != null) {
-                newFamilyGroupValidator.validateAvailable(requestNewFamilyGroupId);
+            if (newFamilyGroupId != null) {
+                newFamilyGroupValidator.validateAvailable(newFamilyGroupId);
             }
 
-            newFamily.updateNewFamilyGroup(requestNewFamilyGroupId);
+            newFamily.updateNewFamilyGroup(newFamilyGroupId);
         }
 
-        if (request.getEtc() != null) {
-            newFamily.updateEtc(request.getEtc());
+        if (etc != null) {
+            newFamily.updateEtc(etc);
+        }
+
+        if (visitDate != null) {
+            newFamily.updateVisitDate(visitDate);
         }
 
         userUpstream.update(
                 newFamily.getUserId(),
-                request.getName(),
-                request.getPhoneNumber(),
-                request.getBirth(),
-                request.getSex(),
-                request.getGrade()
+                name,
+                phoneNumber,
+                birth,
+                sex,
+                grade
         );
     }
 }
