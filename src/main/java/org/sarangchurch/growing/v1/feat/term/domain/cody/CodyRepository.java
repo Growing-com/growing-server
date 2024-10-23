@@ -9,4 +9,5 @@ public interface CodyRepository {
     boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId);
     Cody save(Cody cody);
     void deleteById(Long id);
+    Optional<Cody> findByUserIdAndTermId(Long userId, Long termId);
 }

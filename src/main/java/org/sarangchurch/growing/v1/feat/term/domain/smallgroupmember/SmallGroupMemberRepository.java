@@ -21,4 +21,6 @@ public interface SmallGroupMemberRepository {
     boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId);
 
     Optional<SmallGroupMember> findByUserIdAndTermId(Long userId, Long termId);
+
+    void deleteByUserIdAndTermId(Long userId, Long termId);
 }

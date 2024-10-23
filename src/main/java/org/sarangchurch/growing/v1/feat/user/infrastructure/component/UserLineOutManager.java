@@ -1,9 +1,9 @@
 package org.sarangchurch.growing.v1.feat.user.infrastructure.component;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.user.application.lineout.UserLineOutRequest;
 import org.sarangchurch.growing.v1.feat.user.domain.lineoutuser.LineOutUser;
-import org.sarangchurch.growing.v1.feat.user.domain.lineoutuser.LineOutUserRepository;
+import org.sarangchurch.growing.v1.feat.user.domain.user.User;
+import org.sarangchurch.growing.v1.feat.user.infrastructure.data.DispatchedUserWriter;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.data.LineOutUserReader;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.data.LineOutUserWriter;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.data.UserFinder;
@@ -19,15 +19,22 @@ public class UserLineOutManager {
     private final UserFinder userFinder;
     private final LineOutUserReader lineOutUserReader;
     private final LineOutUserWriter lineOutUserWriter;
+    private final DispatchedUserWriter dispatchedUserWriter;
 
     @Transactional
-    public void lineOut(UserLineOutRequest request) {
-        List<Long> userIds = request.getContent()
-                .stream()
-                .map(UserLineOutRequest.UserLineOutRequestItem::getUserId)
+    public void lineOut(List<LineOutUser> lineOutUsers) {
+        List<Long> userIds = lineOutUsers.stream()
+                .map(LineOutUser::getUserId)
                 .collect(Collectors.toList());
 
-        userFinder.findByIdInOrThrow(userIds);
+        List<User> users = userFinder.findByIdInOrThrow(userIds);
+
+        boolean containsInActiveUser = users.stream()
+                .anyMatch(it -> !it.isActive());
+
+        if (containsInActiveUser) {
+            throw new IllegalStateException("비활성 유저가 포함되어 있습니다.");
+        }
 
         boolean includesLineOut = lineOutUserReader.existsByUserIdIn(userIds);
 
@@ -35,15 +42,7 @@ public class UserLineOutManager {
             throw new IllegalStateException("이미 라인아웃된 유저가 포함되어 있습니다.");
         }
 
-        List<LineOutUser> lineOutUsers = request.getContent()
-                .stream()
-                .map(it -> LineOutUser.builder()
-                        .userId(it.getUserId())
-                        .lineOutDate(it.getLineOutDate())
-                        .reason(it.getReason())
-                        .build())
-                .collect(Collectors.toList());
-
         lineOutUserWriter.saveAll(lineOutUsers);
+        dispatchedUserWriter.deleteByUserIdIn(userIds);
     }
 }

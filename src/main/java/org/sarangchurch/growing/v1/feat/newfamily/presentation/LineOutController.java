@@ -12,10 +12,10 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 public class LineOutController {
-    private final LineOutService service;
+    private final LineOutService lineOutService;
 
     @PostMapping("/api/v1/new-families/line-out")
     public void lineOut(@RequestBody @Valid LineOutRequest request) {
-        service.lineOut(request);
+        lineOutService.lineOut(request);
     }
 }

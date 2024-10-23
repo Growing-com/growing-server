@@ -23,7 +23,7 @@ public class RegisterNewFamilyAttendanceService {
             throw new IllegalArgumentException("과거 날짜로만 출석체크할 수 있습니다.");
         }
 
-        newFamilyAttendanceAppender.append(request);
+        newFamilyAttendanceAppender.append(request.toEntities());
     }
 
 }

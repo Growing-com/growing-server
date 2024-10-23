@@ -7,4 +7,6 @@ public interface NewFamilyAttendanceRepository {
     <S extends NewFamilyAttendance> List<S> saveAll(Iterable<S> entities);
 
     void deleteByNewFamilyIdInAndDate(List<Long> newFamilyIds, LocalDate date);
+
+    void deleteByNewFamilyIdIn(List<Long> newFamilyIds);
 }

@@ -3,9 +3,9 @@ package org.sarangchurch.growing.v1.feat.term.infra.component;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.SmallGroupMember;
-import org.sarangchurch.growing.v1.feat.term.infra.data.SmallGroupFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.SmallGroupMemberFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.SmallGroupMemberWriter;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberWriter;
 import org.springframework.stereotype.Component;
 
 @Component

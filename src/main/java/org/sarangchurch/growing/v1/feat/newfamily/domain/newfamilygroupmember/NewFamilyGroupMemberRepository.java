@@ -12,4 +12,6 @@ public interface NewFamilyGroupMemberRepository {
     <S extends NewFamilyGroupMember> List<S> saveAll(Iterable<S> newFamilyGroupMembers);
 
     void deleteByNewFamilyGroupId(Long newFamilyGroupId);
+
+    void deleteByUserIdAndTermId(Long userId, Long termId);
 }

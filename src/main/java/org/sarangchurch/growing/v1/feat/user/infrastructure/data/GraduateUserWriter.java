@@ -12,7 +12,7 @@ import java.util.List;
 public class GraduateUserWriter {
     private final GraduateUserRepository graduateUserRepository;
 
-    public void saveAll(List<GraduatedUser> graduatedUsers) {
-        graduateUserRepository.saveAll(graduatedUsers);
+    public List<GraduatedUser> saveAll(List<GraduatedUser> graduatedUsers) {
+        return graduateUserRepository.saveAll(graduatedUsers);
     }
 }

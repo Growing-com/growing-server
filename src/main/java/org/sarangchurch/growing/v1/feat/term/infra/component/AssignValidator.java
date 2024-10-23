@@ -1,12 +1,12 @@
 package org.sarangchurch.growing.v1.feat.term.infra.component;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.attendance.infra.stream.newfamily.NewFamilyDownstream;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
-import org.sarangchurch.growing.v1.feat.term.infra.data.CodyFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.PastorFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.SmallGroupLeaderFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.SmallGroupMemberFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.cody.CodyFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.pastor.PastorFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupleader.SmallGroupLeaderFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyDownstream;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupLeaderDownstream;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupMemberDownstream;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
@@ -144,4 +144,6 @@ public class AssignValidator {
             throw new IllegalStateException("새가족을 내부 인원으로 배정할 수 없습니다.");
         }
     }
+
+
 }
