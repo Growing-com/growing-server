@@ -21,7 +21,7 @@ POST http://localhost:8080/api/v1/new-families/register
 Content-Type: application/json
 
 {
-  "name": "김라인아웃",
+  "name": "새가족응애",
   "sex": "MALE",
   "phoneNumber":"010-1234-5678",
   "birth": "2003-03-03",
@@ -41,7 +41,7 @@ Content-Type: application/json
 }
 
 ### 새가족 수정
-POST http://localhost:8080/api/v1/new-families/44/update
+POST http://localhost:8080/api/v1/new-families/1/update
 Content-Type: application/json
 
 {
@@ -51,7 +51,7 @@ Content-Type: application/json
   "birth": "2003-03-03",
   "visitDate": "2024-09-01",
   "grade": 3,
-  "newFamilyGroupId": null,
+  "newFamilyGroupId": 1,
   "etc": {
     "school": "감자대학교 감자학과 1학년",
     "introducer": "홍길동",
@@ -70,7 +70,7 @@ POST http://localhost:8080/api/v1/new-families/request-line-up
 Content-Type: application/json
 
 {
-  "newFamilyIds": [44]
+  "newFamilyIds": [1]
 }
 
 ### 임시 라인업
@@ -80,8 +80,8 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 44,
-      "temporarySmallGroupIds": [73]
+      "newFamilyId": 1,
+      "temporarySmallGroupIds": [2]
     }
   ]
 }
@@ -93,8 +93,8 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 44,
-      "smallGroupId": 74
+      "newFamilyId": 1,
+      "smallGroupId": 2
     }
   ]
 }
@@ -106,7 +106,7 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 44,
+      "newFamilyId": 1,
       "promoteDate": "2024-09-13"
     }
   ]
@@ -117,8 +117,8 @@ POST http://localhost:8080/api/v1/new-families/line-out
 Content-Type: application/json
 
 {
-  "newFamilyIds": [45]
+  "newFamilyIds": [2]
 }
 
 ### 라인인
-POST http://localhost:8080/api/v1/line-out-new-families/6/line-in
+POST http://localhost:8080/api/v1/line-out-new-families/1/line-in

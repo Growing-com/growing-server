@@ -14,17 +14,17 @@ public class UserUpdateService {
 
     @Transactional
     public void update(Long userId, UserUpdateRequest request) {
-        if (request.getSmallGroupId() == null) {
-            userUpdater.update(
-                    userId,
-                    request.getName(),
-                    request.getPhoneNumber(),
-                    request.getBirth(),
-                    request.getSex(),
-                    request.getGrade()
-            );
+        if (request.getSmallGroupId() != null) {
+            smallGroupMemberUpstream.update(userId, request.getSmallGroupId());
         }
 
-        smallGroupMemberUpstream.update(userId, request.getSmallGroupId());
+        userUpdater.update(
+                userId,
+                request.getName(),
+                request.getPhoneNumber(),
+                request.getBirth(),
+                request.getSex(),
+                request.getGrade()
+        );
     }
 }

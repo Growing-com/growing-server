@@ -3,7 +3,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.infra.component.lineinout;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.lineoutnewfamily.LineOutNewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
-import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyPromoteLogLookUpManager;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyPromoteLogManager;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.lineoutnewfamily.LineOutNewFamilyWriter;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamily.NewFamilyFinder;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamily.NewFamilyWriter;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NewFamilyLineOutManager {
     private final NewFamilyFinder newFamilyFinder;
-    private final NewFamilyPromoteLogLookUpManager newFamilyPromoteLogLookUpManager;
+    private final NewFamilyPromoteLogManager newFamilyPromoteLogManager;
 
     private final NewFamilyWriter newFamilyWriter;
     private final LineOutNewFamilyWriter lineOutNewFamilyWriter;
@@ -28,24 +28,21 @@ public class NewFamilyLineOutManager {
     public List<LineOutNewFamily> lineOut(List<Long> newFamilyIds) {
         List<NewFamily> newFamilies = newFamilyFinder.findByIdInOrThrow(newFamilyIds);
 
-        // 등반 이전 확인
-        newFamilyPromoteLogLookUpManager.findBeforePromotedByNewFamilyIds(newFamilyIds);
+        // 새가족 라인아웃은 등반 이전에만 가능함
+        newFamilyPromoteLogManager.validateBeforePromotedByNewFamilyIds(newFamilyIds);
 
-        // 라인아웃
-        List<LineOutNewFamily> lineOutNewFamilies = newFamilies.stream()
-                .map(LineOutNewFamily::from)
-                .collect(Collectors.toList());
-
+        // 라인아웃 + 등반 기록 삭제
         newFamilyWriter.deleteByIdIn(newFamilyIds);
-        lineOutNewFamilyWriter.saveAll(lineOutNewFamilies);
+        newFamilyPromoteLogWriter.deleteByIdIn(
+                newFamilies.stream()
+                        .map(NewFamily::getNewFamilyPromoteLogId)
+                        .collect(Collectors.toList())
+        );
 
-        // 등반 기록 삭제
-        List<Long> promoteLogIds = newFamilies.stream()
-                .map(NewFamily::getNewFamilyPromoteLogId)
-                .collect(Collectors.toList());
-
-        newFamilyPromoteLogWriter.deleteByIdIn(promoteLogIds);
-
-        return lineOutNewFamilies;
+        return lineOutNewFamilyWriter.saveAll(
+                newFamilies.stream()
+                        .map(LineOutNewFamily::from)
+                        .collect(Collectors.toList())
+        );
     }
 }

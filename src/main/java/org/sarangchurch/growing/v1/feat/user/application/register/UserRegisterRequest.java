@@ -3,6 +3,7 @@ package org.sarangchurch.growing.v1.feat.user.application.register;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.Sex;
+import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -29,4 +30,15 @@ public class UserRegisterRequest {
     private Integer grade;
 
     private Long smallGroupId;
+
+    public User toUser() {
+        return User.builder()
+                .name(getName())
+                .phoneNumber(getPhoneNumber())
+                .birth(getBirth())
+                .sex(getSex())
+                .grade(getGrade())
+                .isActive(true)
+                .build();
+    }
 }

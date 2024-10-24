@@ -36,7 +36,7 @@ public class NewFamilyGroupAppender {
         Term term = termFinder.findActiveByIdOrThrow(termId);
         User user = userDownstream.findActiveByIdOrThrow(leaderUserId);
 
-        // 순장
+        // 새가족 순장
         assignValidator.validateAssignable(term, user);
 
         NewFamilyGroupLeader savedNewFamilyGroupLeader = newFamilyGroupLeaderUpstream.save(

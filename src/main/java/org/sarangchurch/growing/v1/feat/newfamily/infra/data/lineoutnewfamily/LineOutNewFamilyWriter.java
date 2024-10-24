@@ -16,7 +16,7 @@ public class LineOutNewFamilyWriter {
         lineoutNewFamilyRepository.deleteById(id);
     }
 
-    public void saveAll(List<LineOutNewFamily> lineOutNewFamilies) {
-        lineoutNewFamilyRepository.saveAll(lineOutNewFamilies);
+    public List<LineOutNewFamily> saveAll(List<LineOutNewFamily> lineOutNewFamilies) {
+        return lineoutNewFamilyRepository.saveAll(lineOutNewFamilies);
     }
 }

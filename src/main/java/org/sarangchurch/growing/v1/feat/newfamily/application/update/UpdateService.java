@@ -1,25 +1,34 @@
 package org.sarangchurch.growing.v1.feat.newfamily.application.update;
 
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyUpdater;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.user.UserUpstream;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class UpdateService {
     private final NewFamilyUpdater newFamilyUpdater;
+    private final UserUpstream userUpstream;
 
+    @Transactional
     public void update(Long newFamilyId, UpdateRequest request) {
-        newFamilyUpdater.update(
+        NewFamily newFamily = newFamilyUpdater.update(
                 newFamilyId,
                 request.getNewFamilyGroupId(),
+                request.getVisitDate(),
+                request.getEtc()
+        );
+
+        userUpstream.update(
+                newFamily.getUserId(),
                 request.getName(),
-                request.getSex(),
                 request.getPhoneNumber(),
                 request.getBirth(),
-                request.getVisitDate(),
-                request.getGrade(),
-                request.getEtc()
+                request.getSex(),
+                request.getGrade()
         );
     }
 }

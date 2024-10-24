@@ -17,11 +17,11 @@ public class NewFamilyLineUpRequester {
     private final NewFamilyPromoteLogWriter newFamilyPromoteLogWriter;
 
     @Transactional
-    public void run(List<Long> newFamilyIds) {
+    public void request(List<Long> newFamilyIds) {
         List<NewFamily> newFamilies = newFamilyFinder.findByIdInOrThrow(newFamilyIds);
 
         boolean alreadyRequested = newFamilies.stream()
-                .anyMatch(el -> el.getNewFamilyPromoteLogId() != null);
+                .anyMatch(NewFamily::hasPromoteLog);
 
         if (alreadyRequested) {
             throw new IllegalStateException("이미 라인업 요청이 완료된 새가족이 포함되어 있습니다.");
@@ -30,8 +30,8 @@ public class NewFamilyLineUpRequester {
         List<NewFamilyPromoteLog> savedLogs = newFamilyPromoteLogWriter.saveAll(NewFamilyPromoteLog.ofSize(newFamilies.size()));
 
         for (int i = 0; i < newFamilies.size(); i++) {
-            NewFamilyPromoteLog log = savedLogs.get(i);
             NewFamily newFamily = newFamilies.get(i);
+            NewFamilyPromoteLog log = savedLogs.get(i);
 
             newFamily.setPromoteLog(log);
         }

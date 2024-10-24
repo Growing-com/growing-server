@@ -6,7 +6,6 @@ import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.infra.component.UserEmitManager;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,7 +21,6 @@ public class TermServiceImpl implements TermService {
     }
 
     @Override
-    @Transactional
     public void emitByUserIds(List<Long> userIds) {
         userEmitManager.emitByUserIds(userIds);
     }

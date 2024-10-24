@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyEtc;
 import org.sarangchurch.growing.core.interfaces.common.Sex;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
+import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -37,11 +38,22 @@ public class RegisterRequest {
 
     private NewFamilyEtc etc;
 
-    public NewFamily toEntity() {
+    public NewFamily toNewFamily() {
         return NewFamily.builder()
                 .newFamilyGroupId(newFamilyGroupId)
                 .visitDate(visitDate)
                 .etc(etc)
+                .build();
+    }
+
+    public User toUser() {
+        return User.builder()
+                .name(getName())
+                .phoneNumber(getPhoneNumber())
+                .birth(getBirth())
+                .sex(getSex())
+                .grade(getGrade())
+                .isActive(true)
                 .build();
     }
 }
