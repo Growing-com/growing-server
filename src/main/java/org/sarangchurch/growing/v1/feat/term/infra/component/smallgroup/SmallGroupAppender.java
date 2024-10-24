@@ -39,10 +39,12 @@ public class SmallGroupAppender {
         // 순장
         assignValidator.validateAssignable(term, user);
 
-        SmallGroupLeader savedSmallGroupLeader = smallGroupLeaderWriter.save(SmallGroupLeader.builder()
-                .termId(term.getId())
-                .userId(user.getId())
-                .build());
+        SmallGroupLeader savedSmallGroupLeader = smallGroupLeaderWriter.save(
+                SmallGroupLeader.builder()
+                        .termId(term.getId())
+                        .userId(user.getId())
+                        .build()
+        );
 
         // 순모임
         boolean existsSmallGroup = smallGroupFinder.existsByCodyIdAndSmallGroupLeaderId(codyId, savedSmallGroupLeader.getId());
@@ -51,11 +53,13 @@ public class SmallGroupAppender {
             throw new IllegalStateException("이미 존재하는 순모임입니다.");
         }
 
-        SmallGroup savedSmallGroup = smallGroupWriter.save(SmallGroup.builder()
-                .termId(termId)
-                .codyId(codyId)
-                .smallGroupLeaderId(savedSmallGroupLeader.getId())
-                .build());
+        SmallGroup savedSmallGroup = smallGroupWriter.save(
+                SmallGroup.builder()
+                        .termId(termId)
+                        .codyId(codyId)
+                        .smallGroupLeaderId(savedSmallGroupLeader.getId())
+                        .build()
+        );
 
         // 순원
         List<User> memberUsers = userDownstream.findByIdIn(memberUserIds);

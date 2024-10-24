@@ -4,7 +4,7 @@ import com.mysema.commons.lang.Pair;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLog;
-import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyPromoteLogLookUpManager;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyPromoteLogManager;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.term.SmallGroupDownstream;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NewFamilyTemporaryLineUpManager {
     private final SmallGroupDownstream smallGroupDownstream;
-    private final NewFamilyPromoteLogLookUpManager newFamilyPromoteLogLookUpManager;
+    private final NewFamilyPromoteLogManager newFamilyPromoteLogManager;
 
     @Transactional
     public void temporaryLineUp(List<Long> newFamilyIds, List<List<Long>> temporarySmallGroupIds) {
@@ -27,25 +27,18 @@ public class NewFamilyTemporaryLineUpManager {
                         .collect(Collectors.toList())
         );
 
-        Pair<List<NewFamily>, List<NewFamilyPromoteLog>> pair = newFamilyPromoteLogLookUpManager.findLineUpReadyByNewFamilyIds(newFamilyIds);
+        Pair<List<NewFamily>, List<NewFamilyPromoteLog>> pair = newFamilyPromoteLogManager.findLineUpReadyByNewFamilyIds(newFamilyIds);
         List<NewFamily> newFamilies = pair.getFirst();
         List<NewFamilyPromoteLog> promoteLogs = pair.getSecond();
 
-        for (int i = 0; i < newFamilyIds.size(); i++) {
-            Long newFamilyId = newFamilyIds.get(i);
-            List<Long> temporarySmallGroupIdList = temporarySmallGroupIds.get(i);
-
-            NewFamily newFamily = newFamilies.stream()
-                    .filter(el -> el.getId().equals(newFamilyId))
-                    .findAny()
-                    .orElseThrow();
-
+        for (int i = 0; i < newFamilies.size(); i++) {
+            NewFamily newFamily = newFamilies.get(0);
             NewFamilyPromoteLog log = promoteLogs.stream()
                     .filter(el -> el.getId().equals(newFamily.getNewFamilyPromoteLogId()))
                     .findAny()
                     .orElseThrow();
 
-            log.updateTemporarySmallGroups(temporarySmallGroupIdList);
+            log.updateTemporarySmallGroups(temporarySmallGroupIds.get(i));
         }
     }
 }

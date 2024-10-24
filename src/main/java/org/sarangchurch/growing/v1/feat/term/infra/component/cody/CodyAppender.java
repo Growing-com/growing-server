@@ -24,11 +24,11 @@ public class CodyAppender {
 
         assignValidator.validateAssignable(term, user);
 
-        Cody newCody = Cody.builder()
-                .termId(term.getId())
-                .userId(user.getId())
-                .build();
-
-        codyWriter.save(newCody);
+        codyWriter.save(
+                Cody.builder()
+                        .termId(term.getId())
+                        .userId(user.getId())
+                        .build()
+        );
     }
 }

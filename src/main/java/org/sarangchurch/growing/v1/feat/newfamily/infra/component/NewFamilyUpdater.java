@@ -1,11 +1,9 @@
 package org.sarangchurch.growing.v1.feat.newfamily.infra.component;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.Sex;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyEtc;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamily.NewFamilyFinder;
-import org.sarangchurch.growing.v1.feat.newfamily.infra.stream.user.UserUpstream;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,47 +15,29 @@ import java.util.Objects;
 public class NewFamilyUpdater {
     private final NewFamilyFinder newFamilyFinder;
     private final NewFamilyGroupValidator newFamilyGroupValidator;
-    private final UserUpstream userUpstream;
 
     @Transactional
-    public void update(
+    public NewFamily update(
             Long newFamilyId,
-            Long newFamilyGroupId,
-            String name,
-            Sex sex,
-            String phoneNumber,
-            LocalDate birth,
+            Long targetNewFamilyGroupId,
             LocalDate visitDate,
-            Integer grade,
             NewFamilyEtc etc
     ) {
         NewFamily newFamily = newFamilyFinder.findByIdOrThrow(newFamilyId);
 
-        boolean isNewFamilyGroupIdChanged = !Objects.equals(newFamily.getNewFamilyGroupId(), newFamilyGroupId);
+        boolean isNewFamilyGroupIdChanged = !Objects.equals(newFamily.getNewFamilyGroupId(), targetNewFamilyGroupId);
 
         if (isNewFamilyGroupIdChanged) {
-            if (newFamilyGroupId != null) {
-                newFamilyGroupValidator.validateAvailable(newFamilyGroupId);
+            if (targetNewFamilyGroupId != null) {
+                newFamilyGroupValidator.validateAvailable(targetNewFamilyGroupId);
             }
 
-            newFamily.updateNewFamilyGroup(newFamilyGroupId);
+            newFamily.updateNewFamilyGroup(targetNewFamilyGroupId);
         }
 
-        if (etc != null) {
-            newFamily.updateEtc(etc);
-        }
+        newFamily.updateEtc(etc);
+        newFamily.updateVisitDate(visitDate);
 
-        if (visitDate != null) {
-            newFamily.updateVisitDate(visitDate);
-        }
-
-        userUpstream.update(
-                newFamily.getUserId(),
-                name,
-                phoneNumber,
-                birth,
-                sex,
-                grade
-        );
+        return newFamily;
     }
 }

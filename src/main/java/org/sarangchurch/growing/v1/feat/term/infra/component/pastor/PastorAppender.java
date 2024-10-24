@@ -24,12 +24,12 @@ public class PastorAppender {
 
         assignValidator.validateAssignable(term, user);
 
-        Pastor pastor = Pastor.builder()
-                .termId(term.getId())
-                .userId(user.getId())
-                .isSenior(false)
-                .build();
-
-        pastorWriter.save(pastor);
+        pastorWriter.save(
+                Pastor.builder()
+                        .termId(term.getId())
+                        .userId(user.getId())
+                        .isSenior(false)
+                        .build()
+        );
     }
 }

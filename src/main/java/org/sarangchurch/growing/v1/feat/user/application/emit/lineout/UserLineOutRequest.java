@@ -2,12 +2,14 @@ package org.sarangchurch.growing.v1.feat.user.application.emit.lineout;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.sarangchurch.growing.v1.feat.user.domain.lineoutuser.LineOutUser;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
@@ -26,5 +28,23 @@ public class UserLineOutRequest {
         private LocalDate lineOutDate;
 
         private String reason;
+    }
+
+    public List<Long> getUserIds() {
+        return content.stream()
+                .map(UserLineOutRequest.UserLineOutRequestItem::getUserId)
+                .collect(Collectors.toList());
+    }
+
+    public List<LineOutUser> toLineOutUsers() {
+        return content.stream()
+                .map(it ->
+                        LineOutUser.builder()
+                                .userId(it.getUserId())
+                                .lineOutDate(it.getLineOutDate())
+                                .reason(it.getReason())
+                                .build()
+                )
+                .collect(Collectors.toList());
     }
 }

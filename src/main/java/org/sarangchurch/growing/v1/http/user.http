@@ -18,7 +18,7 @@ POST http://localhost:8080/api/v1/users/register
 Content-Type: application/json
 
 {
-  "name":  "김강도사",
+  "name":  "새가족순원",
   "sex": "MALE",
   "phoneNumber":  "010-5555-6666",
   "birth": "1996-10-16",
@@ -27,16 +27,16 @@ Content-Type: application/json
 }
 
 ### 유저 수정
-POST http://localhost:8080/api/v1/users/382/update
+POST http://localhost:8080/api/v1/users/1/update
 Content-Type: application/json
 
 {
-  "name":  "김불닭볶음면22",
+  "name":  "김불닭",
   "sex": "MALE",
   "phoneNumber":  "010-5555-7777",
   "birth": "1996-10-16",
   "grade":  10,
-  "smallGroupId": 73
+  "smallGroupId": null
 }
 
 ### 파송
@@ -46,7 +46,7 @@ Content-Type: application/json
 {
   "content": [
     {
-      "userId": 390,
+      "userId": 1,
       "type": "MISSIONARY",
       "sendDate": "2024-09-01"
     }
@@ -54,14 +54,14 @@ Content-Type: application/json
 }
 
 ### 파송 복귀
-POST http://localhost:8080/api/v1/dispatched-users/4/return
+POST http://localhost:8080/api/v1/dispatched-users/1/return
 
 ### 졸업
 POST http://localhost:8080/api/v1/users/graduate
 Content-Type: application/json
 
 {
-  "userIds": [396],
+  "userIds": [3],
   "graduateDate": "2024-03-01"
 }
 
@@ -72,15 +72,15 @@ Content-Type: application/json
 {
   "content": [
     {
-      "userId": 390,
+      "userId": 3,
       "lineOutDate": "2024-09-01",
-      "reason": "잠수"
+      "reason": "ㅃㅃ"
     }
   ]
 }
 
 ### 라인인
-POST http://localhost:8080/api/v1/line-out-users/2/line-in
+POST http://localhost:8080/api/v1/line-out-users/4/line-in
 
 ### 학년 전체 변경
 POST http://localhost:8080/api/v1/user-grade-update

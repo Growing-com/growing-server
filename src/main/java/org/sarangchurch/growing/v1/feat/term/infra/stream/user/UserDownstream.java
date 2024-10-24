@@ -24,7 +24,7 @@ public class UserDownstream {
         User user = userService.findById(id);
 
         if (!user.isActive()) {
-            throw new IllegalStateException("순장이 활성 유저가 아닙니다.");
+            throw new IllegalStateException("비활성 유저입니다.");
         }
 
         return user;

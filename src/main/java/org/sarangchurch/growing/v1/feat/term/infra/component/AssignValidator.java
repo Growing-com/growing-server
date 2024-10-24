@@ -27,7 +27,12 @@ public class AssignValidator {
     private final NewFamilyDownstream newFamilyDownstream;
 
     public void validateAssignable(Term term, User user) {
-        // 활성화
+        // 텀
+        if (!term.isActive()) {
+            throw new IllegalStateException("비활성 텀입니다.");
+        }
+
+        // 유저 활성화
         if (!user.isActive()) {
             throw new IllegalStateException("비활성 유저입니다.");
         }
@@ -83,11 +88,16 @@ public class AssignValidator {
     }
 
     public void validateAssignable(Term term, List<User> users) {
+        // 텀
+        if (!term.isActive()) {
+            throw new IllegalStateException("비활성 텀입니다.");
+        }
+
+        // 유저 활성화
         List<Long> userIds = users.stream()
                 .map(User::getId)
                 .collect(Collectors.toList());
 
-        // 활성화
         boolean containsInActiveUser = users.stream()
                 .anyMatch(it -> !it.isActive());
 
@@ -144,6 +154,4 @@ public class AssignValidator {
             throw new IllegalStateException("새가족을 내부 인원으로 배정할 수 없습니다.");
         }
     }
-
-
 }

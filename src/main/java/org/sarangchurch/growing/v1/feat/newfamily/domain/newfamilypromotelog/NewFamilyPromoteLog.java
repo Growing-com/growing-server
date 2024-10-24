@@ -64,7 +64,7 @@ public class NewFamilyPromoteLog extends BaseEntity {
         this.promoteDate = promoteDate;
     }
 
-    public void updateTemporarySmallGroups(List<Long> candidateSmallGroupIds) {
-        this.temporarySmallGroupIds = candidateSmallGroupIds;
+    public void updateTemporarySmallGroups(List<Long> temporarySmallGroupIds) {
+        this.temporarySmallGroupIds = temporarySmallGroupIds;
     }
 }
