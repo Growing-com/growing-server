@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.Duty;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
+import org.sarangchurch.growing.v1.feat.user.query.model.User;
 import org.sarangchurch.growing.v1.feat.user.query.model.UserListItem;
 import org.springframework.stereotype.Repository;
 
@@ -227,6 +228,40 @@ public class UserQueryRepository {
         result.addAll(newFamilyGroupMembers);
         result.addAll(newFamilies);
         result.addAll(notPlacedUsers);
+
+        return result;
+    }
+
+    public User findById(Long userId) {
+        Term activeTerm = queryFactory
+                .select(term)
+                .from(term)
+                .where(term.isActive.isTrue())
+                .fetchOne();
+
+        assert activeTerm != null;
+
+        User result = queryFactory.select(Projections.constructor(User.class,
+                        user.id.as("userId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade"),
+                        user.phoneNumber.as("phoneNumber"),
+                        user.birth.as("birth")
+                ))
+                .from(user)
+                .where(user.id.eq(userId))
+                .fetchOne();
+
+        Long smallGroupId = queryFactory.select(smallGroupMember.smallGroupId)
+                .from(smallGroupMember)
+                .where(smallGroupMember.userId.eq(userId),
+                        smallGroupMember.termId.eq(activeTerm.getId()))
+                .fetchOne();
+
+        if (result != null && smallGroupId != null) {
+            result.setSmallGroupId(smallGroupId);
+        }
 
         return result;
     }
