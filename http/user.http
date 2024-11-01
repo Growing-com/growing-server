@@ -51,7 +51,22 @@ Content-Type: application/json
 {
   "content": [
     {
-      "userId": 9,
+      "userId": 7,
+      "type": "MISSIONARY",
+      "sendDate": "2024-09-01"
+    },
+    {
+      "userId": 5,
+      "type": "MISSIONARY",
+      "sendDate": "2024-09-01"
+    },
+    {
+      "userId": 11,
+      "type": "MISSIONARY",
+      "sendDate": "2024-09-01"
+    },
+    {
+      "userId": 10,
       "type": "MISSIONARY",
       "sendDate": "2024-09-01"
     }

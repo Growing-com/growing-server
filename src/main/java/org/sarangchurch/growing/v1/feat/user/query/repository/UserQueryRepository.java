@@ -221,7 +221,7 @@ public class UserQueryRepository {
                         user.birth.as("birth"),
                         user.etc.as("etc"),
                         Expressions.asEnum(Duty.NOT_PLACED).as("duty"),
-                        user.name.as("leaderName")
+                        Expressions.asString("").as("leaderName")
                 ))
                 .from(user)
                 .where(user.isActive.isTrue(), user.id.notIn(placedUserIds))
