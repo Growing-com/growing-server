@@ -15,6 +15,7 @@ public class User {
     private final Integer grade;
     private final String phoneNumber;
     private final LocalDate birth;
+    private final String etc;
 
     private Long smallGroupId;
 

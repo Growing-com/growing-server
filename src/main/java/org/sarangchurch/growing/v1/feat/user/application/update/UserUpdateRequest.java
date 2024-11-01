@@ -28,5 +28,7 @@ public class UserUpdateRequest {
     @NotNull(message = "학년을 입력해주세요.")
     private Integer grade;
 
+    private String etc;
+
     private Long smallGroupId;
 }

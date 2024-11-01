@@ -53,6 +53,7 @@ public class UserQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
+                        user.etc.as("etc"),
                         Expressions.asEnum(Duty.PASTOR).as("duty"),
                         user.name.as("leaderName")
                 ))
@@ -74,6 +75,7 @@ public class UserQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
+                        user.etc.as("etc"),
                         Expressions.asEnum(Duty.PASTOR).as("duty"),
                         Expressions.asString(seniorPastor.getName()).as("leaderName")
                 ))
@@ -93,6 +95,7 @@ public class UserQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
+                        user.etc.as("etc"),
                         Expressions.asEnum(Duty.CODY).as("duty"),
                         Expressions.asString(seniorPastor.getName()).as("leaderName")
                 ))
@@ -108,6 +111,7 @@ public class UserQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
+                        user.etc.as("etc"),
                         Expressions.asEnum(Duty.SMALL_GROUP_LEADER).as("duty"),
                         codyUser.name.as("leaderName")
                 ))
@@ -126,6 +130,7 @@ public class UserQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
+                        user.etc.as("etc"),
                         Expressions.asEnum(Duty.NEW_FAMILY_GROUP_LEADER).as("duty"),
                         codyUser.name.as("leaderName")
                 ))
@@ -144,6 +149,7 @@ public class UserQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
+                        user.etc.as("etc"),
                         Expressions.asEnum(Duty.SMALL_GROUP_MEMBER).as("duty"),
                         smallGroupLeaderUser.name.as("leaderName")
                 ))
@@ -162,6 +168,7 @@ public class UserQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
+                        user.etc.as("etc"),
                         Expressions.asEnum(Duty.NEW_FAMILY_GROUP_MEMBER).as("duty"),
                         newFamilyGroupLeaderUser.name.as("leaderName")
                 ))
@@ -180,6 +187,7 @@ public class UserQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
+                        user.etc.as("etc"),
                         Expressions.asEnum(Duty.NEW_FAMILY).as("duty"),
                         newFamilyGroupLeaderUser.name.as("leaderName")
                 ))
@@ -211,6 +219,7 @@ public class UserQueryRepository {
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
                         user.birth.as("birth"),
+                        user.etc.as("etc"),
                         Expressions.asEnum(Duty.NOT_PLACED).as("duty"),
                         user.name.as("leaderName")
                 ))
@@ -247,7 +256,8 @@ public class UserQueryRepository {
                         user.sex.as("sex"),
                         user.grade.as("grade"),
                         user.phoneNumber.as("phoneNumber"),
-                        user.birth.as("birth")
+                        user.birth.as("birth"),
+                        user.etc.as("etc")
                 ))
                 .from(user)
                 .where(user.id.eq(userId))

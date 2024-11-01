@@ -16,6 +16,7 @@ public class UserListItem {
     private final Integer grade;
     private final String phoneNumber;
     private final LocalDate birth;
+    private final String etc;
     private final Duty duty;
     private final String leaderName;
 }

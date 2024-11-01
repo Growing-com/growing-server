@@ -24,7 +24,8 @@ public class UserUpdateService {
                 request.getPhoneNumber(),
                 request.getBirth(),
                 request.getSex(),
-                request.getGrade()
+                request.getGrade(),
+                request.getEtc()
         );
     }
 }

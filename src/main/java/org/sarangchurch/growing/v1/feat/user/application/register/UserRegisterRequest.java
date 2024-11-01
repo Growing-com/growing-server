@@ -6,6 +6,7 @@ import org.sarangchurch.growing.core.interfaces.common.Sex;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
@@ -29,6 +30,8 @@ public class UserRegisterRequest {
     @NotNull(message = "학년을 입력해주세요.")
     private Integer grade;
 
+    private String etc;
+
     private Long smallGroupId;
 
     public User toUser() {
@@ -38,6 +41,7 @@ public class UserRegisterRequest {
                 .birth(getBirth())
                 .sex(getSex())
                 .grade(getGrade())
+                .etc(getEtc())
                 .isActive(true)
                 .build();
     }
