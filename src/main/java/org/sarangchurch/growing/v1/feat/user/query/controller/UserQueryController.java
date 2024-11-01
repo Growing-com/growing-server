@@ -16,6 +16,7 @@ public class UserQueryController {
 
     @GetMapping("/api/v1/users")
     public ApiResponse<List<UserListItem>> users() {
+
         return ApiResponse.of(userQueryRepository.findAll());
     }
 }

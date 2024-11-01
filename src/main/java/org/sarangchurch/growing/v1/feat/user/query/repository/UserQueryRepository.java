@@ -12,10 +12,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.QNewFamily.newFamily;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.QNewFamilyGroupMember.newFamilyGroupMember;
+import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.QNewFamilyPromoteLog.newFamilyPromoteLog;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.pastor.QPastor.pastor;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
@@ -61,6 +64,25 @@ public class UserQueryRepository {
                 .fetchOne();
 
         assert seniorPastor != null;
+
+        // PASTOR
+        List<UserListItem> juniorPastors = queryFactory.select(Projections.constructor(UserListItem.class,
+                        user.id.as("userId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade"),
+                        user.phoneNumber.as("phoneNumber"),
+                        user.birth.as("birth"),
+                        Expressions.asEnum(Duty.PASTOR).as("duty"),
+                        Expressions.asString(seniorPastor.getName()).as("leaderName")
+                ))
+                .from(pastor)
+                .join(user).on(
+                        user.id.eq(pastor.userId),
+                        pastor.termId.eq(activeTerm.getId()),
+                        pastor.isSenior.isFalse()
+                )
+                .fetch();
 
         // CODY
         List<UserListItem> codies = queryFactory.select(Projections.constructor(UserListItem.class,
@@ -149,6 +171,51 @@ public class UserQueryRepository {
                 .join(newFamilyGroupLeaderUser).on(newFamilyGroupLeader.userId.eq(newFamilyGroupLeaderUser.id))
                 .fetch();
 
+        // NEW_FAMILY
+        List<UserListItem> newFamilies = queryFactory.select(Projections.constructor(UserListItem.class,
+                        user.id.as("userId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade"),
+                        user.phoneNumber.as("phoneNumber"),
+                        user.birth.as("birth"),
+                        Expressions.asEnum(Duty.NEW_FAMILY).as("duty"),
+                        newFamilyGroupLeaderUser.name.as("leaderName")
+                ))
+                .from(newFamily)
+                .leftJoin(newFamilyPromoteLog).on(newFamilyPromoteLog.id.eq(newFamily.newFamilyPromoteLogId))
+                .join(user).on(user.id.eq(newFamily.userId))
+                .leftJoin(newFamilyGroup).on(newFamilyGroup.id.eq(newFamily.newFamilyGroupId))
+                .leftJoin(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
+                .leftJoin(newFamilyGroupLeaderUser).on(newFamilyGroupLeader.userId.eq(newFamilyGroupLeaderUser.id))
+                .where(newFamily.newFamilyPromoteLogId.isNull().or(newFamilyPromoteLog.promoteDate.isNull()))
+                .fetch();
+
+        // NOT_PLACED
+        List<Long> placedUserIds = new ArrayList<>();
+
+        placedUserIds.add(seniorPastor.getUserId());
+        placedUserIds.addAll(juniorPastors.stream().map(UserListItem::getUserId).collect(Collectors.toList()));
+        placedUserIds.addAll(codies.stream().map(UserListItem::getUserId).collect(Collectors.toList()));
+        placedUserIds.addAll(smallGroupLeaders.stream().map(UserListItem::getUserId).collect(Collectors.toList()));
+        placedUserIds.addAll(newFamilyGroupLeaders.stream().map(UserListItem::getUserId).collect(Collectors.toList()));
+        placedUserIds.addAll(smallGroupMembers.stream().map(UserListItem::getUserId).collect(Collectors.toList()));
+        placedUserIds.addAll(newFamilyGroupMembers.stream().map(UserListItem::getUserId).collect(Collectors.toList()));
+        placedUserIds.addAll(newFamilies.stream().map(UserListItem::getUserId).collect(Collectors.toList()));
+
+        List<UserListItem> notPlacedUsers = queryFactory.select(Projections.constructor(UserListItem.class,
+                        user.id.as("userId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade"),
+                        user.phoneNumber.as("phoneNumber"),
+                        user.birth.as("birth"),
+                        Expressions.asEnum(Duty.NOT_PLACED).as("duty"),
+                        user.name.as("leaderName")
+                ))
+                .from(user)
+                .where(user.isActive.isTrue(), user.id.notIn(placedUserIds))
+                .fetch();
 
         // AGGREGATION
         List<UserListItem> result = new ArrayList<>();
@@ -158,6 +225,8 @@ public class UserQueryRepository {
         result.addAll(newFamilyGroupLeaders);
         result.addAll(smallGroupMembers);
         result.addAll(newFamilyGroupMembers);
+        result.addAll(newFamilies);
+        result.addAll(notPlacedUsers);
 
         return result;
     }
