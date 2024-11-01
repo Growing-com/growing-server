@@ -3,7 +3,9 @@ package org.sarangchurch.growing.v1.feat.user.query.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.sarangchurch.growing.core.interfaces.common.Sex;
+import org.sarangchurch.growing.v1.feat.term.domain.Duty;
 import org.sarangchurch.growing.v1.feat.user.domain.dispatcheduser.DispatchType;
 
 import java.time.LocalDate;
@@ -21,9 +23,9 @@ public class DispatchedUserListItem {
     private final DispatchType type;
     private final LocalDate sendDate;
     private final LocalDate returnDate;
-    private String leaderName;
 
-    public void setLeaderName(String leaderName) {
-        this.leaderName = leaderName;
-    }
+    @Setter
+    private Duty duty;
+    @Setter
+    private String leaderName;
 }
