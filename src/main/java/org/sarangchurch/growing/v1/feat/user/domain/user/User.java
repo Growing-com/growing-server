@@ -36,16 +36,20 @@ public class User extends BaseEntity {
     @Column(name = "grade", nullable = false)
     private Integer grade;
 
+    @Column(name = "etc", nullable = false)
+    private String etc;
+
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
     @Builder
-    public User(String name, String phoneNumber, LocalDate birth, Sex sex, Integer grade, boolean isActive) {
+    public User(String name, String phoneNumber, LocalDate birth, Sex sex, Integer grade, String etc, boolean isActive) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.birth = birth;
         this.sex = sex;
         this.grade = grade;
+        this.etc = etc;
         this.isActive = isActive;
     }
 
@@ -56,6 +60,7 @@ public class User extends BaseEntity {
                 .birth(birth)
                 .sex(sex)
                 .grade(grade)
+                .etc(etc)
                 .build();
     }
 
@@ -65,6 +70,7 @@ public class User extends BaseEntity {
         birth = editor.getBirth();
         sex = editor.getSex();
         grade = editor.getGrade();
+        etc = editor.getEtc();
     }
 
     public void toInActive() {

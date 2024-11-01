@@ -5,6 +5,7 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.Duty;
+import org.sarangchurch.growing.v1.feat.term.domain.cody.QCody;
 import org.sarangchurch.growing.v1.feat.term.query.model.CodyListItem;
 import org.sarangchurch.growing.v1.feat.term.query.model.GroupListItem;
 import org.sarangchurch.growing.v1.feat.term.query.model.GroupType;
@@ -90,6 +91,21 @@ public class TreeMemberQueryRepository {
     public List<TreeMemberListItem> findByCody(Long codyId) {
         QUser leaderUser = new QUser("leaderUser");
 
+        // 코디
+        TreeMemberListItem cody = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
+                        user.id.as("userId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade"),
+                        user.phoneNumber.as("phoneNumber"),
+                        user.birth.as("birth"),
+                        user.name.as("leaderName"),
+                        Expressions.asEnum(Duty.CODY).as("duty")
+                ))
+                .from(QCody.cody)
+                .join(user).on(user.id.eq(QCody.cody.userId), QCody.cody.id.eq(codyId))
+                .fetchOne();
+
         // 일반 순장
         List<TreeMemberListItem> smallGroupLeaders = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
                         user.id.as("userId"),
@@ -118,7 +134,7 @@ public class TreeMemberQueryRepository {
                         Expressions.asEnum(Duty.SMALL_GROUP_MEMBER).as("duty")
                 ))
                 .from(smallGroup)
-                .join(smallGroupMember).on(smallGroupMember.smallGroupId.eq(smallGroup.id), smallGroup.codyId.eq(smallGroup.codyId))
+                .join(smallGroupMember).on(smallGroupMember.smallGroupId.eq(smallGroup.id), smallGroup.codyId.eq(codyId))
                 .join(user).on(user.id.eq(smallGroupMember.userId))
                 .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
                 .join(leaderUser).on(leaderUser.id.eq(smallGroupLeader.userId))
@@ -168,6 +184,10 @@ public class TreeMemberQueryRepository {
         result.addAll(newFamilyGroupMembers);
 
         result.sort(Comparator.comparing(TreeMemberListItem::getLeaderName));
+
+        if (cody != null) {
+            result.add(0, cody);
+        }
 
         return result;
     }

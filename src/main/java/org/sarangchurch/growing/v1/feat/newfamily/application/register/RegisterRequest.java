@@ -53,6 +53,7 @@ public class RegisterRequest {
                 .birth(getBirth())
                 .sex(getSex())
                 .grade(getGrade())
+                .etc("")
                 .isActive(true)
                 .build();
     }

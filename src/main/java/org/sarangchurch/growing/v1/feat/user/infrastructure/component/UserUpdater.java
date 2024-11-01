@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.Sex;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.sarangchurch.growing.v1.feat.user.domain.user.UserEditor;
-import org.sarangchurch.growing.v1.feat.user.domain.user.UserRepository;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.data.UserFinder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +27,22 @@ public class UserUpdater {
         userEditor.setBirth(birth);
         userEditor.setSex(sex);
         userEditor.setGrade(grade);
+
+        user.edit(userEditor);
+    }
+
+    @Transactional
+    public void update(Long userId, String name, String phoneNumber, LocalDate birth, Sex sex, Integer grade, String etc) {
+        User user = userFinder.findByIdOrThrow(userId);
+
+        UserEditor userEditor = user.toEditor();
+
+        userEditor.setName(name);
+        userEditor.setPhoneNumber(phoneNumber);
+        userEditor.setBirth(birth);
+        userEditor.setSex(sex);
+        userEditor.setGrade(grade);
+        userEditor.setEtc(etc);
 
         user.edit(userEditor);
     }

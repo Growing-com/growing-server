@@ -1,52 +1,57 @@
 ### 전체 인원
-GET https://wsangwook.com/api/v1/users
+GET http://localhost:8080/api/v1/users
+
+### 유저
+GET http://localhost:8080/api/v1/users/8
 
 ### 내 정보
-GET https://wsangwook.com/api/v1/my-info
+GET http://localhost:8080/api/v1/my-info
 
 ### 파송자 목록 조회
-GET https://wsangwook.com/api/v1/dispatched-users
+GET http://localhost:8080/api/v1/dispatched-users
 
 ### 졸업자 목록 조회
-GET https://wsangwook.com/api/v1/graduated-users
+GET http://localhost:8080/api/v1/graduated-users
 
 ### 라인아웃 유저 조회
-GET https://wsangwook.com/api/v1/line-out-users
+GET http://localhost:8080/api/v1/line-out-users
 
 ### 유저 등록
-POST https://wsangwook.com/api/v1/users/register
+POST http://localhost:8080/api/v1/users/register
 Content-Type: application/json
 
 {
-  "name":  "새가족순원",
+  "name":  "미나리",
   "sex": "MALE",
   "phoneNumber":  "010-5555-6666",
   "birth": "1996-10-16",
   "grade":  10,
+  "etc": "미나리",
   "smallGroupId": null
 }
 
 ### 유저 수정
-POST https://wsangwook.com/api/v1/users/1/update
+POST http://localhost:8080/api/v1/users/15/update
 Content-Type: application/json
 
 {
-  "name":  "김불닭",
+  "name":  "미나리",
   "sex": "MALE",
-  "phoneNumber":  "010-5555-7777",
+  "phoneNumber":  "010-5555-6666",
   "birth": "1996-10-16",
   "grade":  10,
+  "etc": "청록 미나리식당",
   "smallGroupId": null
 }
 
 ### 파송
-POST https://wsangwook.com/api/v1/users/dispatch
+POST http://localhost:8080/api/v1/users/dispatch
 Content-Type: application/json
 
 {
   "content": [
     {
-      "userId": 1,
+      "userId": 9,
       "type": "MISSIONARY",
       "sendDate": "2024-09-01"
     }
@@ -54,10 +59,10 @@ Content-Type: application/json
 }
 
 ### 파송 복귀
-POST https://wsangwook.com/api/v1/dispatched-users/1/return
+POST http://localhost:8080/api/v1/dispatched-users/2/return
 
 ### 졸업
-POST https://wsangwook.com/api/v1/users/graduate
+POST http://localhost:8080/api/v1/users/graduate
 Content-Type: application/json
 
 {
@@ -66,7 +71,7 @@ Content-Type: application/json
 }
 
 ### 라인아웃
-POST https://wsangwook.com/api/v1/users/line-out
+POST http://localhost:8080/api/v1/users/line-out
 Content-Type: application/json
 
 {
@@ -80,10 +85,10 @@ Content-Type: application/json
 }
 
 ### 라인인
-POST https://wsangwook.com/api/v1/line-out-users/4/line-in
+POST http://localhost:8080/api/v1/line-out-users/4/line-in
 
 ### 학년 전체 변경
-POST https://wsangwook.com/api/v1/user-grade-update
+POST http://localhost:8080/api/v1/user-grade-update
 Content-Type: application/json
 
 {
