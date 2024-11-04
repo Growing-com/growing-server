@@ -235,7 +235,6 @@ public class UserQueryRepository {
         result.addAll(newFamilyGroupLeaders);
         result.addAll(smallGroupMembers);
         result.addAll(newFamilyGroupMembers);
-        result.addAll(newFamilies);
         result.addAll(notPlacedUsers);
 
         return result;
