@@ -2,6 +2,7 @@ package org.sarangchurch.growing.v1.feat.user.infrastructure.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.user.domain.graduateduser.GraduatedUser;
+import org.sarangchurch.growing.v1.feat.user.infrastructure.data.DispatchedUserWriter;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.data.GraduateUserReader;
 import org.sarangchurch.growing.v1.feat.user.infrastructure.data.GraduateUserWriter;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 public class UserGraduateManager {
     private final GraduateUserReader graduateUserReader;
     private final GraduateUserWriter graduateUserWriter;
+    private final DispatchedUserWriter dispatchedUserWriter;
 
     @Transactional
     public void graduate(List<GraduatedUser> graduatedUsers) {
@@ -29,5 +31,6 @@ public class UserGraduateManager {
         }
 
         graduateUserWriter.saveAll(graduatedUsers);
+        dispatchedUserWriter.deleteByUserIdIn(userIds);
     }
 }
