@@ -21,7 +21,7 @@ public class UserGraduateManager {
     @Transactional
     public void graduate(List<GraduatedUser> graduatedUsers) {
         List<Long> userIds = graduatedUsers.stream()
-                .map(GraduatedUser::getId)
+                .map(GraduatedUser::getUserId)
                 .collect(Collectors.toList());
 
         boolean includesGraduated = graduateUserReader.existsByUserIdIn(userIds);
