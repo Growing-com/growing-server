@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.attendance.domain.newfamilyattendance;
+package org.sarangchurch.growing.v1.feat.attendance.domain;
 
 public enum AttendanceStatus {
     ATTEND,

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.Sex;
-import org.sarangchurch.growing.v1.feat.attendance.domain.newfamilyattendance.AttendanceStatus;
+import org.sarangchurch.growing.v1.feat.attendance.domain.AttendanceStatus;
 
 import java.time.LocalDate;
 import java.util.List;

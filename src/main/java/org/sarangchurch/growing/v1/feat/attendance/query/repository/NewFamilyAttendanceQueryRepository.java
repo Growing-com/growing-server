@@ -3,7 +3,7 @@ package org.sarangchurch.growing.v1.feat.attendance.query.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.attendance.domain.newfamilyattendance.AttendanceStatus;
+import org.sarangchurch.growing.v1.feat.attendance.domain.AttendanceStatus;
 import org.sarangchurch.growing.v1.feat.attendance.query.model.NewFamilyAttendanceListItem;
 import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
 import org.springframework.stereotype.Repository;
