@@ -29,4 +29,8 @@ public class CodyFinder {
         return codyRepository.findByUserIdAndTermId(userId, termId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 코디입니다"));
     }
+
+    public List<Cody> findByTermId(Long termId) {
+        return codyRepository.findByTermId(termId);
+    }
 }

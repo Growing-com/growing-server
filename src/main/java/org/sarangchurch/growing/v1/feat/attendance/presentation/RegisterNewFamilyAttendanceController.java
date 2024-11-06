@@ -3,8 +3,6 @@ package org.sarangchurch.growing.v1.feat.attendance.presentation;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.attendance.application.registernewfamilyattendance.RegisterNewFamilyAttendanceRequest;
 import org.sarangchurch.growing.v1.feat.attendance.application.registernewfamilyattendance.RegisterNewFamilyAttendanceService;
-import org.sarangchurch.growing.v1.feat.auth.domain.Principal;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,10 +16,7 @@ public class RegisterNewFamilyAttendanceController {
     private final RegisterNewFamilyAttendanceService registerNewFamilyAttendanceService;
 
     @PostMapping("/api/v1/new-families/attendance-check")
-    public void registerNewFamilyAttendance(
-            @AuthenticationPrincipal Principal principal,
-            @RequestBody @Valid RegisterNewFamilyAttendanceRequest request
-    ) {
-            registerNewFamilyAttendanceService.register(request);
+    public void registerNewFamilyAttendance(@RequestBody @Valid RegisterNewFamilyAttendanceRequest request) {
+        registerNewFamilyAttendanceService.register(request);
     }
 }

@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.attendance.domain.stumpattendance;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
@@ -33,4 +34,13 @@ public class StumpAttendance extends BaseEntity {
 
     @Column(name = "reason")
     private String reason;
+
+    @Builder
+    public StumpAttendance(Long userId, Long termId, LocalDate date, AttendanceStatus status, String reason) {
+        this.userId = userId;
+        this.termId = termId;
+        this.date = date;
+        this.status = status;
+        this.reason = reason;
+    }
 }

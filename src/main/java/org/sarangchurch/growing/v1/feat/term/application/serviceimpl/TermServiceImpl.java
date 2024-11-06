@@ -3,6 +3,7 @@ package org.sarangchurch.growing.v1.feat.term.application.serviceimpl;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.v1.term.TermService;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
+import org.sarangchurch.growing.v1.feat.term.infra.component.TermValidator;
 import org.sarangchurch.growing.v1.feat.term.infra.component.UserEmitManager;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.List;
 public class TermServiceImpl implements TermService {
     private final TermFinder termFinder;
     private final UserEmitManager userEmitManager;
+    private final TermValidator termValidator;
 
     @Override
     public Term findTerm(Long id) {
@@ -23,5 +25,10 @@ public class TermServiceImpl implements TermService {
     @Override
     public void emitByUserIds(List<Long> userIds) {
         userEmitManager.emitByUserIds(userIds);
+    }
+
+    @Override
+    public boolean areValidStumpUserIds(List<Long> userIds, Long termId) {
+        return termValidator.areValidStumpUserIds(userIds, termId);
     }
 }

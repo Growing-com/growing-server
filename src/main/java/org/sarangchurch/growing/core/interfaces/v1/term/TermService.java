@@ -7,4 +7,5 @@ import java.util.List;
 public interface TermService {
     Term findTerm(Long id);
     void emitByUserIds(List<Long> userIds);
+    boolean areValidStumpUserIds(List<Long> userIds, Long termId);
 }
