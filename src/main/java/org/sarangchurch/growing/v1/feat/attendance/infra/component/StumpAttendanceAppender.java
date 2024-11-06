@@ -2,6 +2,7 @@ package org.sarangchurch.growing.v1.feat.attendance.infra.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.attendance.domain.stumpattendance.StumpAttendance;
+import org.sarangchurch.growing.v1.feat.attendance.infra.data.StumpAttendanceWriter;
 import org.sarangchurch.growing.v1.feat.attendance.infra.stream.term.TermDownstream;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class StumpAttendanceAppender {
     private final TermDownstream termDownstream;
+    private final StumpAttendanceWriter stumpAttendanceWriter;
 
     @Transactional
     public void append(List<StumpAttendance> attendances) {
@@ -36,5 +38,8 @@ public class StumpAttendanceAppender {
         if (!isValid) {
             throw new IllegalArgumentException("그루터기 인원이 아닌 지체가 포함되어 있습니다.");
         }
+
+        stumpAttendanceWriter.deleteByUserIdInAndDate(userIds, attendanceDate);
+        stumpAttendanceWriter.saveAll(attendances);
     }
 }

@@ -28,7 +28,7 @@ Content-Type: application/json
       "status": "ATTEND"
     },
     {
-      "userId": 6,
+      "userId": 5,
       "status": "ATTEND"
     }
   ]
