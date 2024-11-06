@@ -19,10 +19,6 @@ public class StumpAttendanceAppender {
 
     @Transactional
     public void append(List<StumpAttendance> attendances) {
-        List<Long> userIds = attendances.stream()
-                .map(StumpAttendance::getUserId)
-                .collect(Collectors.toList());
-
         LocalDate attendanceDate = attendances.get(0).getDate();
         Long termId = attendances.get(0).getTermId();
 
@@ -32,6 +28,10 @@ public class StumpAttendanceAppender {
         if (!allDatesAreEqual) {
             throw new IllegalArgumentException("모든 출석 날짜는 동일해야합니다");
         }
+
+        List<Long> userIds = attendances.stream()
+                .map(StumpAttendance::getUserId)
+                .collect(Collectors.toList());
 
         boolean isValid = termDownstream.areValidStumpUserIdsByTermId(userIds, termId);
 

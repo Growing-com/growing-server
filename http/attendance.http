@@ -20,8 +20,8 @@ POST http://localhost:8080/api/v1/attendances/stump-attendance-check
 Content-Type: application/json
 
 {
-  "termId": 1,
   "date": "2024-10-07",
+  "termId": 1,
   "attendanceItems": [
     {
       "userId": 4,
@@ -35,13 +35,20 @@ POST http://localhost:8080/api/v1/attendances/group-attendance-check
 Content-Type: application/json
 
 {
-  "termId": 1,
   "date": "2024-10-07",
   "groupType": "SMALL_GROUP",
-  "groupId": 1,
+  "groupId": 2,
   "attendanceItems": [
     {
-      "userId": 4,
+      "userId": 8,
+      "status": "ATTEND"
+    },
+    {
+      "userId": 9,
+      "status": "ATTEND"
+    },
+    {
+      "userId": 12,
       "status": "ATTEND"
     }
   ]

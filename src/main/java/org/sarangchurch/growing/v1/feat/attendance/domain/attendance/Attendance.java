@@ -45,14 +45,20 @@ public class Attendance extends BaseEntity {
     private String reason;
 
     @Builder
-    public Attendance(Long userId, Long termId, Long codyId, Long smallGroupId, Long newFamilyGroupId, LocalDate date, AttendanceStatus status, String reason) {
+    public Attendance(Long userId, Long smallGroupId, Long newFamilyGroupId, LocalDate date, AttendanceStatus status, String reason) {
         this.userId = userId;
-        this.termId = termId;
-        this.codyId = codyId;
         this.smallGroupId = smallGroupId;
         this.newFamilyGroupId = newFamilyGroupId;
         this.date = date;
         this.status = status;
         this.reason = reason;
+    }
+
+    public void setTermId(Long termId) {
+        this.termId = termId;
+    }
+
+    public void setCodyId(Long codyId) {
+        this.codyId = codyId;
     }
 }

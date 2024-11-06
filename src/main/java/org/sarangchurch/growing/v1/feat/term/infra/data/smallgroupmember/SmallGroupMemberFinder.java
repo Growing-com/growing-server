@@ -37,4 +37,8 @@ public class SmallGroupMemberFinder {
     public Optional<SmallGroupMember> findByUserIdAndTermId(Long userId, Long termId) {
         return smallGroupMemberRepository.findByUserIdAndTermId(userId, termId);
     }
+
+    public List<SmallGroupMember> findBySmallGroupId(Long smallGroupId) {
+        return smallGroupMemberRepository.findBySmallGroupId(smallGroupId);
+    }
 }

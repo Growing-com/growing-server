@@ -16,4 +16,9 @@ public class SmallGroupServiceImpl implements SmallGroupService {
     public void validateAvailable(List<Long> smallGroupIds) {
         smallGroupValidator.validateAvailable(smallGroupIds);
     }
+
+    @Override
+    public boolean areValidUserIdsBySmallGroupId(List<Long> userIds, Long smallGroupId) {
+        return smallGroupValidator.areValidUserIdsBySmallGroupId(userIds, smallGroupId);
+    }
 }

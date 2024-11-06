@@ -19,10 +19,6 @@ public class NewFamilyAttendanceAppender {
 
     @Transactional
     public void append(List<NewFamilyAttendance> attendances) {
-        List<Long> newFamilyIds = attendances.stream()
-                .map(NewFamilyAttendance::getNewFamilyId)
-                .collect(Collectors.toList());
-
         LocalDate attendanceDate = attendances.get(0).getDate();
 
         boolean allDatesAreEqual = attendances.stream()
@@ -31,6 +27,10 @@ public class NewFamilyAttendanceAppender {
         if (!allDatesAreEqual) {
             throw new IllegalArgumentException("모든 출석 날짜는 동일해야합니다");
         }
+
+        List<Long> newFamilyIds = attendances.stream()
+                .map(NewFamilyAttendance::getNewFamilyId)
+                .collect(Collectors.toList());
 
         boolean exists = newFamilyDownstream.existsAllByIds(newFamilyIds);
 
