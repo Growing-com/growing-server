@@ -17,4 +17,6 @@ public interface PastorRepository {
     Optional<Pastor> findSeniorByTermId(Long termId);
 
     Optional<Pastor> findByUserIdAndTermId(Long termId, Long userId);
+
+    List<Pastor> findByTermId(Long termId);
 }
