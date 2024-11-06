@@ -15,6 +15,20 @@ Content-Type: application/json
   ]
 }
 
+### 그루터기 출석 체크
+POST http://localhost:8080/api/v1/attendances/stump-attendance-check
+Content-Type: application/json
+
+{
+  "date": "2024-10-07",
+  "attendanceItems": [
+    {
+      "userId": 1,
+      "status": "ATTEND"
+    }
+  ]
+}
+
 ### 통계 갱신
 POST http://localhost:8080/api/v1/run-batch-job
 Content-Type: application/json

@@ -44,8 +44,10 @@ public class RegisterNewFamilyAttendanceRequest {
     public static class NewFamilyAttendanceItems {
         @NotNull(message = "새가족 id를 입력해주세요.")
         private Long newFamilyId;
+
         @NotNull(message = "출석 정보를 입력해주세요.")
         private AttendanceStatus status;
+
         private String reason;
     }
 }
