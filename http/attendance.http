@@ -26,9 +26,22 @@ Content-Type: application/json
     {
       "userId": 4,
       "status": "ATTEND"
-    },
+    }
+  ]
+}
+
+### 순모임 출석 체크
+POST http://localhost:8080/api/v1/attendances/group-attendance-check
+Content-Type: application/json
+
+{
+  "termId": 1,
+  "date": "2024-10-07",
+  "groupType": "SMALL_GROUP",
+  "groupId": 1,
+  "attendanceItems": [
     {
-      "userId": 5,
+      "userId": 4,
       "status": "ATTEND"
     }
   ]

@@ -2,6 +2,7 @@ package org.sarangchurch.growing.v1.feat.term.query.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.core.interfaces.common.GroupType;
 
 @Getter
 @RequiredArgsConstructor
