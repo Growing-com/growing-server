@@ -3,6 +3,8 @@ package org.sarangchurch.growing.v1.feat.term.application.serviceimpl;
 import com.mysema.commons.lang.Pair;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.v1.term.TermService;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroup.NewFamilyGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.domain.cody.Cody;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
@@ -23,6 +25,7 @@ public class TermServiceImpl implements TermService {
     private final TermValidator termValidator;
     private final SmallGroupFinder smallGroupFinder;
     private final CodyFinder codyFinder;
+    private final NewFamilyGroupFinder newFamilyGroupFinder;
 
     @Override
     public Term findTerm(Long id) {
@@ -44,6 +47,15 @@ public class TermServiceImpl implements TermService {
         SmallGroup smallGroup = smallGroupFinder.findByIdOrThrow(smallGroupId);
         Term term = termFinder.findById(smallGroup.getTermId());
         Cody cody = codyFinder.findByIdOrThrow(smallGroup.getCodyId());
+
+        return Pair.of(term, cody);
+    }
+
+    @Override
+    public Pair<Term, Cody> findTermAndCodyByNewFamilyGroupId(Long newFamilyGroupId) {
+        NewFamilyGroup newFamilyGroup = newFamilyGroupFinder.findByIdOrThrow(newFamilyGroupId);
+        Term term = termFinder.findById(newFamilyGroup.getTermId());
+        Cody cody = codyFinder.findByIdOrThrow(newFamilyGroup.getCodyId());
 
         return Pair.of(term, cody);
     }

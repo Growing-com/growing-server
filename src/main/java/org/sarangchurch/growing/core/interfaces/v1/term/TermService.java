@@ -11,4 +11,5 @@ public interface TermService {
     void emitByUserIds(List<Long> userIds);
     boolean areValidStumpUserIds(List<Long> userIds, Long termId);
     Pair<Term, Cody> findTermAndCodyBySmallGroupId(Long smallGroupId);
+    Pair<Term, Cody> findTermAndCodyByNewFamilyGroupId(Long newFamilyGroupId);
 }

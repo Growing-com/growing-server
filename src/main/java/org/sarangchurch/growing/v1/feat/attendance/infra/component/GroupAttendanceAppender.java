@@ -4,6 +4,7 @@ import com.mysema.commons.lang.Pair;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.attendance.domain.attendance.Attendance;
 import org.sarangchurch.growing.v1.feat.attendance.infra.data.AttendanceWriter;
+import org.sarangchurch.growing.v1.feat.attendance.infra.stream.term.NewFamilyGroupDownstream;
 import org.sarangchurch.growing.v1.feat.attendance.infra.stream.term.SmallGroupDownstream;
 import org.sarangchurch.growing.v1.feat.attendance.infra.stream.term.TermDownstream;
 import org.sarangchurch.growing.v1.feat.term.domain.cody.Cody;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class GroupAttendanceAppender {
     private final TermDownstream termDownstream;
     private final SmallGroupDownstream smallGroupDownstream;
+    private final NewFamilyGroupDownstream newFamilyGroupDownstream;
     private final AttendanceWriter attendanceWriter;
 
     @Transactional
@@ -35,7 +37,6 @@ public class GroupAttendanceAppender {
         }
 
         Long smallGroupId = attendance.getSmallGroupId();
-        Long newFamilyGroupId = attendance.getNewFamilyGroupId();
 
         if (smallGroupId != null) {
             List<Long> userIds = attendances.stream()
@@ -58,8 +59,31 @@ public class GroupAttendanceAppender {
             attendanceWriter.deleteByUserIdInAndDate(userIds, attendanceDate);
             attendanceWriter.saveAll(attendances);
 
-        } else if (newFamilyGroupId != null) {
-            // TODO
+            return;
+        }
+
+        Long newFamilyGroupId = attendance.getNewFamilyGroupId();
+
+        if (newFamilyGroupId != null) {
+            List<Long> userIds = attendances.stream()
+                    .map(Attendance::getUserId)
+                    .collect(Collectors.toList());
+
+            boolean isValid = newFamilyGroupDownstream.areValidUserIdsByNewFamilyGroupId(userIds, newFamilyGroupId);
+
+            if (!isValid) {
+                throw new IllegalArgumentException("새가족 순모임에 속하지 않은 인원이 포함되어 있습니다.");
+            }
+
+            Pair<Term, Cody> pair = termDownstream.findTermAndCodyByNewFamilyGroupId(newFamilyGroupId);
+
+            attendances.forEach(it -> {
+                it.setTermId(pair.getFirst().getId());
+                it.setCodyId(pair.getSecond().getId());
+            });
+
+            attendanceWriter.deleteByUserIdInAndDate(userIds, attendanceDate);
+            attendanceWriter.saveAll(attendances);
         }
     }
 }

@@ -36,19 +36,11 @@ Content-Type: application/json
 
 {
   "date": "2024-10-07",
-  "groupType": "SMALL_GROUP",
-  "groupId": 2,
+  "groupType": "NEW_FAMILY_GROUP",
+  "groupId": 1,
   "attendanceItems": [
     {
-      "userId": 8,
-      "status": "ATTEND"
-    },
-    {
-      "userId": 9,
-      "status": "ATTEND"
-    },
-    {
-      "userId": 12,
+      "userId": 11,
       "status": "ATTEND"
     }
   ]

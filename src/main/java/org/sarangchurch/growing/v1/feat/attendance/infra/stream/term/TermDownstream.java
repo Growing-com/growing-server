@@ -21,4 +21,8 @@ public class TermDownstream {
     public Pair<Term, Cody> findTermAndCodyBySmallGroupId(Long smallGroupId) {
         return termService.findTermAndCodyBySmallGroupId(smallGroupId);
     }
+
+    public Pair<Term, Cody> findTermAndCodyByNewFamilyGroupId(Long newFamilyGroupId) {
+        return termService.findTermAndCodyByNewFamilyGroupId(newFamilyGroupId);
+    }
 }
