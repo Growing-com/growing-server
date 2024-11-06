@@ -8,7 +8,7 @@ import org.sarangchurch.growing.v1.feat.term.domain.Duty;
 import org.sarangchurch.growing.v1.feat.term.domain.cody.QCody;
 import org.sarangchurch.growing.v1.feat.term.query.model.CodyListItem;
 import org.sarangchurch.growing.v1.feat.term.query.model.GroupListItem;
-import org.sarangchurch.growing.v1.feat.term.query.model.GroupType;
+import org.sarangchurch.growing.core.interfaces.common.GroupType;
 import org.sarangchurch.growing.v1.feat.term.query.model.TreeMemberListItem;
 import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
 import org.springframework.stereotype.Repository;

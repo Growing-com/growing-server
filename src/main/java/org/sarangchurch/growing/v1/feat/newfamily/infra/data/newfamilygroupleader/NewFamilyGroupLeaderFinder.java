@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroupleader;
 
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.NewFamilyGroupLeader;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.NewFamilyGroupLeaderRepository;
 import org.springframework.stereotype.Component;
 
@@ -17,5 +18,10 @@ public class NewFamilyGroupLeaderFinder {
 
     public boolean existsByUserIdInAndTermId(List<Long> userIds, Long termId) {
         return newFamilyGroupLeaderRepository.existsByUserIdInAndTermId(userIds, termId);
+    }
+
+    public NewFamilyGroupLeader findByIdOrThrow(Long id) {
+        return newFamilyGroupLeaderRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 순장입니다."));
     }
 }

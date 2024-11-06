@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.term.query.model;
+package org.sarangchurch.growing.core.interfaces.common;
 
 public enum GroupType {
     NEW_FAMILY_GROUP,

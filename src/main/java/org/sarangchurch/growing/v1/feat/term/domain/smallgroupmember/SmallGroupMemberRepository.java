@@ -23,4 +23,6 @@ public interface SmallGroupMemberRepository {
     Optional<SmallGroupMember> findByUserIdAndTermId(Long userId, Long termId);
 
     void deleteByUserIdAndTermId(Long userId, Long termId);
+
+    List<SmallGroupMember> findBySmallGroupId(Long smallGroupId);
 }
