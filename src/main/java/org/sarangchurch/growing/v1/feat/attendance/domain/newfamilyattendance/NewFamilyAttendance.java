@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
+import org.sarangchurch.growing.v1.feat.attendance.domain.AttendanceStatus;
 
 import javax.persistence.*;
 import java.time.LocalDate;

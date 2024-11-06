@@ -14,3 +14,14 @@ Content-Type: application/json
     }
   ]
 }
+
+### 통계 갱신
+POST http://localhost:8080/api/v1/run-batch-job
+Content-Type: application/json
+
+{
+  "jobName": "helloWorldJob",
+  "jobParameters": {
+    "requestDate": "2024-10-10"
+  }
+}
