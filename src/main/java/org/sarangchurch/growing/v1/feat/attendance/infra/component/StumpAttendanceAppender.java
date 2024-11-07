@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.attendance.domain.stumpattendance.StumpAttendance;
 import org.sarangchurch.growing.v1.feat.attendance.infra.data.StumpAttendanceWriter;
 import org.sarangchurch.growing.v1.feat.attendance.infra.stream.term.TermDownstream;
+import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +20,15 @@ public class StumpAttendanceAppender {
 
     @Transactional
     public void append(List<StumpAttendance> attendances) {
+        validateAttendances(attendances);
+
         LocalDate attendanceDate = attendances.get(0).getDate();
         Long termId = attendances.get(0).getTermId();
 
-        boolean allDatesAreEqual = attendances.stream()
-                .allMatch(it -> it.getDate().equals(attendanceDate));
+        Term term = termDownstream.findByIdOrThrow(termId);
 
-        if (!allDatesAreEqual) {
-            throw new IllegalArgumentException("모든 출석 날짜는 동일해야합니다");
+        if (!term.isActive()) {
+            throw new IllegalStateException("비활성 텀입니다.");
         }
 
         List<Long> userIds = attendances.stream()
@@ -41,5 +43,25 @@ public class StumpAttendanceAppender {
 
         stumpAttendanceWriter.deleteByUserIdInAndDate(userIds, attendanceDate);
         stumpAttendanceWriter.saveAll(attendances);
+    }
+
+    private void validateAttendances(List<StumpAttendance> attendances) {
+        LocalDate attendanceDate = attendances.get(0).getDate();
+        Long termId = attendances.get(0).getTermId();
+
+        boolean allTermsAreEqual = attendances.stream()
+                .allMatch(it -> it.getTermId().equals(termId));
+
+
+        boolean allDatesAreEqual = attendances.stream()
+                .allMatch(it -> it.getDate().equals(attendanceDate));
+
+        if (!allDatesAreEqual) {
+            throw new IllegalArgumentException("모든 출석 날짜는 동일해야합니다");
+        }
+
+        if (!allTermsAreEqual) {
+            throw new IllegalArgumentException("모든 텀은 동일해야합니다.");
+        }
     }
 }

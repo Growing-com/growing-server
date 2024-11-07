@@ -40,7 +40,7 @@ Content-Type: application/json
   "groupId": 1,
   "attendanceItems": [
     {
-      "userId": 11,
+      "userId": 100,
       "status": "ATTEND"
     }
   ]
