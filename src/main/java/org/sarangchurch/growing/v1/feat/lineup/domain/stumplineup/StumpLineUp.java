@@ -2,6 +2,7 @@ package org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup;
 
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.TypeDef;
@@ -9,6 +10,7 @@ import org.sarangchurch.growing.config.LongArrayListConverter;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,9 +31,18 @@ public class StumpLineUp extends BaseEntity {
 
     @Convert(converter = LongArrayListConverter.class)
     @Column(name = "junior_pastor_user_ids", columnDefinition = "json", nullable = false)
-    private List<Long> juniorPastorUserIds;
+    private List<Long> juniorPastorUserIds = new ArrayList<>();
 
     @Convert(converter = LongArrayListConverter.class)
     @Column(name = "cody_user_ids", columnDefinition = "json", nullable = false)
-    private List<Long> codyUserIds;
+    private List<Long> codyUserIds = new ArrayList<>();
+
+    @Builder
+    public StumpLineUp(Long termId) {
+        this.termId = termId;
+    }
+
+    public void changeSeniorPastor(Long userId) {
+        seniorPastorUserId = userId;
+    }
 }

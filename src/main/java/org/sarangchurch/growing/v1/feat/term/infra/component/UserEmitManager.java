@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.term.infra.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroupmember.NewFamilyGroupMemberWriter;
-import org.sarangchurch.growing.v1.feat.term.domain.Duty;
+import org.sarangchurch.growing.core.interfaces.common.Duty;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.infra.component.cody.CodyRemover;
 import org.sarangchurch.growing.v1.feat.term.infra.component.pastor.PastorRemover;

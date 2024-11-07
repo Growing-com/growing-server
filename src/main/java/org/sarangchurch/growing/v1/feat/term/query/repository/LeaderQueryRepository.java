@@ -3,7 +3,7 @@ package org.sarangchurch.growing.v1.feat.term.query.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.term.domain.Duty;
+import org.sarangchurch.growing.core.interfaces.common.Duty;
 import org.sarangchurch.growing.v1.feat.term.query.model.LeaderListItem;
 import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
 import org.springframework.stereotype.Repository;

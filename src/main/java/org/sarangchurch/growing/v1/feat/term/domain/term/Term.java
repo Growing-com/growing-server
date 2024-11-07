@@ -48,4 +48,8 @@ public class Term {
 
         return this;
     }
+
+    public boolean stateEquals(TermStatus anotherStatus) {
+        return status == anotherStatus;
+    }
 }

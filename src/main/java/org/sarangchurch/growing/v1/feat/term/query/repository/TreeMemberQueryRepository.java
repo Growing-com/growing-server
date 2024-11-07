@@ -4,7 +4,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.term.domain.Duty;
+import org.sarangchurch.growing.core.interfaces.common.Duty;
 import org.sarangchurch.growing.v1.feat.term.domain.cody.QCody;
 import org.sarangchurch.growing.v1.feat.term.query.model.CodyListItem;
 import org.sarangchurch.growing.v1.feat.term.query.model.GroupListItem;

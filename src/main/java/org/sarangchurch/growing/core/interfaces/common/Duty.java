@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.term.domain;
+package org.sarangchurch.growing.core.interfaces.common;
 
 public enum Duty {
     PASTOR,
