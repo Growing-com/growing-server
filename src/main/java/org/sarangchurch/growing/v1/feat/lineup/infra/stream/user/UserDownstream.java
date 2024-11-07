@@ -5,6 +5,8 @@ import org.sarangchurch.growing.core.interfaces.v1.user.UserService;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component("LineUp_User_Downstream")
 @RequiredArgsConstructor
 public class UserDownstream {
@@ -18,5 +20,19 @@ public class UserDownstream {
         }
 
         return user;
+    }
+
+    public List<User> findActiveByIdInOrThrow(List<Long> userIds) {
+        List<User> users = userService.findByIdIn(userIds);
+
+        if (users.size() != userIds.size()) {
+            throw new IllegalArgumentException("존재하지 않는 유저가 포함되어 있습니다.");
+        }
+
+        if (users.stream().anyMatch(it -> !it.isActive())) {
+            throw new IllegalStateException("비활성 유저가 포함되어 있습니다.");
+        }
+
+        return users;
     }
 }

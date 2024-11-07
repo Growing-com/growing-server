@@ -1,6 +1,16 @@
+### 담임 교역자 라인업
 POST http://localhost:8080/api/v1/terms/2/assign-senior-pastor
 Content-Type: application/json
 
 {
   "userId": 9
+}
+
+
+### 부교역자 라인업
+POST http://localhost:8080/api/v1/terms/2/assign-junior-pastor
+Content-Type: application/json
+
+{
+  "userIds": [13]
 }
