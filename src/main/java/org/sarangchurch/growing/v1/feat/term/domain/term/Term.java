@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.term.domain.term;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,4 +28,24 @@ public class Term {
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
+
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TermStatus status;
+
+    @Builder
+    public Term(String name, LocalDate startDate, LocalDate endDate, boolean isActive, TermStatus status) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.isActive = isActive;
+        this.status = status;
+    }
+
+    public Term toLineUpState() {
+        isActive = false;
+        status = TermStatus.LINE_UP;
+
+        return this;
+    }
 }
