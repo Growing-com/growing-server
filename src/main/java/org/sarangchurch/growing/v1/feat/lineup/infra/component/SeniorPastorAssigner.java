@@ -2,8 +2,10 @@ package org.sarangchurch.growing.v1.feat.lineup.infra.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
-import org.sarangchurch.growing.v1.feat.lineup.infra.data.StumpLineUpFinder;
+import org.sarangchurch.growing.v1.feat.lineup.infra.data.stumplineup.StumpLineUpFinder;
+import org.sarangchurch.growing.v1.feat.lineup.infra.data.stumplineup.StumpLineUpWriter;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
+import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,12 +13,22 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class SeniorPastorAssigner {
     private final StumpLineUpFinder stumpLineUpFinder;
+    private final StumpLineUpWriter stumpLineUpWriter;
+    private final NormalLineUpAvailableValidator normalLineUpAvailableValidator;
 
     @Transactional
-    public void assign(Term term, Long userId) {
+    public void assign(Term term, User user) {
         StumpLineUp stumpLineUp = stumpLineUpFinder.findByTermId(term.getId())
-                .orElseThrow(() -> new IllegalArgumentException("그루터기 라인업이 존재하지 않습니다."));
+                .orElseGet(() ->
+                        stumpLineUpWriter.save(
+                                StumpLineUp.builder()
+                                        .termId(term.getId())
+                                        .build()
+                        )
+                );
 
-        stumpLineUp.changeSeniorPastor(userId);
+        normalLineUpAvailableValidator.validate(term, user);
+
+        stumpLineUp.changeSeniorPastor(user.getId());
     }
 }
