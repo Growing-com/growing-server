@@ -115,3 +115,13 @@ Content-Type: application/json
 {
   "memberUserIds": [11]
 }
+
+### 새 텀 추가
+POST http://localhost:8080/api/v1/terms/create
+Content-Type: application/json
+
+{
+  "name": "테슽흐",
+  "startDate": "2025-03-01",
+  "endDate": "2025-08-31"
+}

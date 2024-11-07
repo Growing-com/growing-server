@@ -3,7 +3,10 @@ package org.sarangchurch.growing.v1.feat.term.infra.data.term;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.domain.term.TermRepository;
+import org.sarangchurch.growing.v1.feat.term.domain.term.TermStatus;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -29,5 +32,9 @@ public class TermFinder {
     public Term findActiveOrThrow() {
         return termRepository.findActive()
                 .orElseThrow(() -> new IllegalArgumentException("활성 텀이 존재하지 않습니다."));
+    }
+
+    public Optional<Term> findByStatus(TermStatus termStatus) {
+        return termRepository.findByStatus(termStatus);
     }
 }
