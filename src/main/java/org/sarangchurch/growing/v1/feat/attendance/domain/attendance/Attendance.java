@@ -61,4 +61,12 @@ public class Attendance extends BaseEntity {
     public void setCodyId(Long codyId) {
         this.codyId = codyId;
     }
+
+    public boolean isSmallGroupAttendance() {
+        return smallGroupId != null && newFamilyGroupId == null;
+    }
+
+    public boolean isNewFamilyGroupAttendance() {
+        return smallGroupId == null && newFamilyGroupId != null;
+    }
 }

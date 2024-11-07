@@ -26,8 +26,20 @@ public class GroupAttendanceAppender {
 
     @Transactional
     public void append(List<Attendance> attendances) {
-        Attendance attendance = attendances.get(0);
-        LocalDate attendanceDate = attendance.getDate();
+        validateData(attendances);
+
+        Long smallGroupId = attendances.get(0).getSmallGroupId();
+        Long newFamilyGroupId = attendances.get(0).getNewFamilyGroupId();
+
+        if (smallGroupId != null) {
+            handleSmallGroupAttendance(attendances);
+        } else if (newFamilyGroupId != null) {
+            handleNewFamilyGroupAttendance(attendances);
+        }
+    }
+
+    private void validateData(List<Attendance> attendances) {
+        LocalDate attendanceDate = attendances.get(0).getDate();
 
         boolean allDatesAreEqual = attendances.stream()
                 .allMatch(it -> it.getDate().equals(attendanceDate));
@@ -36,54 +48,94 @@ public class GroupAttendanceAppender {
             throw new IllegalArgumentException("모든 출석 날짜는 동일해야합니다");
         }
 
-        Long smallGroupId = attendance.getSmallGroupId();
+        boolean isAllSmallGroupAttendance = attendances.stream()
+                .allMatch(Attendance::isSmallGroupAttendance);
 
-        if (smallGroupId != null) {
-            List<Long> userIds = attendances.stream()
-                    .map(Attendance::getUserId)
-                    .collect(Collectors.toList());
+        boolean isAllNewFamilyGroupAttendance = attendances.stream()
+                .allMatch(Attendance::isNewFamilyGroupAttendance);
 
-            boolean isValid = smallGroupDownstream.areValidUserIdsBySmallGroupId(userIds, smallGroupId);
+        if (isAllSmallGroupAttendance) {
+            Long smallGroupId = attendances.get(0).getSmallGroupId();
 
-            if (!isValid) {
-                throw new IllegalArgumentException("일반 순모임에 속하지 않은 인원이 포함되어 있습니다.");
+            boolean smallGroupIdMatch = attendances.stream()
+                    .allMatch(it -> smallGroupId.equals(it.getSmallGroupId()));
+
+            if (!smallGroupIdMatch) {
+                throw new IllegalArgumentException("모든 일반 순모임 id는 동일해야합니다.");
             }
+        } else if (isAllNewFamilyGroupAttendance) {
+            Long newFamilyGroupId = attendances.get(0).getNewFamilyGroupId();
 
-            Pair<Term, Cody> pair = termDownstream.findTermAndCodyBySmallGroupId(smallGroupId);
+            boolean newFamilyGroupIdMatch = attendances.stream()
+                    .allMatch(it -> newFamilyGroupId.equals(it.getNewFamilyGroupId()));
 
-            attendances.forEach(it -> {
-                it.setTermId(pair.getFirst().getId());
-                it.setCodyId(pair.getSecond().getId());
-            });
+            if (!newFamilyGroupIdMatch) {
+                throw new IllegalArgumentException("모든 새가족 순모임 id는 동일해야합니다.");
+            }
+        } else {
+            throw new IllegalArgumentException("출석 데이터는 출석 날짜가 같고 일반 순모임 출석, 새가족 순모임 출석중 하나여야만 합니다.");
+        }
+    }
 
-            attendanceWriter.deleteByUserIdInAndDate(userIds, attendanceDate);
-            attendanceWriter.saveAll(attendances);
+    private void handleSmallGroupAttendance(List<Attendance> attendances) {
+        Long smallGroupId = attendances.get(0).getSmallGroupId();
+        LocalDate attendanceDate = attendances.get(0).getDate();
 
-            return;
+        List<Long> userIds = attendances.stream()
+                .map(Attendance::getUserId)
+                .collect(Collectors.toList());
+
+        boolean isValid = smallGroupDownstream.areValidUserIdsBySmallGroupId(userIds, smallGroupId);
+
+        if (!isValid) {
+            throw new IllegalArgumentException("일반 순모임에 속하지 않은 인원이 포함되어 있습니다.");
         }
 
-        Long newFamilyGroupId = attendance.getNewFamilyGroupId();
+        Pair<Term, Cody> pair = termDownstream.findTermAndCodyBySmallGroupId(smallGroupId);
+        Term term = pair.getFirst();
+        Cody cody = pair.getSecond();
 
-        if (newFamilyGroupId != null) {
-            List<Long> userIds = attendances.stream()
-                    .map(Attendance::getUserId)
-                    .collect(Collectors.toList());
-
-            boolean isValid = newFamilyGroupDownstream.areValidUserIdsByNewFamilyGroupId(userIds, newFamilyGroupId);
-
-            if (!isValid) {
-                throw new IllegalArgumentException("새가족 순모임에 속하지 않은 인원이 포함되어 있습니다.");
-            }
-
-            Pair<Term, Cody> pair = termDownstream.findTermAndCodyByNewFamilyGroupId(newFamilyGroupId);
-
-            attendances.forEach(it -> {
-                it.setTermId(pair.getFirst().getId());
-                it.setCodyId(pair.getSecond().getId());
-            });
-
-            attendanceWriter.deleteByUserIdInAndDate(userIds, attendanceDate);
-            attendanceWriter.saveAll(attendances);
+        if (!term.isActive()) {
+            throw new IllegalStateException("비활성 텀의 순모임을 출석체크 할 수 없습니다.");
         }
+
+        attendances.forEach(it -> {
+            it.setTermId(term.getId());
+            it.setCodyId(cody.getId());
+        });
+
+        attendanceWriter.deleteByUserIdInAndDate(userIds, attendanceDate);
+        attendanceWriter.saveAll(attendances);
+    }
+
+    private void handleNewFamilyGroupAttendance(List<Attendance> attendances) {
+        Long newFamilyGroupId = attendances.get(0).getNewFamilyGroupId();
+        LocalDate attendanceDate = attendances.get(0).getDate();
+
+        List<Long> userIds = attendances.stream()
+                .map(Attendance::getUserId)
+                .collect(Collectors.toList());
+
+        boolean isValid = newFamilyGroupDownstream.areValidUserIdsByNewFamilyGroupId(userIds, newFamilyGroupId);
+
+        if (!isValid) {
+            throw new IllegalArgumentException("새가족 순모임에 속하지 않은 인원이 포함되어 있습니다.");
+        }
+
+        Pair<Term, Cody> pair = termDownstream.findTermAndCodyByNewFamilyGroupId(newFamilyGroupId);
+        Term term = pair.getFirst();
+        Cody cody = pair.getSecond();
+
+        if (!term.isActive()) {
+            throw new IllegalStateException("비활성 텀의 순모임을 출석체크 할 수 없습니다.");
+        }
+
+        attendances.forEach(it -> {
+            it.setTermId(term.getId());
+            it.setCodyId(cody.getId());
+        });
+
+        attendanceWriter.deleteByUserIdInAndDate(userIds, attendanceDate);
+        attendanceWriter.saveAll(attendances);
     }
 }
