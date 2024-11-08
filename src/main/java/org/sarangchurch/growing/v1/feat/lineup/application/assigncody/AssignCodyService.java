@@ -1,24 +1,26 @@
-package org.sarangchurch.growing.v1.feat.lineup.application.assignseniorpastor;
+package org.sarangchurch.growing.v1.feat.lineup.application.assigncody;
 
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v1.feat.lineup.infra.component.CodyAssigner;
 import org.sarangchurch.growing.v1.feat.lineup.infra.component.LineUpTermFinder;
-import org.sarangchurch.growing.v1.feat.lineup.infra.component.SeniorPastorAssigner;
 import org.sarangchurch.growing.v1.feat.lineup.infra.stream.user.UserDownstream;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
-public class AssignSeniorPastorService {
+public class AssignCodyService {
     private final LineUpTermFinder lineUpTermFinder;
     private final UserDownstream userDownstream;
-    private final SeniorPastorAssigner seniorPastorAssigner;
+    private final CodyAssigner codyAssigner;
 
-    public void assign(Long termId, Long userId) {
+    public void assign(Long termId, List<Long> userIds) {
         Term term = lineUpTermFinder.findByIdOrThrow(termId);
-        User user = userDownstream.findActiveByIdOrThrow(userId);
+        List<User> users = userDownstream.findActiveByIdInOrThrow(userIds);
 
-        seniorPastorAssigner.assign(term, user);
+        codyAssigner.assign(term, users);
     }
 }

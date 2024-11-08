@@ -8,10 +8,12 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.TypeDef;
 import org.sarangchurch.growing.config.LongArrayListConverter;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
+import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "stump_line_up")
@@ -44,5 +46,18 @@ public class StumpLineUp extends BaseEntity {
 
     public void changeSeniorPastor(Long userId) {
         seniorPastorUserId = userId;
+    }
+
+    public void setJuniorPastors(List<User> users) {
+        juniorPastorUserIds = users.stream()
+                .map(User::getId)
+                .collect(Collectors.toList());
+        ;
+    }
+
+    public void setCodies(List<User> users) {
+        codyUserIds = users.stream()
+                .map(User::getId)
+                .collect(Collectors.toList());
     }
 }
