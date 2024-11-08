@@ -1,5 +1,7 @@
 package org.sarangchurch.growing.core.interfaces.v1.newfamily;
 
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
+
 import java.util.List;
 
 public interface NewFamilyService {
@@ -10,4 +12,6 @@ public interface NewFamilyService {
     boolean containsNewFamilyByUserIds(List<Long> userIds);
 
     boolean existsByNewFamilyGroupId(Long newFamilyGroupId);
+
+    List<NewFamily> findByIdInOrThrow(List<Long> newFamilyIds);
 }
