@@ -12,5 +12,13 @@ POST http://localhost:8080/api/v1/terms/2/assign-junior-pastor
 Content-Type: application/json
 
 {
-  "userIds": [13]
+  "userIds": [7]
+}
+
+### 코디 라인업
+POST http://localhost:8080/api/v1/terms/2/assign-cody
+Content-Type: application/json
+
+{
+  "userIds": [8]
 }

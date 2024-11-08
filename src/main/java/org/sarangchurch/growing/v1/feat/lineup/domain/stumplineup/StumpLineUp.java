@@ -51,6 +51,13 @@ public class StumpLineUp extends BaseEntity {
     public void setJuniorPastors(List<User> users) {
         juniorPastorUserIds = users.stream()
                 .map(User::getId)
-                .collect(Collectors.toList());;
+                .collect(Collectors.toList());
+        ;
+    }
+
+    public void setCodies(List<User> users) {
+        codyUserIds = users.stream()
+                .map(User::getId)
+                .collect(Collectors.toList());
     }
 }
