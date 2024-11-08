@@ -42,6 +42,5 @@ public class SmallGroupMemberAssigner {
                 .collect(Collectors.toList());
 
         smallGroupMemberLineUpWriter.saveAll(smallGroupLeaderLineUps);
-
     }
 }

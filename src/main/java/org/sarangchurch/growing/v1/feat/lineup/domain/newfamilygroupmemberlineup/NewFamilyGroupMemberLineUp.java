@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupmemberlineup;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
@@ -24,4 +25,11 @@ public class NewFamilyGroupMemberLineUp extends BaseEntity {
 
     @Column(name = "member_user_id", nullable = false)
     private Long memberUserId;
+
+    @Builder
+    public NewFamilyGroupMemberLineUp(Long termId, Long newFamilyGroupLeaderLineUpId, Long memberUserId) {
+        this.termId = termId;
+        this.newFamilyGroupLeaderLineUpId = newFamilyGroupLeaderLineUpId;
+        this.memberUserId = memberUserId;
+    }
 }
