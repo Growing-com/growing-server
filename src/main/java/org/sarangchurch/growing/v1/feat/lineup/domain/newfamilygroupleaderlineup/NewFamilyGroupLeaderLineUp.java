@@ -1,10 +1,9 @@
 package org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupleaderlineup;
 
-import io.hypersistence.utils.hibernate.type.json.JsonType;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.TypeDef;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
 
 import javax.persistence.*;
@@ -26,4 +25,11 @@ public class NewFamilyGroupLeaderLineUp extends BaseEntity {
 
     @Column(name = "leader_user_id", nullable = false)
     private Long leaderUserId;
+
+    @Builder
+    public NewFamilyGroupLeaderLineUp(Long termId, Long codyUserId, Long leaderUserId) {
+        this.termId = termId;
+        this.codyUserId = codyUserId;
+        this.leaderUserId = leaderUserId;
+    }
 }
