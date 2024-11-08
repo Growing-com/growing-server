@@ -3,6 +3,7 @@ package org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupmemberlineu
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "new_family_group_member_line_up")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class NewFamilyGroupMemberLineUp {
+public class NewFamilyGroupMemberLineUp extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

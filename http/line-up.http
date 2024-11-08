@@ -38,5 +38,14 @@ Content-Type: application/json
 
 {
   "codyUserId": 8,
-  "newFamilyGroupLeaderUserIds": [17]
+  "newFamilyGroupLeaderUserIds": []
+}
+
+### 일반 순원 라인업
+POST http://localhost:8080/api/v1/terms/2/assign-small-group-member
+Content-Type: application/json
+
+{
+  "leaderUserId": 15,
+  "memberUserIds": [17]
 }
