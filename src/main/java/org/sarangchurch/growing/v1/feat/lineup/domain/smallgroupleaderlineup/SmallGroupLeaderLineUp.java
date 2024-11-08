@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupleaderlineup;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
@@ -24,4 +25,11 @@ public class SmallGroupLeaderLineUp extends BaseEntity {
 
     @Column(name = "leader_user_id", nullable = false)
     private Long leaderUserId;
+
+    @Builder
+    public SmallGroupLeaderLineUp(Long termId, Long codyUserId, Long leaderUserId) {
+        this.termId = termId;
+        this.codyUserId = codyUserId;
+        this.leaderUserId = leaderUserId;
+    }
 }

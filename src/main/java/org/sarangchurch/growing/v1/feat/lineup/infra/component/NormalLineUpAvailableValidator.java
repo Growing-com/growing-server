@@ -23,19 +23,21 @@ public class NormalLineUpAvailableValidator {
     private final NewFamilyGroupMemberLineUpReader newFamilyGroupMemberLineUpReader;
 
     public void validate(Term term, User user) {
+        // 공통 1. 활성 유저만 라인업 할 수 있음
         if (!user.isActive()) {
             throw new IllegalStateException("비활성 유저를 라인업할 수 없습니다.");
         }
 
-        StumpLineUp stumpLineUp = stumpLineUpFinder.findByTermId(term.getId())
-                .orElseThrow(() -> new IllegalArgumentException("그루터기 라인업이 존재하지 않습니다."));
-
-        // 0. 새가족이면 안 됨
+        // 공통 2. 새가족이면 안 됨
         boolean isNewFamily = newFamilyDownstream.isNewFamilyByUserId(user.getId());
 
         if (isNewFamily) {
             throw new IllegalStateException("새가족은 새가족 라인업을 진행해야합니다.");
         }
+
+        // 직분 검사 START
+        StumpLineUp stumpLineUp = stumpLineUpFinder.findByTermId(term.getId())
+                .orElseThrow(() -> new IllegalArgumentException("그루터기 라인업이 존재하지 않습니다."));
 
         // 1. 담당 교역자
         boolean isAlreadySeniorPastor = user.getId().equals(stumpLineUp.getSeniorPastorUserId());

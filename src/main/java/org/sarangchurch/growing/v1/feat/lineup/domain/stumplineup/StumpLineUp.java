@@ -60,4 +60,8 @@ public class StumpLineUp extends BaseEntity {
                 .map(User::getId)
                 .collect(Collectors.toList());
     }
+
+    public boolean containsCody(User cody) {
+        return codyUserIds.contains(cody.getId());
+    }
 }
