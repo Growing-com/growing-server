@@ -11,4 +11,6 @@ public interface SmallGroupLeaderLineUpRepository {
     void deleteByCodyUserIdAndTermId(Long codyId, Long termId);
 
     Optional<SmallGroupLeaderLineUp> findByLeaderUserIdAndTermId(Long leaderUserId, Long termId);
+
+    List<SmallGroupLeaderLineUp> findByTermId(Long termId);
 }

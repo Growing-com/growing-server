@@ -88,4 +88,8 @@ public class User extends BaseEntity {
     public void decreaseGrade() {
         grade = grade - 1;
     }
+
+    public boolean isActive() {
+        return isActive;
+    }
 }

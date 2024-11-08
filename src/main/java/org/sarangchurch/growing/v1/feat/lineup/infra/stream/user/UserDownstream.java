@@ -35,4 +35,8 @@ public class UserDownstream {
 
         return users;
     }
+
+    public List<User> findAll() {
+        return userService.findAll();
+    }
 }

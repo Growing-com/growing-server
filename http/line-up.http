@@ -29,7 +29,7 @@ Content-Type: application/json
 
 {
   "codyUserId": 8,
-  "smallGroupLeaderUserIds": []
+  "smallGroupLeaderUserIds": [15]
 }
 
 ### 새가족 순장 라인업
@@ -38,7 +38,7 @@ Content-Type: application/json
 
 {
   "codyUserId": 8,
-  "newFamilyGroupLeaderUserIds": [17]
+  "newFamilyGroupLeaderUserIds": [18]
 }
 
 ### 일반 순원 라인업
@@ -47,7 +47,7 @@ Content-Type: application/json
 
 {
   "leaderUserId": 15,
-  "memberUserIds": []
+  "memberUserIds": [17]
 }
 
 ### 새가족 순원 라인업
@@ -67,3 +67,6 @@ Content-Type: application/json
   "leaderUserId": 17,
   "newFamilyIds": [3]
 }
+
+### 라인업 확정
+POST http://localhost:8080/api/v1/terms/2/confirm-line-up

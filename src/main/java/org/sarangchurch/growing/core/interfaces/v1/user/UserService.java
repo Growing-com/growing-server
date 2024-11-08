@@ -18,4 +18,6 @@ public interface UserService {
     void activateByIdIn(List<Long> ids);
 
     void deActivateByIdIn(List<Long> ids);
+
+    List<User> findAll();
 }

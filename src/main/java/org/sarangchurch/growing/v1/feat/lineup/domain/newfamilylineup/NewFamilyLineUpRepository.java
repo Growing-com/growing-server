@@ -6,4 +6,6 @@ public interface NewFamilyLineUpRepository {
     void deleteByNewFamilyGroupLeaderLineUpIdAndTermId(Long newFamilyGroupLeaderLineUpId, Long termId);
 
     <S extends NewFamilyLineUp> List<S> saveAll(Iterable<S> entities);
+
+    List<NewFamilyLineUp> findByTermId(Long termId);
 }

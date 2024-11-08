@@ -11,4 +11,6 @@ public interface NewFamilyGroupLeaderLineUpRepository {
     <S extends NewFamilyGroupLeaderLineUp> List<S> saveAll(Iterable<S> entities);
 
     Optional<NewFamilyGroupLeaderLineUp> findByLeaderUserIdAndTermId(Long leaderUserId, Long termId);
+
+    List<NewFamilyGroupLeaderLineUp> findByTermId(Long termId);
 }
