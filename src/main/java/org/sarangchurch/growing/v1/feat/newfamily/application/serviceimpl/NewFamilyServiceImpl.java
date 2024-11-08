@@ -2,6 +2,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.application.serviceimpl;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.v1.newfamily.NewFamilyService;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamily.NewFamilyFinder;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,10 @@ public class NewFamilyServiceImpl implements NewFamilyService {
     @Override
     public boolean existsByNewFamilyGroupId(Long newFamilyGroupId) {
         return newFamilyFinder.existsCurrentByNewFamilyGroupId(newFamilyGroupId);
+    }
+
+    @Override
+    public List<NewFamily> findByIdInOrThrow(List<Long> newFamilyIds) {
+        return newFamilyFinder.findByIdInOrThrow(newFamilyIds);
     }
 }
