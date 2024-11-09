@@ -11,4 +11,6 @@ public interface UserRepository {
     List<User> findByIdIn(List<Long> ids);
 
     List<User> findAll();
+
+    List<User> findAllActive();
 }

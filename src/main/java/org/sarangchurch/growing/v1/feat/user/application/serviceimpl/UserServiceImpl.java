@@ -52,4 +52,9 @@ public class UserServiceImpl implements UserService {
 
         userUpdater.deactivate(users);
     }
+
+    @Override
+    public List<User> findAll() {
+        return userFinder.findAll();
+    }
 }

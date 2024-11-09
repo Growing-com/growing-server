@@ -8,4 +8,6 @@ public interface NewFamilyGroupMemberLineUpRepository {
     void deleteByNewFamilyGroupLeaderLineUpIdAndTermId(Long newFamilyGroupLeaderLineUpId, Long termId);
 
     <S extends NewFamilyGroupMemberLineUp> List<S> saveAll(Iterable<S> entities);
+
+    List<NewFamilyGroupMemberLineUp> findByTermId(Long termId);
 }

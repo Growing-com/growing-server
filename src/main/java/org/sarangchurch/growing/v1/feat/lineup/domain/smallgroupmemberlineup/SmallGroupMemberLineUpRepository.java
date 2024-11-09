@@ -8,4 +8,6 @@ public interface SmallGroupMemberLineUpRepository {
     void deleteBySmallGroupLeaderLineUpIdAndTermId(Long smallGroupLeaderLineUpId, Long termId);
 
     <S extends SmallGroupMemberLineUp> List<S> saveAll(Iterable<S> entities);
+
+    List<SmallGroupMemberLineUp> findByTermId(Long termId);
 }
