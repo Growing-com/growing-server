@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.lineup.infra.component;
 
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.core.interfaces.common.Duty;
 import org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupleaderlineup.SmallGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupmemberlineup.SmallGroupMemberLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.smallgroupleaderlineup.SmallGroupLeaderLineUpReader;
@@ -29,7 +30,7 @@ public class SmallGroupMemberAssigner {
 
         smallGroupMemberLineUpWriter.deleteBySmallGroupLeaderLineUpIdAndTermId(smallGroupLeaderLineUp.getId(), term.getId());
 
-        memberUsers.forEach(user -> normalLineUpAvailableValidator.validate(term, user));
+        memberUsers.forEach(user -> normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.SMALL_GROUP_MEMBER));
 
         List<SmallGroupMemberLineUp> smallGroupLeaderLineUps = memberUsers.stream()
                 .map(it ->

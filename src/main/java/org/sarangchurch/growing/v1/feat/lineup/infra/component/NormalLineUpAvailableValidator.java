@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.lineup.infra.component;
 
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.core.interfaces.common.Duty;
 import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUpReader;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.newfamilygroupmemberlineup.NewFamilyGroupMemberLineUpReader;
@@ -22,63 +23,85 @@ public class NormalLineUpAvailableValidator {
     private final SmallGroupMemberLineUpReader smallGroupMemberLineUpReader;
     private final NewFamilyGroupMemberLineUpReader newFamilyGroupMemberLineUpReader;
 
-    public void validate(Term term, User user) {
-        // 공통 1. 활성 유저만 라인업 할 수 있음
+    public void validateDutyAssignable(Term term, User user, Duty duty) {
         if (!user.isActive()) {
             throw new IllegalStateException("비활성 유저를 라인업할 수 없습니다.");
         }
 
-        // 공통 2. 새가족이면 안 됨
         boolean isNewFamily = newFamilyDownstream.isNewFamilyByUserId(user.getId());
 
         if (isNewFamily) {
             throw new IllegalStateException("새가족은 새가족 라인업을 진행해야합니다.");
         }
 
-        // 직분 검사 START
         StumpLineUp stumpLineUp = stumpLineUpFinder.findByTermId(term.getId())
                 .orElseThrow(() -> new IllegalArgumentException("그루터기 라인업이 존재하지 않습니다."));
 
-        // 1. 담당 교역자
-        boolean isAlreadySeniorPastor = user.getId().equals(stumpLineUp.getSeniorPastorUserId());
-
-        if (isAlreadySeniorPastor) {
-            throw new IllegalStateException("이미 해당텀에 담당 교역자로 라인업된 유저입니다.");
+        switch (duty) {
+            case PASTOR: {
+                validateCody(user, stumpLineUp);
+                validateSmallGroupLeader(term, user);
+                validateNewFamilyGroupLeader(term, user);
+                validateSmallGroupMember(term, user);
+                validateNewFamilyGroupMember(term, user);
+                break;
+            }
+            case CODY: {
+                validatePastor(user, stumpLineUp);
+                validateSmallGroupLeader(term, user);
+                validateNewFamilyGroupLeader(term, user);
+                validateSmallGroupMember(term, user);
+                validateNewFamilyGroupMember(term, user);
+                break;
+            }
+            case SMALL_GROUP_LEADER: {
+                validatePastor(user, stumpLineUp);
+                validateCody(user, stumpLineUp);
+                validateNewFamilyGroupLeader(term, user);
+                validateSmallGroupMember(term, user);
+                validateNewFamilyGroupMember(term, user);
+                break;
+            }
+            case NEW_FAMILY_GROUP_LEADER: {
+                validatePastor(user, stumpLineUp);
+                validateCody(user, stumpLineUp);
+                validateSmallGroupLeader(term, user);
+                validateSmallGroupMember(term, user);
+                validateNewFamilyGroupMember(term, user);
+                break;
+            }
+            case SMALL_GROUP_MEMBER: {
+                validatePastor(user, stumpLineUp);
+                validateCody(user, stumpLineUp);
+                validateSmallGroupLeader(term, user);
+                validateNewFamilyGroupLeader(term, user);
+                validateNewFamilyGroupMember(term, user);
+                break;
+            }
+            case NEW_FAMILY_GROUP_MEMBER: {
+                validatePastor(user, stumpLineUp);
+                validateCody(user, stumpLineUp);
+                validateSmallGroupLeader(term, user);
+                validateNewFamilyGroupLeader(term, user);
+                validateSmallGroupMember(term, user);
+                break;
+            }
+            default:
+                break;
         }
+    }
 
-        // 2. 부 교역자
-        boolean isAlreadyJuniorPastor = stumpLineUp.getJuniorPastorUserIds().contains(user.getId());
-
-        if (isAlreadyJuniorPastor) {
-            throw new IllegalStateException("이미 해당텀에 부교역자로 라인업된 유저입니다.");
-        }
-
-        // 3. 코디
-        boolean isAlreadyCody = stumpLineUp.getCodyUserIds().contains(user.getId());
-
-        if (isAlreadyCody) {
-            throw new IllegalStateException("이미 해당텀에 코디로 라인업된 유저입니다.");
-        }
-
-        // 4. 일반 순장
-        boolean isAlreadySmallGroupLeader = smallGroupLeaderLineUpReader.existsByLeaderUserIdAndTermId(
+    private void validateNewFamilyGroupMember(Term term, User user) {
+        boolean isAlreadyNewFamilyGroupMember = newFamilyGroupMemberLineUpReader.existsByMemberUserIdAndTermId(
                 user.getId(), term.getId()
         );
 
-        if (isAlreadySmallGroupLeader) {
-            throw new IllegalStateException("이미 해당텀에 일반 순장으로 라인업된 유저입니다.");
+        if (isAlreadyNewFamilyGroupMember) {
+            throw new IllegalStateException("이미 해당텀에 새가족 순원으로 라인업된 유저입니다.");
         }
+    }
 
-        // 5. 새가족 순장
-        boolean isAlreadyNewFamilyGroupLeader = newFamilyGroupLeaderLineUpReader.existsByLeaderUserIdAndTermId(
-                user.getId(), term.getId()
-        );
-
-        if (isAlreadyNewFamilyGroupLeader) {
-            throw new IllegalStateException("이미 해당텀에 새가족 순장으로 라인업된 유저입니다.");
-        }
-
-        // 6. 일반 순원
+    private void validateSmallGroupMember(Term term, User user) {
         boolean isAlreadySmallGroupMember = smallGroupMemberLineUpReader.existsByMemberUserIdAndTermId(
                 user.getId(), term.getId()
         );
@@ -86,14 +109,47 @@ public class NormalLineUpAvailableValidator {
         if (isAlreadySmallGroupMember) {
             throw new IllegalStateException("이미 해당텀에 일반 순원으로 라인업된 유저입니다.");
         }
+    }
 
-        // 7. 새가족 순원
-        boolean isAlreadyNewFamilyGroupMember = newFamilyGroupMemberLineUpReader.existsByMemberUserIdAndTermId(
+    private void validateNewFamilyGroupLeader(Term term, User user) {
+        boolean isAlreadyNewFamilyGroupLeader = newFamilyGroupLeaderLineUpReader.existsByLeaderUserIdAndTermId(
                 user.getId(), term.getId()
         );
 
-        if (isAlreadyNewFamilyGroupMember) {
-            throw new IllegalStateException("이미 해당텀에 새가족 순원으로 라인업된 유저입니다.");
+        if (isAlreadyNewFamilyGroupLeader) {
+            throw new IllegalStateException("이미 해당텀에 새가족 순장으로 라인업된 유저입니다.");
+        }
+    }
+
+    private void validateSmallGroupLeader(Term term, User user) {
+        boolean isAlreadySmallGroupLeader = smallGroupLeaderLineUpReader.existsByLeaderUserIdAndTermId(
+                user.getId(), term.getId()
+        );
+
+        if (isAlreadySmallGroupLeader) {
+            throw new IllegalStateException("이미 해당텀에 일반 순장으로 라인업된 유저입니다.");
+        }
+    }
+
+    private void validatePastor(User user, StumpLineUp stumpLineUp) {
+        boolean isAlreadySeniorPastor = user.getId().equals(stumpLineUp.getSeniorPastorUserId());
+
+        if (isAlreadySeniorPastor) {
+            throw new IllegalStateException("이미 해당텀에 담당 교역자로 라인업된 유저입니다.");
+        }
+
+        boolean isAlreadyJuniorPastor = stumpLineUp.getJuniorPastorUserIds().contains(user.getId());
+
+        if (isAlreadyJuniorPastor) {
+            throw new IllegalStateException("이미 해당텀에 부교역자로 라인업된 유저입니다.");
+        }
+    }
+    
+    private void validateCody(User user, StumpLineUp stumpLineUp) {
+        boolean isAlreadyCody = stumpLineUp.getCodyUserIds().contains(user.getId());
+
+        if (isAlreadyCody) {
+            throw new IllegalStateException("이미 해당텀에 코디로 라인업된 유저입니다.");
         }
     }
 }

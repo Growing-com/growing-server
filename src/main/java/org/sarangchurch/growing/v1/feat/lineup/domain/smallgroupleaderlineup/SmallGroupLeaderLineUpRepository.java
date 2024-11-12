@@ -8,9 +8,11 @@ public interface SmallGroupLeaderLineUpRepository {
 
     <S extends SmallGroupLeaderLineUp> List<S> saveAll(Iterable<S> smallGroupLeaderLineUps);
 
-    void deleteByCodyUserIdAndTermId(Long codyId, Long termId);
-
     Optional<SmallGroupLeaderLineUp> findByLeaderUserIdAndTermId(Long leaderUserId, Long termId);
 
     List<SmallGroupLeaderLineUp> findByTermId(Long termId);
+
+    List<SmallGroupLeaderLineUp> findByCodyUserId(Long codyUserId);
+
+    void deleteByIdIn(List<Long> deleteIds);
 }

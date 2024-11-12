@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.lineup.infra.component;
 
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.core.interfaces.common.Duty;
 import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.newfamilygroupleaderlineup.NewFamilyLeaderLineUpWriter;
@@ -39,7 +40,7 @@ public class NewFamilyGroupLeaderAssigner {
 
         newFamilyLeaderLineUpWriter.deleteByCodyUserIdAndTermId(codyUser.getId(), term.getId());
 
-        newFamilyGroupLeaderUsers.forEach(user -> normalLineUpAvailableValidator.validate(term, user));
+        newFamilyGroupLeaderUsers.forEach(user -> normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.NEW_FAMILY_GROUP_LEADER));
 
         List<NewFamilyGroupLeaderLineUp> newFamilyGroupLeaderLineUps = newFamilyGroupLeaderUsers.stream()
                 .map(it ->

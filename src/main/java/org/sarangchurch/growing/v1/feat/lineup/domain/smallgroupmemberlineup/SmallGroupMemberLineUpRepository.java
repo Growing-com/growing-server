@@ -10,4 +10,6 @@ public interface SmallGroupMemberLineUpRepository {
     <S extends SmallGroupMemberLineUp> List<S> saveAll(Iterable<S> entities);
 
     List<SmallGroupMemberLineUp> findByTermId(Long termId);
+
+    boolean existsBySmallGroupLeaderLineUpIdIn(List<Long> smallGroupLeaderLineUpIds);
 }

@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.lineup.infra.component;
 
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.core.interfaces.common.Duty;
 import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupleaderlineup.SmallGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
@@ -38,7 +39,7 @@ public class CodyAssigner {
 
         validateAssignedLeaderExists(term, codyUsers);
 
-        codyUsers.forEach(user -> normalLineUpAvailableValidator.validate(term, user));
+        codyUsers.forEach(user -> normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.CODY));
 
         stumpLineUp.setCodies(codyUsers);
     }

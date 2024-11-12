@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.lineup.infra.component;
 
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.core.interfaces.common.Duty;
 import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.stumplineup.StumpLineUpFinder;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.stumplineup.StumpLineUpWriter;
@@ -27,7 +28,7 @@ public class SeniorPastorAssigner {
                         )
                 );
 
-        normalLineUpAvailableValidator.validate(term, user);
+        normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.PASTOR);
 
         stumpLineUp.changeSeniorPastor(user.getId());
     }

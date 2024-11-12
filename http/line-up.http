@@ -20,7 +20,7 @@ POST http://localhost:8080/api/v1/terms/2/assign-cody
 Content-Type: application/json
 
 {
-  "userIds": []
+  "userIds": [8]
 }
 
 ### 일반 순장 라인업
@@ -29,7 +29,7 @@ Content-Type: application/json
 
 {
   "codyUserId": 8,
-  "smallGroupLeaderUserIds": []
+  "smallGroupLeaderUserIds": [17]
 }
 
 ### 새가족 순장 라인업
@@ -38,7 +38,7 @@ Content-Type: application/json
 
 {
   "codyUserId": 8,
-  "newFamilyGroupLeaderUserIds": [18]
+  "newFamilyGroupLeaderUserIds": []
 }
 
 ### 일반 순원 라인업
@@ -46,8 +46,8 @@ POST http://localhost:8080/api/v1/terms/2/assign-small-group-member
 Content-Type: application/json
 
 {
-  "leaderUserId": 15,
-  "memberUserIds": [17]
+  "leaderUserId": 18,
+  "memberUserIds": []
 }
 
 ### 새가족 순원 라인업
