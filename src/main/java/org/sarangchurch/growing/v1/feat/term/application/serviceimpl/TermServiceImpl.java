@@ -67,11 +67,10 @@ public class TermServiceImpl implements TermService {
 
     @Override
     public void startTerm(
-            Long termId,
             StumpLineUp stumpLineUp,
             List<SmallGroupLeaderLineUp> smallGroupLeaderLineUps,
             List<SmallGroupMemberLineUp> smallGroupMemberLineUps
     ) {
-        log.info("Starting term with id {}", termId);
+        log.info("Starting term");
     }
 }

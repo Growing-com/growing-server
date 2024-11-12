@@ -16,7 +16,6 @@ public interface TermService {
     Pair<Term, Cody> findTermAndCodyBySmallGroupId(Long smallGroupId);
     Pair<Term, Cody> findTermAndCodyByNewFamilyGroupId(Long newFamilyGroupId);
     void startTerm(
-            Long termId,
             StumpLineUp stumpLineUp,
             List<SmallGroupLeaderLineUp> smallGroupLeaderLineUps,
             List<SmallGroupMemberLineUp> smallGroupMemberLineUps

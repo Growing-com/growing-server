@@ -14,12 +14,11 @@ import java.util.List;
 public class TermUpstream {
     private final TermService termService;
 
-    public void startTerm(
-            Long termId,
+    public void processLineUpsAndStartTerm(
             StumpLineUp stumpLineUp,
             List<SmallGroupLeaderLineUp> smallGroupLeaderLineUps,
             List<SmallGroupMemberLineUp> smallGroupMemberLineUps
     ) {
-        termService.startTerm(termId, stumpLineUp, smallGroupLeaderLineUps, smallGroupMemberLineUps);
+        termService.startTerm(stumpLineUp, smallGroupLeaderLineUps, smallGroupMemberLineUps);
     }
 }
