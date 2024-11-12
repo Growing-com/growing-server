@@ -5,6 +5,8 @@ import org.sarangchurch.growing.v1.feat.term.domain.pastor.Pastor;
 import org.sarangchurch.growing.v1.feat.term.domain.pastor.PastorRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class PastorWriter {
@@ -16,5 +18,9 @@ public class PastorWriter {
 
     public void deleteById(Long id) {
         pastorRepository.deleteById(id);
+    }
+
+    public void saveAll(List<Pastor> juniorPastors) {
+        pastorRepository.saveAll(juniorPastors);
     }
 }

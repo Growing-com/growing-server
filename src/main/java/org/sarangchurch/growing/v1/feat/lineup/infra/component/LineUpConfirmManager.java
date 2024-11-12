@@ -118,8 +118,6 @@ public class LineUpConfirmManager {
         termUpstream.processLineUps(stumpLineUp, smallGroupLeaderLineUps, smallGroupMemberLineUps);
         newFamilyGroupUpstream.processLineUps(newFamilyGroupLeaderLineUps, newFamilyGroupMemberLineUps);
         newFamilyUpstream.processLineUps(newFamilyGroupLeaderLineUps, newFamilyLineUps);
-
-        throw new IllegalStateException();
     }
 
 }

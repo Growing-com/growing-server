@@ -12,6 +12,8 @@ import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroup.NewF
 import org.sarangchurch.growing.v1.feat.term.domain.cody.Cody;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
+import org.sarangchurch.growing.v1.feat.term.infra.component.TermActivator;
+import org.sarangchurch.growing.v1.feat.term.infra.component.TermLineUpProcessor;
 import org.sarangchurch.growing.v1.feat.term.infra.component.TermValidator;
 import org.sarangchurch.growing.v1.feat.term.infra.component.UserEmitManager;
 import org.sarangchurch.growing.v1.feat.term.infra.data.cody.CodyFinder;
@@ -31,6 +33,8 @@ public class TermServiceImpl implements TermService {
     private final SmallGroupFinder smallGroupFinder;
     private final CodyFinder codyFinder;
     private final NewFamilyGroupFinder newFamilyGroupFinder;
+    private final TermLineUpProcessor termLineUpProcessor;
+    private final TermActivator termActivator;
 
     @Override
     public Term findTerm(Long id) {
@@ -66,11 +70,12 @@ public class TermServiceImpl implements TermService {
     }
 
     @Override
-    public void startTerm(
+    public void processLineUps(
             StumpLineUp stumpLineUp,
             List<SmallGroupLeaderLineUp> smallGroupLeaderLineUps,
             List<SmallGroupMemberLineUp> smallGroupMemberLineUps
     ) {
-        log.info("Starting term");
+        termLineUpProcessor.process(stumpLineUp, smallGroupLeaderLineUps, smallGroupMemberLineUps);
+        termActivator.activate(stumpLineUp.getTermId());
     }
 }

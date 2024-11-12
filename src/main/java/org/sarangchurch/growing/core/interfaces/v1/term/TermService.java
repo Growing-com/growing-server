@@ -15,7 +15,7 @@ public interface TermService {
     boolean areValidStumpUserIds(List<Long> userIds, Long termId);
     Pair<Term, Cody> findTermAndCodyBySmallGroupId(Long smallGroupId);
     Pair<Term, Cody> findTermAndCodyByNewFamilyGroupId(Long newFamilyGroupId);
-    void startTerm(
+    void processLineUps(
             StumpLineUp stumpLineUp,
             List<SmallGroupLeaderLineUp> smallGroupLeaderLineUps,
             List<SmallGroupMemberLineUp> smallGroupMemberLineUps

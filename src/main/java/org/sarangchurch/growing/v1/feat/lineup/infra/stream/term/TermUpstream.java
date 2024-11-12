@@ -19,6 +19,6 @@ public class TermUpstream {
             List<SmallGroupLeaderLineUp> smallGroupLeaderLineUps,
             List<SmallGroupMemberLineUp> smallGroupMemberLineUps
     ) {
-        termService.startTerm(stumpLineUp, smallGroupLeaderLineUps, smallGroupMemberLineUps);
+        termService.processLineUps(stumpLineUp, smallGroupLeaderLineUps, smallGroupMemberLineUps);
     }
 }

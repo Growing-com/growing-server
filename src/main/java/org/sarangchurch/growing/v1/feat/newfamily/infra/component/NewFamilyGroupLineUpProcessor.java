@@ -34,17 +34,49 @@ public class NewFamilyGroupLineUpProcessor {
     ) {
         Long termId = leaderLineUps.get(0).getTermId();
         List<Cody> codies = codyDownstream.findByTermId(termId);
-        List<NewFamilyGroupLeader> newFamilyGroupLeaders =  newFamilyGroupLeaderFinder.findByTermId(termId);
 
+        List<NewFamilyGroup> newFamilyGroups = processLeaderLineUps(leaderLineUps, codies);
+        List<NewFamilyGroupLeader> newFamilyGroupLeaders = newFamilyGroupLeaderFinder.findByTermId(termId);
+
+        for (NewFamilyGroupMemberLineUp memberLineUp : memberLineUps) {
+            this.processMemberLineUp(memberLineUp, leaderLineUps, newFamilyGroups, newFamilyGroupLeaders);
+        }
+    }
+
+    private List<NewFamilyGroup> processLeaderLineUps(List<NewFamilyGroupLeaderLineUp> leaderLineUps, List<Cody> codies) {
         List<NewFamilyGroup> newFamilyGroups = new ArrayList<>();
 
         for (NewFamilyGroupLeaderLineUp leaderLineUp : leaderLineUps) {
             newFamilyGroups.add(this.processLeaderLineUp(leaderLineUp, codies));
         }
 
-        for (NewFamilyGroupMemberLineUp memberLineUp : memberLineUps) {
-            this.processMemberLineUp(memberLineUp, leaderLineUps, newFamilyGroups, newFamilyGroupLeaders);
-        }
+        return newFamilyGroups;
+    }
+
+    private NewFamilyGroup processLeaderLineUp(NewFamilyGroupLeaderLineUp lineUp, List<Cody> codies) {
+        Long termId = lineUp.getTermId();
+        Long leaderUserId = lineUp.getLeaderUserId();
+        Long codyUserId = lineUp.getCodyUserId();
+
+        NewFamilyGroupLeader newFamilyGroupLeader = NewFamilyGroupLeader.builder()
+                .termId(termId)
+                .userId(leaderUserId)
+                .build();
+
+        NewFamilyGroupLeader savedNewFamilyGroupLeader = newFamilyGroupLeaderWriter.save(newFamilyGroupLeader);
+
+        Cody cody = codies.stream()
+                .filter(it -> it.getUserId().equals(codyUserId))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 코디입니다."));
+
+        NewFamilyGroup newFamilyGroup = NewFamilyGroup.builder()
+                .termId(termId)
+                .codyId(cody.getId())
+                .newFamilyGroupLeaderId(savedNewFamilyGroupLeader.getId())
+                .build();
+
+        return newFamilyGroupWriter.save(newFamilyGroup);
     }
 
     private void processMemberLineUp(
@@ -79,31 +111,5 @@ public class NewFamilyGroupLineUpProcessor {
                 .build();
 
         newFamilyGroupMemberWriter.save(groupMember);
-    }
-
-    private NewFamilyGroup processLeaderLineUp(NewFamilyGroupLeaderLineUp lineUp, List<Cody> codies) {
-        Long termId = lineUp.getTermId();
-        Long leaderUserId = lineUp.getLeaderUserId();
-        Long codyUserId = lineUp.getCodyUserId();
-
-        NewFamilyGroupLeader newFamilyGroupLeader = NewFamilyGroupLeader.builder()
-                .termId(termId)
-                .userId(leaderUserId)
-                .build();
-
-        NewFamilyGroupLeader savedNewFamilyGroupLeader = newFamilyGroupLeaderWriter.save(newFamilyGroupLeader);
-
-        Cody cody = codies.stream()
-                .filter(it -> it.getUserId().equals(codyUserId))
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 코디입니다."));
-
-        NewFamilyGroup newFamilyGroup = NewFamilyGroup.builder()
-                .termId(termId)
-                .codyId(cody.getId())
-                .newFamilyGroupLeaderId(savedNewFamilyGroupLeader.getId())
-                .build();
-
-        return newFamilyGroupWriter.save(newFamilyGroup);
     }
 }
