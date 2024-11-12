@@ -92,7 +92,7 @@ Content-Type: application/json
 {
   "content": [
     {
-      "userId": 3,
+      "userId": 16,
       "lineOutDate": "2024-09-01",
       "reason": "ㅃㅃ"
     }
@@ -100,7 +100,7 @@ Content-Type: application/json
 }
 
 ### 라인인
-POST http://localhost:8080/api/v1/line-out-users/4/line-in
+POST http://localhost:8080/api/v1/line-out-users/7/line-in
 
 ### 학년 전체 변경
 POST http://localhost:8080/api/v1/user-grade-update

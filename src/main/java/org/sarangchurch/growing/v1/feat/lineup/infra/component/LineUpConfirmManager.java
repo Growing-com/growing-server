@@ -16,11 +16,15 @@ import org.sarangchurch.growing.v1.feat.lineup.infra.data.smallgroupmemberlineup
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.stumplineup.StumpLineUpFinder;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.stumplineup.StumpLineUpWriter;
 import org.sarangchurch.growing.v1.feat.lineup.infra.stream.newfamily.NewFamilyDownstream;
+import org.sarangchurch.growing.v1.feat.lineup.infra.stream.newfamily.NewFamilyGroupUpstream;
+import org.sarangchurch.growing.v1.feat.lineup.infra.stream.newfamily.NewFamilyUpstream;
+import org.sarangchurch.growing.v1.feat.lineup.infra.stream.term.TermUpstream;
 import org.sarangchurch.growing.v1.feat.lineup.infra.stream.user.UserDownstream;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -42,6 +46,11 @@ public class LineUpConfirmManager {
     private final NewFamilyGroupMemberLineUpReader newFamilyGroupMemberLineUpReader;
     private final NewFamilyLineUpReader newFamilyLineUpReader;
 
+    private final TermUpstream termUpstream;
+    private final NewFamilyUpstream newFamilyUpstream;
+    private final NewFamilyGroupUpstream newFamilyGroupUpstream;
+
+    @Transactional
     public void confirm(Term term) {
         List<User> allUsers = userDownstream.findAll();
         List<User> activeUsers = allUsers.stream()
@@ -97,9 +106,16 @@ public class LineUpConfirmManager {
                 newFamilyLineUps,
                 newFamilies
         );
-        Set<Long> activeUserIdSet = activeUsers.stream().map(User::getId).collect(Collectors.toSet());
 
-        checkDiff(allUsers, activeUserIdSet, placedUserIdSet);
+        Set<Long> activeUserIdSet = activeUsers.stream()
+                .map(User::getId)
+                .collect(Collectors.toSet());
+
+        checkOnlyActiveAreAllPlaced(allUsers, activeUserIdSet, placedUserIdSet);
+
+        termUpstream.startTerm(term.getId(), stumpLineUp, smallGroupLeaderLineUps, smallGroupMemberLineUps);
+        newFamilyUpstream.processLineUps(newFamilyLineUps);
+        newFamilyGroupUpstream.processLineUps(newFamilyGroupLeaderLineUps, newFamilyGroupMemberLineUps);
     }
 
     private Set<Long> makePlacedUserIdSet(
@@ -182,7 +198,7 @@ public class LineUpConfirmManager {
         return placedUserIdSet;
     }
 
-    private void checkDiff(List<User> allUsers, Set<Long> activeUserIdSet, Set<Long> placedUserIdSet) {
+    private void checkOnlyActiveAreAllPlaced(List<User> allUsers, Set<Long> activeUserIdSet, Set<Long> placedUserIdSet) {
         Map<Long, String> userIdNameMap = allUsers.stream()
                 .map(it -> Map.entry(it.getId(), it.getName()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));

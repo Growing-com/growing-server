@@ -1,5 +1,7 @@
 package org.sarangchurch.growing.core.interfaces.v1.newfamily;
 
+import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUp;
+import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupmemberlineup.NewFamilyGroupMemberLineUp;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
 
 import java.util.List;
@@ -10,4 +12,9 @@ public interface NewFamilyGroupService {
     NewFamilyGroup findByIdOrThrow(Long newFamilyGroupId);
 
     boolean areValidUserIdsByNewFamilyGroupId(List<Long> userIds, Long newFamilyGroupId);
+
+    void processLineUps(
+            List<NewFamilyGroupLeaderLineUp> leaderLineUps,
+            List<NewFamilyGroupMemberLineUp> memberLineUps
+    );
 }

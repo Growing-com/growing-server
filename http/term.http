@@ -33,7 +33,7 @@ POST http://localhost:8080/api/v1/terms/1/create-pastor
 Content-Type: application/json
 
 {
-  "pastorUserId": 4
+  "pastorUserId": 8
 }
 
 ### 교역자 삭제
@@ -64,7 +64,7 @@ Content-Type: application/json
 }
 
 ### 코디 삭제
-POST http://localhost:8080/api/v1/codies/2/delete
+POST http://localhost:8080/api/v1/codies/3/delete
 
 ### 순모임 생성
 POST http://localhost:8080/api/v1/terms/1/create-small-group
@@ -77,15 +77,15 @@ Content-Type: application/json
 }
 
 ### 순모임 수정
-POST http://localhost:8080/api/v1/small-groups/1/update
+POST http://localhost:8080/api/v1/small-groups/3/update
 Content-Type: application/json
 
 {
-  "memberUserIds": [8]
+  "memberUserIds": [3]
 }
 
 ### 순모임 삭제
-POST http://localhost:8080/api/v1/small-groups/1/delete
+POST http://localhost:8080/api/v1/small-groups/2/delete
 
 ### 순원 라인업 변경
 POST http://localhost:8080/api/v1/small-group-members/1/line-up-edit
