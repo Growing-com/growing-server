@@ -115,9 +115,11 @@ public class LineUpConfirmManager {
 
         lineUpIntegrityChecker.check(allUsers, activeUserIdSet);
 
-        newFamilyUpstream.processLineUps(newFamilyLineUps);
         newFamilyGroupUpstream.processLineUps(newFamilyGroupLeaderLineUps, newFamilyGroupMemberLineUps);
+        newFamilyUpstream.processLineUps(newFamilyGroupLeaderLineUps, newFamilyLineUps);
         termUpstream.processLineUpsAndStartTerm(stumpLineUp, smallGroupLeaderLineUps, smallGroupMemberLineUps);
+
+        throw new IllegalStateException();
     }
 
 }

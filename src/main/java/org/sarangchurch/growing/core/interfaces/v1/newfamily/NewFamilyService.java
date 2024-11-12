@@ -1,5 +1,6 @@
 package org.sarangchurch.growing.core.interfaces.v1.newfamily;
 
+import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilylineup.NewFamilyLineUp;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 
@@ -16,5 +17,5 @@ public interface NewFamilyService {
 
     List<NewFamily> findByIdInOrThrow(List<Long> newFamilyIds);
 
-    void processLineUps(List<NewFamilyLineUp> newFamilyLineUps);
+    void processLineUps(List<NewFamilyGroupLeaderLineUp> newFamilyGroupLeaderLineUps, List<NewFamilyLineUp> newFamilyLineUps);
 }
