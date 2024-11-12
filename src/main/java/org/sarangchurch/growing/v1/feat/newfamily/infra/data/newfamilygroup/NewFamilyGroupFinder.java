@@ -5,6 +5,8 @@ import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamil
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroupRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class NewFamilyGroupFinder {
@@ -21,5 +23,9 @@ public class NewFamilyGroupFinder {
 
     public boolean existsByCodyIdAndNewFamilyGroupLeaderId(Long codyId, Long newFamilyGroupLeaderId) {
         return newFamilyGroupRepository.existsByCodyIdAndNewFamilyGroupLeaderId(codyId, newFamilyGroupLeaderId);
+    }
+
+    public List<NewFamilyGroup> findByTermId(Long termId) {
+        return newFamilyGroupRepository.findByTermId(termId);
     }
 }

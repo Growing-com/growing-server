@@ -42,14 +42,24 @@ public class Term {
         this.status = status;
     }
 
-    public Term toLineUpState() {
+    public Term toLineUpStatus() {
         isActive = false;
         status = TermStatus.LINE_UP;
 
         return this;
     }
 
-    public boolean stateEquals(TermStatus anotherStatus) {
+    public boolean statusEquals(TermStatus anotherStatus) {
         return status == anotherStatus;
+    }
+
+    public void toClosedStatus() {
+        isActive = false;
+        status = TermStatus.CLOSED;
+    }
+
+    public void toActiveStatus() {
+        isActive = true;
+        status = TermStatus.ACTIVE;
     }
 }

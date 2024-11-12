@@ -11,4 +11,5 @@ public interface CodyRepository {
     void deleteById(Long id);
     Optional<Cody> findByUserIdAndTermId(Long userId, Long termId);
     List<Cody> findByTermId(Long termId);
+    <S extends Cody> List<S> saveAll(Iterable<S> codies);
 }

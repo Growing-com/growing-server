@@ -24,4 +24,8 @@ public class NewFamilyGroupLeaderFinder {
         return newFamilyGroupLeaderRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 순장입니다."));
     }
+
+    public List<NewFamilyGroupLeader> findByTermId(Long termId) {
+        return newFamilyGroupLeaderRepository.findByTermId(termId);
+    }
 }

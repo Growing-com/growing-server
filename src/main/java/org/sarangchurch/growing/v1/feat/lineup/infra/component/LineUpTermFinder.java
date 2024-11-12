@@ -14,7 +14,7 @@ public class LineUpTermFinder {
     public Term findByIdOrThrow(Long termId) {
         Term term = termService.findTerm(termId);
 
-        if (!term.stateEquals(TermStatus.LINE_UP)) {
+        if (!term.statusEquals(TermStatus.LINE_UP)) {
             throw new IllegalStateException("텀이 라인업 상태가 아닙니다.");
         }
 

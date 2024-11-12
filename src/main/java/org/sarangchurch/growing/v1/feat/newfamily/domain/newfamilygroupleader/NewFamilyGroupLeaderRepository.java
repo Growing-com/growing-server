@@ -13,4 +13,6 @@ public interface NewFamilyGroupLeaderRepository {
     NewFamilyGroupLeader save(NewFamilyGroupLeader newFamilyGroupLeader);
 
     void deleteById(Long newFamilyGroupLeaderId);
+
+    List<NewFamilyGroupLeader> findByTermId(Long termId);
 }

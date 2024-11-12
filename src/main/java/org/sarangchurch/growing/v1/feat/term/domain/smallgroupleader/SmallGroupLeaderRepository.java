@@ -13,4 +13,6 @@ public interface SmallGroupLeaderRepository {
     void deleteById(Long smallGroupLeaderId);
 
     Optional<SmallGroupLeader> findById(Long id);
+
+    List<SmallGroupLeader> findByTermId(Long termId);
 }

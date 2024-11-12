@@ -5,42 +5,42 @@ GET http://localhost:8080/api/v1/terms
 GET http://localhost:8080/api/v1/terms/active-term
 
 ### 일반 순장 및 나무 목록 조회
-GET http://localhost:8080/api/v1/terms/1/small-groups
+GET http://localhost:8080/api/v1/terms/2/small-groups
 
 ### 새가족 순장 목록 조회
-GET http://localhost:8080/api/v1/terms/1/new-family-groups
+GET http://localhost:8080/api/v1/terms/2/new-family-groups
 
 ### 모든 리더쉽
-GET http://localhost:8080/api/v1/terms/1/all-leaders
+GET http://localhost:8080/api/v1/terms/2/all-leaders
 
 ### 교역자 목록
-GET http://localhost:8080/api/v1/terms/1/pastors
+GET http://localhost:8080/api/v1/terms/2/pastors
 
 ### 코디 소속 인원
 GET http://localhost:8080/api/v1/codies/3/members
 
 ### 텀 별 인원 배정수
-GET http://localhost:8080/api/v1/terms/1/duty-distribution-count
+GET http://localhost:8080/api/v1/terms/2/duty-distribution-count
 
 ### 텀 별 코디 인원
-GET http://localhost:8080/api/v1/terms/1/codies
+GET http://localhost:8080/api/v1/terms/2/codies
 
 ### 코디 소속 순장(일반, 새가족 모두)
 GET http://localhost:8080/api/v1/codies/17/groups
 
 ### 교역자 추가
-POST http://localhost:8080/api/v1/terms/1/create-pastor
+POST http://localhost:8080/api/v1/terms/2/create-pastor
 Content-Type: application/json
 
 {
-  "pastorUserId": 4
+  "pastorUserId": 8
 }
 
 ### 교역자 삭제
 POST http://localhost:8080/api/v1/pastors/1/delete
 
 ### 담임 교역자 변경
-POST http://localhost:8080/api/v1/terms/1/switch-senior-pastor
+POST http://localhost:8080/api/v1/terms/2/switch-senior-pastor
 Content-Type: application/json
 
 {
@@ -48,7 +48,7 @@ Content-Type: application/json
 }
 
 ### 코디 추가
-POST http://localhost:8080/api/v1/terms/1/create-cody
+POST http://localhost:8080/api/v1/terms/2/create-cody
 Content-Type: application/json
 
 {
@@ -64,10 +64,10 @@ Content-Type: application/json
 }
 
 ### 코디 삭제
-POST http://localhost:8080/api/v1/codies/2/delete
+POST http://localhost:8080/api/v1/codies/3/delete
 
 ### 순모임 생성
-POST http://localhost:8080/api/v1/terms/1/create-small-group
+POST http://localhost:8080/api/v1/terms/2/create-small-group
 Content-Type: application/json
 
 {
@@ -77,15 +77,15 @@ Content-Type: application/json
 }
 
 ### 순모임 수정
-POST http://localhost:8080/api/v1/small-groups/1/update
+POST http://localhost:8080/api/v1/small-groups/3/update
 Content-Type: application/json
 
 {
-  "memberUserIds": [8]
+  "memberUserIds": [3]
 }
 
 ### 순모임 삭제
-POST http://localhost:8080/api/v1/small-groups/1/delete
+POST http://localhost:8080/api/v1/small-groups/2/delete
 
 ### 순원 라인업 변경
 POST http://localhost:8080/api/v1/small-group-members/1/line-up-edit
@@ -96,7 +96,7 @@ Content-Type: application/json
 }
 
 ### 새가족반 추가
-POST http://localhost:8080/api/v1/terms/1/create-new-family-group
+POST http://localhost:8080/api/v1/terms/2/create-new-family-group
 Content-Type: application/json
 
 {

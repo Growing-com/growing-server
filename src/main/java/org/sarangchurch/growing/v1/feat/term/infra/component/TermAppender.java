@@ -11,6 +11,6 @@ public class TermAppender {
     private final TermWriter termWriter;
 
     public void append(Term term) {
-        termWriter.write(term.toLineUpState());
+        termWriter.write(term.toLineUpStatus());
     }
 }
