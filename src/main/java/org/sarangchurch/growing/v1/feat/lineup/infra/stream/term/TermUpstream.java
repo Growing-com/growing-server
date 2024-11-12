@@ -14,7 +14,7 @@ import java.util.List;
 public class TermUpstream {
     private final TermService termService;
 
-    public void processLineUpsAndStartTerm(
+    public void processLineUps(
             StumpLineUp stumpLineUp,
             List<SmallGroupLeaderLineUp> smallGroupLeaderLineUps,
             List<SmallGroupMemberLineUp> smallGroupMemberLineUps

@@ -6,6 +6,7 @@ import org.sarangchurch.growing.core.interfaces.v1.newfamily.NewFamilyGroupServi
 import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupmemberlineup.NewFamilyGroupMemberLineUp;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
+import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyGroupLineUpProcessor;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyGroupMemberValidator;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroup.NewFamilyGroupFinder;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.List;
 public class NewFamilyGroupServiceImpl implements NewFamilyGroupService {
     private final NewFamilyGroupFinder newFamilyGroupFinder;
     private final NewFamilyGroupMemberValidator newFamilyGroupMemberValidator;
+    private final NewFamilyGroupLineUpProcessor newFamilyGroupLineUpProcessor;
 
     @Override
     public long countByCodyId(Long codyId) {
@@ -39,6 +41,6 @@ public class NewFamilyGroupServiceImpl implements NewFamilyGroupService {
             List<NewFamilyGroupLeaderLineUp> leaderLineUps,
             List<NewFamilyGroupMemberLineUp> memberLineUps
     ) {
-        log.info("Processing line-ups");
+        newFamilyGroupLineUpProcessor.process(leaderLineUps, memberLineUps);
     }
 }
