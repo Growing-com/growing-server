@@ -19,4 +19,8 @@ public class NewFamilyGroupMemberLineUpReader {
     public List<NewFamilyGroupMemberLineUp> findByTermId(Long termId) {
         return newFamilyGroupMemberLineUpRepository.findByTermId(termId);
     }
+
+    public boolean existsByNewFamilyGroupLeaderLineUpIdIn(List<Long> lineUpIds) {
+        return newFamilyGroupMemberLineUpRepository.existsByNewFamilyGroupLeaderLineUpIdIn(lineUpIds);
+    }
 }

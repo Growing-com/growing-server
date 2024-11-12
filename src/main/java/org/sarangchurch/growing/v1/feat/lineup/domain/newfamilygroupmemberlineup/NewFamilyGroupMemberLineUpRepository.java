@@ -10,4 +10,6 @@ public interface NewFamilyGroupMemberLineUpRepository {
     <S extends NewFamilyGroupMemberLineUp> List<S> saveAll(Iterable<S> entities);
 
     List<NewFamilyGroupMemberLineUp> findByTermId(Long termId);
+
+    boolean existsByNewFamilyGroupLeaderLineUpIdIn(List<Long> lineUpIds);
 }
