@@ -38,7 +38,17 @@ public class NormalLineUpAvailableValidator {
                 .orElseThrow(() -> new IllegalArgumentException("그루터기 라인업이 존재하지 않습니다."));
 
         switch (duty) {
-            case PASTOR: {
+            case SENIOR_PASTOR: {
+                validateJuniorPastor(user, stumpLineUp);
+                validateCody(user, stumpLineUp);
+                validateSmallGroupLeader(term, user);
+                validateNewFamilyGroupLeader(term, user);
+                validateSmallGroupMember(term, user);
+                validateNewFamilyGroupMember(term, user);
+                break;
+            }
+            case JUNIOR_PASTOR: {
+                validateSeniorPastor(user, stumpLineUp);
                 validateCody(user, stumpLineUp);
                 validateSmallGroupLeader(term, user);
                 validateNewFamilyGroupLeader(term, user);
@@ -47,7 +57,7 @@ public class NormalLineUpAvailableValidator {
                 break;
             }
             case CODY: {
-                validatePastor(user, stumpLineUp);
+                validateSeniorPastor(user, stumpLineUp);
                 validateSmallGroupLeader(term, user);
                 validateNewFamilyGroupLeader(term, user);
                 validateSmallGroupMember(term, user);
@@ -55,7 +65,7 @@ public class NormalLineUpAvailableValidator {
                 break;
             }
             case SMALL_GROUP_LEADER: {
-                validatePastor(user, stumpLineUp);
+                validateSeniorPastor(user, stumpLineUp);
                 validateCody(user, stumpLineUp);
                 validateNewFamilyGroupLeader(term, user);
                 validateSmallGroupMember(term, user);
@@ -63,7 +73,7 @@ public class NormalLineUpAvailableValidator {
                 break;
             }
             case NEW_FAMILY_GROUP_LEADER: {
-                validatePastor(user, stumpLineUp);
+                validateSeniorPastor(user, stumpLineUp);
                 validateCody(user, stumpLineUp);
                 validateSmallGroupLeader(term, user);
                 validateSmallGroupMember(term, user);
@@ -71,7 +81,7 @@ public class NormalLineUpAvailableValidator {
                 break;
             }
             case SMALL_GROUP_MEMBER: {
-                validatePastor(user, stumpLineUp);
+                validateSeniorPastor(user, stumpLineUp);
                 validateCody(user, stumpLineUp);
                 validateSmallGroupLeader(term, user);
                 validateNewFamilyGroupLeader(term, user);
@@ -79,7 +89,7 @@ public class NormalLineUpAvailableValidator {
                 break;
             }
             case NEW_FAMILY_GROUP_MEMBER: {
-                validatePastor(user, stumpLineUp);
+                validateSeniorPastor(user, stumpLineUp);
                 validateCody(user, stumpLineUp);
                 validateSmallGroupLeader(term, user);
                 validateNewFamilyGroupLeader(term, user);
@@ -131,13 +141,15 @@ public class NormalLineUpAvailableValidator {
         }
     }
 
-    private void validatePastor(User user, StumpLineUp stumpLineUp) {
+    private void validateSeniorPastor(User user, StumpLineUp stumpLineUp) {
         boolean isAlreadySeniorPastor = user.getId().equals(stumpLineUp.getSeniorPastorUserId());
 
         if (isAlreadySeniorPastor) {
             throw new IllegalStateException("이미 해당텀에 담당 교역자로 라인업된 유저입니다.");
         }
+    }
 
+    private void validateJuniorPastor(User user, StumpLineUp stumpLineUp) {
         boolean isAlreadyJuniorPastor = stumpLineUp.getJuniorPastorUserIds().contains(user.getId());
 
         if (isAlreadyJuniorPastor) {

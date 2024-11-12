@@ -30,7 +30,7 @@ public class JuniorPastorAssigner {
                         )
                 );
 
-        users.forEach(user -> normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.PASTOR));
+        users.forEach(user -> normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.JUNIOR_PASTOR));
 
         stumpLineUp.setJuniorPastors(users);
     }
