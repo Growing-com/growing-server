@@ -28,7 +28,7 @@ public class SeniorPastorAssigner {
                         )
                 );
 
-        normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.PASTOR);
+        normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.SENIOR_PASTOR);
 
         stumpLineUp.changeSeniorPastor(user.getId());
     }
