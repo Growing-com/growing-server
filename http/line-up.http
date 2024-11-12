@@ -29,7 +29,17 @@ Content-Type: application/json
 
 {
   "codyUserId": 8,
-  "smallGroupLeaderUserIds": [15]
+  "smallGroupLeaderUserIds": [17]
+}
+
+
+### 일반 순원 라인업
+POST http://localhost:8080/api/v1/terms/2/assign-small-group-member
+Content-Type: application/json
+
+{
+  "leaderUserId": 18,
+  "memberUserIds": []
 }
 
 ### 새가족 순장 라인업
@@ -38,16 +48,7 @@ Content-Type: application/json
 
 {
   "codyUserId": 8,
-  "newFamilyGroupLeaderUserIds": [18]
-}
-
-### 일반 순원 라인업
-POST http://localhost:8080/api/v1/terms/2/assign-small-group-member
-Content-Type: application/json
-
-{
-  "leaderUserId": 15,
-  "memberUserIds": [17]
+  "newFamilyGroupLeaderUserIds": []
 }
 
 ### 새가족 순원 라인업
@@ -55,8 +56,8 @@ POST http://localhost:8080/api/v1/terms/2/assign-new-family-group-member
 Content-Type: application/json
 
 {
-  "leaderUserId": 17,
-  "memberUserIds": [16]
+  "leaderUserId": 18,
+  "memberUserIds": []
 }
 
 ### 새가족 라인업
@@ -64,8 +65,8 @@ POST http://localhost:8080/api/v1/terms/2/assign-new-family
 Content-Type: application/json
 
 {
-  "leaderUserId": 17,
-  "newFamilyIds": [3]
+  "leaderUserId": 18,
+  "newFamilyIds": []
 }
 
 ### 라인업 확정

@@ -1,6 +1,7 @@
 package org.sarangchurch.growing.v1.feat.lineup.infra.component;
 
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.core.interfaces.common.Duty;
 import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupmemberlineup.NewFamilyGroupMemberLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUpReader;
@@ -29,7 +30,7 @@ public class NewFamilyGroupMemberAssigner {
 
         newFamilyGroupMemberLineUpWriter.deleteByNewFamilyGroupLeaderLineUpIdAndTermId(newFamilyGroupLeaderLineUp.getId(), term.getId());
 
-        memberUsers.forEach(user -> normalLineUpAvailableValidator.validate(term, user));
+        memberUsers.forEach(user -> normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.NEW_FAMILY_GROUP_MEMBER));
 
         List<NewFamilyGroupMemberLineUp> newFamilyGroupLeaderLineUps = memberUsers.stream()
                 .map(it ->

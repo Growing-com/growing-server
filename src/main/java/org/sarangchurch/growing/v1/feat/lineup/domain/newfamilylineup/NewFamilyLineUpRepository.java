@@ -8,4 +8,6 @@ public interface NewFamilyLineUpRepository {
     <S extends NewFamilyLineUp> List<S> saveAll(Iterable<S> entities);
 
     List<NewFamilyLineUp> findByTermId(Long termId);
+
+    boolean existsByNewFamilyGroupLeaderLineUpIdIn(List<Long> lineUpIds);
 }

@@ -19,4 +19,8 @@ public class SmallGroupMemberLineUpReader {
     public List<SmallGroupMemberLineUp> findByTermId(Long termId) {
         return smallGroupMemberLineUpRepository.findByTermId(termId);
     }
+
+    public boolean existsBySmallGroupLeaderLineUpIdIn(List<Long> smallGroupLeaderLineUpIds) {
+        return smallGroupMemberLineUpRepository.existsBySmallGroupLeaderLineUpIdIn(smallGroupLeaderLineUpIds);
+    }
 }

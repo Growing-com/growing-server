@@ -24,4 +24,8 @@ public class NewFamilyGroupLeaderLineUpReader {
     public List<NewFamilyGroupLeaderLineUp> findByTermId(Long termId) {
         return newFamilyGroupLeaderLineUpRepository.findByTermId(termId);
     }
+
+    public List<NewFamilyGroupLeaderLineUp> findByCodyUserId(Long codyUserId) {
+        return newFamilyGroupLeaderLineUpRepository.findByCodyUserId(codyUserId);
+    }
 }

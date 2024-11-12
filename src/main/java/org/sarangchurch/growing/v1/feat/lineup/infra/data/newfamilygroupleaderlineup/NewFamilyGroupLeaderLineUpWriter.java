@@ -9,14 +9,14 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class NewFamilyLeaderLineUpWriter {
+public class NewFamilyGroupLeaderLineUpWriter {
     private final NewFamilyGroupLeaderLineUpRepository newFamilyGroupLeaderLineUpRepository;
-
-    public void deleteByCodyUserIdAndTermId(Long userId, Long termId) {
-        newFamilyGroupLeaderLineUpRepository.deleteByCodyUserIdAndTermId(userId, termId);
-    }
 
     public void saveAll(List<NewFamilyGroupLeaderLineUp> newFamilyGroupLeaderLineUps) {
         newFamilyGroupLeaderLineUpRepository.saveAll(newFamilyGroupLeaderLineUps);
+    }
+
+    public void deleteByIdIn(List<Long> deleteIds) {
+        newFamilyGroupLeaderLineUpRepository.deleteByIdIn(deleteIds);
     }
 }

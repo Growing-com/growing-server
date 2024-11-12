@@ -16,7 +16,7 @@ public class SmallGroupLeaderLineUpWriter {
         smallGroupLeaderLineUpRepository.saveAll(smallGroupLeaderLineUps);
     }
 
-    public void deleteByCodyUserIdAndTermId(Long codyUserId, Long termId) {
-        smallGroupLeaderLineUpRepository.deleteByCodyUserIdAndTermId(codyUserId, termId);
+    public void deleteByIdIn(List<Long> deleteIds) {
+        smallGroupLeaderLineUpRepository.deleteByIdIn(deleteIds);
     }
 }

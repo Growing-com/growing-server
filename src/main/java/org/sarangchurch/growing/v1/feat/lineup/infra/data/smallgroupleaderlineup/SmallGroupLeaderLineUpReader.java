@@ -24,4 +24,8 @@ public class SmallGroupLeaderLineUpReader {
     public List<SmallGroupLeaderLineUp> findByTermId(Long termId) {
         return smallGroupLeaderLineUpRepository.findByTermId(termId);
     }
+
+    public List<SmallGroupLeaderLineUp> findByCodyUserId(Long codyUserId) {
+        return smallGroupLeaderLineUpRepository.findByCodyUserId(codyUserId);
+    }
 }
