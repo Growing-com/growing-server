@@ -12,4 +12,6 @@ public interface NewFamilyLineUpRepository {
     boolean existsByNewFamilyGroupLeaderLineUpIdIn(List<Long> lineUpIds);
 
     void deleteByNewFamilyGroupLeaderLineUpIdIn(List<Long> deleteIds);
+
+    void deleteByTermIdAndNewFamilyIdIn(Long termId, List<Long> newFamilyIds);
 }

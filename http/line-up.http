@@ -47,8 +47,8 @@ POST http://localhost:8080/api/v1/terms/3/assign-new-family-group-leader
 Content-Type: application/json
 
 {
-  "codyUserId": 8,
-  "newFamilyGroupLeaderUserIds": [4, 5]
+  "codyUserId": 4,
+  "newFamilyGroupLeaderUserIds": [8]
 }
 
 ### 새가족 순원 라인업
@@ -56,7 +56,7 @@ POST http://localhost:8080/api/v1/terms/3/assign-new-family-group-member
 Content-Type: application/json
 
 {
-  "leaderUserId": 4,
+  "leaderUserId": 8,
   "memberUserIds": [12, 10]
 }
 
@@ -65,7 +65,7 @@ POST http://localhost:8080/api/v1/terms/3/assign-new-family
 Content-Type: application/json
 
 {
-  "leaderUserId": 4,
+  "leaderUserId": 8,
   "newFamilyIds": [3]
 }
 
