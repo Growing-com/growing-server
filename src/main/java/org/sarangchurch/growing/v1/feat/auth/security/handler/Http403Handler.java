@@ -3,7 +3,7 @@ package org.sarangchurch.growing.v1.feat.auth.security.handler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.sarangchurch.growing.core.interfaces.common.ErrorResponse;
+import org.sarangchurch.growing.core.interfaces.common.dto.ErrorResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 

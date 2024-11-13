@@ -1,7 +1,7 @@
-package org.sarangchurch.growing.v1.feat.lineup.infra.component;
+package org.sarangchurch.growing.v1.feat.lineup.infra.component.assigner;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.Duty;
+import org.sarangchurch.growing.core.interfaces.common.types.Duty;
 import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUpReader;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.newfamilygroupmemberlineup.NewFamilyGroupMemberLineUpReader;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class NormalLineUpAvailableValidator {
+public class NormalLineUpAssignValidator {
     private final StumpLineUpFinder stumpLineUpFinder;
     private final NewFamilyDownstream newFamilyDownstream;
     private final SmallGroupLeaderLineUpReader smallGroupLeaderLineUpReader;

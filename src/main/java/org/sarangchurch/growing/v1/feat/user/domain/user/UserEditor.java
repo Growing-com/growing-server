@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.user.domain.user;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.sarangchurch.growing.core.interfaces.common.Sex;
+import org.sarangchurch.growing.core.interfaces.common.types.Sex;
 
 import java.time.LocalDate;
 

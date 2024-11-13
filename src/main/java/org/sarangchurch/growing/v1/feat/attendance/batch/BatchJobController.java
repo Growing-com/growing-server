@@ -3,7 +3,7 @@ package org.sarangchurch.growing.v1.feat.attendance.batch;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.config.BatchJobRunner;
-import org.sarangchurch.growing.core.interfaces.common.ApiResponse;
+import org.sarangchurch.growing.core.interfaces.common.dto.ApiResponse;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.configuration.JobRegistry;

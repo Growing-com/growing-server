@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.lineup.application.assignjuniorpastor;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.lineup.infra.component.JuniorPastorAssigner;
+import org.sarangchurch.growing.v1.feat.lineup.infra.component.assigner.JuniorPastorAssigner;
 import org.sarangchurch.growing.v1.feat.lineup.infra.component.LineUpTermFinder;
 import org.sarangchurch.growing.v1.feat.lineup.infra.stream.user.UserDownstream;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;

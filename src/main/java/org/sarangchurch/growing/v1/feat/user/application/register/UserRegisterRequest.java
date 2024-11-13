@@ -2,11 +2,10 @@ package org.sarangchurch.growing.v1.feat.user.application.register;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.Sex;
+import org.sarangchurch.growing.core.interfaces.common.types.Sex;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.core.interfaces.common;
+package org.sarangchurch.growing.core.interfaces.common.types;
 
 public enum BooleanOption {
     YES("네"),

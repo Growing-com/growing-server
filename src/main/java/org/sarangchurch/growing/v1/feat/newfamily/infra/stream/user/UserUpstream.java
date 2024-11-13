@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.newfamily.infra.stream.user;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.Sex;
+import org.sarangchurch.growing.core.interfaces.common.types.Sex;
 import org.sarangchurch.growing.core.interfaces.v1.user.UserService;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Component;

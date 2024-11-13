@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.lineup.application.assignnewfamily;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.lineup.infra.component.LineUpTermFinder;
-import org.sarangchurch.growing.v1.feat.lineup.infra.component.NewFamilyAssigner;
+import org.sarangchurch.growing.v1.feat.lineup.infra.component.assigner.NewFamilyAssigner;
 import org.sarangchurch.growing.v1.feat.lineup.infra.stream.newfamily.NewFamilyDownstream;
 import org.sarangchurch.growing.v1.feat.lineup.infra.stream.user.UserDownstream;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;

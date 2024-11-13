@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.attendance.query.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.ApiResponse;
+import org.sarangchurch.growing.core.interfaces.common.dto.ApiResponse;
 import org.sarangchurch.growing.v1.feat.attendance.query.model.NewFamilyAttendanceListItem;
 import org.sarangchurch.growing.v1.feat.attendance.query.repository.NewFamilyAttendanceQueryRepository;
 import org.springframework.web.bind.annotation.GetMapping;

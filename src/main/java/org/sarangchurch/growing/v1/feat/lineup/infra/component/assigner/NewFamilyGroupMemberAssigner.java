@@ -1,7 +1,7 @@
-package org.sarangchurch.growing.v1.feat.lineup.infra.component;
+package org.sarangchurch.growing.v1.feat.lineup.infra.component.assigner;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.Duty;
+import org.sarangchurch.growing.core.interfaces.common.types.Duty;
 import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupmemberlineup.NewFamilyGroupMemberLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUpReader;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class NewFamilyGroupMemberAssigner {
     private final NewFamilyGroupLeaderLineUpReader newFamilyGroupLeaderLineUpReader;
     private final NewFamilyGroupMemberLineUpWriter newFamilyGroupMemberLineUpWriter;
-    private final NormalLineUpAvailableValidator normalLineUpAvailableValidator;
+    private final NormalLineUpAssignValidator normalLineUpAssignValidator;
     
     @Transactional
     public void assign(Term term, User leaderUser, List<User> memberUsers) {
@@ -30,7 +30,7 @@ public class NewFamilyGroupMemberAssigner {
 
         newFamilyGroupMemberLineUpWriter.deleteByNewFamilyGroupLeaderLineUpIdAndTermId(newFamilyGroupLeaderLineUp.getId(), term.getId());
 
-        memberUsers.forEach(user -> normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.NEW_FAMILY_GROUP_MEMBER));
+        memberUsers.forEach(user -> normalLineUpAssignValidator.validateDutyAssignable(term, user, Duty.NEW_FAMILY_GROUP_MEMBER));
 
         List<NewFamilyGroupMemberLineUp> newFamilyGroupLeaderLineUps = memberUsers.stream()
                 .map(it ->

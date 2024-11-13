@@ -1,7 +1,7 @@
-package org.sarangchurch.growing.v1.feat.lineup.infra.component;
+package org.sarangchurch.growing.v1.feat.lineup.infra.component.assigner;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.Duty;
+import org.sarangchurch.growing.core.interfaces.common.types.Duty;
 import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupleaderlineup.SmallGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
@@ -24,7 +24,7 @@ public class CodyAssigner {
     private final StumpLineUpWriter stumpLineUpWriter;
     private final SmallGroupLeaderLineUpReader smallGroupLeaderLineUpReader;
     private final NewFamilyGroupLeaderLineUpReader newFamilyGroupLeaderLineUpReader;
-    private final NormalLineUpAvailableValidator normalLineUpAvailableValidator;
+    private final NormalLineUpAssignValidator normalLineUpAssignValidator;
 
     @Transactional
     public void assign(Term term, List<User> codyUsers) {
@@ -39,7 +39,7 @@ public class CodyAssigner {
 
         validateAssignedLeaderExists(term, codyUsers);
 
-        codyUsers.forEach(user -> normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.CODY));
+        codyUsers.forEach(user -> normalLineUpAssignValidator.validateDutyAssignable(term, user, Duty.CODY));
 
         stumpLineUp.setCodies(codyUsers);
     }

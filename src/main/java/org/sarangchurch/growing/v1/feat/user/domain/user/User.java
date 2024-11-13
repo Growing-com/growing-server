@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
-import org.sarangchurch.growing.core.interfaces.common.Sex;
+import org.sarangchurch.growing.core.interfaces.common.types.Sex;
 
 import javax.persistence.*;
 import java.time.LocalDate;

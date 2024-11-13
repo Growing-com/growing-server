@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.lineup.infra.component;
+package org.sarangchurch.growing.v1.feat.lineup.infra.component.assigner;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUp;

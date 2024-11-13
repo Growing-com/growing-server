@@ -1,6 +1,6 @@
 package org.sarangchurch.growing.core.interfaces.v1.user;
 
-import org.sarangchurch.growing.core.interfaces.common.Sex;
+import org.sarangchurch.growing.core.interfaces.common.types.Sex;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 
 import java.time.LocalDate;

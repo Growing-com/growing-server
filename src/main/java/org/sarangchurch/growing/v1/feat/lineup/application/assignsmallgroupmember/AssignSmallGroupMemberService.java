@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.lineup.application.assignsmallgroupmemb
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.lineup.infra.component.LineUpTermFinder;
-import org.sarangchurch.growing.v1.feat.lineup.infra.component.SmallGroupMemberAssigner;
+import org.sarangchurch.growing.v1.feat.lineup.infra.component.assigner.SmallGroupMemberAssigner;
 import org.sarangchurch.growing.v1.feat.lineup.infra.stream.user.UserDownstream;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;

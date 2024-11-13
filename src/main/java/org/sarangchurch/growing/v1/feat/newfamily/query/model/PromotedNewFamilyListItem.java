@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.newfamily.query.model;
 
 import lombok.Getter;
-import org.sarangchurch.growing.core.interfaces.common.Sex;
+import org.sarangchurch.growing.core.interfaces.common.types.Sex;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.core.interfaces.common;
+package org.sarangchurch.growing.core.interfaces.common.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
