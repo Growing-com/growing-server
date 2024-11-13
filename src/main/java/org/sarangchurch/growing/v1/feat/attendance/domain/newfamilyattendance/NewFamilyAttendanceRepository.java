@@ -9,4 +9,6 @@ public interface NewFamilyAttendanceRepository {
     void deleteByNewFamilyIdInAndDate(List<Long> newFamilyIds, LocalDate date);
 
     void deleteByNewFamilyIdIn(List<Long> newFamilyIds);
+
+    long countByDate(LocalDate date);
 }

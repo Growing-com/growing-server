@@ -7,12 +7,12 @@ create table attendance
     updated_at     datetime(6)           not null,
     updated_by     bigint                null,
     team_member_id bigint                not null,
-    week           date                  not null,
+    sunday           date                  not null,
     status         varchar(255)          not null,
     etc            varchar(255)          null
 ) engine = InnoDB;
 
-create unique index uk_attendance_team_member_id_and_week on attendance (team_member_id, week);
+create unique index uk_attendance_team_member_id_and_week on attendance (team_member_id, sunday);
 
 # 2. weekly_personal_attendance
 CREATE TABLE weekly_personal_attendance
@@ -35,12 +35,12 @@ CREATE TABLE weekly_personal_attendance
     leader_id     bigint                not null,
     leader_name   varchar(255)          not null,
     attendance_id bigint                not null,
-    week          date                  not null,
+    sunday          date                  not null,
     status        varchar(255)          not null,
     etc           varchar(255)          null
 );
 
-create unique index uk_weekly_personal_attendance_user_id_and_week on weekly_personal_attendance (user_id, week);
+create unique index uk_weekly_personal_attendance_user_id_and_week on weekly_personal_attendance (user_id, sunday);
 
 # 3. weekly_attendance
 create table weekly_attendance
@@ -50,7 +50,7 @@ create table weekly_attendance
     created_by           bigint                null,
     updated_at           datetime(6)           not null,
     updated_by           bigint                null,
-    week                 date                  not null,
+    sunday                 date                  not null,
     total_registered     bigint                not null,
     total_attendance     bigint                not null,
     total_online         bigint                not null,
@@ -64,7 +64,7 @@ create table weekly_attendance
     new_visited          bigint                not null
 ) engine = InnoDB;
 
-create unique index uk_weekly_attendance_week on weekly_attendance (week);
+create unique index uk_weekly_attendance_week on weekly_attendance (sunday);
 
 # 4. weekly_manager_attendance
 create table weekly_manager_attendance

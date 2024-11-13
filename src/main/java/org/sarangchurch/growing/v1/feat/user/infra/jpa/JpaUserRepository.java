@@ -13,4 +13,8 @@ public interface JpaUserRepository extends JpaRepository<User, Long>, UserReposi
     @Override
     @Query("SELECT u FROM User u WHERE u.isActive = true")
     List<User> findAllActive();
+
+    @Override
+    @Query("SELECT COUNT(u) FROM User u WHERE u.isActive = true")
+    long countActiveUsers();
 }

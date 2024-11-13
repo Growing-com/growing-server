@@ -34,4 +34,8 @@ public class UserFinder {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    public long countActiveUsers() {
+        return userRepository.countActiveUsers();
+    }
 }

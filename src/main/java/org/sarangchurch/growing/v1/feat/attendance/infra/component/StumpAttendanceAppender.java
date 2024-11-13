@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.attendance.infra.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.attendance.domain.stumpattendance.StumpAttendance;
-import org.sarangchurch.growing.v1.feat.attendance.infra.data.StumpAttendanceWriter;
+import org.sarangchurch.growing.v1.feat.attendance.infra.data.stumpattendance.StumpAttendanceWriter;
 import org.sarangchurch.growing.v1.feat.attendance.infra.stream.term.TermDownstream;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.springframework.stereotype.Component;

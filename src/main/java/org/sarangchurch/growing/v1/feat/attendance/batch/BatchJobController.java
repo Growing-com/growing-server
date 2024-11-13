@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.config.batch.BatchJobRunner;
 import org.sarangchurch.growing.core.interfaces.common.dto.ApiResponse;
 import org.springframework.batch.core.ExitStatus;
+import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.configuration.JobRegistry;
 import org.springframework.batch.core.launch.JobLauncher;
@@ -24,11 +25,17 @@ public class BatchJobController {
     private final JobRegistry jobRegistry;
 
     @PostMapping("/api/v1/run-batch-job")
-    public ApiResponse<ExitStatus> launchJob(@RequestBody @Valid BatchJobRequest request) throws Exception {
-        ExitStatus exitStatus = jobRunner.run(request.getJobName(), new JobParametersBuilder(request.getJobParameters())
-                .addString("run.id", UUID.randomUUID().toString())
-                .toJobParameters());
+    public ApiResponse<String> launchJob(@RequestBody @Valid BatchJobRequest request) throws Exception {
+        String jobName = request.getJobName();
 
-        return ApiResponse.of(exitStatus);
+        JobParameters jobParameters = new JobParametersBuilder(request.getJobParameters())
+                .addString("run.id", UUID.randomUUID().toString())
+                .toJobParameters();
+
+        ExitStatus exitStatus = jobRunner.run(jobName, jobParameters);
+
+        String exitDescription = exitStatus.getExitDescription();
+
+        return ApiResponse.of(exitDescription);
     }
 }

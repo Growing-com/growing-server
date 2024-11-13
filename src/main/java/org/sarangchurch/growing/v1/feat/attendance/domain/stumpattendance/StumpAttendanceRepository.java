@@ -7,4 +7,6 @@ public interface StumpAttendanceRepository {
     <S extends StumpAttendance> List<S> saveAll(Iterable<S> entities);
 
     void deleteByUserIdInAndDate(List<Long> userIds, LocalDate date);
+
+    long countByDate(LocalDate date);
 }

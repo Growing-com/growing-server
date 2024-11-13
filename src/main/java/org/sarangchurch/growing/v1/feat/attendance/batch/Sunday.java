@@ -13,43 +13,43 @@ import java.util.Objects;
 @Embeddable
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Week implements Comparable<Week> {
-    private LocalDate week;
+public class Sunday implements Comparable<Sunday> {
+    private LocalDate date;
 
-    public static Week previousSunday(LocalDate date) {
-        return new Week(date.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY)));
+    public static Sunday previousSunday(LocalDate date) {
+        return new Sunday(date.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY)));
     }
 
-    private Week(LocalDate week) {
-        this.week = week;
+    private Sunday(LocalDate date) {
+        this.date = date;
     }
 
-    public boolean isBefore(Week anotherWeek) {
-        return week.isBefore(anotherWeek.week);
+    public boolean isBefore(Sunday anotherSunday) {
+        return date.isBefore(anotherSunday.date);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Week week1 = (Week) o;
-        return Objects.equals(week, week1.week);
+        Sunday sunday1 = (Sunday) o;
+        return Objects.equals(date, sunday1.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(week);
+        return Objects.hash(date);
     }
 
     @Override
     public String toString() {
-        return week.toString();
+        return date.toString();
     }
 
     @Override
-    public int compareTo(Week o) {
-        if (week.equals(o.getWeek())) return 0;
-        if (week.isBefore(o.getWeek())) return -1;
+    public int compareTo(Sunday o) {
+        if (date.equals(o.getDate())) return 0;
+        if (date.isBefore(o.getDate())) return -1;
         return 1;
     }
 }

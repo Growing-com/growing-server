@@ -21,10 +21,14 @@ Content-Type: application/json
 
 {
   "date": "2024-10-07",
-  "termId": 1,
+  "termId": 2,
   "attendanceItems": [
     {
-      "userId": 4,
+      "userId": 8,
+      "status": "ATTEND"
+    },
+    {
+      "userId": 11,
       "status": "ATTEND"
     }
   ]
@@ -37,10 +41,10 @@ Content-Type: application/json
 {
   "date": "2024-10-07",
   "groupType": "NEW_FAMILY_GROUP",
-  "groupId": 1,
+  "groupId": 5,
   "attendanceItems": [
     {
-      "userId": 100,
+      "userId": 5,
       "status": "ATTEND"
     }
   ]
@@ -51,7 +55,7 @@ POST http://localhost:8080/api/v1/run-batch-job
 Content-Type: application/json
 
 {
-  "jobName": "helloWorldJob",
+  "jobName": "visionReportJob",
   "jobParameters": {
     "requestDate": "2024-10-10"
   }

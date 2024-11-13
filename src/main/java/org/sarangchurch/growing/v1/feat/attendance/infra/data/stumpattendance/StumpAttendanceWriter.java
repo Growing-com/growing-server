@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.attendance.infra.data;
+package org.sarangchurch.growing.v1.feat.attendance.infra.data.stumpattendance;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.attendance.domain.stumpattendance.StumpAttendance;
