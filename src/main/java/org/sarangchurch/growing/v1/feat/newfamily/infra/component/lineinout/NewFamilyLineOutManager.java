@@ -1,6 +1,8 @@
 package org.sarangchurch.growing.v1.feat.newfamily.infra.component.lineinout;
 
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.core.interfaces.common.Events;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.NewFamiliesEmitEvent;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.lineoutnewfamily.LineOutNewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyPromoteLogManager;
@@ -39,10 +41,14 @@ public class NewFamilyLineOutManager {
                         .collect(Collectors.toList())
         );
 
-        return lineOutNewFamilyWriter.saveAll(
+        List<LineOutNewFamily> lineOutNewFamilies = lineOutNewFamilyWriter.saveAll(
                 newFamilies.stream()
                         .map(LineOutNewFamily::from)
                         .collect(Collectors.toList())
         );
+
+        Events.raise(new NewFamiliesEmitEvent(newFamilyIds));
+
+        return lineOutNewFamilies;
     }
 }

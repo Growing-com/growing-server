@@ -19,4 +19,8 @@ public class NewFamilyLineUpWriter {
     public void saveAll(List<NewFamilyLineUp> newFamilyGroupLeaderLineUps) {
         newFamilyLineUpRepository.saveAll(newFamilyGroupLeaderLineUps);
     }
+
+    public void deleteByNewFamilyGroupLeaderLineUpIdIn(List<Long> deleteIds) {
+        newFamilyLineUpRepository.deleteByNewFamilyGroupLeaderLineUpIdIn(deleteIds);
+    }
 }

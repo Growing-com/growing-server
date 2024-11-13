@@ -19,4 +19,8 @@ public class SmallGroupMemberLineUpWriter {
     public void saveAll(List<SmallGroupMemberLineUp> smallGroupLeaderLineUps) {
         smallGroupMemberLineUpRepository.saveAll(smallGroupLeaderLineUps);
     }
+
+    public void deleteBySmallGroupLeaderLineUpIdIn(List<Long> ids) {
+        smallGroupMemberLineUpRepository.deleteBySmallGroupLeaderLineUpIdIn(ids);
+    }
 }

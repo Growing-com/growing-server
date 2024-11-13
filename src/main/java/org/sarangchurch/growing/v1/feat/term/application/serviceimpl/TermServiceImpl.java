@@ -3,12 +3,14 @@ package org.sarangchurch.growing.v1.feat.term.application.serviceimpl;
 import com.mysema.commons.lang.Pair;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.sarangchurch.growing.core.interfaces.common.Events;
 import org.sarangchurch.growing.core.interfaces.v1.term.TermService;
 import org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupleaderlineup.SmallGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupmemberlineup.SmallGroupMemberLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroup.NewFamilyGroupFinder;
+import org.sarangchurch.growing.v1.feat.term.domain.UsersEmitEvent;
 import org.sarangchurch.growing.v1.feat.term.domain.cody.Cody;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
@@ -20,8 +22,10 @@ import org.sarangchurch.growing.v1.feat.term.infra.data.cody.CodyFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -42,8 +46,10 @@ public class TermServiceImpl implements TermService {
     }
 
     @Override
+    @Transactional
     public void emitByUserIds(List<Long> userIds) {
         userEmitManager.emitByUserIds(userIds);
+        Events.raise(new UsersEmitEvent(userIds));
     }
 
     @Override
@@ -77,5 +83,10 @@ public class TermServiceImpl implements TermService {
     ) {
         termLineUpProcessor.process(stumpLineUp, smallGroupLeaderLineUps, smallGroupMemberLineUps);
         termActivator.activate(stumpLineUp.getTermId());
+    }
+
+    @Override
+    public Optional<Term> findLineUpTerm() {
+        return termFinder.findLineUpTerm();
     }
 }

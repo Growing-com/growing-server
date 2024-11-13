@@ -15,4 +15,10 @@ public class StumpLineUpFinder {
     public Optional<StumpLineUp> findByTermId(Long termId) {
         return stumpLineUpRepository.findByTermId(termId);
     }
+
+    public StumpLineUp findByTermIdOrThrow(Long termId) {
+        return stumpLineUpRepository.findByTermId(termId)
+                .orElseThrow(() -> new IllegalArgumentException("그루터기 라인업 기록이 존재하지 않습니다."));
+    }
+
 }

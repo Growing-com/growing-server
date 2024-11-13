@@ -12,4 +12,6 @@ public interface NewFamilyGroupMemberLineUpRepository {
     List<NewFamilyGroupMemberLineUp> findByTermId(Long termId);
 
     boolean existsByNewFamilyGroupLeaderLineUpIdIn(List<Long> lineUpIds);
+
+    void deleteByNewFamilyGroupLeaderLineUpIdIn(List<Long> deleteIds);
 }
