@@ -22,7 +22,7 @@ public class VisionReportJobConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final RequestDateValidator requestDateValidator;
 
-    private final Step helloWorldStep;
+    private final Step visionReportStep;
 
     @JobScope
     @Bean(name = JOB_NAME + "Parameter")
@@ -35,7 +35,7 @@ public class VisionReportJobConfig {
         return jobBuilderFactory.get(JOB_NAME)
                 .validator(requestDateValidator)
                 .incrementer(new RunIdIncrementer())
-                .start(helloWorldStep)
+                .start(visionReportStep)
                 .build();
     }
 }

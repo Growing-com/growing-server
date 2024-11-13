@@ -23,7 +23,9 @@ public class NewFamilyGroupQueryRepository {
         return queryFactory
                 .select(Projections.constructor(NewFamilyGroupListItem.class,
                         newFamilyGroup.id.as("newFamilyGroupId"),
-                        user.name.as("newFamilyGroupLeaderName")
+                        user.name.as("newFamilyGroupLeaderName"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade")
                 ))
                 .from(newFamilyGroup)
                 .join(newFamilyGroupLeader).on(

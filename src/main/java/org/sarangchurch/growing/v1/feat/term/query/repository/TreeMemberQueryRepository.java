@@ -34,7 +34,9 @@ public class TreeMemberQueryRepository {
     public List<CodyListItem> findCodiesByTerm(Long termId) {
         return queryFactory.select(Projections.constructor(CodyListItem.class,
                         cody.id.as("codyId"),
-                        user.name.as("codyName")
+                        user.name.as("codyName"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade")
                 ))
                 .from(cody)
                 .join(user).on(user.id.eq(cody.userId), cody.termId.eq(termId))
@@ -149,7 +151,9 @@ public class TreeMemberQueryRepository {
         List<GroupListItem> smallGroups = queryFactory.select(Projections.constructor(GroupListItem.class,
                         smallGroup.id.as("groupId"),
                         user.name.as("leaderName"),
-                        Expressions.asEnum(GroupType.SMALL_GROUP).as("groupType")
+                        Expressions.asEnum(GroupType.SMALL_GROUP).as("groupType"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade")
                 ))
                 .from(smallGroup)
                 .join(cody).on(cody.id.eq(smallGroup.codyId), cody.id.eq(codyId))
@@ -160,7 +164,9 @@ public class TreeMemberQueryRepository {
         List<GroupListItem> newFamilyGroups = queryFactory.select(Projections.constructor(GroupListItem.class,
                         newFamilyGroup.id.as("groupId"),
                         user.name.as("leaderName"),
-                        Expressions.asEnum(GroupType.NEW_FAMILY_GROUP).as("groupType")
+                        Expressions.asEnum(GroupType.NEW_FAMILY_GROUP).as("groupType"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade")
                 ))
                 .from(newFamilyGroup)
                 .join(cody).on(cody.id.eq(newFamilyGroup.codyId), cody.id.eq(codyId))
