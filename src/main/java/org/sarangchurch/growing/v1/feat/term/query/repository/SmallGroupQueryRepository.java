@@ -3,6 +3,7 @@ package org.sarangchurch.growing.v1.feat.term.query.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v1.feat.term.query.model.SmallGroupListItem;
 import org.sarangchurch.growing.v1.feat.term.query.model.SmallGroupWithCodyListItem;
 import org.sarangchurch.growing.v1.feat.term.query.model.SmallGroupMemberListItem;
 import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
@@ -23,7 +24,7 @@ import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 public class SmallGroupQueryRepository {
     private final JPAQueryFactory queryFactory;
 
-    public List<SmallGroupWithCodyListItem> findByTermId(Long termId) {
+    public List<SmallGroupWithCodyListItem> findBySmallGroupsWithCodyByTermId(Long termId) {
         QUser smallGroupLeaderUser = new QUser("smallGroupLeaderUser");
         QUser codyUser = new QUser("codyUser");
 
@@ -61,6 +62,28 @@ public class SmallGroupQueryRepository {
                 ))
                 .from(smallGroupMember)
                 .join(user).on(user.id.eq(smallGroupMember.userId), smallGroupMember.smallGroupId.eq(smallGroupId))
+                .fetch();
+    }
+
+    public List<SmallGroupListItem> findByTermId(Long termId) {
+        QUser smallGroupLeaderUser = new QUser("smallGroupLeaderUser");
+        QUser codyUser = new QUser("codyUser");
+
+        return queryFactory.select(Projections.constructor(SmallGroupListItem.class,
+                        smallGroup.id.as("smallGroupId"),
+                        codyUser.name.as("codyName"),
+                        smallGroupLeaderUser.name.as("leaderName"),
+                        smallGroupLeaderUser.sex.as("sex"),
+                        smallGroupLeaderUser.grade.as("grade")
+                ))
+                .from(smallGroup)
+                .join(smallGroupLeader).on(
+                        smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId),
+                        smallGroup.termId.eq(termId)
+                )
+                .join(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroupLeader.userId))
+                .join(cody).on(cody.id.eq(smallGroup.codyId))
+                .join(codyUser).on(codyUser.id.eq(cody.userId))
                 .fetch();
     }
 }
