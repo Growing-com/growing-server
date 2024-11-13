@@ -41,53 +41,6 @@ public class TreeMemberQueryRepository {
                 .fetch();
     }
 
-    public List<TreeMemberListItem> findBySmallGroup(Long smallGroupId) {
-        QUser leaderUser = new QUser("leaderUser");
-
-        // 일반 순장
-        Long smallGroupLeaderId = queryFactory.select(smallGroup.smallGroupLeaderId)
-                .from(smallGroup)
-                .where(smallGroup.id.eq(smallGroupId))
-                .fetchOne();
-
-        TreeMemberListItem smallGroupLeaderListItem = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
-                        user.id.as("userId"),
-                        user.name.as("name"),
-                        user.sex.as("sex"),
-                        user.grade.as("grade"),
-                        user.phoneNumber.as("phoneNumber"),
-                        user.birth.as("birth"),
-                        user.name.as("leaderName"),
-                        Expressions.asEnum(Duty.SMALL_GROUP_LEADER).as("duty")
-                ))
-                .from(smallGroupLeader)
-                .join(user).on(user.id.eq(smallGroupLeader.userId), smallGroupLeader.id.eq(smallGroupLeaderId))
-                .fetchOne();
-
-        // 일반 순원
-        List<TreeMemberListItem> smallGroupMemberList = queryFactory.select(Projections.constructor(TreeMemberListItem.class,
-                        user.id.as("userId"),
-                        user.name.as("name"),
-                        user.sex.as("sex"),
-                        user.grade.as("grade"),
-                        user.phoneNumber.as("phoneNumber"),
-                        user.birth.as("birth"),
-                        leaderUser.name.as("leaderName"),
-                        Expressions.asEnum(Duty.SMALL_GROUP_MEMBER).as("duty")
-                ))
-                .from(smallGroup)
-                .join(smallGroupMember).on(smallGroupMember.smallGroupId.eq(smallGroup.id), smallGroup.id.eq(smallGroupId))
-                .join(user).on(user.id.eq(smallGroupMember.userId))
-                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
-                .join(leaderUser).on(leaderUser.id.eq(smallGroupLeader.userId))
-                .orderBy(user.grade.desc())
-                .fetch();
-
-        smallGroupMemberList.add(0, smallGroupLeaderListItem);
-
-        return smallGroupMemberList;
-    }
-
     public List<TreeMemberListItem> findByCody(Long codyId) {
         QUser leaderUser = new QUser("leaderUser");
 
