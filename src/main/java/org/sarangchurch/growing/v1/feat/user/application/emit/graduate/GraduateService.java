@@ -3,9 +3,9 @@ package org.sarangchurch.growing.v1.feat.user.application.emit.graduate;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.v1.user.UserService;
 import org.sarangchurch.growing.v1.feat.user.domain.graduateduser.GraduatedUser;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.component.ActiveUserValidator;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserGraduateManager;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.stream.TermUpstream;
+import org.sarangchurch.growing.v1.feat.user.infra.component.ActiveUserValidator;
+import org.sarangchurch.growing.v1.feat.user.infra.component.emit.UserGraduateManager;
+import org.sarangchurch.growing.v1.feat.user.infra.stream.TermUpstream;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
