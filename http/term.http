@@ -5,7 +5,7 @@ GET http://localhost:8080/api/v1/terms
 GET http://localhost:8080/api/v1/terms/active-term
 
 ### 일반 순장 및 나무 목록 조회
-GET http://localhost:8080/api/v1/terms/2/small-groups
+GET http://localhost:8080/api/v1/terms/1/small-groups-by-cody
 
 ### 새가족 순장 목록 조회
 GET http://localhost:8080/api/v1/terms/2/new-family-groups

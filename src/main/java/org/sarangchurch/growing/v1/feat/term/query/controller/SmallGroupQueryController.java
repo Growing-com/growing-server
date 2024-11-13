@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.term.query.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.dto.ApiResponse;
-import org.sarangchurch.growing.v1.feat.term.query.model.SmallGroupListItem;
+import org.sarangchurch.growing.v1.feat.term.query.model.SmallGroupWithCodyListItem;
 import org.sarangchurch.growing.v1.feat.term.query.model.SmallGroupMemberListItem;
 import org.sarangchurch.growing.v1.feat.term.query.repository.SmallGroupQueryRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +16,8 @@ import java.util.List;
 public class SmallGroupQueryController {
     private final SmallGroupQueryRepository smallGroupQueryRepository;
 
-    @GetMapping("/api/v1/terms/{termId}/small-groups")
-    public ApiResponse<List<SmallGroupListItem>> findSmallGroups(@PathVariable Long termId) {
+    @GetMapping("/api/v1/terms/{termId}/small-groups-by-cody")
+    public ApiResponse<List<SmallGroupWithCodyListItem>> findSmallGroupsGroupedByCodyByTermId(@PathVariable Long termId) {
         return ApiResponse.of(smallGroupQueryRepository.findByTermId(termId));
     }
 

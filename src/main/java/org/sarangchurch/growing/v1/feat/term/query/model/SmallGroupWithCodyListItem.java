@@ -7,18 +7,18 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @Getter
-public class SmallGroupListItem {
+public class SmallGroupWithCodyListItem {
     private final String codyName;
-    private final List<SmallGroupListItemLeaders> smallGroupLeaders;
+    private final List<SmallGroupListItem> smallGroupLeaders;
 
-    public SmallGroupListItem(List<SmallGroupListItemLeaders> smallGroupLeaders) {
-        this.codyName = smallGroupLeaders.get(0).getCodyName();
-        this.smallGroupLeaders = smallGroupLeaders;
+    public SmallGroupWithCodyListItem(List<SmallGroupListItem> smallGroupListItems) {
+        this.codyName = smallGroupListItems.get(0).getCodyName();
+        this.smallGroupLeaders = smallGroupListItems;
     }
 
     @Getter
     @RequiredArgsConstructor
-    public static class SmallGroupListItemLeaders {
+    public static class SmallGroupListItem {
         @JsonIgnore
         private final Long codyUserId;
 
