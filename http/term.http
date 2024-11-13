@@ -59,11 +59,11 @@ Content-Type: application/json
 }
 
 ### 코디 수정
-POST http://localhost:8080/api/v1/codies/2/update
+POST http://localhost:8080/api/v1/codies/9/update
 Content-Type: application/json
 
 {
-  "smallGroupIds": [1]
+  "smallGroupIds": [9, 10, 11]
 }
 
 ### 코디 삭제
@@ -74,21 +74,21 @@ POST http://localhost:8080/api/v1/terms/2/create-small-group
 Content-Type: application/json
 
 {
-  "codyId": 3,
-  "leaderUserId": 9,
-  "memberUserIds": []
+  "codyId": 8,
+  "leaderUserId": 19,
+  "memberUserIds": [19]
 }
 
 ### 순모임 수정
-POST http://localhost:8080/api/v1/small-groups/3/update
+POST http://localhost:8080/api/v1/small-groups/9/update
 Content-Type: application/json
 
 {
-  "memberUserIds": [3]
+  "memberUserIds": []
 }
 
 ### 순모임 삭제
-POST http://localhost:8080/api/v1/small-groups/8/delete
+POST http://localhost:8080/api/v1/small-groups/9/delete
 
 ### 순원 라인업 변경
 POST http://localhost:8080/api/v1/small-group-members/1/line-up-edit
