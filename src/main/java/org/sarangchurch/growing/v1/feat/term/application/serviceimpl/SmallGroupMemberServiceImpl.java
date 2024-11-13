@@ -7,7 +7,7 @@ import org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.SmallGroupM
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.infra.component.AssignValidator;
 import org.sarangchurch.growing.v1.feat.term.infra.component.LineUpEditor;
-import org.sarangchurch.growing.v1.feat.term.infra.component.SmallGroupMemberAppender;
+import org.sarangchurch.growing.v1.feat.term.infra.component.smallgroup.SmallGroupMemberAppender;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;

@@ -1,8 +1,8 @@
 package org.sarangchurch.growing.v1.feat.user.application.dispatch;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.component.ActiveUserValidator;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserDispatcher;
+import org.sarangchurch.growing.v1.feat.user.infra.component.ActiveUserValidator;
+import org.sarangchurch.growing.v1.feat.user.infra.component.UserDispatcher;
 import org.springframework.stereotype.Service;
 
 @Service

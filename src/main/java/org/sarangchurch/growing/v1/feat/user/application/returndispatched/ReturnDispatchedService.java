@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.user.application.returndispatched;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.component.DispatchedReturner;
+import org.sarangchurch.growing.v1.feat.user.infra.component.DispatchedReturner;
 import org.springframework.stereotype.Service;
 
 @Service

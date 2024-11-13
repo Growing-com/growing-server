@@ -1,8 +1,8 @@
 package org.sarangchurch.growing.v1.feat.user.application.update;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserUpdater;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.stream.SmallGroupMemberUpstream;
+import org.sarangchurch.growing.v1.feat.user.infra.component.UserUpdater;
+import org.sarangchurch.growing.v1.feat.user.infra.stream.SmallGroupMemberUpstream;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

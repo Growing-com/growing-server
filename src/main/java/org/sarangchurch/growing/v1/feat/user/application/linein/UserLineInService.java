@@ -3,7 +3,7 @@ package org.sarangchurch.growing.v1.feat.user.application.linein;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.v1.user.UserService;
 import org.sarangchurch.growing.v1.feat.user.domain.lineoutuser.LineOutUser;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserLineInManager;
+import org.sarangchurch.growing.v1.feat.user.infra.component.UserLineInManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

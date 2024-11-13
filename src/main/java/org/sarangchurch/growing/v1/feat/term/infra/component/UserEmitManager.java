@@ -6,6 +6,7 @@ import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroupmembe
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.infra.component.cody.CodyRemover;
 import org.sarangchurch.growing.v1.feat.term.infra.component.pastor.PastorRemover;
+import org.sarangchurch.growing.v1.feat.term.infra.component.term.TermDutyChecker;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberWriter;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserEmitManager {
     private final TermFinder termFinder;
-    private final DutyChecker dutyChecker;
+    private final TermDutyChecker termDutyChecker;
     private final PastorRemover pastorRemover;
     private final CodyRemover codyRemover;
     private final SmallGroupMemberWriter smallGroupMemberWriter;
@@ -27,7 +28,7 @@ public class UserEmitManager {
         Long termId = activeTerm.getId();
 
         for (Long userId : userIds) {
-            Duty duty = dutyChecker.findDutyByTermAndUserId(activeTerm, userId);
+            Duty duty = termDutyChecker.findDutyByTermAndUserId(activeTerm, userId);
 
             switch (duty) {
                 case PASTOR:

@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.user.application.usergradeupdate;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserGradeUpdater;
+import org.sarangchurch.growing.v1.feat.user.infra.component.UserGradeUpdater;
 import org.springframework.stereotype.Service;
 
 @Service

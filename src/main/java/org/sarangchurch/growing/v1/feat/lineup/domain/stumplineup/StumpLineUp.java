@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.TypeDef;
-import org.sarangchurch.growing.config.LongArrayListConverter;
+import org.sarangchurch.growing.config.data.LongArrayListConverter;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 

@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.types.Sex;
 import org.sarangchurch.growing.core.interfaces.v1.user.UserService;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.component.UserUpdater;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.data.UserFinder;
-import org.sarangchurch.growing.v1.feat.user.infrastructure.data.UserWriter;
+import org.sarangchurch.growing.v1.feat.user.infra.component.UserUpdater;
+import org.sarangchurch.growing.v1.feat.user.infra.data.user.UserFinder;
+import org.sarangchurch.growing.v1.feat.user.infra.data.user.UserWriter;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
