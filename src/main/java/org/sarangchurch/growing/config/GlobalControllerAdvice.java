@@ -1,8 +1,7 @@
 package org.sarangchurch.growing.config;
 
-import org.sarangchurch.growing.core.interfaces.common.ErrorResponse;
-import org.sarangchurch.growing.core.interfaces.common.ErrorResponse.ValidationError;
-import org.sarangchurch.growing.core.interfaces.common.ForbiddenException;
+import org.sarangchurch.growing.core.interfaces.common.dto.ErrorResponse;
+import org.sarangchurch.growing.core.interfaces.common.dto.ErrorResponse.ValidationError;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -29,10 +28,6 @@ public class GlobalControllerAdvice {
     })
     public ResponseEntity<ErrorResponse> handle400(Exception e) {
         return createErrorResponse(400, e);
-    }
-    @ExceptionHandler(ForbiddenException.class)
-    public ResponseEntity<ErrorResponse> forbiddenException(ForbiddenException e) {
-        return createErrorResponse(403, e);
     }
 
     private ResponseEntity<ErrorResponse> createErrorResponse(int status, Exception e) {

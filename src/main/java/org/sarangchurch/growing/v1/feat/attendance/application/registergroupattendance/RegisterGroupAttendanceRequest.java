@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.attendance.application.registergroupatt
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.GroupType;
+import org.sarangchurch.growing.core.interfaces.common.types.GroupType;
 import org.sarangchurch.growing.v1.feat.attendance.domain.AttendanceStatus;
 import org.sarangchurch.growing.v1.feat.attendance.domain.attendance.Attendance;
 

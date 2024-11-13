@@ -1,7 +1,7 @@
-package org.sarangchurch.growing.v1.feat.lineup.infra.component;
+package org.sarangchurch.growing.v1.feat.lineup.infra.component.assigner;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.Duty;
+import org.sarangchurch.growing.core.interfaces.common.types.Duty;
 import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.stumplineup.StumpLineUpFinder;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.stumplineup.StumpLineUpWriter;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SeniorPastorAssigner {
     private final StumpLineUpFinder stumpLineUpFinder;
     private final StumpLineUpWriter stumpLineUpWriter;
-    private final NormalLineUpAvailableValidator normalLineUpAvailableValidator;
+    private final NormalLineUpAssignValidator normalLineUpAssignValidator;
 
     @Transactional
     public void assign(Term term, User user) {
@@ -28,7 +28,7 @@ public class SeniorPastorAssigner {
                         )
                 );
 
-        normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.SENIOR_PASTOR);
+        normalLineUpAssignValidator.validateDutyAssignable(term, user, Duty.SENIOR_PASTOR);
 
         stumpLineUp.changeSeniorPastor(user.getId());
     }

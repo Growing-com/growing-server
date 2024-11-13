@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.core.interfaces.common;
+package org.sarangchurch.growing.core.interfaces.common.dto;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;

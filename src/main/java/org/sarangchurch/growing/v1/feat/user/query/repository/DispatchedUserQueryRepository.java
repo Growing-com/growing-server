@@ -4,7 +4,7 @@ import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.Duty;
+import org.sarangchurch.growing.core.interfaces.common.types.Duty;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
 import org.sarangchurch.growing.v1.feat.user.query.model.DispatchedUserListItem;

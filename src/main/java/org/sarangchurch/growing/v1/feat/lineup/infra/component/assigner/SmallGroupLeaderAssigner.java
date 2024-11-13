@@ -1,7 +1,7 @@
-package org.sarangchurch.growing.v1.feat.lineup.infra.component;
+package org.sarangchurch.growing.v1.feat.lineup.infra.component.assigner;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.Duty;
+import org.sarangchurch.growing.core.interfaces.common.types.Duty;
 import org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupleaderlineup.SmallGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.smallgroupleaderlineup.SmallGroupLeaderLineUpReader;
@@ -24,7 +24,7 @@ public class SmallGroupLeaderAssigner {
     private final StumpLineUpWriter stumpLineUpWriter;
     private final SmallGroupLeaderLineUpReader smallGroupLeaderLineUpReader;
     private final SmallGroupMemberLineUpReader smallGroupMemberLineUpReader;
-    private final NormalLineUpAvailableValidator normalLineUpAvailableValidator;
+    private final NormalLineUpAssignValidator normalLineUpAssignValidator;
     private final SmallGroupLeaderLineUpWriter smallGroupLeaderLineUpWriter;
 
     @Transactional
@@ -70,7 +70,7 @@ public class SmallGroupLeaderAssigner {
                 .collect(Collectors.toList());
 
         validateAssignedMemberExists(deleteLineUpCandidates);
-        candidateLeaderUsers.forEach(user -> normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.SMALL_GROUP_LEADER));
+        candidateLeaderUsers.forEach(user -> normalLineUpAssignValidator.validateDutyAssignable(term, user, Duty.SMALL_GROUP_LEADER));
 
         List<Long> deleteIds = deleteLineUpCandidates.stream().map(SmallGroupLeaderLineUp::getId).collect(Collectors.toList());
         smallGroupLeaderLineUpWriter.deleteByIdIn(deleteIds);

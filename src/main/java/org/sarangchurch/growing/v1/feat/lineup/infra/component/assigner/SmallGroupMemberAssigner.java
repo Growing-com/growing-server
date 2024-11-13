@@ -1,7 +1,7 @@
-package org.sarangchurch.growing.v1.feat.lineup.infra.component;
+package org.sarangchurch.growing.v1.feat.lineup.infra.component.assigner;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.Duty;
+import org.sarangchurch.growing.core.interfaces.common.types.Duty;
 import org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupleaderlineup.SmallGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupmemberlineup.SmallGroupMemberLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.smallgroupleaderlineup.SmallGroupLeaderLineUpReader;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class SmallGroupMemberAssigner {
     private final SmallGroupLeaderLineUpReader smallGroupLeaderLineUpReader;
     private final SmallGroupMemberLineUpWriter smallGroupMemberLineUpWriter;
-    private final NormalLineUpAvailableValidator normalLineUpAvailableValidator;
+    private final NormalLineUpAssignValidator normalLineUpAssignValidator;
 
     @Transactional
     public void assign(Term term, User leaderUser, List<User> memberUsers) {
@@ -30,7 +30,7 @@ public class SmallGroupMemberAssigner {
 
         smallGroupMemberLineUpWriter.deleteBySmallGroupLeaderLineUpIdAndTermId(smallGroupLeaderLineUp.getId(), term.getId());
 
-        memberUsers.forEach(user -> normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.SMALL_GROUP_MEMBER));
+        memberUsers.forEach(user -> normalLineUpAssignValidator.validateDutyAssignable(term, user, Duty.SMALL_GROUP_MEMBER));
 
         List<SmallGroupMemberLineUp> smallGroupLeaderLineUps = memberUsers.stream()
                 .map(it ->

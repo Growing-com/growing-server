@@ -2,8 +2,8 @@ package org.sarangchurch.growing.v1.feat.user.query.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.Sex;
-import org.sarangchurch.growing.core.interfaces.common.Duty;
+import org.sarangchurch.growing.core.interfaces.common.types.Sex;
+import org.sarangchurch.growing.core.interfaces.common.types.Duty;
 
 import java.time.LocalDate;
 

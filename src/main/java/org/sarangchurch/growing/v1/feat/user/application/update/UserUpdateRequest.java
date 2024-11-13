@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.user.application.update;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.Sex;
+import org.sarangchurch.growing.core.interfaces.common.types.Sex;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

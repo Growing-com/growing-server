@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.user.query.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.ApiResponse;
+import org.sarangchurch.growing.core.interfaces.common.dto.ApiResponse;
 import org.sarangchurch.growing.v1.feat.user.query.model.GraduatedUserListItem;
 import org.sarangchurch.growing.v1.feat.user.query.repository.GraduatedUserQueryRepository;
 import org.springframework.web.bind.annotation.GetMapping;

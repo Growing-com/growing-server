@@ -1,7 +1,7 @@
-package org.sarangchurch.growing.v1.feat.lineup.infra.component;
+package org.sarangchurch.growing.v1.feat.lineup.infra.component.assigner;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.Duty;
+import org.sarangchurch.growing.core.interfaces.common.types.Duty;
 import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.infra.data.newfamilygroupleaderlineup.NewFamilyGroupLeaderLineUpReader;
@@ -26,7 +26,7 @@ public class NewFamilyGroupLeaderAssigner {
     private final NewFamilyGroupLeaderLineUpReader newFamilyGroupLeaderLineUpReader;
     private final NewFamilyGroupMemberLineUpReader newFamilyGroupMemberLineUpReader;
     private final NewFamilyLineUpReader newFamilyLineUpReader;
-    private final NormalLineUpAvailableValidator normalLineUpAvailableValidator;
+    private final NormalLineUpAssignValidator normalLineUpAssignValidator;
     private final NewFamilyGroupLeaderLineUpWriter newFamilyGroupLeaderLineUpWriter;
 
     @Transactional
@@ -72,7 +72,7 @@ public class NewFamilyGroupLeaderAssigner {
                 .collect(Collectors.toList());
 
         validateAssignedMemberExists(deleteLineUpCandidates);
-        candidateLeaderUsers.forEach(user -> normalLineUpAvailableValidator.validateDutyAssignable(term, user, Duty.NEW_FAMILY_GROUP_LEADER));
+        candidateLeaderUsers.forEach(user -> normalLineUpAssignValidator.validateDutyAssignable(term, user, Duty.NEW_FAMILY_GROUP_LEADER));
 
         List<Long> deleteIds = deleteLineUpCandidates.stream().map(NewFamilyGroupLeaderLineUp::getId).collect(Collectors.toList());
         newFamilyGroupLeaderLineUpWriter.deleteByIdIn(deleteIds);

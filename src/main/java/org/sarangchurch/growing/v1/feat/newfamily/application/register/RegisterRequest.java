@@ -3,7 +3,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.application.register;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyEtc;
-import org.sarangchurch.growing.core.interfaces.common.Sex;
+import org.sarangchurch.growing.core.interfaces.common.types.Sex;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 

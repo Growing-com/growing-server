@@ -1,7 +1,7 @@
 package org.sarangchurch.growing.v1.feat.user.query.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.ApiResponse;
+import org.sarangchurch.growing.core.interfaces.common.dto.ApiResponse;
 import org.sarangchurch.growing.v1.feat.user.query.model.User;
 import org.sarangchurch.growing.v1.feat.user.query.model.UserListItem;
 import org.sarangchurch.growing.v1.feat.user.query.repository.UserQueryRepository;
