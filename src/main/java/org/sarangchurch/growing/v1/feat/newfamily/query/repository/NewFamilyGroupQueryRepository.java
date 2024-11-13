@@ -4,12 +4,14 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.query.model.NewFamilyGroupListItem;
+import org.sarangchurch.growing.v1.feat.newfamily.query.model.NewFamilyGroupMemberListItem;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
+import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.QNewFamilyGroupMember.newFamilyGroupMember;
 import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
 @Repository
@@ -29,6 +31,18 @@ public class NewFamilyGroupQueryRepository {
                         newFamilyGroupLeader.termId.eq(termId)
                 )
                 .join(user).on(user.id.eq(newFamilyGroupLeader.userId))
+                .fetch();
+    }
+
+    public List<NewFamilyGroupMemberListItem> findMembersByNewFamilyGroupId(Long newFamilyGroupId) {
+        return queryFactory.select(Projections.constructor(NewFamilyGroupMemberListItem.class,
+                        user.id.as("userId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade")
+                ))
+                .from(newFamilyGroupMember)
+                .join(user).on(user.id.eq(newFamilyGroupMember.userId), newFamilyGroupMember.newFamilyGroupId.eq(newFamilyGroupId))
                 .fetch();
     }
 }

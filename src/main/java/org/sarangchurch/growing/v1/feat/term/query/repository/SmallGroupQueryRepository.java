@@ -4,6 +4,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.query.model.SmallGroupListItem;
+import org.sarangchurch.growing.v1.feat.term.query.model.SmallGroupMemberListItem;
 import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,8 @@ import java.util.stream.Collectors;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
+import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.QSmallGroupMember.smallGroupMember;
+import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
 @Repository
 @RequiredArgsConstructor
@@ -47,5 +50,17 @@ public class SmallGroupQueryRepository {
         return groupedByUserId.values().stream()
                 .map(SmallGroupListItem::new)
                 .collect(Collectors.toList());
+    }
+
+    public List<SmallGroupMemberListItem> findMembersBySmallGroupId(Long smallGroupId) {
+        return queryFactory.select(Projections.constructor(SmallGroupMemberListItem.class,
+                        user.id.as("userId"),
+                        user.name.as("name"),
+                        user.sex.as("sex"),
+                        user.grade.as("grade")
+                ))
+                .from(smallGroupMember)
+                .join(user).on(user.id.eq(smallGroupMember.userId), smallGroupMember.smallGroupId.eq(smallGroupId))
+                .fetch();
     }
 }

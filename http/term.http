@@ -28,6 +28,9 @@ GET http://localhost:8080/api/v1/terms/2/codies
 ### 코디 소속 순장(일반, 새가족 모두)
 GET http://localhost:8080/api/v1/codies/17/groups
 
+### 순모임 소속 순원
+GET http://localhost:8080/api/v1/small-groups/3/small-group-members
+
 ### 교역자 추가
 POST http://localhost:8080/api/v1/terms/2/create-pastor
 Content-Type: application/json
