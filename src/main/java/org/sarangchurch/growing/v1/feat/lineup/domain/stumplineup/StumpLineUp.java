@@ -52,7 +52,6 @@ public class StumpLineUp extends BaseEntity {
         juniorPastorUserIds = users.stream()
                 .map(User::getId)
                 .collect(Collectors.toList());
-        ;
     }
 
     public void setCodies(List<User> users) {
@@ -63,5 +62,14 @@ public class StumpLineUp extends BaseEntity {
 
     public boolean containsCody(User cody) {
         return codyUserIds.contains(cody.getId());
+    }
+
+    public void removeByUserIds(List<Long> userIds) {
+        if (userIds.contains(seniorPastorUserId)) {
+            seniorPastorUserId = null;
+        }
+
+        codyUserIds.removeAll(userIds);
+        juniorPastorUserIds.removeAll(userIds);
     }
 }

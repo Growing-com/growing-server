@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "new_family_group_leader_line_up")
@@ -31,5 +32,9 @@ public class NewFamilyGroupLeaderLineUp extends BaseEntity {
         this.termId = termId;
         this.codyUserId = codyUserId;
         this.leaderUserId = leaderUserId;
+    }
+
+    public boolean containsUserByUserIds(List<Long> userIds) {
+        return userIds.contains(codyUserId) || userIds.contains(leaderUserId);
     }
 }

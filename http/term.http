@@ -85,7 +85,7 @@ Content-Type: application/json
 }
 
 ### 순모임 삭제
-POST http://localhost:8080/api/v1/small-groups/2/delete
+POST http://localhost:8080/api/v1/small-groups/8/delete
 
 ### 순원 라인업 변경
 POST http://localhost:8080/api/v1/small-group-members/1/line-up-edit
@@ -106,7 +106,7 @@ Content-Type: application/json
 }
 
 ### 새가족반 제거
-POST http://localhost:8080/api/v1/new-family-groups/1/delete
+POST http://localhost:8080/api/v1/new-family-groups/8/delete
 
 ### 새가족반 수정
 POST http://localhost:8080/api/v1/new-family-groups/1/update
@@ -121,7 +121,7 @@ POST http://localhost:8080/api/v1/terms/create
 Content-Type: application/json
 
 {
-  "name": "테슽흐",
+  "name": "테슽흐2",
   "startDate": "2025-03-01",
   "endDate": "2025-08-31"
 }

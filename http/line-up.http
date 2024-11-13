@@ -1,14 +1,14 @@
 ### 담임 교역자 라인업
-POST http://localhost:8080/api/v1/terms/2/assign-senior-pastor
+POST http://localhost:8080/api/v1/terms/3/assign-senior-pastor
 Content-Type: application/json
 
 {
-  "userId": 7
+  "userId": 3
 }
 
 
 ### 부교역자 라인업
-POST http://localhost:8080/api/v1/terms/2/assign-junior-pastor
+POST http://localhost:8080/api/v1/terms/3/assign-junior-pastor
 Content-Type: application/json
 
 {
@@ -16,58 +16,58 @@ Content-Type: application/json
 }
 
 ### 코디 라인업
-POST http://localhost:8080/api/v1/terms/2/assign-cody
+POST http://localhost:8080/api/v1/terms/3/assign-cody
 Content-Type: application/json
 
 {
-  "userIds": [8, 11]
+  "userIds": [4, 17]
 }
 
 ### 일반 순장 라인업
-POST http://localhost:8080/api/v1/terms/2/assign-small-group-leader
+POST http://localhost:8080/api/v1/terms/3/assign-small-group-leader
 Content-Type: application/json
 
 {
-  "codyUserId": 8,
-  "smallGroupLeaderUserIds": [6]
+  "codyUserId": 4,
+  "smallGroupLeaderUserIds": [5]
 }
 
 
 ### 일반 순원 라인업
-POST http://localhost:8080/api/v1/terms/2/assign-small-group-member
+POST http://localhost:8080/api/v1/terms/3/assign-small-group-member
 Content-Type: application/json
 
 {
-  "leaderUserId": 17,
-  "memberUserIds": []
+  "leaderUserId": 5,
+  "memberUserIds": [6]
 }
 
 ### 새가족 순장 라인업
-POST http://localhost:8080/api/v1/terms/2/assign-new-family-group-leader
+POST http://localhost:8080/api/v1/terms/3/assign-new-family-group-leader
 Content-Type: application/json
 
 {
-  "codyUserId": 8,
-  "newFamilyGroupLeaderUserIds": [4, 5]
+  "codyUserId": 4,
+  "newFamilyGroupLeaderUserIds": [8]
 }
 
 ### 새가족 순원 라인업
-POST http://localhost:8080/api/v1/terms/2/assign-new-family-group-member
+POST http://localhost:8080/api/v1/terms/3/assign-new-family-group-member
 Content-Type: application/json
 
 {
-  "leaderUserId": 4,
+  "leaderUserId": 8,
   "memberUserIds": [12, 10]
 }
 
 ### 새가족 라인업
-POST http://localhost:8080/api/v1/terms/2/assign-new-family
+POST http://localhost:8080/api/v1/terms/3/assign-new-family
 Content-Type: application/json
 
 {
-  "leaderUserId": 4,
+  "leaderUserId": 8,
   "newFamilyIds": [3]
 }
 
 ### 라인업 확정
-POST http://localhost:8080/api/v1/terms/2/confirm-line-up
+POST http://localhost:8080/api/v1/terms/3/confirm-line-up

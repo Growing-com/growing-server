@@ -92,7 +92,7 @@ Content-Type: application/json
 {
   "content": [
     {
-      "userId": 16,
+      "userId": 17,
       "lineOutDate": "2024-09-01",
       "reason": "ㅃㅃ"
     }

@@ -12,4 +12,6 @@ public interface SmallGroupMemberLineUpRepository {
     List<SmallGroupMemberLineUp> findByTermId(Long termId);
 
     boolean existsBySmallGroupLeaderLineUpIdIn(List<Long> smallGroupLeaderLineUpIds);
+
+    void deleteBySmallGroupLeaderLineUpIdIn(List<Long> ids);
 }

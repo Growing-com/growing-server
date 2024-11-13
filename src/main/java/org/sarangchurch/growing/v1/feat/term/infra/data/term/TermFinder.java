@@ -37,4 +37,8 @@ public class TermFinder {
     public Optional<Term> findByStatus(TermStatus termStatus) {
         return termRepository.findByStatus(termStatus);
     }
+
+    public Optional<Term> findLineUpTerm() {
+        return termRepository.findByStatus(TermStatus.LINE_UP);
+    }
 }

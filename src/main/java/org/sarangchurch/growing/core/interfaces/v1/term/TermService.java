@@ -8,6 +8,7 @@ import org.sarangchurch.growing.v1.feat.term.domain.cody.Cody;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TermService {
     Term findTerm(Long id);
@@ -20,4 +21,5 @@ public interface TermService {
             List<SmallGroupLeaderLineUp> smallGroupLeaderLineUps,
             List<SmallGroupMemberLineUp> smallGroupMemberLineUps
     );
+    Optional<Term> findLineUpTerm();
 }

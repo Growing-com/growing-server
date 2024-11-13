@@ -10,4 +10,8 @@ public interface NewFamilyLineUpRepository {
     List<NewFamilyLineUp> findByTermId(Long termId);
 
     boolean existsByNewFamilyGroupLeaderLineUpIdIn(List<Long> lineUpIds);
+
+    void deleteByNewFamilyGroupLeaderLineUpIdIn(List<Long> deleteIds);
+
+    void deleteByTermIdAndNewFamilyIdIn(Long termId, List<Long> newFamilyIds);
 }
