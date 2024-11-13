@@ -7,9 +7,9 @@ import java.time.format.DateTimeFormatter;
 
 @Getter
 public class RequestWeekJobParameter {
-    private final Week week;
+    private final Sunday sunday;
 
     public RequestWeekJobParameter(String requestDateStr) {
-        this.week = Week.previousSunday(LocalDate.parse(requestDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        this.sunday = Sunday.previousSunday(LocalDate.parse(requestDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     }
 }

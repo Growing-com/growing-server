@@ -16,8 +16,8 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @RequiredArgsConstructor
 @Configuration
-public class HelloWorldJobConfig {
-    private static final String JOB_NAME = "helloWorldJob";
+public class VisionReportJobConfig {
+    private static final String JOB_NAME = "visionReportJob";
 
     private final JobBuilderFactory jobBuilderFactory;
     private final RequestDateValidator requestDateValidator;

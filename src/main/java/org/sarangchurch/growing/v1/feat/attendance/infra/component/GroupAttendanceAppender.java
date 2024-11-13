@@ -3,7 +3,7 @@ package org.sarangchurch.growing.v1.feat.attendance.infra.component;
 import com.mysema.commons.lang.Pair;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.attendance.domain.attendance.Attendance;
-import org.sarangchurch.growing.v1.feat.attendance.infra.data.AttendanceWriter;
+import org.sarangchurch.growing.v1.feat.attendance.infra.data.attendance.AttendanceWriter;
 import org.sarangchurch.growing.v1.feat.attendance.infra.stream.term.NewFamilyGroupDownstream;
 import org.sarangchurch.growing.v1.feat.attendance.infra.stream.term.SmallGroupDownstream;
 import org.sarangchurch.growing.v1.feat.attendance.infra.stream.term.TermDownstream;

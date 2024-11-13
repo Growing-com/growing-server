@@ -13,4 +13,6 @@ public interface UserRepository {
     List<User> findAll();
 
     List<User> findAllActive();
+
+    long countActiveUsers();
 }

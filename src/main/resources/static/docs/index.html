@@ -456,7 +456,7 @@ Accept: application/json
 Content-Length: 100
 Host: localhost:8080
 
-{"week":"2023-10-01","attendances":[{"teamMemberId":1,"status":"ATTEND","teamId":1,"etc":"비고"}]}</code></pre>
+{"sunday":"2023-10-01","attendances":[{"teamMemberId":1,"status":"ATTEND","teamId":1,"etc":"비고"}]}</code></pre>
 </div>
 </div>
 </div>
@@ -479,7 +479,7 @@ Host: localhost:8080
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -599,7 +599,7 @@ Host: localhost:8080</code></pre>
 Content-Type: application/json
 Content-Length: 405
 
-{"content":[{"leaderName":"우상욱","managerName":"이지우","userId":1,"userName":"김세라","grade":6,"sex":"FEMALE","attendanceItems":[{"attendanceId":1,"status":"ATTEND","week":"2023-12-24","etc":"비고"}]}],"pageable":"INSTANCE","last":true,"totalPages":1,"totalElements":1,"sort":{"empty":true,"unsorted":true,"sorted":false},"number":0,"first":true,"size":1,"numberOfElements":1,"empty":false}</code></pre>
+{"content":[{"leaderName":"우상욱","managerName":"이지우","userId":1,"userName":"김세라","grade":6,"sex":"FEMALE","attendanceItems":[{"attendanceId":1,"status":"ATTEND","sunday":"2023-12-24","etc":"비고"}]}],"pageable":"INSTANCE","last":true,"totalPages":1,"totalElements":1,"sort":{"empty":true,"unsorted":true,"sorted":false},"number":0,"first":true,"size":1,"numberOfElements":1,"empty":false}</code></pre>
 </div>
 </div>
 </div>
@@ -670,7 +670,7 @@ Content-Length: 405
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">출석 주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -727,7 +727,7 @@ Content-Length: 405
 <h4 id="_1_3_코디별_주차_출석_검색_http_request"><a class="link" href="#_1_3_코디별_주차_출석_검색_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/attendance?codyId=1&amp;week=2023-11-01 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/attendance?codyId=1&amp;sunday=2023-11-01 HTTP/1.1
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -755,7 +755,7 @@ Host: localhost:8080</code></pre>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -770,7 +770,7 @@ Host: localhost:8080</code></pre>
 Content-Type: application/json
 Content-Length: 186
 
-{"content":[{"leaderName":"우상욱","teamId":1,"teamMemberId":1,"userName":"김세라","grade":6,"sex":"FEMALE","attendanceId":1,"status":"ATTEND","week":"2023-12-24","etc":"비고"}]}</code></pre>
+{"content":[{"leaderName":"우상욱","teamId":1,"teamMemberId":1,"userName":"김세라","grade":6,"sex":"FEMALE","attendanceId":1,"status":"ATTEND","sunday":"2023-12-24","etc":"비고"}]}</code></pre>
 </div>
 </div>
 </div>
@@ -841,7 +841,7 @@ Content-Length: 186
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">출석 주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -915,7 +915,7 @@ Host: localhost:8080</code></pre>
 Content-Type: application/json
 Content-Length: 234
 
-{"content":[{"leaderName":"우상욱","managerName":"이지우","userId":1,"userName":"김세라","userPhone":null,"grade":6,"sex":"FEMALE","attendanceItems":[{"attendanceId":1,"status":"ABSENT","week":"2023-12-24","etc":"비고"}]}]}</code></pre>
+{"content":[{"leaderName":"우상욱","managerName":"이지우","userId":1,"userName":"김세라","userPhone":null,"grade":6,"sex":"FEMALE","attendanceItems":[{"attendanceId":1,"status":"ABSENT","sunday":"2023-12-24","etc":"비고"}]}]}</code></pre>
 </div>
 </div>
 </div>
@@ -992,7 +992,7 @@ Content-Length: 234
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">출석 주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -1013,7 +1013,7 @@ Content-Length: 234
 <h4 id="_1_5_통계_출석_진행_상황_http_request"><a class="link" href="#_1_5_통계_출석_진행_상황_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/statistics/term/1/attendanceProgress?week=2023-10-01 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/statistics/term/1/attendanceProgress?sunday=2023-10-01 HTTP/1.1
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -1058,7 +1058,7 @@ Host: localhost:8080</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -1073,7 +1073,7 @@ Host: localhost:8080</code></pre>
 Content-Type: application/json
 Content-Length: 134
 
-{"content":{"week":"2023-10-01","totalRegistered":453,"totalProgressed":400,"notProgressedLeaders":[{"userId":1,"name":"곽민섭"}]}}</code></pre>
+{"content":{"sunday":"2023-10-01","totalRegistered":453,"totalProgressed":400,"notProgressedLeaders":[{"userId":1,"name":"곽민섭"}]}}</code></pre>
 </div>
 </div>
 </div>
@@ -1096,7 +1096,7 @@ Content-Length: 134
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">content.week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">content.sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -1178,7 +1178,7 @@ Host: localhost:8080</code></pre>
 Content-Type: application/json
 Content-Length: 263
 
-{"content":[{"week":"2023-10-01","totalRegistered":453,"totalAttendance":200,"totalOnline":0,"totalAbsent":253,"maleRegistered":253,"maleAttendance":100,"femaleRegistered":200,"femaleAttendance":100,"newComerRegistered":10,"newComerAttendance":5,"newVisited":3}]}</code></pre>
+{"content":[{"sunday":"2023-10-01","totalRegistered":453,"totalAttendance":200,"totalOnline":0,"totalAbsent":253,"maleRegistered":253,"maleAttendance":100,"femaleRegistered":200,"femaleAttendance":100,"newComerRegistered":10,"newComerAttendance":5,"newVisited":3}]}</code></pre>
 </div>
 </div>
 </div>
@@ -1201,7 +1201,7 @@ Content-Length: 263
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">content[].week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">content[].sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -1317,7 +1317,7 @@ Host: localhost:8080</code></pre>
 Content-Type: application/json
 Content-Length: 218
 
-{"content":[{"managerId":1,"managerName":"이지우","leaderName":"우상욱","userName":"김세라","sex":"FEMALE","grade":6,"phoneNumber":"010-1234-1234","attendanceItems":[{"week":"2023-10-01","status":"ATTEND"}]}]}</code></pre>
+{"content":[{"managerId":1,"managerName":"이지우","leaderName":"우상욱","userName":"김세라","sex":"FEMALE","grade":6,"phoneNumber":"010-1234-1234","attendanceItems":[{"sunday":"2023-10-01","status":"ATTEND"}]}]}</code></pre>
 </div>
 </div>
 </div>
@@ -1388,7 +1388,7 @@ Content-Length: 218
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">출석 주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -1438,7 +1438,7 @@ Host: localhost:8080</code></pre>
 Content-Type: application/json
 Content-Length: 218
 
-{"content":[{"managerId":1,"managerName":"이지우","leaderName":"우상욱","userName":"김세라","sex":"FEMALE","grade":6,"phoneNumber":"010-1234-1234","attendanceItems":[{"week":"2023-10-01","status":"ATTEND"}]}]}</code></pre>
+{"content":[{"managerId":1,"managerName":"이지우","leaderName":"우상욱","userName":"김세라","sex":"FEMALE","grade":6,"phoneNumber":"010-1234-1234","attendanceItems":[{"sunday":"2023-10-01","status":"ATTEND"}]}]}</code></pre>
 </div>
 </div>
 </div>
@@ -1509,7 +1509,7 @@ Content-Length: 218
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">출석 주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -1559,7 +1559,7 @@ Host: localhost:8080</code></pre>
 Content-Type: application/json
 Content-Length: 229
 
-{"content":[{"managerId":1,"managerName":"이지우","leaderId":2,"leaderName":"우상욱","sex":"MALE","grade":9,"phoneNumber":"010-1234-1234","attendanceItems":[{"week":"2023-10-01","totalRegistered":12,"totalAttendance":5}]}]}</code></pre>
+{"content":[{"managerId":1,"managerName":"이지우","leaderId":2,"leaderName":"우상욱","sex":"MALE","grade":9,"phoneNumber":"010-1234-1234","attendanceItems":[{"sunday":"2023-10-01","totalRegistered":12,"totalAttendance":5}]}]}</code></pre>
 </div>
 </div>
 </div>
@@ -1624,7 +1624,7 @@ Content-Length: 229
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">출석 주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -1686,7 +1686,7 @@ Host: localhost:8080</code></pre>
 Content-Type: application/json
 Content-Length: 139
 
-{"content":[{"managerId":1,"managerName":"이지우","attendanceItems":[{"week":"2023-10-01","totalRegistered":52,"totalAttendance":25}]}]}</code></pre>
+{"content":[{"managerId":1,"managerName":"이지우","attendanceItems":[{"sunday":"2023-10-01","totalRegistered":52,"totalAttendance":25}]}]}</code></pre>
 </div>
 </div>
 </div>
@@ -1721,7 +1721,7 @@ Content-Length: 139
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">출석 주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -1783,7 +1783,7 @@ Host: localhost:8080</code></pre>
 Content-Type: application/json
 Content-Length: 109
 
-{"content":[{"grade":9,"attendanceItems":[{"week":"2023-10-01","totalRegistered":52,"totalAttendance":25}]}]}</code></pre>
+{"content":[{"grade":9,"attendanceItems":[{"sunday":"2023-10-01","totalRegistered":52,"totalAttendance":25}]}]}</code></pre>
 </div>
 </div>
 </div>
@@ -1812,7 +1812,7 @@ Content-Length: 109
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">content[0].attendanceItems[0].sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">출석 주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -2369,7 +2369,7 @@ Content-Length: 70
 <h4 id="_3_5_주차별_재적인원_새등록인원_조회_http_request"><a class="link" href="#_3_5_주차별_재적인원_새등록인원_조회_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/term/totalUser?week=2023-10-01 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/term/totalUser?sunday=2023-10-01 HTTP/1.1
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -2392,7 +2392,7 @@ Host: localhost:8080</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sunday</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">주차</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>

@@ -20,4 +20,6 @@ public interface UserService {
     void deActivateByIdIn(List<Long> ids);
 
     List<User> findAll();
+
+    long countActiveUsers();
 }

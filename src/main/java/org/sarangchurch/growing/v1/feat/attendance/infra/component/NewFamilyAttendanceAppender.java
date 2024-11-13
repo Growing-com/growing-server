@@ -2,7 +2,7 @@ package org.sarangchurch.growing.v1.feat.attendance.infra.component;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.attendance.domain.newfamilyattendance.NewFamilyAttendance;
-import org.sarangchurch.growing.v1.feat.attendance.infra.data.NewFamilyAttendanceWriter;
+import org.sarangchurch.growing.v1.feat.attendance.infra.data.newfamilyattendance.NewFamilyAttendanceWriter;
 import org.sarangchurch.growing.v1.feat.attendance.infra.stream.newfamily.NewFamilyDownstream;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
