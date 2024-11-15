@@ -195,18 +195,4 @@ public class NewFamilyQueryRepository {
                 .orderBy(newFamilyPromoteLog.promoteDate.desc())
                 .fetch();
     }
-
-    public List<TemporaryLinedUpNewFamilyListItem> findAllTemporaryLinedUp() {
-        return queryFactory.select(Projections.constructor(TemporaryLinedUpNewFamilyListItem.class,
-                        newFamily.id.as("newFamilyId"),
-                        newFamilyPromoteLog.temporarySmallGroupIds.as("temporarySmallGroupIds")
-                ))
-                .from(newFamilyPromoteLog)
-                .join(newFamily).on(
-                        newFamily.newFamilyPromoteLogId.eq(newFamilyPromoteLog.id),
-                        newFamilyPromoteLog.promoteDate.isNull()
-                )
-                .orderBy(newFamily.visitDate.desc())
-                .fetch();
-    }
 }

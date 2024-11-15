@@ -4,32 +4,32 @@ GET http://localhost:8080/api/v1/terms
 ### 활성 텀
 GET http://localhost:8080/api/v1/terms/active-term
 
-### 일반 순모임 with 코디 조회
-GET http://localhost:8080/api/v1/terms/1/small-groups-by-cody
-
-### 일반 순모임 목록 조회
-GET http://localhost:8080/api/v1/terms/1/small-groups
-
-### 새가족반 목록 조회
-GET http://localhost:8080/api/v1/terms/2/new-family-groups
-
 ### 모든 리더쉽
 GET http://localhost:8080/api/v1/terms/2/all-leaders
 
 ### 교역자 목록
 GET http://localhost:8080/api/v1/terms/2/pastors
 
-### 코디 소속 인원
-GET http://localhost:8080/api/v1/codies/3/members
-
-### 텀 별 인원 배정수
-GET http://localhost:8080/api/v1/terms/2/duty-distribution-count
-
-### 텀 별 코디 인원
+### 코디 목록
 GET http://localhost:8080/api/v1/terms/2/codies
 
-### 코디 소속 순장(일반, 새가족 모두)
+### 새가족반 목록
+GET http://localhost:8080/api/v1/terms/2/new-family-groups
+
+### 일반 순모임 목록
+GET http://localhost:8080/api/v1/terms/1/small-groups
+
+### 일반 순모임 목록 grouped by 코디
+GET http://localhost:8080/api/v1/terms/1/small-groups-by-cody
+
+### 직분별 인원 배정수
+GET http://localhost:8080/api/v1/terms/2/duty-distribution-count
+
+### 코디 소속 순모임(일반 & 새가족)
 GET http://localhost:8080/api/v1/codies/17/groups
+
+### 코디 소속 인원
+GET http://localhost:8080/api/v1/codies/3/members
 
 ### 순모임 소속 순원
 GET http://localhost:8080/api/v1/small-groups/3/small-group-members
@@ -79,7 +79,7 @@ Content-Type: application/json
 {
   "codyId": 8,
   "leaderUserId": 19,
-  "memberUserIds": [19]
+  "memberUserIds": []
 }
 
 ### 순모임 수정
@@ -92,14 +92,6 @@ Content-Type: application/json
 
 ### 순모임 삭제
 POST http://localhost:8080/api/v1/small-groups/9/delete
-
-### 순원 라인업 변경
-POST http://localhost:8080/api/v1/small-group-members/1/line-up-edit
-Content-Type: application/json
-
-{
-  "targetSmallGroupId": 2
-}
 
 ### 새가족반 추가
 POST http://localhost:8080/api/v1/terms/2/create-new-family-group
@@ -122,12 +114,10 @@ Content-Type: application/json
   "memberUserIds": [11]
 }
 
-### 새 텀 추가
-POST http://localhost:8080/api/v1/terms/create
+### 일반 순원 라인업 변경
+POST http://localhost:8080/api/v1/small-group-members/1/line-up-edit
 Content-Type: application/json
 
 {
-  "name": "테슽흐2",
-  "startDate": "2025-03-01",
-  "endDate": "2025-08-31"
+  "targetSmallGroupId": 2
 }

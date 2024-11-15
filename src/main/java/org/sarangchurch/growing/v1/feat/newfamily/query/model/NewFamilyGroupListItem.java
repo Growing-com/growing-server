@@ -9,6 +9,7 @@ import org.sarangchurch.growing.core.interfaces.common.types.Sex;
 public class NewFamilyGroupListItem {
     private final Long newFamilyGroupId;
     private final String newFamilyGroupLeaderName;
+    private final String codyName;
     private final Sex sex;
     private final Integer grade;
 }

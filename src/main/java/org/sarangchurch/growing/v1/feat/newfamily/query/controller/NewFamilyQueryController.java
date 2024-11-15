@@ -40,9 +40,4 @@ public class NewFamilyQueryController {
     public ApiResponse<List<PromotedNewFamilyListItem>> promotedNewFamilies() {
         return ApiResponse.of(repository.findAllPromoted());
     }
-
-    @GetMapping("/api/v1/temporary-lined-up-new-families")
-    public ApiResponse<List<TemporaryLinedUpNewFamilyListItem>> temporaryLinedUpNewFamilies() {
-        return ApiResponse.of(repository.findAllTemporaryLinedUp());
-    }
 }
