@@ -16,4 +16,8 @@ public class NewFamilyPromoteLogFinder {
     public List<NewFamilyPromoteLog> findByIdIn(List<Long> promoteLogIds) {
         return promoteLogRepository.findByIdIn(promoteLogIds);
     }
+
+    public boolean containsPromotedBySmallGroupId(Long smallGroupId) {
+        return promoteLogRepository.existsBySmallGroupId(smallGroupId);
+    }
 }

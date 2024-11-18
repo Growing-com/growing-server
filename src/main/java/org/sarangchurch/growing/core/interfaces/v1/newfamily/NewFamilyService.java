@@ -18,4 +18,6 @@ public interface NewFamilyService {
     List<NewFamily> findByIdInOrThrow(List<Long> newFamilyIds);
 
     void processLineUps(List<NewFamilyGroupLeaderLineUp> newFamilyGroupLeaderLineUps, List<NewFamilyLineUp> newFamilyLineUps);
+
+    boolean containsPromotedBySmallGroupId(Long smallGroupId);
 }

@@ -22,4 +22,8 @@ public class NewFamilyDownstream {
     public boolean isNewFamilyByUserId(Long userId) {
         return newFamilyService.isNewFamilyByUserId(userId);
     }
+
+    public boolean containsPromotedBySmallGroupId(Long smallGroupId) {
+        return newFamilyService.containsPromotedBySmallGroupId(smallGroupId);
+    }
 }
