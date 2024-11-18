@@ -9,4 +9,5 @@ public interface NewFamilyPromoteLogRepository {
     NewFamilyPromoteLog save(NewFamilyPromoteLog log);
     <S extends NewFamilyPromoteLog> List<S> saveAll(Iterable<S> entities);
     void deleteByIdIn(List<Long> ids);
+    boolean existsBySmallGroupId(Long smallGroupId);
 }
