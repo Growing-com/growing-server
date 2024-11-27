@@ -44,6 +44,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/api/v1/auth/login").permitAll()
                 .antMatchers("/api/v1/auth/logout").permitAll()
+                .antMatchers("/").permitAll()
                 .antMatchers("/actuator/**").permitAll()
                 .anyRequest().authenticated()
 
