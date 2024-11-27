@@ -6,7 +6,6 @@ import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroup.NewF
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyDownstream;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupDownstream;
-import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupLeaderUpstream;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupMemberDownstream;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +18,6 @@ public class NewFamilyGroupRemover {
     private final NewFamilyDownstream newFamilyDownstream;
     private final TermFinder termFinder;
     private final NewFamilyGroupWriter newFamilyGroupWriter;
-    private final NewFamilyGroupLeaderUpstream newFamilyGroupLeaderUpstream;
 
     @Transactional
     public void remove(Long newFamilyGroupId) {
@@ -40,6 +38,5 @@ public class NewFamilyGroupRemover {
         termFinder.findActiveByIdOrThrow(newFamilyGroup.getTermId());
 
         newFamilyGroupWriter.deleteById(newFamilyGroup.getId());
-        newFamilyGroupLeaderUpstream.deleteById(newFamilyGroup.getNewFamilyGroupLeaderId());
     }
 }

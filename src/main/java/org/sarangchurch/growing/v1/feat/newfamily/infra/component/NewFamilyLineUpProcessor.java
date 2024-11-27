@@ -5,10 +5,8 @@ import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilygroupleaderlineup
 import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilylineup.NewFamilyLineUp;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.NewFamilyGroupLeader;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamily.NewFamilyFinder;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroup.NewFamilyGroupFinder;
-import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroupleader.NewFamilyGroupLeaderFinder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +18,6 @@ import java.util.stream.Collectors;
 public class NewFamilyLineUpProcessor {
     private final NewFamilyFinder newFamilyFinder;
     private final NewFamilyGroupFinder newFamilyGroupFinder;
-    private final NewFamilyGroupLeaderFinder newFamilyGroupLeaderFinder;
 
     @Transactional
     public void process(List<NewFamilyGroupLeaderLineUp> leaderLineUps, List<NewFamilyLineUp> newFamilyLineUps) {
@@ -40,7 +37,6 @@ public class NewFamilyLineUpProcessor {
         }
 
         List<NewFamilyGroup> groups = newFamilyGroupFinder.findByTermId(termId);
-        List<NewFamilyGroupLeader> groupLeaders = newFamilyGroupLeaderFinder.findByTermId(termId);
 
         for (NewFamilyLineUp newFamilyLineUp : newFamilyLineUps) {
             NewFamily newFamily = newFamilies.stream()
@@ -53,13 +49,8 @@ public class NewFamilyLineUpProcessor {
                     .findAny()
                     .orElseThrow(() -> new IllegalStateException("새가족 순장 라인업 기록이 존재하지 않습니다."));
 
-            NewFamilyGroupLeader groupLeader = groupLeaders.stream()
-                    .filter(it -> it.getUserId().equals(lineUp.getLeaderUserId()))
-                    .findAny()
-                    .orElseThrow(() -> new IllegalStateException("새가족 순장이 존재하지 않습니다."));
-
             NewFamilyGroup group = groups.stream()
-                    .filter(it -> it.getNewFamilyGroupLeaderId().equals(groupLeader.getId()))
+                    .filter(it -> it.getLeaderUserId().equals(lineUp.getLeaderUserId()))
                     .findAny()
                     .orElseThrow(() -> new IllegalStateException("새가족반이 존재하지 않습니다."));
 

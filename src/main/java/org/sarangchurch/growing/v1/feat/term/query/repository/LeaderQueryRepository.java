@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
-import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.pastor.QPastor.pastor;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
@@ -52,9 +51,10 @@ public class LeaderQueryRepository {
                         codyUser.name.as("codyName")
                 ))
                 .from(newFamilyGroup)
-                .join(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId),
-                        newFamilyGroup.termId.eq(termId))
-                .join(newFamilyGroupLeaderUser).on(newFamilyGroupLeaderUser.id.eq(newFamilyGroupLeader.userId))
+                .join(newFamilyGroupLeaderUser).on(
+                        newFamilyGroupLeaderUser.id.eq(newFamilyGroup.leaderUserId),
+                        newFamilyGroup.termId.eq(termId)
+                )
                 .join(cody).on(cody.id.eq(newFamilyGroup.codyId))
                 .join(codyUser).on(codyUser.id.eq(cody.userId))
                 .orderBy(codyUser.name.asc())

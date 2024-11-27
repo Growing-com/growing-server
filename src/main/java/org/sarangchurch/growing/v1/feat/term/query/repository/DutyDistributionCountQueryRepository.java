@@ -6,7 +6,7 @@ import org.sarangchurch.growing.v1.feat.term.query.model.DutyDistributionCount;
 import org.springframework.stereotype.Repository;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.QNewFamily.newFamily;
-import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
+import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.QNewFamilyGroupMember.newFamilyGroupMember;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.QNewFamilyPromoteLog.newFamilyPromoteLog;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
@@ -46,9 +46,9 @@ public class DutyDistributionCountQueryRepository {
                 .fetchOne();
 
         Long newFamilyGroupLeaderCount = queryFactory
-                .select(newFamilyGroupLeader.count())
-                .from(newFamilyGroupLeader)
-                .where(newFamilyGroupLeader.termId.eq(termId))
+                .select(newFamilyGroup.count())
+                .from(newFamilyGroup)
+                .where(newFamilyGroup.termId.eq(termId))
                 .fetchOne();
 
         Long smallGroupMemberCount = queryFactory

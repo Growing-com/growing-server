@@ -8,11 +8,15 @@ public interface NewFamilyGroupRepository {
 
     long countByCodyId(Long codyId);
 
-    boolean existsByCodyIdAndNewFamilyGroupLeaderId(Long codyId, Long newFamilyGroupLeaderId);
-
     NewFamilyGroup save(NewFamilyGroup newFamilyGroup);
 
     void deleteById(Long newFamilyGroupId);
 
     List<NewFamilyGroup> findByTermId(Long termId);
+
+    boolean existsByCodyIdAndLeaderUserId(Long codyId, Long leaderUserId);
+
+    boolean existsByLeaderUserIdAndTermId(Long leaderUserId, Long termId);
+
+    boolean existsByLeaderUserIdInAndTermId(List<Long> leaderUserIds, Long termId);
 }

@@ -8,7 +8,7 @@ import org.sarangchurch.growing.v1.feat.term.infra.data.pastor.PastorFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyDownstream;
-import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupLeaderDownstream;
+import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupDownstream;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupMemberDownstream;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +19,7 @@ public class TermDutyChecker {
     private final CodyFinder codyFinder;
     private final SmallGroupFinder smallGroupFinder;
     private final SmallGroupMemberFinder smallGroupMemberFinder;
-    private final NewFamilyGroupLeaderDownstream newFamilyGroupLeaderDownstream;
+    private final NewFamilyGroupDownstream newFamilyGroupDownstream;
     private final NewFamilyGroupMemberDownstream newFamilyGroupMemberDownstream;
     private final NewFamilyDownstream newFamilyDownstream;
 
@@ -40,7 +40,7 @@ public class TermDutyChecker {
         }
 
         // 새가족 순장
-        if (newFamilyGroupLeaderDownstream.existsByUserIdAndTermId(userId, term.getId())) {
+        if (newFamilyGroupDownstream.existsByLeaderUserIdAndTermId(userId, term.getId())) {
             return Duty.NEW_FAMILY_GROUP_LEADER;
         }
 

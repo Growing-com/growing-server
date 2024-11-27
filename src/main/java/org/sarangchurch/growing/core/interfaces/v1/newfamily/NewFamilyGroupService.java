@@ -15,4 +15,8 @@ public interface NewFamilyGroupService {
             List<NewFamilyGroupLeaderLineUp> leaderLineUps,
             List<NewFamilyGroupMemberLineUp> memberLineUps
     );
+
+    boolean existsByLeaderUserIdAndTermId(Long leaderUserId, Long termId);
+
+    boolean existsByLeaderUserIdInAndTermId(List<Long> leaderUserIds, Long termId);
 }

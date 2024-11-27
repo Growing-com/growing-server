@@ -15,7 +15,6 @@ public class RegisterNewFamilyController {
 
     private final RegisterService registerService;
 
-    // TODO: 권한 관리
     @PostMapping("/api/v1/new-families/register")
     public void registerNewFamily(@RequestBody @Valid RegisterRequest request) {
         registerService.register(request);

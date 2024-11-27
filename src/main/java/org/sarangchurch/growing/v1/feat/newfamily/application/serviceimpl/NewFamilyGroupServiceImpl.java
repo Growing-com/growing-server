@@ -36,4 +36,14 @@ public class NewFamilyGroupServiceImpl implements NewFamilyGroupService {
     ) {
         newFamilyGroupLineUpProcessor.process(leaderLineUps, memberLineUps);
     }
+
+    @Override
+    public boolean existsByLeaderUserIdAndTermId(Long leaderUserId, Long termId) {
+        return newFamilyGroupFinder.existsByLeaderUserIdAndTermId(leaderUserId, termId);
+    }
+
+    @Override
+    public boolean existsByLeaderUserIdInAndTermId(List<Long> leaderUserIds, Long termId) {
+        return newFamilyGroupFinder.existsByLeaderUserIdInAndTermId(leaderUserIds, termId);
+    }
 }

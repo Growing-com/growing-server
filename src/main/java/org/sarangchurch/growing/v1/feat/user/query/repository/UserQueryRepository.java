@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.QNewFamily.newFamily;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
-import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.QNewFamilyGroupMember.newFamilyGroupMember;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.QNewFamilyPromoteLog.newFamilyPromoteLog;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
@@ -135,9 +134,11 @@ public class UserQueryRepository {
                         Expressions.asEnum(Duty.NEW_FAMILY_GROUP_LEADER).as("duty"),
                         codyUser.name.as("leaderName")
                 ))
-                .from(newFamilyGroupLeader)
-                .join(newFamilyGroup).on(newFamilyGroup.newFamilyGroupLeaderId.eq(newFamilyGroupLeader.id), newFamilyGroup.termId.eq(activeTerm.getId()))
-                .join(user).on(user.id.eq(newFamilyGroupLeader.userId))
+                .from(newFamilyGroup)
+                .join(user).on(
+                        user.id.eq(newFamilyGroup.leaderUserId),
+                        newFamilyGroup.termId.eq(activeTerm.getId())
+                )
                 .join(cody).on(newFamilyGroup.codyId.eq(cody.id))
                 .join(codyUser).on(cody.userId.eq(codyUser.id))
                 .fetch();
@@ -175,8 +176,7 @@ public class UserQueryRepository {
                 .from(newFamilyGroupMember)
                 .join(newFamilyGroup).on(newFamilyGroup.id.eq(newFamilyGroupMember.newFamilyGroupId), newFamilyGroup.termId.eq(activeTerm.getId()))
                 .join(user).on(user.id.eq(newFamilyGroupMember.userId))
-                .join(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
-                .join(newFamilyGroupLeaderUser).on(newFamilyGroupLeader.userId.eq(newFamilyGroupLeaderUser.id))
+                .join(newFamilyGroupLeaderUser).on(newFamilyGroup.leaderUserId.eq(newFamilyGroupLeaderUser.id))
                 .fetch();
 
         // NEW_FAMILY
@@ -195,8 +195,7 @@ public class UserQueryRepository {
                 .leftJoin(newFamilyPromoteLog).on(newFamilyPromoteLog.id.eq(newFamily.newFamilyPromoteLogId))
                 .join(user).on(user.id.eq(newFamily.userId))
                 .leftJoin(newFamilyGroup).on(newFamilyGroup.id.eq(newFamily.newFamilyGroupId))
-                .leftJoin(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
-                .leftJoin(newFamilyGroupLeaderUser).on(newFamilyGroupLeader.userId.eq(newFamilyGroupLeaderUser.id))
+                .leftJoin(newFamilyGroupLeaderUser).on(newFamilyGroup.leaderUserId.eq(newFamilyGroupLeaderUser.id))
                 .where(newFamily.newFamilyPromoteLogId.isNull().or(newFamilyPromoteLog.promoteDate.isNull()))
                 .fetch();
 
