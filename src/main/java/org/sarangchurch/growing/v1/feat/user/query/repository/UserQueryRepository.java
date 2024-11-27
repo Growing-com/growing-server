@@ -23,7 +23,6 @@ import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromote
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.pastor.QPastor.pastor;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
-import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.QSmallGroupMember.smallGroupMember;
 import static org.sarangchurch.growing.v1.feat.term.domain.term.QTerm.term;
 import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
@@ -115,9 +114,11 @@ public class UserQueryRepository {
                         Expressions.asEnum(Duty.SMALL_GROUP_LEADER).as("duty"),
                         codyUser.name.as("leaderName")
                 ))
-                .from(smallGroupLeader)
-                .join(smallGroup).on(smallGroup.smallGroupLeaderId.eq(smallGroupLeader.id), smallGroup.termId.eq(activeTerm.getId()))
-                .join(user).on(user.id.eq(smallGroupLeader.userId))
+                .from(smallGroup)
+                .join(user).on(
+                        user.id.eq(smallGroup.leaderUserId),
+                        smallGroup.termId.eq(activeTerm.getId())
+                )
                 .join(cody).on(smallGroup.codyId.eq(cody.id))
                 .join(codyUser).on(cody.userId.eq(codyUser.id))
                 .fetch();
@@ -156,8 +157,7 @@ public class UserQueryRepository {
                 .from(smallGroupMember)
                 .join(smallGroup).on(smallGroup.id.eq(smallGroupMember.smallGroupId), smallGroup.termId.eq(activeTerm.getId()))
                 .join(user).on(user.id.eq(smallGroupMember.userId))
-                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
-                .join(smallGroupLeaderUser).on(smallGroupLeader.userId.eq(smallGroupLeaderUser.id))
+                .join(smallGroupLeaderUser).on(smallGroup.leaderUserId.eq(smallGroupLeaderUser.id))
                 .fetch();
 
         // NEW_FAMILY_GROUP_MEMBER

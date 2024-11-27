@@ -14,7 +14,6 @@ import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.Q
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.QNewFamilyPromoteLog.newFamilyPromoteLog;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
-import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
 import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
 @Repository
@@ -54,8 +53,7 @@ public class NewFamilyQueryRepository {
                 // 등반한 순모임
                 .leftJoin(newFamilyPromoteLog).on(newFamilyPromoteLog.id.eq(newFamily.newFamilyPromoteLogId))
                 .leftJoin(smallGroup).on(smallGroup.id.eq(newFamilyPromoteLog.smallGroupId))
-                .leftJoin(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
-                .leftJoin(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroupLeader.userId))
+                .leftJoin(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroup.leaderUserId))
                 // 정렬
                 .orderBy(newFamily.visitDate.desc())
                 .fetch();
@@ -96,8 +94,7 @@ public class NewFamilyQueryRepository {
                 // 등반한 순모임
                 .leftJoin(newFamilyPromoteLog).on(newFamilyPromoteLog.id.eq(newFamily.newFamilyPromoteLogId))
                 .leftJoin(smallGroup).on(smallGroup.id.eq(newFamilyPromoteLog.smallGroupId))
-                .leftJoin(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
-                .leftJoin(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroupLeader.userId))
+                .leftJoin(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroup.leaderUserId))
                 // 정렬
                 .orderBy(newFamily.visitDate.desc())
                 .fetch();
@@ -156,8 +153,7 @@ public class NewFamilyQueryRepository {
                 // 일반 순모임
                 .leftJoin(newFamilyPromoteLog).on(newFamilyPromoteLog.id.eq(newFamily.newFamilyPromoteLogId))
                 .leftJoin(smallGroup).on(smallGroup.id.eq(newFamilyPromoteLog.smallGroupId))
-                .leftJoin(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
-                .leftJoin(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroupLeader.userId))
+                .leftJoin(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroup.leaderUserId))
                 // 정렬
                 .orderBy(newFamilyPromoteLog.createdAt.desc())
                 .fetch();
@@ -185,8 +181,7 @@ public class NewFamilyQueryRepository {
                 .join(user).on(user.id.eq(newFamily.userId))
                 // 일반 순모임
                 .join(smallGroup).on(smallGroup.id.eq(newFamilyPromoteLog.smallGroupId))
-                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
-                .join(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroupLeader.userId))
+                .join(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroup.leaderUserId))
                 // 새가족반
                 .leftJoin(newFamilyGroup).on(newFamilyGroup.id.eq(newFamily.newFamilyGroupId))
                 .leftJoin(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))

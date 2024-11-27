@@ -11,7 +11,7 @@ import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupme
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.QNewFamilyPromoteLog.newFamilyPromoteLog;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.pastor.QPastor.pastor;
-import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
+import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.QSmallGroupMember.smallGroupMember;
 import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
@@ -40,9 +40,9 @@ public class DutyDistributionCountQueryRepository {
                 .fetchOne();
 
         Long smallGroupLeaderCount = queryFactory
-                .select(smallGroupLeader.count())
-                .from(smallGroupLeader)
-                .where(smallGroupLeader.termId.eq(termId))
+                .select(smallGroup.count())
+                .from(smallGroup)
+                .where(smallGroup.termId.eq(termId))
                 .fetchOne();
 
         Long newFamilyGroupLeaderCount = queryFactory

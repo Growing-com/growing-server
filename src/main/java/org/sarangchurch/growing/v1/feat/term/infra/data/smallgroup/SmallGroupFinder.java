@@ -21,8 +21,8 @@ public class SmallGroupFinder {
         return smallGroupRepository.countByCodyId(codyId);
     }
 
-    public boolean existsByCodyIdAndSmallGroupLeaderId(Long codyId, Long smallGroupLeaderId) {
-        return smallGroupRepository.existsByCodyIdAndSmallGroupLeaderId(codyId, smallGroupLeaderId);
+    public boolean existsByCodyIdAndLeaderUserId(Long codyId, Long leaderUserId) {
+        return smallGroupRepository.existsByCodyIdAndLeaderUserId(codyId, leaderUserId);
     }
 
     public List<SmallGroup> findByIdIn(List<Long> ids) {
@@ -41,5 +41,13 @@ public class SmallGroupFinder {
         }
 
         return smallGroups;
+    }
+
+    public boolean existsByLeaderUserIdInAndTermId(List<Long> leaderUserIds, Long termId) {
+        return smallGroupRepository.existsByLeaderUserIdInAndTermId(leaderUserIds, termId);
+    }
+
+    public boolean existsByLeaderUserIdAndTermId(Long leaderUserId, Long termId) {
+        return smallGroupRepository.existsByLeaderUserIdAndTermId(leaderUserId, termId);
     }
 }

@@ -22,7 +22,6 @@ import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygrouple
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.QNewFamilyGroupMember.newFamilyGroupMember;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
-import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.QSmallGroupMember.smallGroupMember;
 import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
@@ -73,8 +72,7 @@ public class TreeMemberQueryRepository {
                         Expressions.asEnum(Duty.SMALL_GROUP_LEADER).as("duty")
                 ))
                 .from(smallGroup)
-                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId), smallGroup.codyId.eq(codyId))
-                .join(user).on(user.id.eq(smallGroupLeader.userId))
+                .join(user).on(user.id.eq(smallGroup.leaderUserId))
                 .fetch();
 
         // 일반 순원
@@ -91,8 +89,7 @@ public class TreeMemberQueryRepository {
                 .from(smallGroup)
                 .join(smallGroupMember).on(smallGroupMember.smallGroupId.eq(smallGroup.id), smallGroup.codyId.eq(codyId))
                 .join(user).on(user.id.eq(smallGroupMember.userId))
-                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
-                .join(leaderUser).on(leaderUser.id.eq(smallGroupLeader.userId))
+                .join(leaderUser).on(leaderUser.id.eq(smallGroup.leaderUserId))
                 .fetch();
 
         // 새가족 순장
@@ -157,8 +154,7 @@ public class TreeMemberQueryRepository {
                 ))
                 .from(smallGroup)
                 .join(cody).on(cody.id.eq(smallGroup.codyId), cody.id.eq(codyId))
-                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
-                .join(user).on(user.id.eq(smallGroupLeader.userId))
+                .join(user).on(user.id.eq(smallGroup.leaderUserId))
                 .fetch();
 
         List<GroupListItem> newFamilyGroups = queryFactory.select(Projections.constructor(GroupListItem.class,

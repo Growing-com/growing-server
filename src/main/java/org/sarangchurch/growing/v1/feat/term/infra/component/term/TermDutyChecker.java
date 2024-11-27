@@ -5,7 +5,7 @@ import org.sarangchurch.growing.core.interfaces.common.types.Duty;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.infra.data.cody.CodyFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.pastor.PastorFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupleader.SmallGroupLeaderFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyDownstream;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupLeaderDownstream;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class TermDutyChecker {
     private final PastorFinder pastorFinder;
     private final CodyFinder codyFinder;
-    private final SmallGroupLeaderFinder smallGroupLeaderFinder;
+    private final SmallGroupFinder smallGroupFinder;
     private final SmallGroupMemberFinder smallGroupMemberFinder;
     private final NewFamilyGroupLeaderDownstream newFamilyGroupLeaderDownstream;
     private final NewFamilyGroupMemberDownstream newFamilyGroupMemberDownstream;
@@ -35,7 +35,7 @@ public class TermDutyChecker {
         }
 
         // 일반 순장
-        if (smallGroupLeaderFinder.existsByUserIdAndTermId(userId, term.getId())) {
+        if (smallGroupFinder.existsByLeaderUserIdAndTermId(userId, term.getId())) {
             return Duty.SMALL_GROUP_LEADER;
         }
 

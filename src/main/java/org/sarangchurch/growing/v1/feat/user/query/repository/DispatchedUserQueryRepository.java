@@ -20,7 +20,6 @@ import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupme
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.pastor.QPastor.pastor;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
-import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.QSmallGroupMember.smallGroupMember;
 import static org.sarangchurch.growing.v1.feat.term.domain.term.QTerm.term;
 import static org.sarangchurch.growing.v1.feat.user.domain.dispatcheduser.QDispatchedUser.dispatchedUser;
@@ -76,13 +75,12 @@ public class DispatchedUserQueryRepository {
 
         // 일반 순장 -> 코디
         List<Tuple> smallGroupLeaderTuple = queryFactory.select(user.id, leaderUser.name)
-                .from(smallGroupLeader)
-                .join(smallGroup).on(
-                        smallGroup.smallGroupLeaderId.eq(smallGroupLeader.id),
-                        smallGroupLeader.userId.in(userIds),
+                .from(smallGroup)
+                .join(user).on(
+                        user.id.eq(smallGroup.leaderUserId),
+                        smallGroup.leaderUserId.in(userIds),
                         smallGroup.termId.eq(activeTerm.getId())
                 )
-                .join(user).on(user.id.eq(smallGroupLeader.userId))
                 .join(cody).on(smallGroup.codyId.eq(cody.id))
                 .join(leaderUser).on(leaderUser.id.eq(cody.userId))
                 .fetch();
@@ -96,8 +94,7 @@ public class DispatchedUserQueryRepository {
                         smallGroup.termId.eq(activeTerm.getId())
                 )
                 .join(user).on(user.id.eq(smallGroupMember.userId))
-                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
-                .join(leaderUser).on(leaderUser.id.eq(smallGroupLeader.userId))
+                .join(leaderUser).on(leaderUser.id.eq(smallGroup.leaderUserId))
                 .fetch();
 
         // 새가족 순장 -> 코디

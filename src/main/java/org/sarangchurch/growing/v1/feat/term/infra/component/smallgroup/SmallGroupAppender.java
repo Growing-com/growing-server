@@ -2,13 +2,11 @@ package org.sarangchurch.growing.v1.feat.term.infra.component.smallgroup;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
-import org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.SmallGroupLeader;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.SmallGroupMember;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.infra.component.AssignValidator;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupWriter;
-import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupleader.SmallGroupLeaderWriter;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberWriter;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.user.UserDownstream;
@@ -28,7 +26,6 @@ public class SmallGroupAppender {
     private final SmallGroupFinder smallGroupFinder;
 
     private final SmallGroupMemberWriter smallGroupMemberWriter;
-    private final SmallGroupLeaderWriter smallGroupLeaderWriter;
     private final SmallGroupWriter smallGroupWriter;
 
     @Transactional
@@ -36,18 +33,10 @@ public class SmallGroupAppender {
         Term term = termFinder.findActiveByIdOrThrow(termId);
         User user = userDownstream.findActiveByIdOrThrow(leaderUserId);
 
-        // 순장
         assignValidator.validateAssignable(term, user);
 
-        SmallGroupLeader savedSmallGroupLeader = smallGroupLeaderWriter.save(
-                SmallGroupLeader.builder()
-                        .termId(term.getId())
-                        .userId(user.getId())
-                        .build()
-        );
-
         // 순모임
-        boolean existsSmallGroup = smallGroupFinder.existsByCodyIdAndSmallGroupLeaderId(codyId, savedSmallGroupLeader.getId());
+        boolean existsSmallGroup = smallGroupFinder.existsByCodyIdAndLeaderUserId(codyId, leaderUserId);
 
         if (existsSmallGroup) {
             throw new IllegalStateException("이미 존재하는 순모임입니다.");
@@ -57,7 +46,7 @@ public class SmallGroupAppender {
                 SmallGroup.builder()
                         .termId(termId)
                         .codyId(codyId)
-                        .smallGroupLeaderId(savedSmallGroupLeader.getId())
+                        .leaderUserId(leaderUserId)
                         .build()
         );
 
