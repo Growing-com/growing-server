@@ -23,13 +23,13 @@ public class NewFamilyGroup extends BaseEntity {
     @Column(name = "cody_id", nullable = false)
     private Long codyId;
 
-    @Column(name = "new_family_group_leader_id", nullable = false)
-    private Long newFamilyGroupLeaderId;
+    @Column(name = "leader_user_id", nullable = false)
+    private Long leaderUserId;
 
     @Builder
-    public NewFamilyGroup(Long termId, Long codyId, Long newFamilyGroupLeaderId) {
+    public NewFamilyGroup(Long termId, Long codyId, Long leaderUserId) {
         this.termId = termId;
         this.codyId = codyId;
-        this.newFamilyGroupLeaderId = newFamilyGroupLeaderId;
+        this.leaderUserId = leaderUserId;
     }
 }

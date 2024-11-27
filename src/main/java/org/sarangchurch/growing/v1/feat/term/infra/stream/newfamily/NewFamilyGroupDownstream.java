@@ -5,6 +5,8 @@ import org.sarangchurch.growing.core.interfaces.v1.newfamily.NewFamilyGroupServi
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class NewFamilyGroupDownstream {
@@ -16,5 +18,13 @@ public class NewFamilyGroupDownstream {
 
     public NewFamilyGroup findByIdOrThrow(Long newFamilyGroupId) {
         return newFamilyGroupService.findByIdOrThrow(newFamilyGroupId);
+    }
+
+    public boolean existsByLeaderUserIdAndTermId(Long leaderUserId, Long termId) {
+        return newFamilyGroupService.existsByLeaderUserIdAndTermId(leaderUserId, termId);
+    }
+
+    public boolean existsByLeaderUserIdInAndTermId(List<Long> leaderUserIds, Long termId) {
+        return newFamilyGroupService.existsByLeaderUserIdInAndTermId(leaderUserIds, termId);
     }
 }

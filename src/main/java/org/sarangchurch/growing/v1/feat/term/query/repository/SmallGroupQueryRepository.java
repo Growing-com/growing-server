@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
-import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.QSmallGroupMember.smallGroupMember;
 import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
@@ -36,11 +35,10 @@ public class SmallGroupQueryRepository {
                         smallGroupLeaderUser.name.as("smallGroupLeaderName")
                 ))
                 .from(smallGroup)
-                .join(smallGroupLeader).on(
-                        smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId),
+                .join(smallGroupLeaderUser).on(
+                        smallGroupLeaderUser.id.eq(smallGroup.leaderUserId),
                         smallGroup.termId.eq(termId)
                 )
-                .join(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroupLeader.userId))
                 .join(cody).on(cody.id.eq(smallGroup.codyId))
                 .join(codyUser).on(codyUser.id.eq(cody.userId))
                 .fetch();
@@ -77,11 +75,10 @@ public class SmallGroupQueryRepository {
                         smallGroupLeaderUser.grade.as("grade")
                 ))
                 .from(smallGroup)
-                .join(smallGroupLeader).on(
-                        smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId),
+                .join(smallGroupLeaderUser).on(
+                        smallGroupLeaderUser.id.eq(smallGroup.leaderUserId),
                         smallGroup.termId.eq(termId)
                 )
-                .join(smallGroupLeaderUser).on(smallGroupLeaderUser.id.eq(smallGroupLeader.userId))
                 .join(cody).on(cody.id.eq(smallGroup.codyId))
                 .join(codyUser).on(codyUser.id.eq(cody.userId))
                 .fetch();

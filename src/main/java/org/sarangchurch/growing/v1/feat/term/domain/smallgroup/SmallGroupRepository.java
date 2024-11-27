@@ -8,7 +8,7 @@ public interface SmallGroupRepository {
 
     SmallGroup save(SmallGroup smallGroup);
 
-    boolean existsByCodyIdAndSmallGroupLeaderId(Long codyId, Long smallGroupLeaderId);
+    boolean existsByCodyIdAndLeaderUserId(Long codyId, Long leaderUserId);
 
     Optional<SmallGroup> findById(Long id);
 
@@ -17,4 +17,8 @@ public interface SmallGroupRepository {
     long countByCodyId(Long codyId);
 
     List<SmallGroup> findByCodyId(Long codyId);
+
+    boolean existsByLeaderUserIdInAndTermId(List<Long> leaderUserIds, Long termId);
+
+    boolean existsByLeaderUserIdAndTermId(Long leaderUserId, Long termId);
 }

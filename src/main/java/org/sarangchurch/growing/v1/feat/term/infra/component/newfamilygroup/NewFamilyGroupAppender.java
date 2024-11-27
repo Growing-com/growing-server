@@ -2,14 +2,12 @@ package org.sarangchurch.growing.v1.feat.term.infra.component.newfamilygroup;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.NewFamilyGroupLeader;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.NewFamilyGroupMember;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroup.NewFamilyGroupFinder;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroup.NewFamilyGroupWriter;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.infra.component.AssignValidator;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupLeaderUpstream;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupMemberUpstream;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.user.UserDownstream;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
@@ -27,7 +25,6 @@ public class NewFamilyGroupAppender {
     private final AssignValidator assignValidator;
     private final NewFamilyGroupFinder newFamilyGroupFinder;
 
-    private final NewFamilyGroupLeaderUpstream newFamilyGroupLeaderUpstream;
     private final NewFamilyGroupWriter newFamilyGroupWriter;
     private final NewFamilyGroupMemberUpstream newFamilyGroupMemberUpstream;
 
@@ -36,20 +33,12 @@ public class NewFamilyGroupAppender {
         Term term = termFinder.findActiveByIdOrThrow(termId);
         User user = userDownstream.findActiveByIdOrThrow(leaderUserId);
 
-        // 새가족 순장
         assignValidator.validateAssignable(term, user);
 
-        NewFamilyGroupLeader savedNewFamilyGroupLeader = newFamilyGroupLeaderUpstream.save(
-                NewFamilyGroupLeader.builder()
-                        .termId(term.getId())
-                        .userId(user.getId())
-                        .build()
-        );
-
         // 새가족 순모임
-        boolean existsNewFamilyGroup = newFamilyGroupFinder.existsByCodyIdAndNewFamilyGroupLeaderId(codyId, savedNewFamilyGroupLeader.getId());
+        boolean existingGroup = newFamilyGroupFinder.existsByCodyIdAndLeaderUserId(codyId, leaderUserId);
 
-        if (existsNewFamilyGroup) {
+        if (existingGroup) {
             throw new IllegalStateException("이미 존재하는 새가족반입니다.");
         }
 
@@ -57,7 +46,7 @@ public class NewFamilyGroupAppender {
                 NewFamilyGroup.builder()
                         .termId(termId)
                         .codyId(codyId)
-                        .newFamilyGroupLeaderId(savedNewFamilyGroupLeader.getId())
+                        .leaderUserId(leaderUserId)
                         .build()
         );
 

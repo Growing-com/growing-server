@@ -10,7 +10,6 @@ import org.sarangchurch.growing.v1.feat.attendance.domain.AttendanceStatus;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-// TODO: DB UNIQUE(newFamilyId, date)
 @Entity
 @Table(name = "new_family_attendance", uniqueConstraints = {
         @UniqueConstraint(name = "new_family_attendance_unique_new_family_id_date", columnNames = {"new_family_id", "date"})

@@ -21,11 +21,19 @@ public class NewFamilyGroupFinder {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 새가족반입니다."));
     }
 
-    public boolean existsByCodyIdAndNewFamilyGroupLeaderId(Long codyId, Long newFamilyGroupLeaderId) {
-        return newFamilyGroupRepository.existsByCodyIdAndNewFamilyGroupLeaderId(codyId, newFamilyGroupLeaderId);
-    }
-
     public List<NewFamilyGroup> findByTermId(Long termId) {
         return newFamilyGroupRepository.findByTermId(termId);
+    }
+
+    public boolean existsByCodyIdAndLeaderUserId(Long codyId, Long leaderUserId) {
+        return newFamilyGroupRepository.existsByCodyIdAndLeaderUserId(codyId, leaderUserId);
+    }
+
+    public boolean existsByLeaderUserIdAndTermId(Long leaderUserId, Long termId) {
+        return newFamilyGroupRepository.existsByLeaderUserIdAndTermId(leaderUserId, termId);
+    }
+
+    public boolean existsByLeaderUserIdInAndTermId(List<Long> leaderUserIds, Long termId) {
+        return newFamilyGroupRepository.existsByLeaderUserIdInAndTermId(leaderUserIds, termId);
     }
 }

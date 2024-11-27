@@ -23,7 +23,7 @@ GET http://localhost:8080/api/v1/terms/1/small-groups
 GET http://localhost:8080/api/v1/terms/1/small-groups-by-cody
 
 ### 직분별 인원 배정수
-GET http://localhost:8080/api/v1/terms/2/duty-distribution-count
+GET http://localhost:8080/api/v1/terms/3/duty-distribution-count
 
 ### 코디 소속 순모임(일반 & 새가족)
 GET http://localhost:8080/api/v1/codies/17/groups

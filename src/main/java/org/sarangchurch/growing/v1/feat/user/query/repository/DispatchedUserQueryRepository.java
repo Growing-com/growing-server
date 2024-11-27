@@ -15,12 +15,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
-import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.QNewFamilyGroupMember.newFamilyGroupMember;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.pastor.QPastor.pastor;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
-import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.QSmallGroupMember.smallGroupMember;
 import static org.sarangchurch.growing.v1.feat.term.domain.term.QTerm.term;
 import static org.sarangchurch.growing.v1.feat.user.domain.dispatcheduser.QDispatchedUser.dispatchedUser;
@@ -76,13 +74,12 @@ public class DispatchedUserQueryRepository {
 
         // 일반 순장 -> 코디
         List<Tuple> smallGroupLeaderTuple = queryFactory.select(user.id, leaderUser.name)
-                .from(smallGroupLeader)
-                .join(smallGroup).on(
-                        smallGroup.smallGroupLeaderId.eq(smallGroupLeader.id),
-                        smallGroupLeader.userId.in(userIds),
+                .from(smallGroup)
+                .join(user).on(
+                        user.id.eq(smallGroup.leaderUserId),
+                        smallGroup.leaderUserId.in(userIds),
                         smallGroup.termId.eq(activeTerm.getId())
                 )
-                .join(user).on(user.id.eq(smallGroupLeader.userId))
                 .join(cody).on(smallGroup.codyId.eq(cody.id))
                 .join(leaderUser).on(leaderUser.id.eq(cody.userId))
                 .fetch();
@@ -96,19 +93,17 @@ public class DispatchedUserQueryRepository {
                         smallGroup.termId.eq(activeTerm.getId())
                 )
                 .join(user).on(user.id.eq(smallGroupMember.userId))
-                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
-                .join(leaderUser).on(leaderUser.id.eq(smallGroupLeader.userId))
+                .join(leaderUser).on(leaderUser.id.eq(smallGroup.leaderUserId))
                 .fetch();
 
         // 새가족 순장 -> 코디
         List<Tuple> newFamilyGroupLeaderTuple = queryFactory.select(user.id, leaderUser.name)
-                .from(newFamilyGroupLeader)
-                .join(newFamilyGroup).on(
-                        newFamilyGroup.newFamilyGroupLeaderId.eq(newFamilyGroupLeader.id),
-                        newFamilyGroupLeader.userId.in(userIds),
+                .from(newFamilyGroup)
+                .join(user).on(
+                        user.id.eq(newFamilyGroup.leaderUserId),
+                        user.id.in(userIds),
                         newFamilyGroup.termId.eq(activeTerm.getId())
                 )
-                .join(user).on(user.id.eq(newFamilyGroupLeader.userId))
                 .join(cody).on(newFamilyGroup.codyId.eq(cody.id))
                 .join(leaderUser).on(leaderUser.id.eq(cody.userId))
                 .fetch();
@@ -122,8 +117,7 @@ public class DispatchedUserQueryRepository {
                         newFamilyGroup.termId.eq(activeTerm.getId())
                 )
                 .join(user).on(user.id.eq(newFamilyGroupMember.userId))
-                .join(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
-                .join(leaderUser).on(leaderUser.id.eq(newFamilyGroupLeader.userId))
+                .join(leaderUser).on(leaderUser.id.eq(newFamilyGroup.leaderUserId))
                 .fetch();
 
         dispatchedUsers.forEach(dispatchedUser -> {

@@ -9,7 +9,6 @@ import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
 
 import javax.persistence.*;
 
-// TODO: DB UNIQUE(smallGroupId, userId)
 @Entity
 @Table(name = "small_group_member")
 @Getter

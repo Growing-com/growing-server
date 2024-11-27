@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
-import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.QNewFamilyGroupMember.newFamilyGroupMember;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
@@ -33,11 +32,10 @@ public class NewFamilyGroupQueryRepository {
                         user.grade.as("grade")
                 ))
                 .from(newFamilyGroup)
-                .join(newFamilyGroupLeader).on(
-                        newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId),
-                        newFamilyGroupLeader.termId.eq(termId)
+                .join(user).on(
+                        user.id.eq(newFamilyGroup.leaderUserId),
+                        newFamilyGroup.termId.eq(termId)
                 )
-                .join(user).on(user.id.eq(newFamilyGroupLeader.userId))
                 .join(cody).on(cody.id.eq(newFamilyGroup.codyId))
                 .join(codyUser).on(codyUser.id.eq(cody.userId))
                 .fetch();

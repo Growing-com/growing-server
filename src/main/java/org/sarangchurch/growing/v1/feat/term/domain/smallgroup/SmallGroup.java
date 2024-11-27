@@ -14,7 +14,6 @@ import javax.persistence.*;
 @Table(name = "small_group")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-// TODO: DB UNIQUE(codyId, smallGroupLeaderId)
 public class SmallGroup extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,14 +25,14 @@ public class SmallGroup extends BaseEntity {
     @Column(name = "cody_id", nullable = false)
     private Long codyId;
 
-    @Column(name = "small_group_leader_id", nullable = false)
-    private Long smallGroupLeaderId;
+    @Column(name = "leader_user_id", nullable = false)
+    private Long leaderUserId;
 
     @Builder
-    public SmallGroup(Long termId, Long codyId, Long smallGroupLeaderId) {
+    public SmallGroup(Long termId, Long codyId, Long leaderUserId) {
         this.termId = termId;
         this.codyId = codyId;
-        this.smallGroupLeaderId = smallGroupLeaderId;
+        this.leaderUserId = leaderUserId;
     }
 
     public boolean isSameTerm(Term term) {

@@ -7,13 +7,10 @@ import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
 import org.sarangchurch.growing.v1.feat.term.domain.cody.Cody;
 import org.sarangchurch.growing.v1.feat.term.domain.pastor.Pastor;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
-import org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.SmallGroupLeader;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.SmallGroupMember;
 import org.sarangchurch.growing.v1.feat.term.infra.data.cody.CodyWriter;
 import org.sarangchurch.growing.v1.feat.term.infra.data.pastor.PastorWriter;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupWriter;
-import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupleader.SmallGroupLeaderFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupleader.SmallGroupLeaderWriter;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberWriter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,9 +24,7 @@ import java.util.stream.Collectors;
 public class TermLineUpProcessor {
     private final CodyWriter codyWriter;
     private final PastorWriter pastorWriter;
-    private final SmallGroupLeaderWriter smallGroupLeaderWriter;
     private final SmallGroupWriter smallGroupWriter;
-    private final SmallGroupLeaderFinder smallGroupLeaderFinder;
     private final SmallGroupMemberWriter smallGroupMemberWriter;
 
     @Transactional
@@ -42,10 +37,9 @@ public class TermLineUpProcessor {
         List<Cody> codies = processCodies(stumpLineUp);
 
         List<SmallGroup> smallGroups = processLeaderLineUps(leaderLineUps, codies);
-        List<SmallGroupLeader> smallGroupLeaders = smallGroupLeaderFinder.findByTermId(stumpLineUp.getTermId());
 
         for (SmallGroupMemberLineUp memberLineUp : memberLineUps) {
-            this.processMemberLineUp(memberLineUp, leaderLineUps, smallGroups, smallGroupLeaders);
+            this.processMemberLineUp(memberLineUp, leaderLineUps, smallGroups);
         }
     }
 
@@ -102,13 +96,6 @@ public class TermLineUpProcessor {
         Long leaderUserId = lineUp.getLeaderUserId();
         Long codyUserId = lineUp.getCodyUserId();
 
-        SmallGroupLeader smallGroupLeader = SmallGroupLeader.builder()
-                .termId(termId)
-                .userId(leaderUserId)
-                .build();
-
-        SmallGroupLeader savedSmallGroupLeader = smallGroupLeaderWriter.save(smallGroupLeader);
-
         Cody cody = codies.stream()
                 .filter(it -> it.getUserId().equals(codyUserId))
                 .findAny()
@@ -117,7 +104,7 @@ public class TermLineUpProcessor {
         SmallGroup smallGroup = SmallGroup.builder()
                 .termId(termId)
                 .codyId(cody.getId())
-                .smallGroupLeaderId(savedSmallGroupLeader.getId())
+                .leaderUserId(leaderUserId)
                 .build();
 
         return smallGroupWriter.save(smallGroup);
@@ -126,8 +113,7 @@ public class TermLineUpProcessor {
     private void processMemberLineUp(
             SmallGroupMemberLineUp memberLineUp,
             List<SmallGroupLeaderLineUp> leaderLineUps,
-            List<SmallGroup> smallGroups,
-            List<SmallGroupLeader> smallGroupLeaders
+            List<SmallGroup> smallGroups
     ) {
         Long leaderLineUpId = memberLineUp.getSmallGroupLeaderLineUpId();
 
@@ -138,13 +124,8 @@ public class TermLineUpProcessor {
 
         Long leaderUserId = leaderLineUp.getLeaderUserId();
 
-        SmallGroupLeader smallGroupLeader = smallGroupLeaders.stream()
-                .filter(it -> it.getUserId().equals(leaderUserId))
-                .findAny()
-                .orElseThrow();
-
         SmallGroup findSmallGroup = smallGroups.stream()
-                .filter(smallGroup -> smallGroup.getSmallGroupLeaderId().equals(smallGroupLeader.getId()))
+                .filter(smallGroup -> smallGroup.getLeaderUserId().equals(leaderUserId))
                 .findAny()
                 .orElseThrow();
 

@@ -11,10 +11,12 @@ public interface NewFamilyGroupService {
 
     NewFamilyGroup findByIdOrThrow(Long newFamilyGroupId);
 
-    boolean areValidUserIdsByNewFamilyGroupId(List<Long> userIds, Long newFamilyGroupId);
-
     void processLineUps(
             List<NewFamilyGroupLeaderLineUp> leaderLineUps,
             List<NewFamilyGroupMemberLineUp> memberLineUps
     );
+
+    boolean existsByLeaderUserIdAndTermId(Long leaderUserId, Long termId);
+
+    boolean existsByLeaderUserIdInAndTermId(List<Long> leaderUserIds, Long termId);
 }

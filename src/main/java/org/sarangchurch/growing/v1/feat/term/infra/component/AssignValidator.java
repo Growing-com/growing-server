@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.infra.data.cody.CodyFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.pastor.PastorFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupleader.SmallGroupLeaderFinder;
+import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyDownstream;
-import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupLeaderDownstream;
+import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupDownstream;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupMemberDownstream;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Component;
@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 public class AssignValidator {
     private final PastorFinder pastorFinder;
     private final CodyFinder codyFinder;
-    private final SmallGroupLeaderFinder smallGroupLeaderFinder;
+    private final SmallGroupFinder smallGroupFinder;
     private final SmallGroupMemberFinder smallGroupMemberFinder;
-    private final NewFamilyGroupLeaderDownstream newFamilyGroupLeaderDownstream;
+    private final NewFamilyGroupDownstream newFamilyGroupDownstream;
     private final NewFamilyGroupMemberDownstream newFamilyGroupMemberDownstream;
     private final NewFamilyDownstream newFamilyDownstream;
 
@@ -52,9 +52,9 @@ public class AssignValidator {
         }
 
         // 일반 순장
-        boolean smallGroupLeaderExists = smallGroupLeaderFinder.existsByUserIdAndTermId(user.getId(), term.getId());
+        boolean smallGroupExists = smallGroupFinder.existsByLeaderUserIdAndTermId(user.getId(), term.getId());
 
-        if (smallGroupLeaderExists) {
+        if (smallGroupExists) {
             throw new IllegalStateException("해당 텀에 이미 일반 순장으로 배정된 유저입니다.");
         }
 
@@ -66,7 +66,7 @@ public class AssignValidator {
         }
 
         // 새가족 순장
-        boolean newFamilyGroupLeaderExists = newFamilyGroupLeaderDownstream.existsByUserIdAndTermId(user.getId(), term.getId());
+        boolean newFamilyGroupLeaderExists = newFamilyGroupDownstream.existsByLeaderUserIdAndTermId(user.getId(), term.getId());
 
         if (newFamilyGroupLeaderExists) {
             throw new IllegalStateException("해당 텀에 이미 새가족 순장으로 배정된 유저입니다.");
@@ -120,9 +120,9 @@ public class AssignValidator {
         }
 
         // 일반 순장
-        boolean smallGroupLeaderExists = smallGroupLeaderFinder.existsByUserIdInAndTermId(userIds, term.getId());
+        boolean smallGroupExists = smallGroupFinder.existsByLeaderUserIdInAndTermId(userIds, term.getId());
 
-        if (smallGroupLeaderExists) {
+        if (smallGroupExists) {
             throw new IllegalStateException("해당 텀에 이미 일반 순장으로 배정된 유저가 포함되어 있습니다.");
         }
 
@@ -134,7 +134,7 @@ public class AssignValidator {
         }
 
         // 새가족 순장
-        boolean newFamilyGroupLeaderExists = newFamilyGroupLeaderDownstream.existsByUserIdInAndTermId(userIds, term.getId());
+        boolean newFamilyGroupLeaderExists = newFamilyGroupDownstream.existsByLeaderUserIdInAndTermId(userIds, term.getId());
 
         if (newFamilyGroupLeaderExists) {
             throw new IllegalStateException("해당 텀에 이미 새가족 순장으로 배정된 유저가 포함되어 있습니다.");

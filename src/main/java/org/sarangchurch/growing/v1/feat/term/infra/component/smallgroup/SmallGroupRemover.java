@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupWriter;
-import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupleader.SmallGroupLeaderWriter;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyDownstream;
@@ -19,7 +18,6 @@ public class SmallGroupRemover {
     private final SmallGroupFinder smallGroupFinder;
     private final TermFinder termFinder;
     private final SmallGroupWriter smallGroupWriter;
-    private final SmallGroupLeaderWriter smallGroupLeaderWriter;
 
     @Transactional
     public void remove(Long id) {
@@ -40,6 +38,5 @@ public class SmallGroupRemover {
         termFinder.findActiveByIdOrThrow(smallGroup.getTermId());
 
         smallGroupWriter.deleteById(smallGroup.getId());
-        smallGroupLeaderWriter.deleteById(smallGroup.getSmallGroupLeaderId());
     }
 }

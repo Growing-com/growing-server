@@ -5,10 +5,10 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.types.Duty;
+import org.sarangchurch.growing.core.interfaces.common.types.GroupType;
 import org.sarangchurch.growing.v1.feat.term.domain.cody.QCody;
 import org.sarangchurch.growing.v1.feat.term.query.model.CodyListItem;
 import org.sarangchurch.growing.v1.feat.term.query.model.GroupListItem;
-import org.sarangchurch.growing.core.interfaces.common.types.GroupType;
 import org.sarangchurch.growing.v1.feat.term.query.model.TreeMemberListItem;
 import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
 import org.springframework.stereotype.Repository;
@@ -18,11 +18,9 @@ import java.util.Comparator;
 import java.util.List;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
-import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupleader.QNewFamilyGroupLeader.newFamilyGroupLeader;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.QNewFamilyGroupMember.newFamilyGroupMember;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
-import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.QSmallGroupLeader.smallGroupLeader;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.QSmallGroupMember.smallGroupMember;
 import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
@@ -73,8 +71,7 @@ public class TreeMemberQueryRepository {
                         Expressions.asEnum(Duty.SMALL_GROUP_LEADER).as("duty")
                 ))
                 .from(smallGroup)
-                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId), smallGroup.codyId.eq(codyId))
-                .join(user).on(user.id.eq(smallGroupLeader.userId))
+                .join(user).on(user.id.eq(smallGroup.leaderUserId))
                 .fetch();
 
         // 일반 순원
@@ -91,8 +88,7 @@ public class TreeMemberQueryRepository {
                 .from(smallGroup)
                 .join(smallGroupMember).on(smallGroupMember.smallGroupId.eq(smallGroup.id), smallGroup.codyId.eq(codyId))
                 .join(user).on(user.id.eq(smallGroupMember.userId))
-                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
-                .join(leaderUser).on(leaderUser.id.eq(smallGroupLeader.userId))
+                .join(leaderUser).on(leaderUser.id.eq(smallGroup.leaderUserId))
                 .fetch();
 
         // 새가족 순장
@@ -107,9 +103,7 @@ public class TreeMemberQueryRepository {
                         Expressions.asEnum(Duty.NEW_FAMILY_GROUP_LEADER).as("duty")
                 ))
                 .from(newFamilyGroup)
-                .join(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId),
-                        newFamilyGroup.codyId.eq(codyId))
-                .join(user).on(user.id.eq(newFamilyGroupLeader.userId))
+                .join(user).on(user.id.eq(newFamilyGroup.leaderUserId), newFamilyGroup.codyId.eq(codyId))
                 .fetch();
 
         // 새가족 순원
@@ -127,8 +121,7 @@ public class TreeMemberQueryRepository {
                 .join(newFamilyGroupMember).on(newFamilyGroupMember.newFamilyGroupId.eq(newFamilyGroup.id),
                         newFamilyGroup.codyId.eq(codyId))
                 .join(user).on(user.id.eq(newFamilyGroupMember.userId))
-                .join(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
-                .join(leaderUser).on(leaderUser.id.eq(newFamilyGroupLeader.userId))
+                .join(leaderUser).on(leaderUser.id.eq(newFamilyGroup.leaderUserId))
                 .fetch();
 
         List<TreeMemberListItem> result = new ArrayList<>();
@@ -157,8 +150,7 @@ public class TreeMemberQueryRepository {
                 ))
                 .from(smallGroup)
                 .join(cody).on(cody.id.eq(smallGroup.codyId), cody.id.eq(codyId))
-                .join(smallGroupLeader).on(smallGroupLeader.id.eq(smallGroup.smallGroupLeaderId))
-                .join(user).on(user.id.eq(smallGroupLeader.userId))
+                .join(user).on(user.id.eq(smallGroup.leaderUserId))
                 .fetch();
 
         List<GroupListItem> newFamilyGroups = queryFactory.select(Projections.constructor(GroupListItem.class,
@@ -170,8 +162,7 @@ public class TreeMemberQueryRepository {
                 ))
                 .from(newFamilyGroup)
                 .join(cody).on(cody.id.eq(newFamilyGroup.codyId), cody.id.eq(codyId))
-                .join(newFamilyGroupLeader).on(newFamilyGroupLeader.id.eq(newFamilyGroup.newFamilyGroupLeaderId))
-                .join(user).on(user.id.eq(newFamilyGroupLeader.userId))
+                .join(user).on(user.id.eq(newFamilyGroup.leaderUserId))
                 .fetch();
 
         List<GroupListItem> result = new ArrayList<>();
