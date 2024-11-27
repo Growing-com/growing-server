@@ -13,10 +13,18 @@ public class TermDownstream {
     private final TermService termService;
 
     public boolean areValidStumpUserIdsByTermId(List<Long> userIds, Long termId) {
-        return termService.areValidStumpUserIds(userIds, termId);
+        return termService.areValidStumpUserIdsByTermId(userIds, termId);
+    }
+
+    public boolean areValidMemberUserIdsByCodyId(List<Long> userIds, Long codyId) {
+        return termService.areValidMemberUserIdsByCodyId(userIds, codyId);
     }
 
     public Term findByIdOrThrow(Long termId) {
         return termService.findTerm(termId);
+    }
+
+    public boolean containsCodyByTermIdAndCodyId(Long termId, Long codyId) {
+        return termService.containsCodyByTermIdAndCodyId(termId, codyId);
     }
 }

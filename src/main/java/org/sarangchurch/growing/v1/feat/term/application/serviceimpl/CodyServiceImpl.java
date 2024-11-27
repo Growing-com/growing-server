@@ -13,15 +13,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CodyServiceImpl implements CodyService {
     private final CodyFinder codyFinder;
-    private final CodyValidator codyValidator;
 
     @Override
     public List<Cody> findByTermId(Long termId) {
         return codyFinder.findByTermId(termId);
-    }
-
-    @Override
-    public boolean areValidMemberUserIdsByCodyId(Long codyId, List<Long> userIds) {
-        return codyValidator.areValidMemberUserIdsByCodyId(codyId, userIds);
     }
 }

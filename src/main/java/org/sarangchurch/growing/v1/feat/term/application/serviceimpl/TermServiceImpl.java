@@ -7,15 +7,15 @@ import org.sarangchurch.growing.core.interfaces.v1.term.TermService;
 import org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupleaderlineup.SmallGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupmemberlineup.SmallGroupMemberLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
-import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroup.NewFamilyGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.domain.UsersEmitEvent;
+import org.sarangchurch.growing.v1.feat.term.domain.cody.Cody;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.infra.component.UserEmitManager;
+import org.sarangchurch.growing.v1.feat.term.infra.component.cody.CodyValidator;
 import org.sarangchurch.growing.v1.feat.term.infra.component.term.TermActivator;
 import org.sarangchurch.growing.v1.feat.term.infra.component.term.TermLineUpProcessor;
 import org.sarangchurch.growing.v1.feat.term.infra.component.term.TermValidator;
 import org.sarangchurch.growing.v1.feat.term.infra.data.cody.CodyFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,11 +30,10 @@ public class TermServiceImpl implements TermService {
     private final TermFinder termFinder;
     private final UserEmitManager userEmitManager;
     private final TermValidator termValidator;
-    private final SmallGroupFinder smallGroupFinder;
-    private final CodyFinder codyFinder;
-    private final NewFamilyGroupFinder newFamilyGroupFinder;
     private final TermLineUpProcessor termLineUpProcessor;
     private final TermActivator termActivator;
+    private final CodyValidator codyValidator;
+    private final CodyFinder codyFinder;
 
     @Override
     public Term findTerm(Long id) {
@@ -49,7 +48,7 @@ public class TermServiceImpl implements TermService {
     }
 
     @Override
-    public boolean areValidStumpUserIds(List<Long> userIds, Long termId) {
+    public boolean areValidStumpUserIdsByTermId(List<Long> userIds, Long termId) {
         return termValidator.areValidStumpUserIds(userIds, termId);
     }
 
@@ -66,5 +65,17 @@ public class TermServiceImpl implements TermService {
     @Override
     public Optional<Term> findLineUpTerm() {
         return termFinder.findLineUpTerm();
+    }
+
+    @Override
+    public boolean areValidMemberUserIdsByCodyId(List<Long> userIds, Long codyId) {
+        return codyValidator.areValidMemberUserIdsByCodyId(codyId, userIds);
+    }
+
+    @Override
+    public boolean containsCodyByTermIdAndCodyId(Long termId, Long codyId) {
+        Term term = termFinder.findById(termId);
+        List<Cody> codies = codyFinder.findByTermId(term.getId());
+        return codies.stream().anyMatch(it -> it.getId().equals(codyId));
     }
 }

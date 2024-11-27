@@ -6,7 +6,7 @@ import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFin
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupWriter;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyDownstream;
+import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.newfamily.NewFamilyDownstream;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

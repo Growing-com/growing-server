@@ -8,7 +8,7 @@ import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroup.NewF
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.term.infra.component.AssignValidator;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupMemberUpstream;
+import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.newfamilygroupmember.NewFamilyGroupMemberUpstream;
 import org.sarangchurch.growing.v1.feat.term.infra.stream.user.UserDownstream;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Component;

@@ -15,7 +15,7 @@ public interface NewFamilyGroupMemberRepository {
 
     void deleteByUserIdAndTermId(Long userId, Long termId);
 
-    List<NewFamilyGroupMember> findByNewFamilyGroupId(Long newFamilyGroupId);
-
     NewFamilyGroupMember save(NewFamilyGroupMember groupMember);
+
+    List<NewFamilyGroupMember> findByNewFamilyGroupIdIn(List<Long> newFamilyGroupIds);
 }
