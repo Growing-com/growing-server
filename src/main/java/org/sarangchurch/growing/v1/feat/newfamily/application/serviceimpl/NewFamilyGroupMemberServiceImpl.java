@@ -39,4 +39,9 @@ public class NewFamilyGroupMemberServiceImpl implements NewFamilyGroupMemberServ
     public void deleteByNewFamilyGroupId(Long newFamilyGroupId) {
         newFamilyGroupMemberWriter.deleteByNewFamilyGroupId(newFamilyGroupId);
     }
+
+    @Override
+    public List<NewFamilyGroupMember> findByNewFamilyGroupIdIn(List<Long> newFamilyGroupIds) {
+        return newFamilyGroupMemberFinder.findByNewFamilyGroupIdIn(newFamilyGroupIds);
+    }
 }

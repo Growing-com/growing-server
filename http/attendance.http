@@ -40,11 +40,11 @@ Content-Type: application/json
 
 {
   "date": "2024-10-07",
-  "groupType": "NEW_FAMILY_GROUP",
-  "groupId": 5,
+  "termId": 1,
+  "codyId": 3,
   "attendanceItems": [
     {
-      "userId": 5,
+      "userId": 9,
       "status": "ATTEND"
     }
   ]

@@ -46,4 +46,9 @@ public class NewFamilyGroupServiceImpl implements NewFamilyGroupService {
     public boolean existsByLeaderUserIdInAndTermId(List<Long> leaderUserIds, Long termId) {
         return newFamilyGroupFinder.existsByLeaderUserIdInAndTermId(leaderUserIds, termId);
     }
+
+    @Override
+    public List<NewFamilyGroup> findByCodyId(Long codyId) {
+        return newFamilyGroupFinder.findByCodyId(codyId);
+    }
 }

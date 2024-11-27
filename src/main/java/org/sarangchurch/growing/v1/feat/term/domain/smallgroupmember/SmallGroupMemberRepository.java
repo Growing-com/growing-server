@@ -24,5 +24,5 @@ public interface SmallGroupMemberRepository {
 
     void deleteByUserIdAndTermId(Long userId, Long termId);
 
-    List<SmallGroupMember> findBySmallGroupId(Long smallGroupId);
+    List<SmallGroupMember> findBySmallGroupIdIn(List<Long> smallGroupIds);
 }

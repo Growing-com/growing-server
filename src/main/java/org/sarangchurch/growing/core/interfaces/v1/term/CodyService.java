@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface CodyService {
     List<Cody> findByTermId(Long termId);
-
-    boolean areValidMemberUserIdsByCodyId(Long codyId, List<Long> userIds);
 }

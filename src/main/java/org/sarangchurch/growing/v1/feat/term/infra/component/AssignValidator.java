@@ -6,9 +6,9 @@ import org.sarangchurch.growing.v1.feat.term.infra.data.cody.CodyFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.pastor.PastorFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyDownstream;
-import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupDownstream;
-import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupMemberDownstream;
+import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.newfamily.NewFamilyDownstream;
+import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.newfamilygroup.NewFamilyGroupDownstream;
+import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.newfamilygroupmember.NewFamilyGroupMemberDownstream;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Component;
 

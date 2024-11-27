@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily;
+package org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.newfamily;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.v1.newfamily.NewFamilyService;

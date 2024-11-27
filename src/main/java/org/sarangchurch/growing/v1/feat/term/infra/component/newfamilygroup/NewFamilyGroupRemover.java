@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroup.NewFamilyGroupWriter;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyDownstream;
-import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupDownstream;
-import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupMemberDownstream;
+import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.newfamily.NewFamilyDownstream;
+import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.newfamilygroup.NewFamilyGroupDownstream;
+import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.newfamilygroupmember.NewFamilyGroupMemberDownstream;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

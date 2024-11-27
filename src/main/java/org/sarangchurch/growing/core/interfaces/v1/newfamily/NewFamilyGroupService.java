@@ -19,4 +19,6 @@ public interface NewFamilyGroupService {
     boolean existsByLeaderUserIdAndTermId(Long leaderUserId, Long termId);
 
     boolean existsByLeaderUserIdInAndTermId(List<Long> leaderUserIds, Long termId);
+
+    List<NewFamilyGroup> findByCodyId(Long codyId);
 }

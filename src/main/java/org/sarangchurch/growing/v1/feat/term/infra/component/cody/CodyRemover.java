@@ -6,7 +6,7 @@ import org.sarangchurch.growing.v1.feat.term.infra.data.cody.CodyFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.cody.CodyWriter;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.NewFamilyGroupDownstream;
+import org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.newfamilygroup.NewFamilyGroupDownstream;
 import org.springframework.stereotype.Component;
 
 @Component

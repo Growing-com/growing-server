@@ -36,4 +36,8 @@ public class NewFamilyGroupFinder {
     public boolean existsByLeaderUserIdInAndTermId(List<Long> leaderUserIds, Long termId) {
         return newFamilyGroupRepository.existsByLeaderUserIdInAndTermId(leaderUserIds, termId);
     }
+
+    public List<NewFamilyGroup> findByCodyId(Long codyId) {
+        return newFamilyGroupRepository.findByCodyId(codyId);
+    }
 }

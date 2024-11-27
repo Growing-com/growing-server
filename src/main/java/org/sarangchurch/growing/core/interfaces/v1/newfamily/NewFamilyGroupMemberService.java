@@ -14,4 +14,6 @@ public interface NewFamilyGroupMemberService {
     List<NewFamilyGroupMember> saveAll(List<NewFamilyGroupMember> newFamilyGroupMembers);
 
     void deleteByNewFamilyGroupId(Long newFamilyGroupId);
+
+    List<NewFamilyGroupMember> findByNewFamilyGroupIdIn(List<Long> newFamilyGroupIds);
 }

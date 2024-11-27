@@ -13,7 +13,7 @@ if [ -z "$CURRENT_PID" ]; then
     echo "🌈 구동중인 애플리케이션이 없으므로 종료하지 않습니다."
 else
     echo "🌈 구동중인 애플리케이션을 종료했습니다. (pid : $CURRENT_PID)"
-    kill -15 $CURRENT_PID
+    kill -9 $CURRENT_PID
 fi
 
 echo "🌈 SpringBoot 애플리케이션을 실행합니다."

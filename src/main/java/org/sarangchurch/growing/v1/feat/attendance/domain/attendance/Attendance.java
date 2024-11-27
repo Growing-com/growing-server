@@ -54,12 +54,4 @@ public class Attendance extends BaseEntity {
         this.status = status;
         this.reason = reason;
     }
-
-    public void setTermId(Long termId) {
-        this.termId = termId;
-    }
-
-    public void setCodyId(Long codyId) {
-        this.codyId = codyId;
-    }
 }

@@ -11,11 +11,13 @@ import java.util.Optional;
 public interface TermService {
     Term findTerm(Long id);
     void emitByUserIds(List<Long> userIds);
-    boolean areValidStumpUserIds(List<Long> userIds, Long termId);
+    boolean areValidStumpUserIdsByTermId(List<Long> userIds, Long termId);
     void processLineUps(
             StumpLineUp stumpLineUp,
             List<SmallGroupLeaderLineUp> smallGroupLeaderLineUps,
             List<SmallGroupMemberLineUp> smallGroupMemberLineUps
     );
     Optional<Term> findLineUpTerm();
+    boolean areValidMemberUserIdsByCodyId(List<Long> userIds, Long codyId);
+    boolean containsCodyByTermIdAndCodyId(Long termId, Long codyId);
 }

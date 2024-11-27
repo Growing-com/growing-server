@@ -1,4 +1,4 @@
-package org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily;
+package org.sarangchurch.growing.v1.feat.term.infra.stream.newfamily.newfamilygroup;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.v1.newfamily.NewFamilyGroupService;
@@ -26,5 +26,9 @@ public class NewFamilyGroupDownstream {
 
     public boolean existsByLeaderUserIdInAndTermId(List<Long> leaderUserIds, Long termId) {
         return newFamilyGroupService.existsByLeaderUserIdInAndTermId(leaderUserIds, termId);
+    }
+
+    public List<NewFamilyGroup> findByCodyId(Long codyId) {
+        return newFamilyGroupService.findByCodyId(codyId);
     }
 }
