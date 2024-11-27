@@ -11,8 +11,6 @@ public interface NewFamilyGroupService {
 
     NewFamilyGroup findByIdOrThrow(Long newFamilyGroupId);
 
-    boolean areValidUserIdsByNewFamilyGroupId(List<Long> userIds, Long newFamilyGroupId);
-
     void processLineUps(
             List<NewFamilyGroupLeaderLineUp> leaderLineUps,
             List<NewFamilyGroupMemberLineUp> memberLineUps

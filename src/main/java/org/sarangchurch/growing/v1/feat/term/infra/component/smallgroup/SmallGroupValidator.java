@@ -2,16 +2,10 @@ package org.sarangchurch.growing.v1.feat.term.infra.component.smallgroup;
 
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
-import org.sarangchurch.growing.v1.feat.term.domain.smallgroupleader.SmallGroupLeader;
-import org.sarangchurch.growing.v1.feat.term.domain.smallgroupmember.SmallGroupMember;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupleader.SmallGroupLeaderFinder;
-import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroupmember.SmallGroupMemberFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,8 +15,6 @@ import java.util.stream.Collectors;
 public class SmallGroupValidator {
     private final SmallGroupFinder smallGroupFinder;
     private final TermFinder termFinder;
-    private final SmallGroupLeaderFinder smallGroupLeaderFinder;
-    private final SmallGroupMemberFinder smallGroupMemberFinder;
 
     public void validateAvailable(List<Long> smallGroupIds) {
         List<SmallGroup> smallGroups = smallGroupFinder.findByIdIn(smallGroupIds);
@@ -48,17 +40,5 @@ public class SmallGroupValidator {
         }
 
         termFinder.findActiveByIdOrThrow(termIds.iterator().next());
-    }
-
-    public boolean areValidUserIdsBySmallGroupId(List<Long> userIds, Long smallGroupId) {
-        SmallGroup smallGroup = smallGroupFinder.findByIdOrThrow(smallGroupId);
-        SmallGroupLeader leader = smallGroupLeaderFinder.findByIdOrThrow(smallGroup.getSmallGroupLeaderId());
-        List<SmallGroupMember> members = smallGroupMemberFinder.findBySmallGroupId(smallGroup.getId());
-
-        List<Long> validUserIds = new ArrayList<>();
-        validUserIds.add(leader.getUserId());
-        validUserIds.addAll(members.stream().map(SmallGroupMember::getUserId).collect(Collectors.toList()));
-
-        return new HashSet<>(validUserIds).containsAll(userIds);
     }
 }

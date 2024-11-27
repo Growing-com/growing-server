@@ -2,7 +2,6 @@ package org.sarangchurch.growing.v1.feat.attendance.application.registergroupatt
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sarangchurch.growing.core.interfaces.common.types.GroupType;
 import org.sarangchurch.growing.v1.feat.attendance.domain.AttendanceStatus;
 import org.sarangchurch.growing.v1.feat.attendance.domain.attendance.Attendance;
 
@@ -21,11 +20,11 @@ public class RegisterGroupAttendanceRequest {
     @NotNull(message = "날짜를 입력해주세요.")
     private LocalDate date;
 
-    @NotNull(message = "새가족 순모임/순모임 여부를 입력해주세요.")
-    private GroupType groupType;
+    @NotNull(message = "텀id를 입력해주세요.")
+    private Long termId;
 
-    @NotNull(message = "그룹 id를 입력해주세요.")
-    private Long groupId;
+    @NotNull(message = "코디id를 입력해주세요.")
+    private Long codyId;
 
     @NotEmpty(message = "출석 리스트를 입력해주세요.")
     @Valid
@@ -36,27 +35,19 @@ public class RegisterGroupAttendanceRequest {
     }
 
     public List<Attendance> toEntities() {
-        if (groupType == GroupType.NEW_FAMILY_GROUP) {
-            return attendanceItems.stream()
-                    .map(it -> Attendance.builder()
-                            .userId(it.userId)
-                            .newFamilyGroupId(groupId)
-                            .date(date)
-                            .status(it.status)
-                            .reason(it.reason)
-                            .build())
-                    .collect(Collectors.toList());
-        } else {
-            return attendanceItems.stream()
-                    .map(it -> Attendance.builder()
-                            .userId(it.userId)
-                            .smallGroupId(groupId)
-                            .date(date)
-                            .status(it.status)
-                            .reason(it.reason)
-                            .build())
-                    .collect(Collectors.toList());
-        }
+        return attendanceItems.stream()
+                .map(it ->
+                        Attendance.builder()
+                                .userId(it.userId)
+                                .termId(termId)
+                                .codyId(codyId)
+                                .date(date)
+                                .status(it.status)
+                                .reason(it.reason)
+                                .build()
+                )
+                .collect(Collectors.toList());
+
     }
 
     @Getter

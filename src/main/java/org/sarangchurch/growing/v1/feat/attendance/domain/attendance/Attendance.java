@@ -28,12 +28,6 @@ public class Attendance extends BaseEntity {
     @Column(name = "cody_id", nullable = false)
     private Long codyId;
 
-    @Column(name = "small_group_id")
-    private Long smallGroupId;
-
-    @Column(name = "new_family_group_id")
-    private Long newFamilyGroupId;
-
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
@@ -45,10 +39,17 @@ public class Attendance extends BaseEntity {
     private String reason;
 
     @Builder
-    public Attendance(Long userId, Long smallGroupId, Long newFamilyGroupId, LocalDate date, AttendanceStatus status, String reason) {
+    public Attendance(
+            Long userId,
+            Long termId,
+            Long codyId,
+            LocalDate date,
+            AttendanceStatus status,
+            String reason
+    ) {
         this.userId = userId;
-        this.smallGroupId = smallGroupId;
-        this.newFamilyGroupId = newFamilyGroupId;
+        this.termId = termId;
+        this.codyId = codyId;
         this.date = date;
         this.status = status;
         this.reason = reason;
@@ -60,13 +61,5 @@ public class Attendance extends BaseEntity {
 
     public void setCodyId(Long codyId) {
         this.codyId = codyId;
-    }
-
-    public boolean isSmallGroupAttendance() {
-        return smallGroupId != null && newFamilyGroupId == null;
-    }
-
-    public boolean isNewFamilyGroupAttendance() {
-        return smallGroupId == null && newFamilyGroupId != null;
     }
 }

@@ -1,6 +1,5 @@
 package org.sarangchurch.growing.v1.feat.term.application.serviceimpl;
 
-import com.mysema.commons.lang.Pair;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sarangchurch.growing.core.interfaces.common.Events;
@@ -8,16 +7,13 @@ import org.sarangchurch.growing.core.interfaces.v1.term.TermService;
 import org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupleaderlineup.SmallGroupLeaderLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.smallgroupmemberlineup.SmallGroupMemberLineUp;
 import org.sarangchurch.growing.v1.feat.lineup.domain.stumplineup.StumpLineUp;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.NewFamilyGroup;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilygroup.NewFamilyGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.domain.UsersEmitEvent;
-import org.sarangchurch.growing.v1.feat.term.domain.cody.Cody;
-import org.sarangchurch.growing.v1.feat.term.domain.smallgroup.SmallGroup;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
+import org.sarangchurch.growing.v1.feat.term.infra.component.UserEmitManager;
 import org.sarangchurch.growing.v1.feat.term.infra.component.term.TermActivator;
 import org.sarangchurch.growing.v1.feat.term.infra.component.term.TermLineUpProcessor;
 import org.sarangchurch.growing.v1.feat.term.infra.component.term.TermValidator;
-import org.sarangchurch.growing.v1.feat.term.infra.component.UserEmitManager;
 import org.sarangchurch.growing.v1.feat.term.infra.data.cody.CodyFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.smallgroup.SmallGroupFinder;
 import org.sarangchurch.growing.v1.feat.term.infra.data.term.TermFinder;
@@ -55,24 +51,6 @@ public class TermServiceImpl implements TermService {
     @Override
     public boolean areValidStumpUserIds(List<Long> userIds, Long termId) {
         return termValidator.areValidStumpUserIds(userIds, termId);
-    }
-
-    @Override
-    public Pair<Term, Cody> findTermAndCodyBySmallGroupId(Long smallGroupId) {
-        SmallGroup smallGroup = smallGroupFinder.findByIdOrThrow(smallGroupId);
-        Term term = termFinder.findById(smallGroup.getTermId());
-        Cody cody = codyFinder.findByIdOrThrow(smallGroup.getCodyId());
-
-        return Pair.of(term, cody);
-    }
-
-    @Override
-    public Pair<Term, Cody> findTermAndCodyByNewFamilyGroupId(Long newFamilyGroupId) {
-        NewFamilyGroup newFamilyGroup = newFamilyGroupFinder.findByIdOrThrow(newFamilyGroupId);
-        Term term = termFinder.findById(newFamilyGroup.getTermId());
-        Cody cody = codyFinder.findByIdOrThrow(newFamilyGroup.getCodyId());
-
-        return Pair.of(term, cody);
     }
 
     @Override
