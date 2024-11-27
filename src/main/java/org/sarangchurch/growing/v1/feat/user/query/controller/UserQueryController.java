@@ -25,4 +25,9 @@ public class UserQueryController {
     public ApiResponse<User> user(@PathVariable Long userId) {
         return ApiResponse.of(userQueryRepository.findById(userId));
     }
+
+    @GetMapping("/")
+    public String healthCheck() {
+        return "health check";
+    }
 }
