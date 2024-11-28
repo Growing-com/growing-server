@@ -114,10 +114,6 @@ public class NewFamily extends BaseEntity {
     }
 
     public void assignTemporarySmallGroups(List<Long> temporarySmallGroupIds) {
-        if (status != NewFamilyStatus.LINE_UP_REQUESTED) {
-            throw new IllegalStateException("라인업 요청 상태에서만 라인업을 변경할 수 있습니다.");
-        }
-
         this.temporarySmallGroupIds = temporarySmallGroupIds;
     }
 
