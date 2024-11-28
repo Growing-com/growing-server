@@ -13,7 +13,6 @@ import java.util.List;
 public class AttendanceWriter {
     private final AttendanceRepository attendanceRepository;
 
-
     public void deleteByUserIdInAndDate(List<Long> userIds, LocalDate attendanceDate) {
         attendanceRepository.deleteByUserIdInAndDate(userIds, attendanceDate);
     }

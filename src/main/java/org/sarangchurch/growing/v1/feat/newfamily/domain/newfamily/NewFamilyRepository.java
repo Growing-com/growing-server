@@ -7,7 +7,7 @@ public interface NewFamilyRepository {
     Optional<NewFamily> findById(Long id);
     List<NewFamily> findByIdIn(List<Long> ids);
     Optional<NewFamily> findByUserId(Long userId);
-    boolean existsCurrentByNewFamilyGroupId(Long newFamilyGroupId);
+    boolean existsByNewFamilyGroupId(Long newFamilyGroupId);
     NewFamily save(NewFamily newFamily);
     void deleteByIdIn(List<Long> ids);
 }

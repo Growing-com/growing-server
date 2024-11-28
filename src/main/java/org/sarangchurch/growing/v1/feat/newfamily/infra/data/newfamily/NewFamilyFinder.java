@@ -21,12 +21,6 @@ public class NewFamilyFinder {
                 .orElseThrow(() -> new IllegalArgumentException("새가족을 찾을 수 없습니다"));
     }
 
-    public boolean existsAllByIds(List<Long> ids) {
-        List<NewFamily> newFamilies = newFamilyRepository.findByIdIn(ids);
-
-        return newFamilies.size() == ids.size();
-    }
-
     public List<NewFamily> findByIdInOrThrow(List<Long> ids) {
         List<NewFamily> newFamilies = newFamilyRepository.findByIdIn(ids);
 
@@ -65,7 +59,30 @@ public class NewFamilyFinder {
                 .anyMatch(this::isNewFamilyByUserId);
     }
 
-    public boolean existsCurrentByNewFamilyGroupId(Long newFamilyGroupId) {
-        return newFamilyRepository.existsCurrentByNewFamilyGroupId(newFamilyGroupId);
+    public boolean existsByNewFamilyGroupId(Long newFamilyGroupId) {
+        return newFamilyRepository.existsByNewFamilyGroupId(newFamilyGroupId);
+    }
+
+    public boolean isNewFamilyById(Long id) {
+        Optional<NewFamily> newFamilyOptional = newFamilyRepository.findById(id);
+
+        if (newFamilyOptional.isEmpty()) {
+            return false;
+        }
+
+        NewFamily newFamily = newFamilyOptional.get();
+
+        if (newFamily.hasPromoteLog()) {
+            NewFamilyPromoteLog newFamilyPromoteLog = newFamilyPromoteLogRepository.findById(newFamily.getNewFamilyPromoteLogId())
+                    .orElseThrow(() -> new IllegalStateException("등반 기록이 존재하지 않습니다."));
+
+            boolean isPromoted = newFamilyPromoteLog.isPromoted();
+
+            // 등반이 완료되지 않았으면 새가족
+            return !isPromoted;
+        }
+
+        // 등반 기록이 없으면 새가족
+        return true;
     }
 }

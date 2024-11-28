@@ -22,8 +22,9 @@ public class NewFamilyServiceImpl implements NewFamilyService {
     private final NewFamilyLineUpProcessor newFamilyLineUpProcessor;
 
     @Override
-    public boolean existsAllByIds(List<Long> ids) {
-        return newFamilyFinder.existsAllByIds(ids);
+    public boolean areCurrentNewFamiliesByIds(List<Long> newFamilyIds) {
+        return newFamilyIds.stream()
+                .allMatch(newFamilyFinder::isNewFamilyById);
     }
 
     @Override
@@ -38,7 +39,7 @@ public class NewFamilyServiceImpl implements NewFamilyService {
 
     @Override
     public boolean existsByNewFamilyGroupId(Long newFamilyGroupId) {
-        return newFamilyFinder.existsCurrentByNewFamilyGroupId(newFamilyGroupId);
+        return newFamilyFinder.existsByNewFamilyGroupId(newFamilyGroupId);
     }
 
     @Override
