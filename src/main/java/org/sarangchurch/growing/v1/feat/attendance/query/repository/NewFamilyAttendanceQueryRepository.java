@@ -5,6 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.attendance.domain.AttendanceStatus;
 import org.sarangchurch.growing.v1.feat.attendance.query.model.NewFamilyAttendanceListItem;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyStatus;
 import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +21,6 @@ import java.util.stream.Collectors;
 import static org.sarangchurch.growing.v1.feat.attendance.domain.newfamilyattendance.QNewFamilyAttendance.newFamilyAttendance;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.QNewFamily.newFamily;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
-import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.QNewFamilyPromoteLog.newFamilyPromoteLog;
 import static org.sarangchurch.growing.v1.feat.user.domain.user.QUser.user;
 
 @Repository
@@ -32,16 +32,6 @@ public class NewFamilyAttendanceQueryRepository {
         List<LocalDate> lastTwelveSundays = getLastTwelveSundays();
 
         QUser newFamilyGroupLeaderUser = new QUser("newFamilyGroupLeaderUser");
-
-        List<Long> currentNewFamilyIds = queryFactory.select(newFamily.id)
-                .from(newFamily)
-                .leftJoin(newFamilyPromoteLog)
-                    .on(newFamily.newFamilyPromoteLogId.eq(newFamilyPromoteLog.id))
-                .where(
-                        newFamily.newFamilyPromoteLogId.isNull().or(newFamilyPromoteLog.promoteDate.isNull()),
-                        newFamily.newFamilyGroupId.eq(newFamilyGroupId)
-                )
-                .fetch();
 
         List<NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem> items = queryFactory
                 .select(Projections.constructor(NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem.class,
@@ -55,8 +45,10 @@ public class NewFamilyAttendanceQueryRepository {
                         newFamilyAttendance.reason.as("reason")
                 ))
                 .from(newFamily)
-                .join(user).on(user.id.eq(newFamily.userId),
-                        newFamily.id.in(currentNewFamilyIds)
+                .join(user).on(
+                        user.id.eq(newFamily.userId),
+                        newFamily.newFamilyGroupId.eq(newFamilyGroupId),
+                        newFamily.status.ne(NewFamilyStatus.PROMOTED)
                 )
                 // 새가족반 리더
                 .leftJoin(newFamilyGroup).on(newFamily.newFamilyGroupId.eq(newFamilyGroup.id))
@@ -113,16 +105,6 @@ public class NewFamilyAttendanceQueryRepository {
 
         QUser newFamilyGroupLeaderUser = new QUser("newFamilyGroupLeaderUser");
 
-        List<Long> currentNewFamilyIds = queryFactory.select(newFamily.id)
-                .from(newFamily)
-                .leftJoin(newFamilyPromoteLog)
-                .on(newFamily.newFamilyPromoteLogId.eq(newFamilyPromoteLog.id))
-                .where(
-                        newFamily.newFamilyPromoteLogId.isNull()
-                                .or(newFamilyPromoteLog.promoteDate.isNull())
-                )
-                .fetch();
-
         List<NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem> items = queryFactory
                 .select(Projections.constructor(NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem.class,
                         newFamily.id.as("newFamilyId"),
@@ -135,8 +117,9 @@ public class NewFamilyAttendanceQueryRepository {
                         newFamilyAttendance.reason.as("reason")
                 ))
                 .from(newFamily)
-                .join(user).on(user.id.eq(newFamily.userId),
-                        newFamily.id.in(currentNewFamilyIds)
+                .join(user).on(
+                        user.id.eq(newFamily.userId),
+                        newFamily.status.ne(NewFamilyStatus.PROMOTED)
                 )
                 // 새가족반 리더
                 .leftJoin(newFamilyGroup).on(newFamily.newFamilyGroupId.eq(newFamilyGroup.id))

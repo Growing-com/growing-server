@@ -10,4 +10,5 @@ public interface NewFamilyRepository {
     boolean existsByNewFamilyGroupId(Long newFamilyGroupId);
     NewFamily save(NewFamily newFamily);
     void deleteByIdIn(List<Long> ids);
+    boolean existsBySmallGroupId(Long smallGroupId);
 }

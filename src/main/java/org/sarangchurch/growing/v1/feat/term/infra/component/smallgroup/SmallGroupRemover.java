@@ -21,7 +21,7 @@ public class SmallGroupRemover {
 
     @Transactional
     public void remove(Long id) {
-        boolean newFamilyExists = newFamilyDownstream.containsPromotedBySmallGroupId(id);
+        boolean newFamilyExists = newFamilyDownstream.existsBySmallGroupId(id);
 
         if (newFamilyExists) {
             throw new IllegalStateException("해당 순모임으로 등반했던 새가족이 있어서 삭제할 수 없습니다.");

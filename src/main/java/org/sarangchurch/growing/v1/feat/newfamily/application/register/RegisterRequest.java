@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyEtc;
 import org.sarangchurch.growing.core.interfaces.common.types.Sex;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyStatus;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 
 import javax.validation.constraints.Min;
@@ -43,6 +44,7 @@ public class RegisterRequest {
                 .newFamilyGroupId(newFamilyGroupId)
                 .visitDate(visitDate)
                 .etc(etc)
+                .status(NewFamilyStatus.NEW_FAMILY)
                 .build();
     }
 

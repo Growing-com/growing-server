@@ -2,13 +2,13 @@ package org.sarangchurch.growing.v1.feat.term.query.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyStatus;
 import org.sarangchurch.growing.v1.feat.term.query.model.DutyDistributionCount;
 import org.springframework.stereotype.Repository;
 
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.QNewFamily.newFamily;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.QNewFamilyGroupMember.newFamilyGroupMember;
-import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.QNewFamilyPromoteLog.newFamilyPromoteLog;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.pastor.QPastor.pastor;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
@@ -66,8 +66,7 @@ public class DutyDistributionCountQueryRepository {
         Long newFamilyCount = queryFactory
                 .select(newFamily.count())
                 .from(newFamily)
-                .leftJoin(newFamilyPromoteLog).on(newFamilyPromoteLog.id.eq(newFamily.newFamilyPromoteLogId))
-                .where(newFamily.newFamilyPromoteLogId.isNull().or(newFamilyPromoteLog.promoteDate.isNull()))
+                .where(newFamily.status.ne(NewFamilyStatus.PROMOTED))
                 .fetchOne();
 
         Long notPlacedCount = totalCount - pastorCount - codyCount - smallGroupLeaderCount

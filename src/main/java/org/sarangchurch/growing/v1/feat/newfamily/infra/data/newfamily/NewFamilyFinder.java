@@ -3,8 +3,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamily;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyRepository;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLog;
-import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.NewFamilyPromoteLogRepository;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class NewFamilyFinder {
     private final NewFamilyRepository newFamilyRepository;
-    private final NewFamilyPromoteLogRepository newFamilyPromoteLogRepository;
 
     public NewFamily findByIdOrThrow(Long id) {
         return newFamilyRepository.findById(id)
@@ -40,18 +38,7 @@ public class NewFamilyFinder {
 
         NewFamily newFamily = newFamilyOptional.get();
 
-        if (newFamily.hasPromoteLog()) {
-            NewFamilyPromoteLog newFamilyPromoteLog = newFamilyPromoteLogRepository.findById(newFamily.getNewFamilyPromoteLogId())
-                    .orElseThrow(() -> new IllegalStateException("등반 기록이 존재하지 않습니다."));
-
-            boolean isPromoted = newFamilyPromoteLog.isPromoted();
-
-            // 등반이 완료되지 않았으면 새가족
-            return !isPromoted;
-        }
-
-        // 등반 기록이 없으면 새가족
-        return true;
+        return newFamily.statusNotEquals(NewFamilyStatus.PROMOTED);
     }
 
     public boolean containsNewFamilyByUserIds(List<Long> userIds) {
@@ -72,17 +59,10 @@ public class NewFamilyFinder {
 
         NewFamily newFamily = newFamilyOptional.get();
 
-        if (newFamily.hasPromoteLog()) {
-            NewFamilyPromoteLog newFamilyPromoteLog = newFamilyPromoteLogRepository.findById(newFamily.getNewFamilyPromoteLogId())
-                    .orElseThrow(() -> new IllegalStateException("등반 기록이 존재하지 않습니다."));
+        return newFamily.statusNotEquals(NewFamilyStatus.PROMOTED);
+    }
 
-            boolean isPromoted = newFamilyPromoteLog.isPromoted();
-
-            // 등반이 완료되지 않았으면 새가족
-            return !isPromoted;
-        }
-
-        // 등반 기록이 없으면 새가족
-        return true;
+    public boolean existsBySmallGroupId(Long smallGroupId) {
+        return newFamilyRepository.existsBySmallGroupId(smallGroupId);
     }
 }

@@ -19,5 +19,5 @@ public interface NewFamilyService {
 
     void processLineUps(List<NewFamilyGroupLeaderLineUp> newFamilyGroupLeaderLineUps, List<NewFamilyLineUp> newFamilyLineUps);
 
-    boolean containsPromotedBySmallGroupId(Long smallGroupId);
+    boolean existsBySmallGroupId(Long smallGroupId);
 }
