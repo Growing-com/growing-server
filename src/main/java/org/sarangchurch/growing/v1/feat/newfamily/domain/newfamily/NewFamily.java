@@ -105,8 +105,12 @@ public class NewFamily extends BaseEntity {
     }
 
     public void assignSmallGroup(Long smallGroupId) {
-        if (status != NewFamilyStatus.LINE_UP_REQUESTED) {
-            throw new IllegalStateException("라인업 요청 상태에서만 라인업을 변경할 수 있습니다.");
+        if (status == NewFamilyStatus.NEW_FAMILY) {
+            throw new IllegalStateException("라인업 요청을 먼저 진행해주세요.");
+        }
+
+        if (status == NewFamilyStatus.PROMOTED) {
+            throw new IllegalStateException("이미 등반이 완료됐습니다.");
         }
 
         this.smallGroupId = smallGroupId;
@@ -114,8 +118,12 @@ public class NewFamily extends BaseEntity {
     }
 
     public void assignTemporarySmallGroups(List<Long> temporarySmallGroupIds) {
-        if (status != NewFamilyStatus.LINE_UP_REQUESTED) {
-            throw new IllegalStateException("라인업 요청 상태에서만 라인업을 변경할 수 있습니다.");
+        if (status == NewFamilyStatus.NEW_FAMILY) {
+            throw new IllegalStateException("라인업 요청을 먼저 진행해주세요.");
+        }
+
+        if (status == NewFamilyStatus.PROMOTED) {
+            throw new IllegalStateException("이미 등반이 완료됐습니다.");
         }
 
         this.temporarySmallGroupIds = temporarySmallGroupIds;

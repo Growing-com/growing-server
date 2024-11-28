@@ -24,7 +24,6 @@ public class NewFamilyQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     public List<NewFamilyListItem> findAll() {
-
         // 새가족반 리더 지체
         QUser newFamilyGroupLeaderUser = new QUser("newFamilyGroupLeaderUser");
         // 일반 순모임 리더 지체
@@ -131,7 +130,7 @@ public class NewFamilyQueryRepository {
                 .from(newFamily)
                 .join(user).on(
                         user.id.eq(newFamily.userId),
-                        newFamily.status.eq(NewFamilyStatus.PROMOTE_CANDIDATE)
+                        newFamily.status.in(NewFamilyStatus.PROMOTE_CANDIDATE, NewFamilyStatus.LINE_UP_REQUESTED)
                 )
                 // 새가족반
                 .leftJoin(newFamilyGroup).on(newFamilyGroup.id.eq(newFamily.newFamilyGroupId))
