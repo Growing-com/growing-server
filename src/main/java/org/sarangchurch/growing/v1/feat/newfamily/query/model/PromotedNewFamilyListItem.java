@@ -1,5 +1,6 @@
 package org.sarangchurch.growing.v1.feat.newfamily.query.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import org.sarangchurch.growing.core.interfaces.common.types.Sex;
 
@@ -17,8 +18,22 @@ public class PromotedNewFamilyListItem {
     private final String smallGroupLeaderName;
     private final LocalDate promoteDate;
     private final long weeksAfterPromotion;
+    @JsonIgnore
+    private final Long userId;
 
-    public PromotedNewFamilyListItem(Long newFamilyId, String name, Sex sex, String phoneNumber, Integer grade, String newFamilyGroupLeaderName, String smallGroupLeaderName, LocalDate promoteDate) {
+    private long attendanceAfterPromotion;
+
+    public PromotedNewFamilyListItem(
+            Long newFamilyId,
+            String name,
+            Sex sex,
+            String phoneNumber,
+            Integer grade,
+            String newFamilyGroupLeaderName,
+            String smallGroupLeaderName,
+            LocalDate promoteDate,
+            Long userId
+    ) {
         this.newFamilyId = newFamilyId;
         this.name = name;
         this.sex = sex;
@@ -29,5 +44,10 @@ public class PromotedNewFamilyListItem {
         this.promoteDate = promoteDate;
         // 계산
         this.weeksAfterPromotion = ChronoUnit.WEEKS.between(promoteDate, LocalDate.now());
+        this.userId = userId;
+    }
+
+    public void setAttendanceAfterPromotion(long attendanceAfterPromotion) {
+        this.attendanceAfterPromotion = attendanceAfterPromotion;
     }
 }

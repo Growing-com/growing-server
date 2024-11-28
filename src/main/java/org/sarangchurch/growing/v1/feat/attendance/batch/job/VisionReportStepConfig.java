@@ -53,10 +53,10 @@ public class VisionReportStepConfig {
                     long newFamilyAttendanceCount = newFamilyAttendanceReader.countByDate(sundayDate);
 
                     long totalAttendanceRegistered = attendanceCount + stumpAttendanceCount + newFamilyAttendanceCount;
-                    double attendanceRegisterRate = (double) totalAttendanceRegistered / activeUserCount;
+                    double attendanceRegisterRate = ((double) totalAttendanceRegistered / activeUserCount) * 100;
 
-                    if (attendanceRegisterRate < 0.9d) {
-                        contribution.setExitStatus(new ExitStatus("FAIL", "출석율이 90% 이상이어야 갱신할 수 있습니다. 현재: " + attendanceRegisterRate));
+                    if (attendanceRegisterRate < 90) {
+                        contribution.setExitStatus(new ExitStatus("FAIL", "출석율이 90% 이상이어야 갱신할 수 있습니다. 현재: " + String.format("%.2f%%", attendanceRegisterRate )));
                     } else {
                         contribution.setExitStatus(new ExitStatus("SUCCESS", "비전 리포트가 갱신되었습니다. 날짜: " + sundayDate.toString()));
 

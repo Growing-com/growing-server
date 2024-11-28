@@ -70,7 +70,7 @@ POST http://localhost:8080/api/v1/new-families/request-line-up
 Content-Type: application/json
 
 {
-  "newFamilyIds": [1]
+  "newFamilyIds": [4]
 }
 
 ### 임시 라인업
@@ -93,8 +93,8 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 1,
-      "smallGroupId": 2
+      "newFamilyId": 4,
+      "smallGroupId": 12
     }
   ]
 }
@@ -106,7 +106,7 @@ Content-Type: application/json
 {
   "content": [
     {
-      "newFamilyId": 1,
+      "newFamilyId": 4,
       "promoteDate": "2024-09-13"
     }
   ]

@@ -3,6 +3,7 @@ package org.sarangchurch.growing.v1.feat.newfamily.query.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.sarangchurch.growing.v1.feat.attendance.domain.attendance.Attendance;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyStatus;
 import org.sarangchurch.growing.v1.feat.newfamily.query.model.LineUpReadyNewFamilyListItem;
 import org.sarangchurch.growing.v1.feat.newfamily.query.model.NewFamily;
@@ -11,8 +12,11 @@ import org.sarangchurch.growing.v1.feat.newfamily.query.model.PromotedNewFamilyL
 import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import static org.sarangchurch.growing.v1.feat.attendance.domain.attendance.QAttendance.attendance;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.QNewFamily.newFamily;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
@@ -147,7 +151,9 @@ public class NewFamilyQueryRepository {
         QUser newFamilyGroupLeaderUser = new QUser("newFamilyGroupLeaderUser");
         QUser smallGroupLeaderUser = new QUser("smallGroupLeaderUser");
 
-        return queryFactory.select(Projections.constructor(PromotedNewFamilyListItem.class,
+        LocalDate oneYearBefore = LocalDate.now().minusYears(1);
+
+        List<PromotedNewFamilyListItem> promotedNewFamilies = queryFactory.select(Projections.constructor(PromotedNewFamilyListItem.class,
                         newFamily.id.as("newFamilyId"),
                         user.name.as("name"),
                         user.sex.as("sex"),
@@ -155,12 +161,14 @@ public class NewFamilyQueryRepository {
                         user.grade.as("grade"),
                         newFamilyGroupLeaderUser.name.as("newFamilyGroupLeaderName"),
                         smallGroupLeaderUser.name.as("smallGroupLeaderName"),
-                        newFamily.promoteDate.as("promoteDate")
+                        newFamily.promoteDate.as("promoteDate"),
+                        user.id.as("userId")
                 ))
                 .from(newFamily)
                 .join(user).on(
                         user.id.eq(newFamily.userId),
-                        newFamily.status.eq(NewFamilyStatus.PROMOTED)
+                        newFamily.status.eq(NewFamilyStatus.PROMOTED),
+                        newFamily.promoteDate.after(oneYearBefore)
                 )
                 // 일반 순모임
                 .join(smallGroup).on(smallGroup.id.eq(newFamily.smallGroupId))
@@ -171,5 +179,28 @@ public class NewFamilyQueryRepository {
                 // 정렬
                 .orderBy(newFamily.promoteDate.desc())
                 .fetch();
+
+        List<Long> promotedNewFamilyUserIds = promotedNewFamilies.stream().map(PromotedNewFamilyListItem::getUserId).collect(Collectors.toList());
+
+        List<Attendance> attendances = queryFactory.select(attendance)
+                .from(attendance)
+                .where(attendance.userId.in(promotedNewFamilyUserIds))
+                .fetch();
+
+        promotedNewFamilies.forEach(promotedNewFamily -> {
+            long attendanceAfterPromotion = attendances.stream()
+                    .filter(attendance -> {
+                        if (!attendance.getUserId().equals(promotedNewFamily.getUserId())) {
+                            return false;
+                        }
+
+                        return attendance.getDate().isAfter(promotedNewFamily.getPromoteDate());
+                    })
+                    .count();
+
+            promotedNewFamily.setAttendanceAfterPromotion(attendanceAfterPromotion);
+        });
+
+        return promotedNewFamilies;
     }
 }
