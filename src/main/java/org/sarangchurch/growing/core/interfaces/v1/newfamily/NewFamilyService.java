@@ -7,7 +7,7 @@ import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import java.util.List;
 
 public interface NewFamilyService {
-    boolean existsAllByIds(List<Long> ids);
+    boolean areCurrentNewFamiliesByIds(List<Long> newFamilyIds);
 
     boolean isNewFamilyByUserId(Long userId);
 
@@ -19,5 +19,5 @@ public interface NewFamilyService {
 
     void processLineUps(List<NewFamilyGroupLeaderLineUp> newFamilyGroupLeaderLineUps, List<NewFamilyLineUp> newFamilyLineUps);
 
-    boolean containsPromotedBySmallGroupId(Long smallGroupId);
+    boolean existsBySmallGroupId(Long smallGroupId);
 }

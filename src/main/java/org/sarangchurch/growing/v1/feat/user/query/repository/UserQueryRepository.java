@@ -5,6 +5,7 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.core.interfaces.common.types.Duty;
+import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamilyStatus;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
 import org.sarangchurch.growing.v1.feat.user.domain.user.QUser;
 import org.sarangchurch.growing.v1.feat.user.query.model.User;
@@ -18,7 +19,6 @@ import java.util.stream.Collectors;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.QNewFamily.newFamily;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroup.QNewFamilyGroup.newFamilyGroup;
 import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilygroupmember.QNewFamilyGroupMember.newFamilyGroupMember;
-import static org.sarangchurch.growing.v1.feat.newfamily.domain.newfamilypromotelog.QNewFamilyPromoteLog.newFamilyPromoteLog;
 import static org.sarangchurch.growing.v1.feat.term.domain.cody.QCody.cody;
 import static org.sarangchurch.growing.v1.feat.term.domain.pastor.QPastor.pastor;
 import static org.sarangchurch.growing.v1.feat.term.domain.smallgroup.QSmallGroup.smallGroup;
@@ -192,11 +192,12 @@ public class UserQueryRepository {
                         newFamilyGroupLeaderUser.name.as("leaderName")
                 ))
                 .from(newFamily)
-                .leftJoin(newFamilyPromoteLog).on(newFamilyPromoteLog.id.eq(newFamily.newFamilyPromoteLogId))
-                .join(user).on(user.id.eq(newFamily.userId))
+                .join(user).on(
+                        user.id.eq(newFamily.userId),
+                        newFamily.status.ne(NewFamilyStatus.PROMOTED)
+                )
                 .leftJoin(newFamilyGroup).on(newFamilyGroup.id.eq(newFamily.newFamilyGroupId))
                 .leftJoin(newFamilyGroupLeaderUser).on(newFamilyGroup.leaderUserId.eq(newFamilyGroupLeaderUser.id))
-                .where(newFamily.newFamilyPromoteLogId.isNull().or(newFamilyPromoteLog.promoteDate.isNull()))
                 .fetch();
 
         // NOT_PLACED

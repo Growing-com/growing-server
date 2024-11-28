@@ -23,7 +23,7 @@ public class NewFamilyDownstream {
         return newFamilyService.isNewFamilyByUserId(userId);
     }
 
-    public boolean containsPromotedBySmallGroupId(Long smallGroupId) {
-        return newFamilyService.containsPromotedBySmallGroupId(smallGroupId);
+    public boolean existsBySmallGroupId(Long smallGroupId) {
+        return newFamilyService.existsBySmallGroupId(smallGroupId);
     }
 }

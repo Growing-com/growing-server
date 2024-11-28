@@ -32,10 +32,10 @@ public class NewFamilyAttendanceAppender {
                 .map(NewFamilyAttendance::getNewFamilyId)
                 .collect(Collectors.toList());
 
-        boolean exists = newFamilyDownstream.existsAllByIds(newFamilyIds);
+        boolean areCurrentNewFamilies = newFamilyDownstream.areCurrentNewFamiliesByIds(newFamilyIds);
 
-        if (!exists) {
-            throw new IllegalArgumentException("존재하지 않는 새가족이 포함되어 있습니다");
+        if (!areCurrentNewFamilies) {
+            throw new IllegalArgumentException("새가족이 아닌 지체가 포함되어 있습니다");
         }
 
         newFamilyAttendanceWriter.deleteByNewFamilyIdInAndDate(newFamilyIds, attendanceDate);

@@ -10,6 +10,6 @@ public class RequestLineUpService {
     private final NewFamilyLineUpRequester requester;
 
     public void requestLineUp(RequestLineUpRequest request) {
-        requester.request(request.getNewFamilyIds());
+        requester.requestLineUp(request.getNewFamilyIds());
     }
 }

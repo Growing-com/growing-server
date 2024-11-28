@@ -8,7 +8,6 @@ import org.sarangchurch.growing.v1.feat.lineup.domain.newfamilylineup.NewFamilyL
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyLineUpProcessor;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamily.NewFamilyFinder;
-import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilypromotelog.NewFamilyPromoteLogFinder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,12 +17,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NewFamilyServiceImpl implements NewFamilyService {
     private final NewFamilyFinder newFamilyFinder;
-    private final NewFamilyPromoteLogFinder newFamilyPromoteLogFinder;
     private final NewFamilyLineUpProcessor newFamilyLineUpProcessor;
 
     @Override
-    public boolean existsAllByIds(List<Long> ids) {
-        return newFamilyFinder.existsAllByIds(ids);
+    public boolean areCurrentNewFamiliesByIds(List<Long> newFamilyIds) {
+        return newFamilyIds.stream()
+                .allMatch(newFamilyFinder::isNewFamilyById);
     }
 
     @Override
@@ -38,7 +37,7 @@ public class NewFamilyServiceImpl implements NewFamilyService {
 
     @Override
     public boolean existsByNewFamilyGroupId(Long newFamilyGroupId) {
-        return newFamilyFinder.existsCurrentByNewFamilyGroupId(newFamilyGroupId);
+        return newFamilyFinder.existsByNewFamilyGroupId(newFamilyGroupId);
     }
 
     @Override
@@ -52,7 +51,7 @@ public class NewFamilyServiceImpl implements NewFamilyService {
     }
 
     @Override
-    public boolean containsPromotedBySmallGroupId(Long smallGroupId) {
-        return newFamilyPromoteLogFinder.containsPromotedBySmallGroupId(smallGroupId);
+    public boolean existsBySmallGroupId(Long smallGroupId) {
+        return newFamilyFinder.existsBySmallGroupId(smallGroupId);
     }
 }

@@ -9,7 +9,6 @@ import org.sarangchurch.growing.v1.feat.newfamily.infra.component.NewFamilyPromo
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.lineoutnewfamily.LineOutNewFamilyWriter;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamily.NewFamilyFinder;
 import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamily.NewFamilyWriter;
-import org.sarangchurch.growing.v1.feat.newfamily.infra.data.newfamilypromotelog.NewFamilyPromoteLogWriter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +23,6 @@ public class NewFamilyLineOutManager {
 
     private final NewFamilyWriter newFamilyWriter;
     private final LineOutNewFamilyWriter lineOutNewFamilyWriter;
-    private final NewFamilyPromoteLogWriter newFamilyPromoteLogWriter;
 
     @Transactional
     public List<LineOutNewFamily> lineOut(List<Long> newFamilyIds) {
@@ -33,13 +31,7 @@ public class NewFamilyLineOutManager {
         // 새가족 라인아웃은 등반 이전에만 가능함
         newFamilyPromoteLogManager.validateBeforePromotedByNewFamilyIds(newFamilyIds);
 
-        // 라인아웃 + 등반 기록 삭제
         newFamilyWriter.deleteByIdIn(newFamilyIds);
-        newFamilyPromoteLogWriter.deleteByIdIn(
-                newFamilies.stream()
-                        .map(NewFamily::getNewFamilyPromoteLogId)
-                        .collect(Collectors.toList())
-        );
 
         List<LineOutNewFamily> lineOutNewFamilies = lineOutNewFamilyWriter.saveAll(
                 newFamilies.stream()
