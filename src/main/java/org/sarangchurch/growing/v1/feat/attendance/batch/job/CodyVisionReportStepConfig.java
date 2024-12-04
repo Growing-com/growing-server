@@ -9,6 +9,8 @@ import org.sarangchurch.growing.core.interfaces.v1.term.SmallGroupService;
 import org.sarangchurch.growing.core.interfaces.v1.term.TermService;
 import org.sarangchurch.growing.v1.feat.attendance.batch.RequestWeekJobParameter;
 import org.sarangchurch.growing.v1.feat.attendance.batch.Sunday;
+import org.sarangchurch.growing.v1.feat.attendance.domain.AttendanceStatus;
+import org.sarangchurch.growing.v1.feat.attendance.domain.attendance.Attendance;
 import org.sarangchurch.growing.v1.feat.attendance.domain.attendance.AttendanceRepository;
 import org.sarangchurch.growing.v1.feat.attendance.domain.codyvisionreport.CodyVisionReport;
 import org.sarangchurch.growing.v1.feat.attendance.domain.codyvisionreport.CodyVisionReportRepository;
@@ -62,17 +64,26 @@ public class CodyVisionReportStepConfig {
                     List<CodyVisionReport> codyVisionReports = codies.stream()
                             .map(cody -> {
                                 List<SmallGroup> smallGroups = smallGroupService.findByCodyId(cody.getId());
-                                List<NewFamilyGroup> newFamilyGroups = newFamilyGroupService.findByCodyId(cody.getId());
                                 List<Long> smallGroupIds = smallGroups.stream().map(SmallGroup::getId).collect(Collectors.toList());
-                                List<Long> newFamilyGroupIds = newFamilyGroups.stream().map(NewFamilyGroup::getId).collect(Collectors.toList());
                                 long smallGroupMemberCount = smallGroupMemberService.countBySmallGroupIdIn(smallGroupIds);
+
+                                List<NewFamilyGroup> newFamilyGroups = newFamilyGroupService.findByCodyId(cody.getId());
+                                List<Long> newFamilyGroupIds = newFamilyGroups.stream().map(NewFamilyGroup::getId).collect(Collectors.toList());
                                 long newFamilyGroupMemberCount = newFamilyGroupMemberService.countByNewFamilyGroupIdIn(newFamilyGroupIds);
-                                long attendCount = attendanceRepository.countByCodyId(cody.getId());
+
+                                List<Attendance> attendances = attendanceRepository.findByCodyId(cody.getId());
+                                long attendCount = attendances.stream()
+                                        .filter(it -> it.statusEquals(AttendanceStatus.ATTEND))
+                                        .count();
 
                                 return CodyVisionReport.builder()
                                         .date(date)
                                         .codyId(cody.getId())
-                                        .total((int) (smallGroupIds.size() + newFamilyGroupIds.size() + smallGroupMemberCount + newFamilyGroupMemberCount))
+                                        .total((int) (smallGroupIds.size() +
+                                                smallGroupMemberCount +
+                                                newFamilyGroupIds.size() +
+                                                newFamilyGroupMemberCount)
+                                        )
                                         .attend((int) attendCount)
                                         .build();
                             })

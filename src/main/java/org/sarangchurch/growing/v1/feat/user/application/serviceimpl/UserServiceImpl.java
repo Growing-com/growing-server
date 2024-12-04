@@ -62,4 +62,9 @@ public class UserServiceImpl implements UserService {
     public long countActiveUsers() {
         return userFinder.countActiveUsers();
     }
+
+    @Override
+    public List<User> findAllActive() {
+        return userFinder.findAllActive();
+    }
 }

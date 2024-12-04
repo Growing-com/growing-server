@@ -12,4 +12,5 @@ public interface NewFamilyRepository {
     void deleteByIdIn(List<Long> ids);
     boolean existsBySmallGroupId(Long smallGroupId);
     long countTotalCurrent();
+    List<NewFamily> findAllCurrent();
 }

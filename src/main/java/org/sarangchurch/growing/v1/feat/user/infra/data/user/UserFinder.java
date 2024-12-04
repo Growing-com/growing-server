@@ -38,4 +38,8 @@ public class UserFinder {
     public long countActiveUsers() {
         return userRepository.countActiveUsers();
     }
+
+    public List<User> findAllActive() {
+        return userRepository.findAllActive();
+    }
 }

@@ -22,4 +22,6 @@ public interface UserService {
     List<User> findAll();
 
     long countActiveUsers();
+
+    List<User> findAllActive();
 }

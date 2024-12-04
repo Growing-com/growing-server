@@ -55,6 +55,7 @@ public class Attendance extends BaseEntity {
         this.reason = reason;
     }
 
+    // 온라인도 출석으로 쳐야하나?
     public boolean statusEquals(AttendanceStatus status) {
         return this.status == status;
     }

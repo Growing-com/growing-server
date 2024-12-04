@@ -69,4 +69,8 @@ public class NewFamilyFinder {
     public long countTotalCurrent() {
         return newFamilyRepository.countTotalCurrent();
     }
+
+    public List<NewFamily> findAllCurrent() {
+        return newFamilyRepository.findAllCurrent();
+    }
 }
