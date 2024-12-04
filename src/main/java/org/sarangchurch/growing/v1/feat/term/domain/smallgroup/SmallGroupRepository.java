@@ -21,4 +21,6 @@ public interface SmallGroupRepository {
     boolean existsByLeaderUserIdInAndTermId(List<Long> leaderUserIds, Long termId);
 
     boolean existsByLeaderUserIdAndTermId(Long leaderUserId, Long termId);
+
+    List<SmallGroup> findByTermId(Long termId);
 }

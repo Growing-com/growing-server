@@ -25,4 +25,9 @@ public class SmallGroupServiceImpl implements SmallGroupService {
         return smallGroupFinder.findByCodyId(codyId);
     }
 
+    @Override
+    public List<SmallGroup> findByTermId(Long termId) {
+        return smallGroupFinder.findByTermId(termId);
+    }
+
 }

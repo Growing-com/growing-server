@@ -59,4 +59,9 @@ public class SmallGroupMemberServiceImpl implements SmallGroupMemberService {
     public long countBySmallGroupIdIn(List<Long> smallGroupIds) {
         return smallGroupMemberFinder.countBySmallGroupIdIn(smallGroupIds);
     }
+
+    @Override
+    public List<SmallGroupMember> findBySmallGroupIdIn(List<Long> smallGroupIds) {
+        return smallGroupMemberFinder.findBySmallGroupIdIn(smallGroupIds);
+    }
 }

@@ -24,8 +24,8 @@ public class Sunday implements Comparable<Sunday> {
         this.date = date;
     }
 
-    public boolean isBefore(Sunday anotherSunday) {
-        return date.isBefore(anotherSunday.date);
+    public Sunday previous() {
+        return Sunday.previousSunday(date.minusWeeks(1));
     }
 
     @Override

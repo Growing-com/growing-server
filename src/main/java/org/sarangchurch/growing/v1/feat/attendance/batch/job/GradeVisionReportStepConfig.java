@@ -13,7 +13,6 @@ import org.sarangchurch.growing.v1.feat.attendance.domain.gradevisionreport.Grad
 import org.sarangchurch.growing.v1.feat.attendance.domain.stumpattendance.StumpAttendance;
 import org.sarangchurch.growing.v1.feat.attendance.domain.stumpattendance.StumpAttendanceRepository;
 import org.sarangchurch.growing.v1.feat.newfamily.domain.newfamily.NewFamily;
-import org.sarangchurch.growing.v1.feat.user.application.emit.graduate.GraduateService;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Step;
@@ -45,7 +44,7 @@ public class GradeVisionReportStepConfig {
 
     @JobScope
     @Bean(STEP_NAME)
-    public Step step(GraduateService graduateService) {
+    public Step step() {
         return stepBuilderFactory.get(STEP_NAME)
                 .tasklet((stepContribution, chunkContext) -> {
                     Sunday sunday = jobParameter.getSunday();

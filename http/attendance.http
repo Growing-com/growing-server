@@ -42,7 +42,7 @@ POST http://localhost:8080/api/v1/attendances/group-attendance-check
 Content-Type: application/json
 
 {
-  "date": "2024-10-20",
+  "date": "2024-10-13",
   "termId": 2,
   "codyId": 8,
   "attendanceItems": [
@@ -52,7 +52,7 @@ Content-Type: application/json
     },
     {
       "userId": 10,
-      "status": "ABSENT"
+      "status": "ATTEND"
     },
     {
       "userId": 12,
