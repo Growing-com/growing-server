@@ -50,4 +50,8 @@ public class SmallGroupFinder {
     public boolean existsByLeaderUserIdAndTermId(Long leaderUserId, Long termId) {
         return smallGroupRepository.existsByLeaderUserIdAndTermId(leaderUserId, termId);
     }
+
+    public List<SmallGroup> findByTermId(Long termId) {
+        return smallGroupRepository.findByTermId(termId);
+    }
 }

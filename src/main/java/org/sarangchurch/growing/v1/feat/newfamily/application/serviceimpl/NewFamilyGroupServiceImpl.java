@@ -51,4 +51,9 @@ public class NewFamilyGroupServiceImpl implements NewFamilyGroupService {
     public List<NewFamilyGroup> findByCodyId(Long codyId) {
         return newFamilyGroupFinder.findByCodyId(codyId);
     }
+
+    @Override
+    public List<NewFamilyGroup> findByTermId(Long termId) {
+        return newFamilyGroupFinder.findByTermId(termId);
+    }
 }

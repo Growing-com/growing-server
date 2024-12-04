@@ -8,4 +8,6 @@ public interface SmallGroupService {
     void validateAvailable(List<Long> smallGroupIds);
 
     List<SmallGroup> findByCodyId(Long codyId);
+
+    List<SmallGroup> findByTermId(Long termId);
 }

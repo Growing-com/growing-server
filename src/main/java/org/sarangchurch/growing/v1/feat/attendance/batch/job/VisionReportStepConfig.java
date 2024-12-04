@@ -50,7 +50,7 @@ public class VisionReportStepConfig {
     @Bean(name = STEP_NAME)
     public Step step() {
         return stepBuilderFactory.get(STEP_NAME)
-                .tasklet((contribution, chunkContext) -> {
+                .tasklet((stepContribution, chunkContext) -> {
                     Sunday sunday = jobParameter.getSunday();
                     LocalDate sundayDate = sunday.getDate();
 
@@ -64,7 +64,7 @@ public class VisionReportStepConfig {
                     double registerRate = ((double) registered / active) * 100;
 
                     if (registerRate < 90) {
-                        contribution.setExitStatus(new ExitStatus("FAIL", "출석율이 90% 이상이어야 갱신할 수 있습니다. 현재: " + String.format("%.2f%%", registerRate)));
+                        stepContribution.setExitStatus(new ExitStatus("FAIL", "출석율이 90% 이상이어야 갱신할 수 있습니다. 현재: " + String.format("%.2f%%", registerRate)));
 
                         return RepeatStatus.FINISHED;
                     }
@@ -86,7 +86,7 @@ public class VisionReportStepConfig {
 
                     visionReportWriter.save(visionReport);
 
-                    contribution.setExitStatus(new ExitStatus("SUCCESS", "비전 리포트가 갱신되었습니다. 날짜: " + sundayDate.toString()));
+                    stepContribution.setExitStatus(new ExitStatus("SUCCESS", "비전 리포트가 갱신되었습니다. 날짜: " + sundayDate.toString()));
 
                     return RepeatStatus.FINISHED;
                 })
