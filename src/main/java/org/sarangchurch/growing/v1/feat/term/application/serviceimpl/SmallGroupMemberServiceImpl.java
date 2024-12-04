@@ -15,6 +15,7 @@ import org.sarangchurch.growing.v1.feat.term.infra.stream.user.UserDownstream;
 import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -52,5 +53,10 @@ public class SmallGroupMemberServiceImpl implements SmallGroupMemberService {
         }
 
         smallGroupMemberAppender.append(userId, targetSmallGroupId);
+    }
+
+    @Override
+    public long countBySmallGroupIdIn(List<Long> smallGroupIds) {
+        return smallGroupMemberFinder.countBySmallGroupIdIn(smallGroupIds);
     }
 }

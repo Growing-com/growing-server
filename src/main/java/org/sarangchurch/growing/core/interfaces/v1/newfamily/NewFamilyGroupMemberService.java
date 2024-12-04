@@ -16,4 +16,6 @@ public interface NewFamilyGroupMemberService {
     void deleteByNewFamilyGroupId(Long newFamilyGroupId);
 
     List<NewFamilyGroupMember> findByNewFamilyGroupIdIn(List<Long> newFamilyGroupIds);
+
+    long countByNewFamilyGroupIdIn(List<Long> newFamilyGroupIds);
 }

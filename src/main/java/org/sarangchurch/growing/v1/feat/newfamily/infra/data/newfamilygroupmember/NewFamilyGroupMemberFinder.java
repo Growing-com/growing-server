@@ -27,4 +27,8 @@ public class NewFamilyGroupMemberFinder {
     public List<NewFamilyGroupMember> findByNewFamilyGroupIdIn(List<Long> newFamilyGroupIds) {
         return newFamilyGroupMemberRepository.findByNewFamilyGroupIdIn(newFamilyGroupIds);
     }
+
+    public long countByNewFamilyGroupIdIn(List<Long> newFamilyGroupIds) {
+        return newFamilyGroupMemberRepository.countByNewFamilyGroupIdIn(newFamilyGroupIds);
+    }
 }

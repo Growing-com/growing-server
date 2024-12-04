@@ -18,4 +18,6 @@ public interface NewFamilyGroupMemberRepository {
     NewFamilyGroupMember save(NewFamilyGroupMember groupMember);
 
     List<NewFamilyGroupMember> findByNewFamilyGroupIdIn(List<Long> newFamilyGroupIds);
+
+    long countByNewFamilyGroupIdIn(List<Long> newFamilyGroupIds);
 }

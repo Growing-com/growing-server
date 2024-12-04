@@ -78,4 +78,9 @@ public class TermServiceImpl implements TermService {
         List<Cody> codies = codyFinder.findByTermId(term.getId());
         return codies.stream().anyMatch(it -> it.getId().equals(codyId));
     }
+
+    @Override
+    public Term findActiveTerm() {
+        return termFinder.findActiveOrThrow();
+    }
 }

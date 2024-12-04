@@ -41,4 +41,8 @@ public class SmallGroupMemberFinder {
     public List<SmallGroupMember> findBySmallGroupIdIn(List<Long> smallGroupIds) {
         return smallGroupMemberRepository.findBySmallGroupIdIn(smallGroupIds);
     }
+
+    public long countBySmallGroupIdIn(List<Long> smallGroupIds) {
+        return smallGroupMemberRepository.countBySmallGroupIdIn(smallGroupIds);
+    }
 }

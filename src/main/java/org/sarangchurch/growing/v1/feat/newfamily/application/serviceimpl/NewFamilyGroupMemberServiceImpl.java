@@ -44,4 +44,9 @@ public class NewFamilyGroupMemberServiceImpl implements NewFamilyGroupMemberServ
     public List<NewFamilyGroupMember> findByNewFamilyGroupIdIn(List<Long> newFamilyGroupIds) {
         return newFamilyGroupMemberFinder.findByNewFamilyGroupIdIn(newFamilyGroupIds);
     }
+
+    @Override
+    public long countByNewFamilyGroupIdIn(List<Long> newFamilyGroupIds) {
+        return newFamilyGroupMemberFinder.countByNewFamilyGroupIdIn(newFamilyGroupIds);
+    }
 }
