@@ -6,5 +6,5 @@ import java.util.List;
 public interface AttendanceRepository {
     <S extends Attendance> List<S> saveAll(Iterable<S> entities);
     void deleteByUserIdInAndDate(List<Long> userIds, LocalDate date);
-    long countByDate(LocalDate date);
+    List<Attendance> findByDate(LocalDate date);
 }

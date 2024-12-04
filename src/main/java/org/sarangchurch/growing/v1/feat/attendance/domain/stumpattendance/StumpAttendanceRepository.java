@@ -8,5 +8,5 @@ public interface StumpAttendanceRepository {
 
     void deleteByUserIdInAndDate(List<Long> userIds, LocalDate date);
 
-    long countByDate(LocalDate date);
+    List<StumpAttendance> findByDate(LocalDate date);
 }

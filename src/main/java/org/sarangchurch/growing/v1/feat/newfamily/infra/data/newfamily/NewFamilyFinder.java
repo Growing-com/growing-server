@@ -65,4 +65,8 @@ public class NewFamilyFinder {
     public boolean existsBySmallGroupId(Long smallGroupId) {
         return newFamilyRepository.existsBySmallGroupId(smallGroupId);
     }
+
+    public long countTotalCurrent() {
+        return newFamilyRepository.countTotalCurrent();
+    }
 }

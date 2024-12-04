@@ -10,5 +10,5 @@ public interface NewFamilyAttendanceRepository {
 
     void deleteByNewFamilyIdIn(List<Long> newFamilyIds);
 
-    long countByDate(LocalDate date);
+    List<NewFamilyAttendance> findByDate(LocalDate date);
 }
