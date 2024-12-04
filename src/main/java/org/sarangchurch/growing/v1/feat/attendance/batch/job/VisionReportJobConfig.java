@@ -23,6 +23,7 @@ public class VisionReportJobConfig {
     private final RequestDateValidator requestDateValidator;
 
     private final Step visionReportStep;
+    private final Step codyVisionReportStep;
 
     @JobScope
     @Bean(name = JOB_NAME + "Parameter")
@@ -36,6 +37,7 @@ public class VisionReportJobConfig {
                 .validator(requestDateValidator)
                 .incrementer(new RunIdIncrementer())
                 .start(visionReportStep)
+                .next(codyVisionReportStep)
                 .build();
     }
 }

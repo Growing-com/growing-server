@@ -20,4 +20,6 @@ public interface TermService {
     Optional<Term> findLineUpTerm();
     boolean areValidMemberUserIdsByCodyId(List<Long> userIds, Long codyId);
     boolean containsCodyByTermIdAndCodyId(Long termId, Long codyId);
+
+    Term findActiveTerm();
 }
