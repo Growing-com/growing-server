@@ -59,4 +59,9 @@ public class NewFamilyServiceImpl implements NewFamilyService {
     public long countTotalCurrent() {
         return newFamilyFinder.countTotalCurrent();
     }
+
+    @Override
+    public List<NewFamily> findAllCurrent() {
+        return newFamilyFinder.findAllCurrent();
+    }
 }

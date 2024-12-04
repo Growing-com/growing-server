@@ -24,6 +24,7 @@ public class VisionReportJobConfig {
 
     private final Step visionReportStep;
     private final Step codyVisionReportStep;
+    private final Step gradeVisionReportStep;
 
     @JobScope
     @Bean(name = JOB_NAME + "Parameter")
@@ -38,6 +39,7 @@ public class VisionReportJobConfig {
                 .incrementer(new RunIdIncrementer())
                 .start(visionReportStep)
                 .next(codyVisionReportStep)
+                .next(gradeVisionReportStep)
                 .build();
     }
 }

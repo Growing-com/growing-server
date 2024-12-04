@@ -22,4 +22,6 @@ public interface NewFamilyService {
     boolean existsBySmallGroupId(Long smallGroupId);
 
     long countTotalCurrent();
+
+    List<NewFamily> findAllCurrent();
 }
