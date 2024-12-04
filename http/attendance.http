@@ -4,18 +4,18 @@ GET http://localhost:8080/api/v1/attendances/attendance-register-rate?date=2024-
 ### 새가족 출석 목록
 GET http://localhost:8080/api/v1/new-families/attendances
 
-### 새가족 출석 체크
-POST http://localhost:8080/api/v1/new-families/attendance-check
+### 비전 리포트 조회
+GET http://localhost:8080/api/v1/vision-report?date=2024-10-20
+
+### 비전 리포트 갱신
+POST http://localhost:8080/api/v1/run-batch-job
 Content-Type: application/json
 
 {
-  "date": "2024-10-20",
-  "attendanceItems": [
-    {
-      "newFamilyId": 5,
-      "status": "ATTEND"
-    }
-  ]
+  "jobName": "visionReportJob",
+  "jobParameters": {
+    "requestDate": "2024-10-20"
+  }
 }
 
 ### 그루터기 출석 체크
@@ -27,11 +27,11 @@ Content-Type: application/json
   "termId": 2,
   "attendanceItems": [
     {
-      "userId": 8,
-      "status": "ATTEND"
+      "userId": 7,
+      "status": "ABSENT"
     },
     {
-      "userId": 11,
+      "userId": 9,
       "status": "ATTEND"
     }
   ]
@@ -47,19 +47,34 @@ Content-Type: application/json
   "codyId": 8,
   "attendanceItems": [
     {
-      "userId": 3,
+      "userId": 20,
+      "status": "ATTEND"
+    },
+    {
+      "userId": 10,
+      "status": "ATTEND"
+    },
+    {
+      "userId": 12,
       "status": "ATTEND"
     }
   ]
 }
 
-### 통계 갱신
-POST http://localhost:8080/api/v1/run-batch-job
+### 새가족 출석 체크
+POST http://localhost:8080/api/v1/new-families/attendance-check
 Content-Type: application/json
 
 {
-  "jobName": "visionReportJob",
-  "jobParameters": {
-    "requestDate": "2024-10-20"
-  }
+  "date": "2024-10-20",
+  "attendanceItems": [
+    {
+      "newFamilyId": 5,
+      "status": "ATTEND"
+    },
+    {
+      "newFamilyId": 6,
+      "status": "ABSENT"
+    }
+  ]
 }

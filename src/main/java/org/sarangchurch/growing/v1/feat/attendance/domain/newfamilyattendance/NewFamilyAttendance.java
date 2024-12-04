@@ -41,4 +41,8 @@ public class NewFamilyAttendance extends BaseEntity {
         this.status = status;
         this.reason = reason;
     }
+
+    public boolean statusEquals(AttendanceStatus status) {
+        return this.status == status;
+    }
 }

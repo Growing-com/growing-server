@@ -54,4 +54,9 @@ public class NewFamilyServiceImpl implements NewFamilyService {
     public boolean existsBySmallGroupId(Long smallGroupId) {
         return newFamilyFinder.existsBySmallGroupId(smallGroupId);
     }
+
+    @Override
+    public long countTotalCurrent() {
+        return newFamilyFinder.countTotalCurrent();
+    }
 }

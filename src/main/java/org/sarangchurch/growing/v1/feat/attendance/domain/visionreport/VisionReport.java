@@ -1,9 +1,9 @@
 package org.sarangchurch.growing.v1.feat.attendance.domain.visionreport;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.sarangchurch.growing.core.interfaces.common.BaseEntity;
 
 import javax.persistence.*;
@@ -21,21 +21,31 @@ public class VisionReport extends BaseEntity {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @Column(name = "total_active")
-    private Integer totalActive;
+    @Setter
+    @Column(name = "active")
+    private Integer active;
 
-    @Column(name = "total_attendance_registered")
-    private Integer totalAttendanceRegistered;
+    @Setter
+    @Column(name = "registered")
+    private Integer registered;
 
-    @Builder
-    public VisionReport(LocalDate date, Integer totalActive, Integer totalAttendanceRegistered) {
-        this.date = date;
-        this.totalActive = totalActive;
-        this.totalAttendanceRegistered = totalAttendanceRegistered;
+    @Setter
+    @Column(name = "total_attend")
+    private Integer totalAttend;
+
+    @Setter
+    @Column(name = "new_family")
+    private Integer newFamily;
+
+    @Setter
+    @Column(name = "new_family_attend")
+    private Integer newFamilyAttend;
+
+    public static VisionReport fromDate(LocalDate date) {
+        return new VisionReport(date);
     }
 
-    public void update(long activeUserCount, long totalAttendanceRegisteredCount) {
-        totalActive = (int) activeUserCount;
-        totalAttendanceRegistered = (int) totalAttendanceRegisteredCount;
+    private VisionReport(LocalDate date) {
+        this.date = date;
     }
 }

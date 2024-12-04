@@ -11,4 +11,5 @@ public interface NewFamilyRepository {
     NewFamily save(NewFamily newFamily);
     void deleteByIdIn(List<Long> ids);
     boolean existsBySmallGroupId(Long smallGroupId);
+    long countTotalCurrent();
 }
