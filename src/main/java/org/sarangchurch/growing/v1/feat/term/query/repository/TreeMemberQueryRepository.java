@@ -71,7 +71,7 @@ public class TreeMemberQueryRepository {
                         Expressions.asEnum(Duty.SMALL_GROUP_LEADER).as("duty")
                 ))
                 .from(smallGroup)
-                .join(user).on(user.id.eq(smallGroup.leaderUserId))
+                .join(user).on(user.id.eq(smallGroup.leaderUserId), smallGroup.codyId.eq(codyId))
                 .fetch();
 
         // 일반 순원
