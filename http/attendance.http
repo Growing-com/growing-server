@@ -13,6 +13,9 @@ GET http://localhost:8080/api/v1/attendances/stump-attendance?date=2024-10-20
 ### 순장 및 순원 출석 조회
 GET http://localhost:8080/api/v1/attendances/normal-attendance?codyId=8&date=2024-10-20
 
+### 출석 검색
+GET http://localhost:8080/api/v1/attendances/search?startDate=2024-09-20&endDate=2024-10-20
+
 ### 비전 리포트 갱신
 POST http://localhost:8080/api/v1/run-batch-job
 Content-Type: application/json
