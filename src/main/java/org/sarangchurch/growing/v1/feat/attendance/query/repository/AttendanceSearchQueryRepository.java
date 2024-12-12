@@ -357,8 +357,8 @@ public class AttendanceSearchQueryRepository {
                             name,
                             sex,
                             grade,
-                            name,
                             pastorName,
+                            name,
                             items
                     );
                 })
