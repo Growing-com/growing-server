@@ -23,12 +23,6 @@ public class StumpAttendanceListItem {
     public static class StumpAttendanceListItemAttendItem {
         @JsonIgnore
         private final Long userId;
-        @JsonIgnore
-        private final String name;
-        @JsonIgnore
-        private final Sex sex;
-        @JsonIgnore
-        private final Integer grade;
 
         private final AttendanceStatus status;
         private final LocalDate date;

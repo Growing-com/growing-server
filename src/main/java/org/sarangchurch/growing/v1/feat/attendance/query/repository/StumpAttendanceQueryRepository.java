@@ -1,12 +1,12 @@
 package org.sarangchurch.growing.v1.feat.attendance.query.repository;
 
 import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.sarangchurch.growing.v1.feat.attendance.domain.AttendanceStatus;
 import org.sarangchurch.growing.v1.feat.attendance.query.model.StumpAttendanceListItem;
 import org.sarangchurch.growing.v1.feat.term.domain.term.Term;
+import org.sarangchurch.growing.v1.feat.user.domain.user.User;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -33,15 +33,7 @@ public class StumpAttendanceQueryRepository {
 
         assert activeTerm != null;
 
-        List<StumpAttendanceListItem.StumpAttendanceListItemAttendItem> result = queryFactory.select(Projections.constructor(StumpAttendanceListItem.StumpAttendanceListItemAttendItem.class,
-                        user.id.as("userId"),
-                        user.name.as("name"),
-                        user.sex.as("sex"),
-                        user.grade.as("grade"),
-                        Expressions.asEnum(AttendanceStatus.NONE).as("status"),
-                        Expressions.asDate(date).as("date"),
-                        Expressions.asString("").as("reason")
-                ))
+        List<User> codyUsers = queryFactory.select(user)
                 .from(cody)
                 .join(user).on(
                         cody.userId.eq(user.id),
@@ -49,11 +41,8 @@ public class StumpAttendanceQueryRepository {
                 )
                 .fetch();
 
-        List<StumpAttendanceListItem.StumpAttendanceListItemAttendItem> existingAttendItems = queryFactory.select(Projections.constructor(StumpAttendanceListItem.StumpAttendanceListItemAttendItem.class,
+        List<StumpAttendanceListItem.StumpAttendanceListItemAttendItem> attendItems = queryFactory.select(Projections.constructor(StumpAttendanceListItem.StumpAttendanceListItemAttendItem.class,
                         user.id.as("userId"),
-                        user.name.as("name"),
-                        user.sex.as("sex"),
-                        user.grade.as("grade"),
                         stumpAttendance.status.as("status"),
                         stumpAttendance.date.as("date"),
                         stumpAttendance.reason.as("reason")
@@ -65,33 +54,43 @@ public class StumpAttendanceQueryRepository {
                 )
                 .fetch();
 
-        return result.stream()
-                .map(it -> {
-                    Optional<StumpAttendanceListItem.StumpAttendanceListItemAttendItem> optionalExistingItem = existingAttendItems.stream()
-                            .filter(attendItem -> it.getUserId().equals(attendItem.getUserId()))
+        List<StumpAttendanceListItem> result = codyUsers.stream()
+                .map(codyUser -> {
+                    Optional<StumpAttendanceListItem.StumpAttendanceListItemAttendItem> op = attendItems.stream()
+                            .filter(attendItem -> codyUser.getId().equals(attendItem.getUserId()))
                             .findFirst();
 
-                    if (optionalExistingItem.isPresent()) {
-                        StumpAttendanceListItem.StumpAttendanceListItemAttendItem attendItem = optionalExistingItem.get();
+                    if (op.isPresent()) {
+                        StumpAttendanceListItem.StumpAttendanceListItemAttendItem item = op.get();
 
                         return new StumpAttendanceListItem(
-                                attendItem.getUserId(),
-                                attendItem.getName(),
-                                attendItem.getSex(),
-                                attendItem.getGrade(),
-                                List.of(attendItem)
+                                codyUser.getId(),
+                                codyUser.getName(),
+                                codyUser.getSex(),
+                                codyUser.getGrade(),
+                                List.of(item)
                         );
                     } else {
+                        StumpAttendanceListItem.StumpAttendanceListItemAttendItem defaultItem = new StumpAttendanceListItem.StumpAttendanceListItemAttendItem(
+                                codyUser.getId(),
+                                AttendanceStatus.NONE,
+                                date,
+                                ""
+                        );
+
                         return new StumpAttendanceListItem(
-                                it.getUserId(),
-                                it.getName(),
-                                it.getSex(),
-                                it.getGrade(),
-                                List.of(it)
+                                codyUser.getId(),
+                                codyUser.getName(),
+                                codyUser.getSex(),
+                                codyUser.getGrade(),
+                                List.of(defaultItem)
                         );
                     }
                 })
-                .sorted(Comparator.comparing(StumpAttendanceListItem::getName))
                 .collect(Collectors.toList());
+
+        result.sort(Comparator.comparing(StumpAttendanceListItem::getName));
+
+        return result;
     }
 }

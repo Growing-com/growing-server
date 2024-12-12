@@ -144,35 +144,42 @@ public class NormalAttendanceQueryRepository {
     ) {
         return newFamilyGroupLeaderTuples.stream()
                 .map(tup -> {
+                    Long userId = tup.get(0, Long.class);
+                    String name = tup.get(1, String.class);
+                    Sex sex = tup.get(2, Sex.class);
+                    Integer grade = tup.get(3, Integer.class);
+
                     Optional<NormalAttendanceListItem.NormalAttendanceListItemAttendItem> op = attendItems.stream()
-                            .filter(attendItem -> attendItem.getUserId().equals(tup.get(0, Long.class)))
+                            .filter(attendItem -> attendItem.getUserId().equals(userId))
                             .findAny();
 
                     if (op.isPresent()) {
+                        NormalAttendanceListItem.NormalAttendanceListItemAttendItem item = op.get();
+
                         return new NormalAttendanceListItem(
-                                tup.get(0, Long.class),
-                                tup.get(1, String.class),
-                                tup.get(2, Sex.class),
-                                tup.get(3, Integer.class),
+                                userId,
+                                name,
+                                sex,
+                                grade,
                                 codyName,
-                                tup.get(1, String.class),
-                                List.of(op.get())
+                                name,
+                                List.of(item)
                         );
                     } else {
                         NormalAttendanceListItem.NormalAttendanceListItemAttendItem emptyAttendance = new NormalAttendanceListItem.NormalAttendanceListItemAttendItem(
-                                tup.get(0, Long.class),
+                                userId,
                                 AttendanceStatus.NONE,
                                 date,
                                 ""
                         );
 
                         return new NormalAttendanceListItem(
-                                tup.get(0, Long.class),
-                                tup.get(1, String.class),
-                                tup.get(2, Sex.class),
-                                tup.get(3, Integer.class),
+                                userId,
+                                name,
+                                sex,
+                                grade,
                                 codyName,
-                                tup.get(1, String.class),
+                                name,
                                 List.of(emptyAttendance)
                         );
                     }
@@ -189,35 +196,43 @@ public class NormalAttendanceQueryRepository {
     ) {
         return smallGroupMemberTuples.stream()
                 .map(tup -> {
+                    Long userId = tup.get(0, Long.class);
+                    String name = tup.get(1, String.class);
+                    Sex sex = tup.get(2, Sex.class);
+                    Integer grade = tup.get(3, Integer.class);
+                    String leaderName = tup.get(4, String.class);
+
                     Optional<NormalAttendanceListItem.NormalAttendanceListItemAttendItem> op = attendItems.stream()
-                            .filter(attendItem -> attendItem.getUserId().equals(tup.get(0, Long.class)))
+                            .filter(attendItem -> attendItem.getUserId().equals(userId))
                             .findAny();
 
                     if (op.isPresent()) {
+                        NormalAttendanceListItem.NormalAttendanceListItemAttendItem item = op.get();
+
                         return new NormalAttendanceListItem(
-                                tup.get(0, Long.class),
-                                tup.get(1, String.class),
-                                tup.get(2, Sex.class),
-                                tup.get(3, Integer.class),
+                                userId,
+                                name,
+                                sex,
+                                grade,
                                 codyName,
-                                tup.get(4, String.class),
-                                List.of(op.get())
+                                leaderName,
+                                List.of(item)
                         );
                     } else {
                         NormalAttendanceListItem.NormalAttendanceListItemAttendItem emptyAttendance = new NormalAttendanceListItem.NormalAttendanceListItemAttendItem(
-                                tup.get(0, Long.class),
+                                userId,
                                 AttendanceStatus.NONE,
                                 date,
                                 ""
                         );
 
                         return new NormalAttendanceListItem(
-                                tup.get(0, Long.class),
-                                tup.get(1, String.class),
-                                tup.get(2, Sex.class),
-                                tup.get(3, Integer.class),
+                                userId,
+                                name,
+                                sex,
+                                grade,
                                 codyName,
-                                tup.get(4, String.class),
+                                leaderName,
                                 List.of(emptyAttendance)
                         );
                     }
