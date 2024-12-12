@@ -69,8 +69,8 @@ public class NewFamilyAttendanceQueryRepository {
                     NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem firstItem = attendItems.get(0);
 
                     List<NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem> sortedByDateDesc = lastTwelveSundays.stream()
-                            .map(it -> attendItems.stream()
-                                    .filter(it2 -> it.equals(it2.getDate()))
+                            .map(date -> attendItems.stream()
+                                    .filter(attendItem -> date.equals(attendItem.getDate()))
                                     .findAny()
                                     .orElse(new NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem(
                                             firstItem.getNewFamilyId(),
@@ -79,7 +79,7 @@ public class NewFamilyAttendanceQueryRepository {
                                             firstItem.getGrade(),
                                             firstItem.getNewFamilyGroupLeaderName(),
                                             AttendanceStatus.NONE,
-                                            it,
+                                            date,
                                             ""
                                     ))
                             )
@@ -140,8 +140,8 @@ public class NewFamilyAttendanceQueryRepository {
                     NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem firstItem = attendItems.get(0);
 
                     List<NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem> sortedByDateDesc = lastTwelveSundays.stream()
-                            .map(it -> attendItems.stream()
-                                    .filter(it2 -> it.equals(it2.getDate()))
+                            .map(date -> attendItems.stream()
+                                    .filter(attendItem -> date.equals(attendItem.getDate()))
                                     .findAny()
                                     .orElse(new NewFamilyAttendanceListItem.NewFamilyAttendanceListItemAttendItem(
                                             firstItem.getNewFamilyId(),
@@ -150,7 +150,7 @@ public class NewFamilyAttendanceQueryRepository {
                                             firstItem.getGrade(),
                                             firstItem.getNewFamilyGroupLeaderName(),
                                             AttendanceStatus.NONE,
-                                            it,
+                                            date,
                                             ""
                                     ))
                             )

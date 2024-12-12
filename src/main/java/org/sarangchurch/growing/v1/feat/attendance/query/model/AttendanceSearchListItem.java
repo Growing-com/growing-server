@@ -25,12 +25,6 @@ public class AttendanceSearchListItem {
     public static class AttendanceSearchListItemAttendItem {
         @JsonIgnore
         private final Long userId;
-        @JsonIgnore
-        private final String name;
-        @JsonIgnore
-        private final Sex sex;
-        @JsonIgnore
-        private final Integer grade;
 
         private final AttendanceStatus status;
         private final LocalDate date;

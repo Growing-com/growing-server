@@ -144,9 +144,6 @@ public class AttendanceSearchQueryRepository {
         // 출석 데이터
         List<AttendanceSearchListItem.AttendanceSearchListItemAttendItem> stumpAttendances = queryFactory.select(Projections.constructor(AttendanceSearchListItem.AttendanceSearchListItemAttendItem.class,
                         user.id.as("userId"),
-                        user.name.as("name"),
-                        user.sex.as("sex"),
-                        user.grade.as("grade"),
                         stumpAttendance.status.as("status"),
                         stumpAttendance.date.as("date"),
                         stumpAttendance.reason.as("reason")
@@ -160,9 +157,6 @@ public class AttendanceSearchQueryRepository {
 
         List<AttendanceSearchListItem.AttendanceSearchListItemAttendItem> normalAttendances = queryFactory.select(Projections.constructor(AttendanceSearchListItem.AttendanceSearchListItemAttendItem.class,
                         user.id.as("userId"),
-                        user.name.as("name"),
-                        user.sex.as("sex"),
-                        user.grade.as("grade"),
                         attendance.status.as("status"),
                         attendance.date.as("date"),
                         attendance.reason.as("reason")
@@ -215,9 +209,6 @@ public class AttendanceSearchQueryRepository {
 
                                     return new AttendanceSearchListItem.AttendanceSearchListItemAttendItem(
                                             userId,
-                                            name,
-                                            sex,
-                                            grade,
                                             item.getStatus(),
                                             item.getDate(),
                                             item.getReason()
@@ -225,9 +216,6 @@ public class AttendanceSearchQueryRepository {
                                 } else {
                                     return new AttendanceSearchListItem.AttendanceSearchListItemAttendItem(
                                             userId,
-                                            name,
-                                            sex,
-                                            grade,
                                             AttendanceStatus.NONE,
                                             date,
                                             ""
@@ -273,9 +261,6 @@ public class AttendanceSearchQueryRepository {
 
                                     return new AttendanceSearchListItem.AttendanceSearchListItemAttendItem(
                                             userId,
-                                            name,
-                                            sex,
-                                            grade,
                                             item.getStatus(),
                                             item.getDate(),
                                             item.getReason()
@@ -283,9 +268,6 @@ public class AttendanceSearchQueryRepository {
                                 } else {
                                     return new AttendanceSearchListItem.AttendanceSearchListItemAttendItem(
                                             userId,
-                                            name,
-                                            sex,
-                                            grade,
                                             AttendanceStatus.NONE,
                                             date,
                                             ""
@@ -331,9 +313,6 @@ public class AttendanceSearchQueryRepository {
 
                                     return new AttendanceSearchListItem.AttendanceSearchListItemAttendItem(
                                             userId,
-                                            name,
-                                            sex,
-                                            grade,
                                             item.getStatus(),
                                             item.getDate(),
                                             item.getReason()
@@ -341,9 +320,6 @@ public class AttendanceSearchQueryRepository {
                                 } else {
                                     return new AttendanceSearchListItem.AttendanceSearchListItemAttendItem(
                                             userId,
-                                            name,
-                                            sex,
-                                            grade,
                                             AttendanceStatus.NONE,
                                             date,
                                             ""

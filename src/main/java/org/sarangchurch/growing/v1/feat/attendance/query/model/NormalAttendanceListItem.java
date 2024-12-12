@@ -18,7 +18,7 @@ public class NormalAttendanceListItem {
     private final Integer grade;
     private final String codyName;
     private final String leaderName;
-    private final List<NormalAttendanceListItemAttendItem> attendItems;
+    private final List<NormalAttendanceListItemAttendItem> attendanceItems;
 
     @Getter
     @RequiredArgsConstructor
