@@ -151,7 +151,7 @@ public class NewFamilyQueryRepository {
         QUser newFamilyGroupLeaderUser = new QUser("newFamilyGroupLeaderUser");
         QUser smallGroupLeaderUser = new QUser("smallGroupLeaderUser");
 
-        LocalDate oneYearBefore = LocalDate.now().minusYears(1);
+        LocalDate twoYearBefore = LocalDate.now().minusYears(2);
 
         List<PromotedNewFamilyListItem> promotedNewFamilies = queryFactory.select(Projections.constructor(PromotedNewFamilyListItem.class,
                         newFamily.id.as("newFamilyId"),
@@ -168,7 +168,7 @@ public class NewFamilyQueryRepository {
                 .join(user).on(
                         user.id.eq(newFamily.userId),
                         newFamily.status.eq(NewFamilyStatus.PROMOTED),
-                        newFamily.promoteDate.after(oneYearBefore)
+                        newFamily.promoteDate.after(twoYearBefore)
                 )
                 // 일반 순모임
                 .join(smallGroup).on(smallGroup.id.eq(newFamily.smallGroupId))
