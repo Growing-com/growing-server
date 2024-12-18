@@ -129,7 +129,7 @@ public class NormalAttendanceQueryRepository {
         result.addAll(mapMemberTuples(codyName, date, newFamilyGroupMemberTuples, attendItems));
 
         result.sort(Comparator.comparing(
-                NormalAttendanceListItem::getLeaderName)
+                        NormalAttendanceListItem::getLeaderName)
                 .thenComparing(NormalAttendanceListItem::getName)
         );
 
@@ -153,36 +153,30 @@ public class NormalAttendanceQueryRepository {
                             .filter(attendItem -> attendItem.getUserId().equals(userId))
                             .findAny();
 
-                    if (op.isPresent()) {
-                        NormalAttendanceListItem.NormalAttendanceListItemAttendItem item = op.get();
-
-                        return new NormalAttendanceListItem(
-                                userId,
-                                name,
-                                sex,
-                                grade,
-                                codyName,
-                                name,
-                                List.of(item)
-                        );
-                    } else {
-                        NormalAttendanceListItem.NormalAttendanceListItemAttendItem emptyAttendance = new NormalAttendanceListItem.NormalAttendanceListItemAttendItem(
-                                userId,
-                                AttendanceStatus.NONE,
-                                date,
-                                ""
-                        );
-
-                        return new NormalAttendanceListItem(
-                                userId,
-                                name,
-                                sex,
-                                grade,
-                                codyName,
-                                name,
-                                List.of(emptyAttendance)
-                        );
-                    }
+                    return op.map(
+                                    attendItem -> new NormalAttendanceListItem(
+                                            userId,
+                                            name,
+                                            sex,
+                                            grade,
+                                            codyName,
+                                            name,
+                                            attendItem
+                                    ))
+                            .orElseGet(() -> new NormalAttendanceListItem(
+                                    userId,
+                                    name,
+                                    sex,
+                                    grade,
+                                    codyName,
+                                    name,
+                                    new NormalAttendanceListItem.NormalAttendanceListItemAttendItem(
+                                            userId,
+                                            AttendanceStatus.NONE,
+                                            date,
+                                            ""
+                                    )
+                            ));
 
                 })
                 .collect(Collectors.toList());
@@ -206,36 +200,30 @@ public class NormalAttendanceQueryRepository {
                             .filter(attendItem -> attendItem.getUserId().equals(userId))
                             .findAny();
 
-                    if (op.isPresent()) {
-                        NormalAttendanceListItem.NormalAttendanceListItemAttendItem item = op.get();
-
-                        return new NormalAttendanceListItem(
-                                userId,
-                                name,
-                                sex,
-                                grade,
-                                codyName,
-                                leaderName,
-                                List.of(item)
-                        );
-                    } else {
-                        NormalAttendanceListItem.NormalAttendanceListItemAttendItem emptyAttendance = new NormalAttendanceListItem.NormalAttendanceListItemAttendItem(
-                                userId,
-                                AttendanceStatus.NONE,
-                                date,
-                                ""
-                        );
-
-                        return new NormalAttendanceListItem(
-                                userId,
-                                name,
-                                sex,
-                                grade,
-                                codyName,
-                                leaderName,
-                                List.of(emptyAttendance)
-                        );
-                    }
+                    return op.map(
+                                    attendItem -> new NormalAttendanceListItem(
+                                            userId,
+                                            name,
+                                            sex,
+                                            grade,
+                                            codyName,
+                                            leaderName,
+                                            attendItem
+                                    ))
+                            .orElseGet(() -> new NormalAttendanceListItem(
+                                    userId,
+                                    name,
+                                    sex,
+                                    grade,
+                                    codyName,
+                                    leaderName,
+                                    new NormalAttendanceListItem.NormalAttendanceListItemAttendItem(
+                                            userId,
+                                            AttendanceStatus.NONE,
+                                            date,
+                                            ""
+                                    )
+                            ));
 
                 })
                 .collect(Collectors.toList());

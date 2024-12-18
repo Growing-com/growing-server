@@ -7,7 +7,6 @@ import org.sarangchurch.growing.core.interfaces.common.types.Sex;
 import org.sarangchurch.growing.v1.feat.attendance.domain.AttendanceStatus;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @RequiredArgsConstructor
@@ -18,7 +17,7 @@ public class NormalAttendanceListItem {
     private final Integer grade;
     private final String codyName;
     private final String leaderName;
-    private final List<NormalAttendanceListItemAttendItem> attendanceItems;
+    private final NormalAttendanceListItemAttendItem attendanceItem;
 
     @Getter
     @RequiredArgsConstructor

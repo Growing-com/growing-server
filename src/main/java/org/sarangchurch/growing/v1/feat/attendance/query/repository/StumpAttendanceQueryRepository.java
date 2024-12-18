@@ -54,7 +54,7 @@ public class StumpAttendanceQueryRepository {
                 )
                 .fetch();
 
-        List<StumpAttendanceListItem> result = codyUsers.stream()
+        return codyUsers.stream()
                 .map(codyUser -> {
                     Optional<StumpAttendanceListItem.StumpAttendanceListItemAttendItem> op = attendItems.stream()
                             .filter(attendItem -> codyUser.getId().equals(attendItem.getUserId()))
@@ -87,10 +87,7 @@ public class StumpAttendanceQueryRepository {
                         );
                     }
                 })
+                .sorted(Comparator.comparing(StumpAttendanceListItem::getName))
                 .collect(Collectors.toList());
-
-        result.sort(Comparator.comparing(StumpAttendanceListItem::getName));
-
-        return result;
     }
 }
