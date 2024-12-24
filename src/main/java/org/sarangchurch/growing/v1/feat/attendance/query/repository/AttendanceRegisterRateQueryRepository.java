@@ -42,12 +42,12 @@ public class AttendanceRegisterRateQueryRepository {
                 .where(user.isActive.isTrue())
                 .fetchOne();
 
-        // 그루터기 START
         Long pastorCount = queryFactory.select(pastor.count())
                 .from(pastor)
                 .where(pastor.termId.eq(activeTerm.getId()))
                 .fetchOne();
 
+        // 그루터기 START
         Long codyCount = queryFactory.select(cody.count())
                 .from(cody)
                 .where(cody.termId.eq(activeTerm.getId()))
@@ -101,10 +101,10 @@ public class AttendanceRegisterRateQueryRepository {
 
         return new AttendanceRegisterRate(
                 // 전체
-                totalActive,
+                totalActive - pastorCount,
                 totalStumpRegistered + attendancesUserIds.size() + totalNewFamiliesRegistered,
                 // 그루터기
-                pastorCount + codyCount,
+                codyCount,
                 totalStumpRegistered,
                 // 순장
                 (long) smallGroupLeaderUserIds.size(),

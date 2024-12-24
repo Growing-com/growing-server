@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface TermService {
     Term findTerm(Long id);
     void emitByUserIds(List<Long> userIds);
-    boolean areValidStumpUserIdsByTermId(List<Long> userIds, Long termId);
+    boolean areValidCodyUserIdsByTermId(List<Long> userIds, Long termId);
     void processLineUps(
             StumpLineUp stumpLineUp,
             List<SmallGroupLeaderLineUp> smallGroupLeaderLineUps,

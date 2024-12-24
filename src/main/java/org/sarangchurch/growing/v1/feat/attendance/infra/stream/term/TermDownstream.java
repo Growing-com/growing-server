@@ -12,8 +12,8 @@ import java.util.List;
 public class TermDownstream {
     private final TermService termService;
 
-    public boolean areValidStumpUserIdsByTermId(List<Long> userIds, Long termId) {
-        return termService.areValidStumpUserIdsByTermId(userIds, termId);
+    public boolean areValidCodyUserIdsByTermId(List<Long> userIds, Long termId) {
+        return termService.areValidCodyUserIdsByTermId(userIds, termId);
     }
 
     public boolean areValidMemberUserIdsByCodyId(List<Long> userIds, Long codyId) {

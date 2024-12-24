@@ -68,7 +68,7 @@ public class StumpAttendanceQueryRepository {
                                 codyUser.getName(),
                                 codyUser.getSex(),
                                 codyUser.getGrade(),
-                                List.of(item)
+                                item
                         );
                     } else {
                         StumpAttendanceListItem.StumpAttendanceListItemAttendItem defaultItem = new StumpAttendanceListItem.StumpAttendanceListItemAttendItem(
@@ -83,7 +83,7 @@ public class StumpAttendanceQueryRepository {
                                 codyUser.getName(),
                                 codyUser.getSex(),
                                 codyUser.getGrade(),
-                                List.of(defaultItem)
+                                defaultItem
                         );
                     }
                 })
