@@ -38,10 +38,6 @@ Content-Type: application/json
     {
       "userId": 7,
       "status": "ABSENT"
-    },
-    {
-      "userId": 9,
-      "status": "ATTEND"
     }
   ]
 }

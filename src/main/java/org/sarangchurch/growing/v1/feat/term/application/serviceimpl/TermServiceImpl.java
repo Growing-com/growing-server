@@ -48,8 +48,8 @@ public class TermServiceImpl implements TermService {
     }
 
     @Override
-    public boolean areValidStumpUserIdsByTermId(List<Long> userIds, Long termId) {
-        return termValidator.areValidStumpUserIds(userIds, termId);
+    public boolean areValidCodyUserIdsByTermId(List<Long> userIds, Long termId) {
+        return termValidator.areValidCodyUserIdsByTermId(userIds, termId);
     }
 
     @Override

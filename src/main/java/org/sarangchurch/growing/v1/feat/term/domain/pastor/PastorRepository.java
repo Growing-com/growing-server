@@ -18,7 +18,5 @@ public interface PastorRepository {
 
     Optional<Pastor> findByUserIdAndTermId(Long termId, Long userId);
 
-    List<Pastor> findByTermId(Long termId);
-
     <S extends Pastor> List<S> saveAll(Iterable<S> entities);
 }

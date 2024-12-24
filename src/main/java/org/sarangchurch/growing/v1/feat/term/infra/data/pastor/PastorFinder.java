@@ -34,8 +34,4 @@ public class PastorFinder {
         return pastorRepository.findByUserIdAndTermId(userId, termId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 교역자입니다."));
     }
-
-    public List<Pastor> findByTermId(Long termId) {
-        return pastorRepository.findByTermId(termId);
-    }
 }

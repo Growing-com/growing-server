@@ -35,10 +35,10 @@ public class StumpAttendanceAppender {
                 .map(StumpAttendance::getUserId)
                 .collect(Collectors.toList());
 
-        boolean isValid = termDownstream.areValidStumpUserIdsByTermId(userIds, termId);
+        boolean isValid = termDownstream.areValidCodyUserIdsByTermId(userIds, termId);
 
         if (!isValid) {
-            throw new IllegalArgumentException("그루터기 인원이 아닌 지체가 포함되어 있습니다.");
+            throw new IllegalArgumentException("코디가 아닌 지체가 포함되어 있습니다.");
         }
 
         stumpAttendanceWriter.deleteByUserIdInAndDate(userIds, attendanceDate);
