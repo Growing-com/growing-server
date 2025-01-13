@@ -1,5 +1,8 @@
-echo "🌈 1. 소스 코드를 받아옵니다."
+echo "🌈 1. master 브랜치를 받아옵니다."
 
+git add .
+git stash
+git checkout master
 git pull
 
 echo "🌈 2. SpringBoot 프로젝트 빌드를 시작합니다."
